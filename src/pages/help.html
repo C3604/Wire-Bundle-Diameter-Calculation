@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线束直径计算工具 - 帮助文档</title>
+    <link rel="stylesheet" href="../styles/help-style.css">
+</head>
+<body>
+    <div class="help-container">
+        <header>
+            <h1>欢迎使用 线束直径计算工具！</h1>
+        </header>
+
+        <section id="intro">
+            <p>本工具是一款基于二维圆形填充算法的线束直径估算插件。它可以帮助你根据输入的多种规格导线、包裹物层数和厚度，通过模拟计算来估算线束的最终直径，并提供可视化结果和配置管理功能。</p>
+        </section>
+
+        <nav id="toc">
+            <button id="toc-toggle-btn" aria-expanded="true" aria-controls="toc-list" title="切换目录显隐">☰</button>
+            <h2>目录</h2>
+            <ul id="toc-list">
+                <li><a href="#section1">1. 如何启动插件</a></li>
+                <li><a href="#section2">2. 主界面概览</a>
+                    <ul>
+                        <li><a href="#section2-1">侧边栏</a></li>
+                        <li><a href="#section2-2">主内容区</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section3">3. 核心功能：线束直径计算 (<code>计算</code> 页面)</a>
+                    <ul>
+                        <li><a href="#section3-1">界面布局概览</a></li>
+                        <li><a href="#section3-2">左侧：参数输入区</a>
+                            <ul>
+                                <li><a href="#section3-2-1">标准导线</a></li>
+                                <li><a href="#section3-2-2">特殊导线</a></li>
+                                <li><a href="#section3-2-3">包裹物</a></li>
+                                <li><a href="#section3-2-4">制造公差</a></li>
+                                <li><a href="#section3-2-5">计算次数</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#section3-3">底部：操作控制栏</a></li>
+                        <li><a href="#section3-4">右侧：结果展示区</a>
+                            <ul>
+                                <li><a href="#section3-4-1">截面模拟图</a></li>
+                                <li><a href="#section3-4-2">高亮最终平均直径</a></li>
+                                <li><a href="#section3-4-3">输入统计</a></li>
+                                <li><a href="#section3-4-4">直径计算详情</a></li>
+                                <li><a href="#section3-4-5">计算结果分布图</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#section3-5">快速计算示例</a></li>
+                    </ul>
+                </li>
+                <li><a href="#section4">4. 查看与管理计算历史 (<code>历史</code> 页面)</a></li>
+                <li><a href="#section5">5. 插件配置 (<code>配置</code> 页面)</a></li>
+                <li><a href="#section6">6. 查看版本与更新日志</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="section1">
+                <h2>1. 如何启动插件</h2>
+                <p>安装插件后，在你的浏览器工具栏中找到 "线束直径计算工具" 的图标 (通常是一个图案图标)，点击它。插件的主界面会以一个新的弹出式窗口打开。</p>
+                <svg class="plugin-icon-help-page" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1289" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path d="M512 192C336 192 192 336 192 512s144 320 320 320 320-144 320-320c0 80-64 144-144 144S544 592 544 512s64-144 144-144 144 64 144 144c0-176-144-320-320-320z m-80 320c80 0 144 64 144 144S512 800 432 800 288 736 288 656s64-144 144-144C352 512 288 448 288 368S352 224 432 224 576 288 576 368 512 512 432 512z" fill="#DB5132" p-id="1290"></path>
+                    <path d="M896 0H128C57.6 0 0 57.6 0 128v768c0 70.4 57.6 128 128 128h768c70.4 0 128-57.6 128-128V128c0-70.4-57.6-128-128-128zM512 864C316.8 864 160 707.2 160 512S316.8 160 512 160s352 156.8 352 352-156.8 352-352 352z" fill="#DB5132" p-id="1291"></path>
+                </svg>
+                <p class="caption"><em>这是插件的图标</em></p>
+            </section>
+
+            <section id="section2">
+                <h2>2. 主界面概览</h2>
+                <p>插件主界面分为左右两部分：左侧是 <strong>侧边栏导航</strong>，右侧是 <strong>主内容区</strong>。</p>
+                <img src="../assets/img1.jpg" alt="主界面概览图">
+                <p class="caption"><em>这是一个示意图，展示了侧边栏和主内容区的布局</em></p>
+
+                <h3 id="section2-1">侧边栏</h3>
+                <p>侧边栏提供了主要的导航功能：</p>
+                <ul>
+                    <li><strong>🧮 计算</strong>: 点击进入核心的线束直径计算页面。这是插件的主要功能模块。</li>
+                    <li><strong>📜 历史</strong>: 点击查看你过往的计算历史记录。</li>
+                    <li><strong>⚙️ 配置</strong>: 点击进入插件的配置页面 (当前功能待完善)。</li>
+                    <li><strong>版本信息</strong>: 在侧边栏底部会显示当前插件的版本号，例如 <code>版本: 1.0.2.2</code>。点击版本号可以查看详细的更新日志。</li>
+                    <li><strong>收起/展开按钮 (<code>&lt;</code> 或 <code>&gt;</code>)</strong>: 位于侧边栏和主内容区之间，点击可以收起或展开侧边栏，以便为内容区提供更多空间。</li>
+                </ul>
+
+                <h3 id="section2-2">主内容区</h3>
+                <p>主内容区会根据你在侧边栏选择的选项动态显示不同的内容。默认情况下，打开插件后会显示 <strong>"计算"</strong> 页面的内容。</p>
+            </section>
+
+            <section id="section3">
+                <h2>3. 核心功能：线束直径计算 (<code>计算</code> 页面)</h2>
+                <p>"计算" 页面是你进行所有线束直径参数输入、执行计算并查看结果的地方。</p>
+
+                <h3 id="section3-1">界面布局概览</h3>
+                <p>计算页面主要分为三个区域：</p>
+                <ol>
+                    <li><strong>左侧参数输入区</strong>: 用于定义线束的组成部分，如导线规格、数量，包裹物厚度等，以及设置计算相关的参数。</li>
+                    <li><strong>右侧结果展示区</strong>: 用于可视化展示计算后的线束截面模拟图、详细的直径数据和统计图表。</li>
+                    <li><strong>底部操作控制栏</strong>: 包含执行计算、重置页面和保存历史记录的选项。</li>
+                </ol>
+                <img src="../assets/img2.jpg" alt="计算页面布局示意图">
+
+                <h3 id="section3-2">左侧：参数输入区</h3>
+                <p>在这里，你需要输入构成线束的所有组件信息和计算参数。</p>
+
+                <h4 id="section3-2-1">📏 标准导线</h4>
+                <p>此区域用于添加和管理符合预设规格的导线。</p>
+                <h5>表格列说明:</h5>
+                <ul>
+                    <li><strong>序号</strong>: 自动编号。</li>
+                    <li><strong>线径</strong>: 从下拉列表中选择导线的标称截面积 (例如 0.35, 0.5, 0.75 mm² 等)。</li>
+                    <li><strong>类型</strong>: 根据选择的线径，从下拉列表中选择导线的绝缘层类型 (例如 Thin-薄壁, Thick-厚壁, UltraThin-超薄壁)。</li>
+                    <li><strong>直径(mm)</strong>: 根据你选择的"线径"和"类型"，此字段会自动填充该规格导线的标称外径。</li>
+                    <li><strong>数量</strong>: 输入这种规格的导线在线束中的数量。</li>
+                    <li><strong>删除</strong>: 点击 "❌" 按钮可以删除该行导线。</li>
+                </ul>
+                <h5>操作按钮:</h5>
+                <ul>
+                    <li><strong>✨ 增加</strong>: 点击增加一行新的标准导线输入。</li>
+                    <li><strong>🔄 重置</strong>: 点击将标准导线表格恢复到默认的初始状态（通常是几行预设的常用规格，数量为0）。</li>
+                </ul>
+                <h5>如何使用:</h5>
+                <ol>
+                    <li>点击"✨ 增加"按钮添加导线行。</li>
+                    <li>在每一行中，从"线径"下拉框选择合适的线径。</li>
+                    <li>接着，从"类型"下拉框选择对应的绝缘层类型，"直径(mm)"会自动更新。</li>
+                    <li>在"数量"列输入该规格导线的根数。</li>
+                    <li>如果添加错误或不再需要某行，点击该行末尾的"删除"按钮。</li>
+                </ol>
+
+                <h4 id="section3-2-2">🔗 特殊导线</h4>
+                <p>如果你的线束中包含没有在"标准导线"列表中预设规格的导线，可以在这里添加。</p>
+                 <h5>表格列说明:</h5>
+                <ul>
+                    <li><strong>序号</strong>: 自动编号。</li>
+                    <li><strong>直径(mm)</strong>: 直接输入这种特殊导线的外径（包含绝缘层）。</li>
+                    <li><strong>数量</strong>: 输入这种特殊导线的数量。</li>
+                    <li><strong>删除</strong>: 点击 "❌" 按钮可以删除该行导线。</li>
+                </ul>
+                <h5>操作按钮:</h5>
+                <ul>
+                    <li><strong>✨ 增加</strong>: 点击增加一行新的特殊导线输入。</li>
+                    <li><strong>🔄 重置</strong>: 点击清空所有特殊导线输入。</li>
+                </ul>
+                <h5>如何使用:</h5>
+                <ol>
+                    <li>点击"✨ 增加"按钮添加导线行。</li>
+                    <li>在"直径(mm)"列输入导线的实际外径。</li>
+                    <li>在"数量"列输入该导线的根数。</li>
+                </ol>
+
+                <h4 id="section3-2-3">🛡️ 包裹物</h4>
+                <p>此区域用于定义线束外部的包裹层，例如胶带、套管等。包裹物会增加线束的最终直径。</p>
+                <h5>表格列说明:</h5>
+                <ul>
+                    <li><strong>序号</strong>: 自动编号，代表包裹的层数顺序（从内到外）。</li>
+                    <li><strong>厚度(mm)</strong>: 输入这一层包裹物的单边厚度。</li>
+                    <li><strong>删除</strong>: 点击 "❌" 按钮可以删除该行包裹物。</li>
+                </ul>
+                <h5>操作按钮:</h5>
+                <ul>
+                    <li><strong>✨ 增加</strong>: 点击增加一层新的包裹物输入。</li>
+                    <li><strong>🔄 重置</strong>: 点击清空所有包裹物输入。</li>
+                </ul>
+                <h5>如何使用:</h5>
+                <ol>
+                    <li>如果线束有多层包裹，从最内层开始，逐层点击"✨ 增加"按钮添加。</li>
+                    <li>在每一行的"厚度(mm)"列输入该层包裹的厚度。</li>
+                </ol>
+
+                <h4 id="section3-2-4">📐 制造公差</h4>
+                <p>考虑到实际生产中的各种因素，线束的实际直径通常会比理论计算值稍大。这里可以设置一个放大系数。</p>
+                <h5>滑块与输入框:</h5>
+                <p>你可以通过拖动滑块或直接在输入框中输入百分比来调整制造公差。</p>
+                <ul>
+                    <li>范围是 100% 到 200%。例如，输入 110% 表示最终计算直径会在理论值（含包裹物）的基础上再放大 10%。</li>
+                    <li>默认值为 110%。</li>
+                </ul>
+                <h5>操作按钮:</h5>
+                <ul>
+                    <li><strong>🔄 重置</strong>: 点击将制造公差恢复到默认值 (110%)。</li>
+                </ul>
+
+                <h4 id="section3-2-5">🧮 计算次数</h4>
+                <p>本工具使用蒙特卡洛模拟方法来估算线束直径，这意味着它会进行多次随机的导线堆叠模拟，然后取统计结果。</p>
+                <h5>滑块与输入框:</h5>
+                <p>你可以通过拖动滑块或直接在输入框中输入次数来调整模拟计算的运行次数。</p>
+                <ul>
+                    <li>范围是 1 到 100 次。次数越多，结果可能越接近真实情况的平均值，但计算时间也会相应增加。</li>
+                    <li>默认值为 10 次。</li>
+                </ul>
+                <h5>操作按钮:</h5>
+                <ul>
+                    <li><strong>🔄 重置</strong>: 点击将计算次数恢复到默认值 (10)。</li>
+                </ul>
+
+                <h3 id="section3-3">底部：操作控制栏</h3>
+                <p>位于计算页面最下方，提供主要的操作命令。</p>
+                <ul>
+                    <li><strong>保存历史记录 (复选框)</strong>:
+                        <p>默认勾选。当勾选时，每次点击"📏 计算直径"后，当前的输入参数和计算结果会自动保存到"历史"页面中，方便日后查阅。</p>
+                        <p>如果不想自动保存，可以取消勾选。</p>
+                    </li>
+                    <li><strong>🧹 全部重置 (按钮)</strong>:
+                        <p>点击此按钮会将整个"计算"页面上的所有输入项（标准导线、特殊导线、包裹物、制造公差、计算次数）恢复到它们的初始默认状态。</p>
+                    </li>
+                    <li><strong>📏 计算直径 (按钮)</strong>:
+                        <p>这是最重要的操作按钮。当你完成了所有参数的输入后，点击此按钮，插件会开始执行线束直径的模拟计算。</p>
+                        <p>计算完成后，结果会显示在页面的右侧结果展示区。</p>
+                        <p>你也可以直接按键盘上的 <code>Enter</code> 键来触发计算。</p>
+                    </li>
+                </ul>
+
+                <h3 id="section3-4">右侧：结果展示区</h3>
+                <p>当你点击"📏 计算直径"按钮后，计算结果会在这里显示。</p>
+
+                <h4 id="section3-4-1">🖼️ 截面模拟图</h4>
+                <ul>
+                    <li><strong>Canvas 画布</strong>: 这里会展示一个基于你输入的导线进行随机堆叠后的典型线束横截面示意图。不同直径的导线会用不同颜色表示。</li>
+                    <li><strong>图例 (Legend)</strong>: 画布旁边或下方会有一个图例，说明截面图中不同颜色分别对应哪种直径的导线。</li>
+                    <li><strong>内层容器边界</strong>: 图中可能会有一条虚线圆圈，它代表了所有导线（不含包裹物和公差）堆叠后形成的理论线束边界。</li>
+                </ul>
+
+                <h4 id="section3-4-2">✨ 高亮最终平均直径</h4>
+                <p>在截面模拟图区域，会有一个醒目显示的数值，例如 "<strong>Ø 12.3 mm</strong>"。</p>
+                <p>这代表了<strong>最终的平均直径</strong>，它是综合考虑了所有导线、所有包裹层厚度以及你设定的制造公差后，向上取整得到的估算直径值。括号内通常会显示一个更精确（如保留两位小数）的计算值。</p>
+
+                <h4 id="section3-4-3">⚙️ 输入统计</h4>
+                <p>这里汇总了你当前输入的一些关键参数：</p>
+                <ul>
+                    <li><strong>总导线数量</strong>: 你在"标准导线"和"特殊导线"中输入的导线总根数。</li>
+                    <li><strong>总包裹物层数</strong>: 你在"包裹物"区域输入的包裹层总数。</li>
+                    <li><strong>总包裹物厚度</strong>: 所有包裹层厚度的总和（单边）。</li>
+                </ul>
+
+                <h4 id="section3-4-4">📈 直径计算详情</h4>
+                <p>这是一个表格，展示了更详细的直径计算结果：</p>
+                <h5>参数:</h5>
+                <ul>
+                    <li><strong>最小线径</strong>: 多次模拟中得到的最小线束直径。</li>
+                    <li><strong>最大线径</strong>: 多次模拟中得到的最大线束直径。</li>
+                    <li><strong>平均线径</strong>: 多次模拟结果的平均线束直径。</li>
+                </ul>
+                <h5>裸线值 (mm):</h5>
+                <p>这一列显示的是<strong>仅基于导线本身</strong>（不包含任何包裹物和制造公差）进行多次堆叠模拟后得到的理论直径的最小值、最大值和平均值。</p>
+                <h5>模拟值 (mm):</h5>
+                <p>这一列显示的是<strong>最终的计算直径</strong>，它是在"裸线值"的基础上，加上了所有包裹层的总厚度（双边），并且应用了你设定的"制造公差"百分比后得到的直径。这些值通常是你更关心的最终结果。</p>
+
+                <h4 id="section3-4-5">📊 计算结果分布图</h4>
+                <p>这是一个折线图，横坐标是模拟的次数（例如"模拟1"，"模拟2"，...，直到你设定的"计算次数"），纵坐标是该次模拟计算出的裸线束直径 (mm)。</p>
+                <p>通过这个图表，你可以观察到多次模拟计算结果的波动情况和分布趋势。如果折线比较平稳，说明模拟结果较为一致。</p>
+
+                <h3 id="section3-5">快速计算示例</h3>
+                <ol>
+                    <li>打开插件，进入"计算"页面。</li>
+                    <li>在"标准导线"区域，为你需要的导线规格输入"数量"。例如，选择 0.5mm² Thin 型导线，数量填 5。</li>
+                    <li>如果需要，在"特殊导线"区域添加自定义直径的导线。</li>
+                    <li>在"包裹物"区域，点击"✨ 增加"，输入包裹层厚度，例如 0.3 mm。</li>
+                    <li>检查"制造公差"和"计算次数"，如果需要可以调整。</li>
+                    <li>确保"保存历史记录"已勾选（如果需要）。</li>
+                    <li>点击页面底部的"📏 计算直径"按钮。</li>
+                    <li>在右侧结果区查看"截面模拟图"、"高亮最终平均直径"、"直径计算详情"和"计算结果分布图"。</li>
+                </ol>
+            </section>
+
+            <section id="section4">
+                <h2>4. 查看与管理计算历史 (<code>历史</code> 页面)</h2>
+                <p>如果你在计算时勾选了"保存历史记录"，那么你的每一次计算参数和结果都会被记录下来。点击侧边栏的"📜 历史"可以进入历史记录页面。</p>
+                <h5>界面布局:</h5>
+                <ul>
+                    <li><strong>历史记录表格</strong>: 表格中会列出你所有的计算记录。每一行代表一次计算，包含以下信息：
+                        <ul>
+                            <li>序号</li>
+                            <li>计算时间</li>
+                            <li>标准导线 (规格, 类型, 数量的简述)</li>
+                            <li>特殊导线 (直径, 数量的简述)</li>
+                            <li>包覆物 (厚度的简述)</li>
+                            <li>制造公差 (%)</li>
+                            <li>最大理论直径 (mm)</li>
+                            <li>最小理论直径 (mm)</li>
+                            <li>平均理论直径 (mm)</li>
+                            <li>最终直径 (mm) (即最终平均直径)</li>
+                        </ul>
+                    </li>
+                    <li>最新的记录会显示在最上面。</li>
+                </ul>
+                <h5>操作按钮:</h5>
+                <ul>
+                    <li><strong>📄 导出CSV</strong>: 点击此按钮，可以将当前所有的历史记录导出为一个名为 <code>calculation_history.csv</code> 的文件。你可以用 Excel 或其他表格软件打开这个文件。</li>
+                    <li><strong>🗑️ 清除历史</strong>: 点击此按钮会弹出一个确认对话框。如果确认，<strong>所有</strong>的历史记录都将被永久删除，此操作不可恢复。</li>
+                </ul>
+            </section>
+
+            <section id="section5">
+                <h2>5. 插件配置 (<code>配置</code> 页面)</h2>
+                <p>点击侧边栏的"⚙️ 配置"可以进入配置页面。</p>
+                <h3>自定义标准导线参数</h3>
+                <p>在配置页面，你可以自定义和管理标准导线的参数（线规、不同绝缘层类型的外径等），以适应企业或个人的特殊需求。所有自定义内容仅影响本地浏览器，不会影响他人。</p>
+                <h4>表格说明</h4>
+                <ul>
+                    <li><strong>序号</strong>：自动编号。</li>
+                    <li><strong>线径 (mm²)</strong>：输入或选择导线的标称截面积（如 0.35、0.5、0.75 等）。支持直接输入，也可下拉选择已有规格。</li>
+                    <li><strong>Thin/Thick/UltraThin (mm)</strong>：分别填写该线规下不同绝缘层类型的标称外径（单位 mm）。</li>
+                    <li><strong>操作</strong>：点击 <strong>❌</strong> 按钮可删除该行。</li>
+                </ul>
+                <h4>操作按钮</h4>
+                <ul>
+                    <li><strong>✨ 新增</strong>：添加一行空白导线参数，便于自定义新规格。</li>
+                    <li><strong>💾 保存</strong>：将当前所有自定义内容保存到本地（localStorage）。仅保存与标准库不同或新增的条目。</li>
+                    <li><strong>🔄 恢复默认</strong>：清除所有自定义内容，恢复为出厂标准库。</li>
+                </ul>
+                <h4>输入校验与提示</h4>
+                <ul>
+                    <li>线规（gauge）不可重复，重复时输入框会高亮，且无法保存。</li>
+                    <li>外径（Thin/Thick/UltraThin）必须为非负数，输入非法值会有弹窗提示。</li>
+                    <li>如所有行均为空或无效，保存时会弹窗确认是否保存空列表。</li>
+                </ul>
+                <h4>使用流程示例</h4>
+                <ol>
+                    <li>点击"✨ 新增"添加新行，输入线规和外径参数。</li>
+                    <li>如需删除，点击对应行末的"❌"按钮。</li>
+                    <li>编辑完成后，点击"💾 保存"将自定义内容保存。</li>
+                    <li>如需恢复出厂设置，点击"🔄 恢复默认"。</li>
+                </ol>
+                <h4>注意事项</h4>
+                <ul>
+                    <li>配置页面仅显示自定义内容，标准库内容不会在此直接显示。</li>
+                    <li>所有自定义参数仅在本地浏览器生效，清除浏览器数据会导致自定义内容丢失。</li>
+                </ul>
+            </section>
+
+            <section id="section6">
+                <h2>6. 查看版本与更新日志</h2>
+                <ul>
+                    <li><strong>查看版本号</strong>: 在主界面侧边栏的底部，你可以直接看到当前插件的版本号，例如 <code>版本: 1.0.2.2</code>。</li>
+                    <li><strong>查看更新日志</strong>: 点击侧边栏底部的版本号文字，会弹出一个模态窗口，里面详细列出了各个版本的更新内容和修复的问题。你可以通过它了解插件的新功能和改进。</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>希望这份教程能帮助你快速上手并有效使用"线束直径计算工具"！</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.documentElement.classList.add('js-no-transition');
+
+            const toc = document.getElementById('toc');
+            const tocToggleBtn = document.getElementById('toc-toggle-btn');
+            const tocList = document.getElementById('toc-list');
+            const helpContainer = document.querySelector('.help-container'); // Or body, if preferred
+
+            if (toc && tocToggleBtn && tocList && helpContainer) {
+                // Function to update TOC state based on localStorage
+                function updateTocState() {
+                    const isTocCollapsed = localStorage.getItem('helpTocCollapsed') === 'true';
+                    if (isTocCollapsed) {
+                        toc.classList.add('collapsed');
+                        helpContainer.classList.add('toc-collapsed');
+                        tocToggleBtn.setAttribute('aria-expanded', 'false');
+                        tocToggleBtn.innerHTML = '➔'; // Or some other icon for "open"
+                        tocToggleBtn.title = "展开目录";
+                    } else {
+                        toc.classList.remove('collapsed');
+                        helpContainer.classList.remove('toc-collapsed');
+                        tocToggleBtn.setAttribute('aria-expanded', 'true');
+                        tocToggleBtn.innerHTML = '✕'; // Or a hamburger '☰' or close '✕'
+                        tocToggleBtn.title = "收起目录";
+                    }
+                }
+
+                // Initial state update
+                updateTocState();
+
+                tocToggleBtn.addEventListener('click', function () {
+                    const isCurrentlyCollapsed = toc.classList.contains('collapsed');
+                    if (isCurrentlyCollapsed) {
+                        localStorage.setItem('helpTocCollapsed', 'false');
+                    } else {
+                        localStorage.setItem('helpTocCollapsed', 'true');
+                    }
+                    updateTocState(); // Update based on new state
+                });
+
+                // Add this to remove the class after initial setup
+                requestAnimationFrame(() => {
+                    document.documentElement.classList.remove('js-no-transition');
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

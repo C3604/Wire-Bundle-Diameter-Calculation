@@ -1,0 +1,353 @@
+/* help-style.css */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    margin: 0;
+    /* padding: 20px; */ /* Body padding is removed, help-container will manage its padding relative to TOC */
+    background-color: #F8F9FA; /* Consistent with main app background */
+    color: #495057; /* Consistent with main app text color */
+    overflow-x: hidden; /* Prevent horizontal scroll issues during transitions */
+}
+
+.help-container {
+    max-width: 900px; /* Content max-width */
+    margin: 20px auto 20px 320px; /* TOC width (280px) + TOC left (20px) + Gutter (20px) = 320px */
+    padding: 30px 40px;
+    background-color: #FFFFFF; /* White background for content area */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    /* transition: margin-left 0.35s ease-in-out; */ /* Original transition - keep commented or remove */
+}
+
+html:not(.js-no-transition) .help-container {
+    transition: margin-left 0.35s ease-in-out;
+}
+
+.help-container.toc-collapsed {
+    margin-left: 80px; /* Collapsed TOC width (approx 60px for button) + Gutter (20px) */
+    /* Remove incorrectly added properties here */
+}
+
+header h1 {
+    color: #3A86FF; /* Main accent blue for the main title */
+    text-align: center;
+    font-size: 2em; /* Larger main title */
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #EBF4FF; /* Lighter blue for border */
+}
+
+#intro p {
+    font-size: 1.1em;
+    color: #343a40; /* Slightly darker for intro paragraph */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* TOC will be restyled for floating and collapsing later */
+#toc {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 280px;
+    height: calc(100vh - 40px); /* Full height minus top/bottom margin */
+    background-color: #FFFFFF; 
+    padding: 20px;
+    padding-top: 60px; /* Increased padding for button to sit comfortably */
+    border-radius: 8px;
+    /* margin-bottom: 30px; */ /* Not needed for fixed element */
+    border: 1px solid #DEE2E6; 
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    z-index: 1000;
+    overflow-y: auto;
+    box-sizing: border-box; /* Crucial for correct width calculation */
+    transform: translateX(0);
+    /* transition: width 0.35s ease-in-out, transform 0.35s ease-in-out, opacity 0.35s ease-in-out; */ /* Original transition - keep commented or remove */
+    opacity: 1;
+}
+
+html:not(.js-no-transition) #toc {
+    transition: width 0.35s ease-in-out, transform 0.35s ease-in-out, opacity 0.35s ease-in-out;
+}
+
+#toc.collapsed {
+    width: 60px; /* Width when collapsed, just enough for the button */
+    padding-left: 10px; /* Adjust padding for collapsed state */
+    padding-right: 10px;
+    overflow: hidden; /* Hide overflowing content like text */
+    /* transform: translateX(0); */ /* No horizontal transform needed, width changes */
+    opacity: 1; /* Keep it visible but small - ensure this is intended, or remove if #toc handles opacity */
+    /* Remove incorrectly added properties like cursor, z-index, box-shadow from here if they belong to the button */
+}
+
+/* Ensure these rules are present */
+#toc.collapsed #toc-list,
+#toc.collapsed h2 {
+    display: none; /* Hide title and list when collapsed */
+}
+
+
+#toc-toggle-btn {
+    position: absolute;
+    top: 15px;
+    /* right: 15px; */ /* Will be centered when collapsed */
+    left: 50%; /* Start with centering for easier logic */
+    transform: translateX(-50%); /* Center the button */
+    width: 36px; /* Slightly larger button */
+    height: 36px;
+    background-color: #3A86FF;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px; /* Icon size */
+    font-weight: normal; /* Can be normal for icons */
+    line-height: 36px; 
+    text-align: center;
+    cursor: pointer;
+    z-index: 1001; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    /* transition: background-color 0.2s ease, transform 0.2s ease, left 0.35s ease-in-out; */ /* Remove original transition if conditional one is below */
+}
+
+html:not(.js-no-transition) #toc-toggle-btn { /* Corrected selector to target button directly */
+    transition: background-color 0.2s ease, transform 0.2s ease, left 0.35s ease-in-out;
+}
+
+#toc:not(.collapsed) #toc-toggle-btn {
+    left: auto; /* Override left for expanded state */
+    right: 15px; /* Position to the right when expanded */
+    transform: translateX(0); /* No horizontal transform needed for right positioning */
+}
+
+#toc-toggle-btn:hover {
+    background-color: #2a75e6; /* Darker blue on hover */
+    transform: scale(1.1) translateX(-50%); /* Adjust transform if centered */
+}
+
+#toc:not(.collapsed) #toc-toggle-btn:hover {
+    transform: scale(1.1) translateX(0); /* Adjust transform for non-collapsed hover */
+}
+
+/* Styles for when TOC is collapsed, button might need to reposition or always be visible */
+/* If the TOC slides completely off, the button needs a separate fixed position */
+/* Let's assume the button STAYS with the TOC and slides with it for simplicity first.
+   The JS logic will change its icon. */
+
+#toc h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #3A86FF; /* Accent blue for TOC title */
+    font-size: 1.4em;
+    border-bottom: 1px solid #EBF4FF;
+    padding-bottom: 10px;
+}
+
+#toc ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#toc ul li {
+    margin-bottom: 10px;
+}
+
+#toc ul ul {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+#toc a {
+    text-decoration: none;
+    color: #495057; /* Standard text color for links */
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+#toc a:hover,
+#toc a:focus {
+    color: #3A86FF; /* Accent blue on hover/focus */
+    text-decoration: none;
+}
+
+main section {
+    margin-bottom: 40px;
+}
+
+main h2 { /* Section titles in main content */
+    color: #343a40; /* Darker grey for section titles */
+    font-size: 1.75em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DEE2E6; /* Consistent border */
+}
+
+main h3 {
+    color: #495057; /* Standard text color */
+    font-size: 1.4em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+main h4 {
+    color: #28a745; /* A green for H4, can be adjusted */
+    font-size: 1.2em;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+main h5 {
+    color: #6C757D; /* Lighter grey for H5 */
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+p, ul, ol {
+    margin-bottom: 16px;
+    font-size: 1em;
+}
+
+ul, ol {
+    padding-left: 25px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+strong {
+    font-weight: 600; /* Slightly bolder */
+    color: #343a40;
+}
+
+code {
+    background-color: #EBF4FF; /* Light blue background */
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    color: #D6336C; /* A pinkish color for code text, adjust if needed */
+    font-size: 0.9em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #DEE2E6;
+    border-radius: 6px;
+    padding: 4px;
+    background-color: #FFFFFF;
+}
+
+.caption {
+    text-align: center;
+    font-style: italic;
+    color: #6C757D;
+    font-size: 0.9em;
+    margin-top: -15px; /* Pull caption closer to image */
+    margin-bottom: 20px;
+}
+
+/* Style for the embedded plugin icon SVG in help.html */
+.plugin-icon-help-page {
+    display: block;
+    width: 80px; /* Adjust width as needed */
+    height: 80px; /* Adjust height as needed */
+    margin: 20px auto; /* Center the icon */
+    padding: 5px;
+    border: 1px solid #DEE2E6;
+    border-radius: 6px;
+    background-color: #FFFFFF; /* Optional: if icon has transparent parts */
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid #DEE2E6;
+    font-size: 0.95em;
+    color: #6C757D;
+}
+
+/* 配置页面帮助表格样式 */
+.config-table-help {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 24px 0;
+    background: #f9fbfd;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(58,134,255,0.06);
+}
+.config-table-help th, .config-table-help td {
+    border: 1px solid #e3e7ef;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 1em;
+}
+.config-table-help th {
+    background: #eaf3ff;
+    color: #3A86FF;
+    font-weight: 600;
+}
+.config-table-help td {
+    background: #fff;
+}
+
+/* 配置页面按钮样式 */
+.config-btn-help {
+    display: inline-block;
+    margin: 0 6px 6px 0;
+    padding: 6px 16px;
+    border: none;
+    border-radius: 4px;
+    background: #3A86FF;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.config-btn-help.btn-danger {
+    background: #e74c3c;
+}
+.config-btn-help:active {
+    background: #2a75e6;
+}
+.config-btn-help[disabled] {
+    background: #b0c4de;
+    cursor: not-allowed;
+}
+
+/* 配置页面输入框样式 */
+.config-input-help {
+    width: 80px;
+    padding: 4px 8px;
+    border: 1px solid #b0c4de;
+    border-radius: 3px;
+    font-size: 1em;
+    transition: border-color 0.2s;
+}
+.config-input-help:focus {
+    border-color: #3A86FF;
+    outline: none;
+}
+.config-input-help.input-error {
+    border-color: #e74c3c;
+    background: #fff0f0;
+}
+
+/* 配置页面说明区样式 */
+.config-help-section h3, .config-help-section h4 {
+    color: #3A86FF;
+    margin-top: 18px;
+}
+.config-help-section ul, .config-help-section ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+.config-help-section li {
+    margin-bottom: 0.5em;
+} 

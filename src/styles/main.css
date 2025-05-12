@@ -1,0 +1,1511 @@
+/* 主样式文件（基于 Adobe Color Trends UI/UX 灵感） */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background: #F8F9FA; /* 背景浅灰 */
+  min-height: 100vh;
+  color: #495057; /* 文字深灰 */
+}
+
+.main-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #FFFFFF; /* 背景白 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07); /* Enhanced shadow for floating effect */
+  transition: width 0.3s ease;
+  position: relative;
+  z-index: 20;
+}
+
+.sidebar.collapsed {
+  width: 72px;
+  padding-top: 30px;
+}
+
+div.sidebar-divider > #collapseBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background-color: transparent;
+  border: none;
+  color: #868E96; /* Initial color for the SVG */
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  z-index: 25;
+  opacity: 0; /* Hidden by default */
+  visibility: hidden; /* Not interactive when hidden */
+  transition: color 0.2s, transform 0.2s ease-out, text-shadow 0.2s ease-out, opacity 0.2s ease-out, visibility 0.2s ease-out;
+}
+
+/* Show #collapseBtn when its preceding sibling .sidebar is hovered */
+.sidebar:hover + .sidebar-divider > #collapseBtn {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hover effects specifically for the button (when it is visible and hovered) */
+div.sidebar-divider > #collapseBtn:hover {
+  color: #3A86FF;
+}
+
+/* New class for rotating the icon */
+div.sidebar-divider > #collapseBtn.rotate-icon {
+  /* Apply base centering and then rotate. Add hover scale if needed or handle combined transforms */
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+div.sidebar-divider > #collapseBtn.rotate-icon:hover {
+  /* Ensure hover scale is also applied when rotated */
+  transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+}
+
+/* Styles for the SVG element inside the button */
+div.sidebar-divider > #collapseBtn svg {
+  width: 16px;  /* Adjust size as needed */
+  height: 16px; /* Adjust size as needed */
+  display: block; /* Prevents extra space if any */
+}
+
+.sidebar button {
+  width: 170px;
+  height: 48px;
+  margin-bottom: 20px; /* 调整间距 */
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #495057; /* 文字深灰 */
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar button.active {
+  background: #EBF4FF; /* 浅蓝背景 (主色蓝的浅色变体) */
+  color: #3A86FF; /* 主色蓝 */
+  font-weight: 600;
+}
+
+.sidebar button .emoji {
+  font-size: 20px;
+  margin-right: 16px;
+  transition: margin 0.3s ease;
+  min-width: 20px;
+  text-align: center;
+}
+
+.sidebar.collapsed button {
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  padding-left: 0;
+}
+.sidebar.collapsed button .emoji {
+  margin-right: 0;
+}
+.sidebar.collapsed button span.text {
+  display: none;
+}
+
+.sidebar button:not(.active):hover {
+  background: #F8F9FA; /* 背景浅灰 */
+  color: #3A86FF; /* 主色蓝 */
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 32px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #F8F9FA; /* 背景浅灰 */
+  position: relative; /* Establish a stacking context */
+  z-index: 1; /* Lower than sidebar's z-index */
+}
+
+/* 移除旧的面板样式，这些应由具体页面控制 */
+/* #input-panel, #output-panel, #visualization { ... } */
+
+.sidebar-divider {
+  width: 1px;
+  background: #CED4DA; /* 边框灰 */
+  cursor: col-resize;
+  position: relative;
+  z-index: 22; /* Increased z-index to be above sidebar (20) */
+}
+
+/* 移除旧的 mini-collapse-btn */
+/* .mini-collapse-btn { ... } */
+
+/* Bottom Action Bar */
+/* .calc-bottom-bar {
+  // Ensure bottom bar's z-index is lower than the sidebar
+} */
+
+@media (max-width: 900px) {
+  .main-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    flex-direction: row;
+    width: 100vw;
+    height: 64px;
+    padding-top: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+    justify-content: flex-start;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow-x: auto;
+  }
+  .sidebar button {
+    margin-bottom: 0;
+    margin-right: 8px;
+    flex-shrink: 0;
+    width: auto;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .sidebar.collapsed button {
+    width: 48px;
+    height: 48px;
+  }
+  div.sidebar-divider > #collapseBtn { display: none; }
+  .sidebar-divider { display: none; }
+
+  .content {
+    padding: 16px;
+  }
+}
+
+/* --- 移除 main.css 中 CalcPage 相关样式 --- */
+/* 这些样式已迁移到 CalcPage.css */
+/* .calc-layout { ... } */
+/* .calc-left { ... } */
+/* .calc-list-group { ... } */
+/* .calc-list-title { ... } */
+/* .calc-list-content { ... } */
+/* .calc-drag-area { ... } */
+/* .calc-divider { ... } */
+/* .calc-right { ... } */
+/* .calc-result-area, .calc-score-area { ... } */
+/* .calc-chart-area { ... } */
+/* @media (max-width: 1200px) { ... } */
+/* .calc-table-group { ... } */
+/* .calc-table-title { ... } */
+/* .calc-table-btns { ... } */
+/* .calc-table-btn { ... } */
+/* .calc-table-content { ... } */
+/* .calc-table { ... } */
+/* .calc-table thead th { ... } */
+/* .calc-table tbody td { ... } */
+/* .del-cell { ... } */
+/* #tolerance-drag-area { ... } */
+/* #tolerance-range { ... } */
+
+/* 版本信息样式 */
+.version-info {
+  /* position: absolute; */ /* 移除绝对定位 */
+  /* bottom: 15px; */       /* 移除 bottom 定位 */
+  /* left: 0; */
+  /* right: 0; */
+  width: 100%; /* 使其宽度适应侧边栏，便于文本居中 */
+  text-align: center;
+  font-size: 12px;
+  color: #868E96; /* 与折叠按钮颜色一致，或使用较浅的灰色 */
+  padding: 0 10px;    /* 左右内边距，防止文字紧贴边缘 */
+  box-sizing: border-box;
+  white-space: nowrap; /* 防止文字换行 */
+  overflow: hidden;    /* 超出部分隐藏 */
+  text-overflow: ellipsis; /* 超出部分显示省略号 */
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* 过渡效果 */
+  opacity: 1;
+  visibility: visible;
+  margin-bottom: 15px; /* 调整与侧边栏底部的间距 */
+  /* margin-top: 5px; */ /* 可选：如果希望版本信息与帮助按钮有明确的顶部间距，但通常由帮助按钮的 margin-bottom 控制 */
+}
+
+.sidebar.collapsed .version-info {
+  opacity: 0;         /* 收起时完全透明 */
+  visibility: hidden; /* 收起时不可见且不参与布局 */
+  pointer-events: none; /* 避免在隐藏时仍可交互 */
+}
+
+/* 更新日志模态窗口样式 */
+.changelog-modal-overlay {
+  position: fixed; /* 固定定位，覆盖整个视口 */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* 半透明黑色背景 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /*确保在最上层 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+/* 当模态窗口被添加到DOM后，通过JS添加此类来触发显示动画 */
+.changelog-modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+.changelog-modal-content {
+  background-color: #FFFFFF;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 80%;
+  max-width: 600px; /* 最大宽度 */
+  max-height: 80vh; /* 最大高度，内容超出则滚动 */
+  overflow-y: auto; /* 内容超出时垂直滚动 */
+  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.changelog-modal-overlay.visible .changelog-modal-content {
+  transform: scale(1);
+}
+
+.changelog-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  color: #868E96;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.changelog-modal-close:hover {
+  color: #3A86FF;
+}
+
+.changelog-modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #495057; /* Unified color */
+  font-size: 20px; /* Adjusted font size for consistency */
+  font-weight: 600; /* Unified font weight */
+  text-align: center;
+}
+
+.changelog-list {
+  margin-top: 15px;
+}
+
+.changelog-version-entry {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E9ECEF; /* 分隔线 */
+}
+
+.changelog-version-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.changelog-version-entry h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #495057;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.changelog-version-entry ul {
+  list-style-type: disc; /* 使用实心圆点 */
+  padding-left: 25px;
+  margin: 0;
+  color: #6C757D;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.changelog-version-entry ul li {
+  margin-bottom: 6px;
+}
+
+/* 帮助按钮的弱化样式 */
+#btn-help {
+  background-color: transparent;
+  border: none;
+  color: #555; /* 比其他按钮文字颜色稍浅一些 */
+  padding: 0; /* 重置内边距，由SVG大小和按钮大小控制 */
+  margin-top: auto; /* 将按钮推向底部 */
+  margin-bottom: 8px; /* 与版本信息保持一些间距，略微调整 */
+  /* font-size: 1.1em; */ /* 移除 emoji 的字体大小控制 */
+  opacity: 0.75; /* 进一步弱化 */
+  cursor: pointer;
+  border-radius: 4px; /* 轻微圆角 */
+  width: 32px; /* 设置按钮宽度 */
+  height: 32px; /* 设置按钮高度 */
+  display: flex; /* 使用flex布局使SVG居中 */
+  align-items: center; /* 垂直居中SVG */
+  justify-content: center; /* 水平居中SVG */
+  /* text-align: center; */ /* display:flex 时不再需要 */
+}
+
+#btn-help .help-icon-svg { /* 直接为SVG元素设置大小 */
+  width: 20px; /* SVG图标的宽度 */
+  height: 20px; /* SVG图标的高度 */
+}
+
+#btn-help:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* 轻微的悬停效果 */
+  opacity: 1;
+}
+
+/* #btn-help .emoji { margin-right: 0; } */ /* 移除旧的 emoji 样式 */
+
+/* 如果希望帮助按钮在侧边栏收起时也显示 emoji */
+/* .sidebar.collapsed #btn-help .text { display: none; } */ /* 移除，因为没有 .text span 了 */
+
+.sidebar.collapsed #btn-help .help-icon-svg { /* SVG 在收起时的样式 */
+  /* display: inline; */ /* SVG 默认为 inline-block 或可由 flex 控制 */
+  width: 22px; /* 在收起状态下可以稍微大一点 */
+  height: 22px;
+  /* padding: 5px 0; */ /* 移除，按钮大小已固定 */
+}
+
+.sidebar.collapsed #btn-help {
+  width: 40px; /* 调整收起时按钮的整体宽度 */
+  height: 40px; /* 调整收起时按钮的整体高度 */
+  /* padding: 8px 0; */ /* 移除，因为按钮使用固定宽高和flex居中 */
+  /* width: 100%; */ /* 不再占满宽度，而是固定大小 */
+} 
+
+/* 从 src/styles/ConfigPage.css 导入的样式 */
+/* --------------------------------------- */
+/* src/styles/ConfigPage.css */
+.config-page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 各区块之间的间距 */
+  padding: 0; /* 修改：与 calc-layout 一致，依赖父级 .content 的 padding */
+}
+
+.config-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* 在小屏幕上换行 */
+  gap: 10px; /* 标题和按钮组之间的间距 */
+}
+
+.config-title {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+  font-weight: 600; /* 新增：与 history-title 统一 */
+  line-height: 1.4; /* 新增：与 history-title 统一 */
+}
+
+.config-actions {
+  display: flex;
+  justify-content: flex-end; /* 修改：使按钮组靠右 */
+  align-items: center; /* 新增：与 section-title 对齐 */
+  margin-bottom: 12px; /* 新增：与 section-title 对齐 */
+  gap: 10px; /* 重新显式声明 gap */
+}
+
+.config-table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  background: #F8F9FA; /* 修改：参考 calc-table-group */
+  padding: 16px 18px; /* 修改：参考 calc-table-group */
+}
+
+/* .config-table th, (这些将被 .calc-table th, td 统一)
+.config-table td {
+  border: 1px solid #e0e0e0;
+  padding: 8px 10px; 
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap; 
+}
+
+.config-table th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #444;
+}
+*/
+/* 序号列和操作列的文本居中 - 保留并确保适用于 .calc-table.config-table */
+.calc-table.config-table th:first-child, 
+.calc-table.config-table td:first-child, 
+.calc-table.config-table th:last-child,  
+.calc-table.config-table td:last-child {  
+  text-align: center;
+  width: 60px; /* 明确指定序号和操作列的宽度 */
+  white-space: nowrap; /* 确保这些列不换行 */
+}
+
+.config-table input.config-input[type="number"] {
+  width: 70px; /* 将输入框宽度调整为 70px */
+  padding: 6px 8px;
+  border: 1px solid #ccc; /* 默认边框 */
+  border-radius: 3px;
+  box-sizing: border-box; 
+  text-align: center; /* 输入框文本居中 */
+  background-color: #fff; /* 默认背景色 */
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out; /* 添加过渡效果 */
+  appearance: textfield;           /* 标准写法，优先写在最前面 */
+  -webkit-appearance: textfield;   /* Chrome/Safari */
+  -moz-appearance: textfield;      /* Firefox */
+}
+
+.config-table input.config-input[type="number"]:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 0.1rem rgba(0,123,255,.25);
+}
+
+/* 用于高亮错误输入框的样式 */
+.config-table input.config-input.input-error {
+  border-color: red !important; /* 强制红色边框 */
+  background-color: #ffe0e0 !important; /* 淡红色背景底纹 */
+  box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.35) !important; /* 可选：更明显的红色阴影 */
+  color: #d8000c; /* 可选：将文字颜色也变深红，以确保对比度 */
+}
+
+/* 如果希望聚焦时的错误状态也保持错误样式，可以添加 */
+.config-table input.config-input.input-error:focus {
+  border-color: red !important; 
+  background-color: #ffe0e0 !important; 
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important; /* 聚焦时阴影更明显一些 */
+  color: #d8000c !important;
+}
+
+/* 小号删除按钮样式，如果全局 calc-table-btn btn-danger btn-small 不够具体 */
+.config-table .btn-small {
+    padding: 3px 6px; /* 进一步减小按钮内边距 */
+    font-size: 0.9em; /* 减小字体大小 */
+    line-height: 1.2; /* 调整行高以适应新的padding和font-size */
+}
+
+
+/* 从 src/styles/CalcPage.css 导入的样式 */
+/* ------------------------------------ */
+/* CalcPage 页面样式，抽取自原JS内嵌<style>标签 */
+.calc-layout {
+  display: flex;
+  gap: 24px;
+  padding: 0;
+  min-width: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding-bottom: 90px; /* Space for the fixed bottom bar */
+}
+.layout-left, .layout-right {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.layout-left {
+  flex: 4 1 0% !important;
+  min-width: 360px;
+  max-width: 100%;
+}
+.layout-right {
+  flex: 6 1 0% !important;
+  min-width: 400px;
+  max-width: 100%;
+}
+.calc-table-group {
+  margin-bottom: 0;
+  padding: 16px 18px;
+  border-bottom: none;
+  background: #F8F9FA;
+  border-radius: 8px; /* 统一圆角 */
+}
+.calc-table-btns {
+  display: flex;
+  gap: 8px;
+}
+/* .calc-table-btn 被定义在 HistoryPage.css 和 main.css (通用按钮) 中，这里注释掉以避免直接冲突 */
+/* 如果需要 CalcPage 特有的 calc-table-btn 样式，请取消注释并调整或确保其特异性更高 */
+/*
+.calc-table-btn {
+  padding: 4px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #CED4DA;
+  background: #FFFFFF;
+  color: #495057;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.calc-table-btn:hover {
+  background: #EBF4FF;
+  border-color: #3A86FF;
+  color: #3A86FF;
+}
+*/
+#reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover {
+  background: #FEEAEA;
+  border-color: #D00000;
+  color: #D00000;
+}
+.calc-table-content {
+  margin-bottom: 0;
+}
+.calc-table {
+  width: 100%; /* 默认让表格宽度占满其容器 */
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #495057;
+  /* table-layout: fixed; -- 移除全局 fixed，由具体表格按需设置 (如 .calc-table-fixed) */
+}
+.calc-table input, .calc-table select {
+  width: 95%;
+  min-width: 40px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #CED4DA;
+  text-align: center;
+  font-size: 14px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  color: #495057;
+}
+.calc-table select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23495057' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 16px 12px;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 1.5rem;
+}
+.calc-table th, 
+.calc-table td {
+  padding: 8px 10px; /* 统一内边距 */
+  border: 1px solid #E0E0E0; /* 统一边框颜色 */
+  vertical-align: middle; /* 统一垂直居中 */
+}
+.calc-table th {
+  background: #F8F9FA;
+  font-weight: 600;
+  color: #495057;
+  text-align: center; /* 表头文字默认居中 */
+  white-space: nowrap; /* 表头默认不换行 */
+}
+.calc-table td {
+  text-align: center; /* 表格数据默认居中 (原为 left) */
+  /* white-space: normal; -- 默认允许换行，特定列可设为nowrap */
+}
+.calc-drag-area {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.calc-table-fixed {
+  table-layout: fixed;
+  width: 100%;
+  height: auto;
+}
+/* 列表区1 (标准导线) 列宽调整 */
+#table1-header-table th:nth-child(1), #table1-body-table td:nth-child(1) { min-width: 48px; width: 8%; } /* 序号 */
+#table1-header-table th:nth-child(2), #table1-body-table td:nth-child(2) { min-width: 80px; width: 20%; } /* 线径 */
+#table1-header-table th:nth-child(3), #table1-body-table td:nth-child(3) { min-width: 80px; width: 20%; } /* 类型 */
+#table1-header-table th:nth-child(4), #table1-body-table td:nth-child(4) { min-width: 70px; width: 12%; } /* 直径(mm) - 减小 */
+#table1-header-table th:nth-child(5), #table1-body-table td:nth-child(5) { min-width: 70px; width: 20%; } /* 数量 */
+#table1-header-table th:nth-child(6), #table1-body-table td:nth-child(6) { min-width: 50px; width: 10%; } /* 删除 - 减小 */
+
+/* 列表区2 (特殊导线) 列宽调整 */
+#table2-header-table th:nth-child(1), #table2-body-table td:nth-child(1) { min-width: 48px; width: 15%; } /* 序号 */
+#table2-header-table th:nth-child(2), #table2-body-table td:nth-child(2) { min-width: 80px; width: 40%; } /* 直径(mm) */
+#table2-header-table th:nth-child(3), #table2-body-table td:nth-child(3) { min-width: 70px; width: 30%; } /* 数量 */
+#table2-header-table th:nth-child(4), #table2-body-table td:nth-child(4) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
+
+/* 列表区3 (包裹物) 列宽调整 */
+#table3-header-table th:nth-child(1), #table3-body-table td:nth-child(1) { min-width: 48px; width: 30%; } /* 序号 */
+#table3-header-table th:nth-child(2), #table3-body-table td:nth-child(2) { min-width: 80px; width: 55%; } /* 厚度(mm) */
+#table3-header-table th:nth-child(3), #table3-body-table td:nth-child(3) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
+
+#table1-header-wrapper,
+#table2-header-wrapper,
+#table3-header-wrapper {
+  padding-right: 15px; /* 常见滚动条宽度，根据需要调整 */
+  box-sizing: border-box; /* 确保内边距包含在元素总宽度内 */
+}
+.calc-table td {
+  vertical-align: middle;
+  height: auto;
+}
+.drag-area-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.drag-area-range {
+  flex: 1;
+  margin: 0;
+  vertical-align: middle;
+  height: 32px;
+  accent-color: #3A86FF;
+  background: transparent;
+  cursor: pointer;
+}
+.drag-area-input {
+  width: 65px;
+  height: 32px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #CED4DA;
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #495057;
+  flex-shrink: 0;
+  background: #FFFFFF;
+}
+.input-with-unit-wrapper {
+  position: relative;
+  display: inline-flex; /* Or inline-block, adjust as needed */
+  align-items: center;
+}
+#tolerance-drag-area .drag-area-input {
+  padding-right: 22px; /* Space for the unit */
+}
+.drag-area-unit {
+  position: absolute;
+  right: 8px; /* Position inside the input box */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #495057;
+  pointer-events: none; /* Allow clicks to pass through to the input */
+}
+.calc-drag-area { /* This one is used for tolerance and score area */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 8px 12px;
+  box-shadow: none;
+  border: 1px solid #EAECEF;
+}
+.calc-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 20px;
+  padding: 12px 20px;
+  background-color: #FFFFFF;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  box-sizing: border-box;
+  height: 72px;
+  transition: left 0.3s ease, width 0.3s ease;
+}
+.history-save-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto; 
+  padding-left: 10px; 
+}
+.history-save-option label {
+  font-size: 14px;
+  color: #495057;
+  cursor: pointer;
+  user-select: none; 
+}
+.history-save-option input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px; 
+  height: 16px;
+  accent-color: #3A86FF; 
+}
+.main-container .calc-bottom-bar {
+  left: 220px;
+  width: calc(100% - 220px);
+}
+.main-container.sidebar-collapsed .calc-bottom-bar {
+  left: 72px;
+  width: calc(100% - 72px);
+}
+.action-bar-btn {
+  padding: 10px 28px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid transparent; 
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease; 
+  min-width: 130px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); 
+  user-select: none; 
+}
+.action-bar-btn:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+}
+.action-bar-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); 
+}
+.btn-reset-action {
+  background-color: #FFFFFF;
+  color: #DC3545;
+  border-color: #DC3545;
+}
+.btn-reset-action:hover {
+  background-color: #DC3545; /* 修改：背景变为危险红色 */
+  border-color: #DC3545;   /* 修改：边框保持危险红色 (之前为 #C82333) */
+  color: #FFFFFF;         /* 修改：文字变为白色 (之前为 #C82333) */
+}
+.btn-calculate-action {
+  background-color: #FFFFFF; 
+  color: #3A86FF;    
+  border-color: #3A86FF; 
+}
+.btn-calculate-action:hover {
+  background-color: #3A86FF; 
+  border-color: #3A86FF; 
+  color: #FFFFFF;    
+}
+@media (max-width: 1100px) {
+  .calc-layout {
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    padding-bottom: 90px; 
+  }
+  .layout-left, .layout-right {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+@media (max-width: 900px) { 
+  .main-container .calc-bottom-bar,
+  .main-container.sidebar-collapsed .calc-bottom-bar {
+    left: 0;
+    width: 100%;
+  }
+}
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #495057;
+  letter-spacing: normal;
+}
+.chart-container-wrapper {
+  background: #FFFFFF; 
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+}
+.chart-area-title { /* This is used in JS */
+  margin-bottom: 0;
+}
+.simulation-content-wrapper {
+  display: flex;
+  align-items: flex-start; 
+  gap: 16px; 
+}
+.simulation-area {
+  background: #F8F9FA;
+  border-radius: 6px;
+  width: 50%; 
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: flex-end; 
+  padding: 8px;
+  border: 1px solid #EAECEF;
+  box-sizing: border-box;
+  overflow: auto; 
+  flex-shrink: 0;
+  position: relative; 
+}
+#simulation-canvas {
+  max-width: 100%;
+  max-height: 80%; 
+  display: block;
+  flex-shrink: 0; 
+}
+.simulation-details {
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; 
+}
+.highlighted-result-area {
+  background-color: #EBF4FF;
+  border: 1px solid #B3D1F2;
+  border-radius: 6px;
+  padding: 10px 16px; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 4px; 
+  margin-top: 4px;
+}
+.highlight-value {
+  font-size: 32px; 
+  font-weight: 700;
+  color: #3A86FF;
+  line-height: 1.1; 
+}
+.precise-value {
+  font-size: 16px; 
+  color: #6C757D;
+  font-weight: 400;
+  margin-left: 6px; 
+  vertical-align: baseline;
+}
+#input-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+  padding-left: 8px; 
+}
+#input-summary > div {
+  padding: 6px 0;
+  border-bottom: 1px dashed #EAECEF;
+  font-size: 13px;
+  color: #495057; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+#input-summary > div:last-child {
+  border-bottom: none;
+}
+#input-summary > div > span {
+  color: #3A86FF;    
+  font-weight: 600;
+}
+.simulation-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.simulation-results-table th,
+.simulation-results-table td {
+  padding: 10px 8px; 
+  text-align: left; 
+  border-bottom: 1px dashed #EAECEF;
+  vertical-align: middle; 
+}
+.simulation-results-table th {
+  color: #495057;
+  font-weight: 600;
+  background-color: #F8F9FA;
+  border-bottom: 2px solid #E0E0E0;
+}
+.simulation-results-table th:nth-child(2),
+.simulation-results-table td:nth-child(2),
+.simulation-results-table th:nth-child(3),
+.simulation-results-table td:nth-child(3) {
+  text-align: right;
+  width: 30%; 
+}
+.simulation-results-table td:nth-child(2) span,
+.simulation-results-table td:nth-child(3) span {
+  color: #3A86FF;
+  font-weight: 600;
+}
+.simulation-results-table tr:last-child td {
+  border-bottom: none;
+}
+.results-chart-area {
+  background: #F8F9FA; 
+  border-radius: 6px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #CED4DA; 
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  padding: 10px;
+  border: 1px dashed #CED4DA; 
+}
+.calc-table td button {
+  background: none; 
+  border: none; 
+  padding: 0; 
+  margin: 0; 
+  box-shadow: none; 
+  color: #D00000; 
+  font-size: 16px; 
+  line-height: 1; 
+  cursor: pointer;
+}
+.calc-table td button:hover {
+  background: none; 
+  color: #A30000; 
+}
+.simulation-legend-wrapper {
+  background: transparent; 
+  border-radius: 0; 
+  padding: 0; 
+  box-shadow: none; 
+  width: 100%; 
+  margin-top: auto; 
+  box-sizing: border-box;
+}
+#legend-items-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px; 
+  justify-content: center; 
+  margin-top: 4px; 
+}
+#legend-items-list li {
+  display: flex;
+  align-items: center;
+  font-size: 11px; 
+  color: #495057;
+}
+.legend-color-box {
+  display: inline-block;
+  width: 10px; 
+  height: 10px;
+  border-radius: 2px; 
+  margin-right: 4px; 
+  border: 1px solid #DEE2E6;
+}
+
+
+/* 从 src/styles/HistoryPage.CSS 导入的样式 */
+/* ---------------------------------------- */
+/* HistoryPage 页面样式 - 全新版本 */
+
+/* 页面整体布局 */
+.history-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0; /* 修改：与 calc-layout 一致，依赖父级 .content 的 padding */
+  /* background: #F0F2F5; -- 取消灰色背景 */
+  min-height: calc(100vh - 60px); /* 假设导航栏高度为60px */
+}
+
+/* 顶部控制栏 (.history-controls) */
+.history-controls {
+  display: flex;                  /* 启用Flexbox布局 */
+  justify-content: space-between; /* 左侧标题推到最左，右侧控件组推到最右 */
+  align-items: center;          /* 修改：与 config-header 一致 */
+  flex-wrap: wrap;                /* 新增：与 config-header 一致 */
+  gap: 10px;                      /* 新增：与 config-header 一致 */
+  /* 移除以下卡片化样式 */
+  /* padding: 15px 20px; */
+  /* background: #FFFFFF; */
+  /* border-radius: 12px; */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
+  /* margin-bottom: 16px; */ /* 这个间距可以由父级 .history-layout 的 gap 控制 */
+}
+
+/* 左侧标题 */
+.history-title {
+  font-size: 1.5em; /* 修改：与 config-title 一致 */
+  font-weight: 600;
+  color: #333;       /* 修改：与 config-title 一致 */
+  margin: 0; /* 移除默认外边距 */
+  padding: 0; /* 移除默认内边距 */
+  line-height: 1.4; /* 微调行高以帮助垂直对齐，可根据实际效果调整 */
+}
+
+/* 右侧控件容器 (包含缓存信息和按钮组) */
+.history-rhs-controls {
+  display: flex;
+  flex-direction: column;   /* 内部元素垂直堆叠：缓存信息在上，按钮组在下 */
+  align-items: flex-end;    /* 内部元素（缓存信息文本、按钮组）均靠右对齐 */
+  /* gap: 8px; */ /* 缓存信息和按钮组之间的垂直间距 - 现在只有一个子元素，gap不起作用 */
+}
+
+/* 缓存信息文本 - 相关样式被移除 */
+/* .cache-info { ... } */
+/* .cache-info .cache-value { ... } */
+
+/* 按钮动作组 */
+.history-actions {
+  display: flex;
+  justify-content: flex-end; /* 修改：使按钮组靠右 */
+  align-items: center; /* 新增：与 section-title 对齐 */
+  margin-bottom: 12px; /* 新增：与 section-title 对齐 */
+  gap: 12px; /* 重新显式声明 gap */
+}
+
+/* 通用按钮样式 (参考CalcPage) */
+/* .calc-table-btn is already defined in CalcPage.css section (or globally if that was kept) */
+/* If specific overrides for HistoryPage are needed for .calc-table-btn, they should be more specific */
+/*
+.calc-table-btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #CED4DA;
+  background: #FFFFFF;
+  color: #495057;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.calc-table-btn:hover {
+  background: #EBF4FF;
+  border-color: #3A86FF;
+  color: #3A86FF;
+}
+*/
+.calc-table-btn.btn-danger:hover { /* "清除历史"按钮的特定悬停效果 */
+  background: #FEEAEA;
+  border-color: #D00000;
+  color: #D00000;
+}
+
+/* 表格区域样式 */
+.history-table-group {
+  background: #F8F9FA;
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+/* 注释掉HistoryPage表格的特殊列宽、对齐样式 */
+/*
+#history-table-header-table th:nth-child(1), #history-table-body-table td:nth-child(1) { width: 5%; text-align: center;}
+#history-table-header-table th:nth-child(2), #history-table-body-table td:nth-child(2) { width: 15%; text-align: center;}
+#history-table-header-table th:nth-child(3), #history-table-body-table td:nth-child(3) { width: 10%; text-align: center;}
+#history-table-header-table th:nth-child(4), #history-table-body-table td:nth-child(4) { width: 10%; text-align: center;}
+#history-table-header-table th:nth-child(5), #history-table-body-table td:nth-child(5) { width: 10%; text-align: center;}
+#history-table-header-table th:nth-child(6), #history-table-body-table td:nth-child(6) { width: 10%; text-align: center;}
+#history-table-header-table th:nth-child(7), #history-table-body-table td:nth-child(7) { width: 10%; text-align: right;}
+#history-table-header-table th:nth-child(8), #history-table-body-table td:nth-child(8) { width: 10%; text-align: right;}
+#history-table-header-table th:nth-child(9), #history-table-body-table td:nth-child(9) { width: 10%; text-align: right;}
+#history-table-header-table th:nth-child(10), #history-table-body-table td:nth-child(10) { width: 10%; text-align: right; font-weight: bold; color: #3A86FF;}
+*/
+
+/* 主表格统一样式（已在文件后部定义）
+.main-data-table, [id^=main-data-table] {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #495057;
+  background: #fff;
+}
+.main-data-table th, .main-data-table td, [id^=main-data-table] th, [id^=main-data-table] td {
+  padding: 8px 10px;
+  border: 1px solid #E0E0E0;
+  vertical-align: middle;
+}
+.main-data-table th, [id^=main-data-table] th {
+  background: #F8F9FA;
+  font-weight: 600;
+  color: #495057;
+  text-align: center;
+  white-space: nowrap;
+}
+.main-data-table td, [id^=main-data-table] td {
+  text-align: center;
+}
+*/
+
+/* 保留 .history-table-group 的背景、圆角、padding 与 .calc-table-group 一致 */
+.history-table-group {
+  background: #F8F9FA;
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+/* 注释掉HistoryPage表格的特殊列宽、对齐样式 */
+/*
+#history-table-header-table th:nth-child(1), #history-table-body-table td:nth-child(1) { width: 5%; text-align: center;}
+#history-table-header-table th:nth-child(2), #history-table-body-table td:nth-child(2) { width: 15%; text-align: center;}
+#history-table-header-table th:nth-child(3), #history-table-body-table td:nth-child(3) { width: 10%; text-align: center;}
+#history-table-header-table th:nth-child(4), #history-table-body-table td:nth-child(4) { width: 10%; text-align: center;}
+#history-table-header-table th:nth-child(5), #history-table-body-table td:nth-child(5) { width: 10%; text-align: center;}
+#history-table-header-table th:nth-child(6), #history-table-body-table td:nth-child(6) { width: 10%; text-align: center;}
+#history-table-header-table th:nth-child(7), #history-table-body-table td:nth-child(7) { width: 10%; text-align: right;}
+#history-table-header-table th:nth-child(8), #history-table-body-table td:nth-child(8) { width: 10%; text-align: right;}
+#history-table-header-table th:nth-child(9), #history-table-body-table td:nth-child(9) { width: 10%; text-align: right;}
+#history-table-header-table th:nth-child(10), #history-table-body-table td:nth-child(10) { width: 10%; text-align: right; font-weight: bold; color: #3A86FF;}
+*/
+
+/* 如果需要，可以添加针对历史记录页面中特定元素的更精细样式 */
+
+#history-table-header-table th:nth-child(9), #history-table-body-table td:nth-child(9) { width: 10%; text-align: right;}
+#history-table-header-table th:nth-child(10), #history-table-body-table td:nth-child(10) { width: 10%; text-align: right; font-weight: bold; color: #3A86FF;}
+
+/* section-title 复用 CalcPage 的样式，或在此处定义/覆盖 */
+/* .section-title 及其子元素 .history-table-header .table-group-subtitle 的样式被移除，因为元素已删除 */
+
+/* 如果需要，可以添加针对历史记录页面中特定元素的更精细样式 */
+
+.calc-table-btn { /* 通用表格/操作按钮样式 */
+  padding: 6px 16px; /* 调整内边距使其更一致 */
+  font-size: 14px;
+  border-radius: 8px; /* 统一增加圆角 */
+  border: 1px solid #CED4DA; /* 默认边框颜色 */
+  background: #FFFFFF; /* 默认白色背景 */
+  color: #495057; /* 默认文字颜色 */
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s; /* 添加 box-shadow 过渡 */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 轻微阴影 */
+}
+.calc-table-btn:hover { /* 通用悬停效果 */
+  border-color: #ADB5BD; /* 边框变深 */
+  background-color: #F8F9FA; /* 背景变浅灰 */
+  /* color: #3A86FF; -- 移除默认的蓝色悬停文字，除非是特定功能按钮 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* 悬停时阴影加深 */
+}
+.calc-table-btn:active {
+  background-color: #E9ECEF; /* 点击时背景更深 */
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+
+/* 取消红色悬停动画，改为柔和效果 */
+#reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover,
+.calc-table-btn.btn-danger:hover {
+  background: #F8F9FA; /* 轻微背景变化 */
+  border-color: #DC3545; /* 边框变危险色 */
+  color: #DC3545;       /* 文字变危险色 */
+}
+
+/* 页面级容器（无样式，仅结构）
+.page-calc {}
+.page-history {}
+.page-config {}
+
+/* 区块容器（大区分区） */
+.layout-calc, .layout-history, .layout-config {
+  display: flex;
+  gap: 24px;
+  padding: 0;
+  min-width: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+.layout-left, .layout-right {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 功能区块统一样式 */
+.group-wire-standard,
+.group-wire-special,
+.group-wrap,
+.group-config-table,
+.group-history-list {
+  background: #F8F9FA;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 0;
+  /* 可根据需要添加统一的 box-shadow 或 border */
+}
+
+/* 标题区统一样式 */
+.group-title, .section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #495057;
+  letter-spacing: normal;
+}
+
+/* 按钮区统一样式 */
+.group-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* 主表格统一ID样式 */
+.main-data-table, [id^=main-data-table] {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #495057;
+  background: #fff;
+}
+.main-data-table th, .main-data-table td, [id^=main-data-table] th, [id^=main-data-table] td {
+  padding: 8px 10px;
+  border: 1px solid #E0E0E0;
+  vertical-align: middle;
+}
+.main-data-table th, [id^=main-data-table] th {
+  background: #F8F9FA;
+  font-weight: 600;
+  color: #495057;
+  text-align: center;
+  white-space: nowrap;
+}
+.main-data-table td, [id^=main-data-table] td {
+  text-align: center;
+}
+
+/* 其它原有样式保留，后续逐步迁移 */
+
+/* --------- 全部主表格统一为.simulation-results-table样式 --------- */
+
+/* 1. 注释掉原有 .main-data-table、.calc-table、.config-table、.history-table-group 等表格样式 */
+/*
+.main-data-table, [id^=main-data-table],
+.calc-table, .config-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #495057;
+  background: #fff;
+}
+.main-data-table th, .main-data-table td, [id^=main-data-table] th, [id^=main-data-table] td,
+.calc-table th, .calc-table td, .config-table th, .config-table td {
+  padding: 8px 10px;
+  border: 1px solid #E0E0E0;
+  vertical-align: middle;
+}
+.main-data-table th, [id^=main-data-table] th, .calc-table th, .config-table th {
+  background: #F8F9FA;
+  font-weight: 600;
+  color: #495057;
+  text-align: center;
+  white-space: nowrap;
+}
+.main-data-table td, [id^=main-data-table] td, .calc-table td, .config-table td {
+  text-align: center;
+}
+*/
+
+/* 2. 统一所有主表格为.simulation-results-table样式 */
+.main-data-table, [id^=main-data-table],
+.calc-table, .config-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: #fff;
+}
+.main-data-table th, .main-data-table td, [id^=main-data-table] th, [id^=main-data-table] td,
+.calc-table th, .calc-table td, .config-table th, .config-table td {
+  padding: 10px 8px;
+  text-align: center; /* 强制居中 */
+  border-bottom: 1px dashed #EAECEF;
+  border-right: none !important;
+  border-left: none !important;
+  border-top: none !important;
+  vertical-align: middle;
+}
+.main-data-table th, [id^=main-data-table] th, .calc-table th, .config-table th {
+  color: #495057;
+  font-weight: 600;
+  background-color: #F8F9FA;
+  border-bottom: 2px solid #E0E0E0;
+  text-align: center; /* 表头也居中 */
+}
+.main-data-table tr:last-child td, [id^=main-data-table] tr:last-child td,
+.calc-table tr:last-child td, .config-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* 3. 兼容原有按钮、输入框等表格内元素样式（如有需要可补充） */
+
+.group-simulation {
+  background: #F8F9FA;
+}
+.group-result {
+  background: #F8F9FA;
+  margin-top: 24px;
+}
+
+.layout-history {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group-config-table {
+  background: #F8F9FA;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.layout-config {
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 700px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* 标准导线配置表格滚动区域样式 */
+#actual-table-display-area {
+  max-height: 800px; /* 15行的高度，假设每行约40px */
+  overflow-y: auto;
+  min-width: 500px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0;
+  position: relative; /* 为固定表头提供定位上下文 */
+}
+
+/* 固定表头样式 */
+#main-data-table-config thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #F8F9FA;
+}
+
+#main-data-table-config thead th {
+  position: sticky;
+  top: 0;
+  background: #F8F9FA;
+  z-index: 2;
+  border-bottom: 2px solid #E0E0E0;
+}
+
+/* 美化滚动条样式 */
+#actual-table-display-area::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+#actual-table-display-area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+#actual-table-display-area::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+#actual-table-display-area::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 历史记录表格滚动区域样式 */
+#history-table-body-wrapper {
+  max-height: 800px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  position: relative;
+}
+
+/* 美化历史记录表格滚动条样式 */
+#history-table-body-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+#history-table-body-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+#history-table-body-wrapper::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+#history-table-body-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 移除所有数字输入框的微调按钮（上下小箭头） */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  appearance: textfield;           /* 标准写法，优先写在最前面 */
+  -webkit-appearance: textfield;   /* Chrome/Safari */
+  -moz-appearance: textfield;      /* Firefox */
+}
+
+

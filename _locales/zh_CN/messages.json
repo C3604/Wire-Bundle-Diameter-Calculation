@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "线束直径计算工具",
+    "description": "扩展名称"
+  },
+  "extDescription": {
+    "message": "基于二维圆形填充的线束直径估算工具，支持多规格导线、包裹物层、可视化与配置管理。",
+    "description": "扩展描述"
+  }
+} 

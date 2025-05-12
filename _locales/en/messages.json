@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "Wire Bundle Diameter Calculator",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "A wire bundle diameter estimation tool based on 2D circular packing, supporting multiple wire specifications, wrapping layers, visualization and configuration management.",
+    "description": "Extension description"
+  }
+} 
