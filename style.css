@@ -1,184 +1,301 @@
-body {
-    font-family: sans-serif;
-    line-height: 1.6;
-    margin: 20px;
-    background-color: #f4f4f4;
+/* CSS Variables */
+:root {
+    --primary-color: #007bff;
+    --primary-hover-color: #0056b3;
+    --secondary-color: #6c757d;
+    --secondary-hover-color: #5a6268;
+    --success-color: #28a745;
+    --success-hover-color: #218838;
+    --danger-color: #dc3545;
+    --danger-hover-color: #c82333;
+    --info-color: #17a2b8;
+    --highlight-bg-color: #e2f0ff;
+    --light-bg: #f8f9fa;
+    --light-gray-bg: #f1f3f5;
+    --medium-gray-bg: #e9ecef;
+    --white-bg: #ffffff;
+    --text-color: #343a40;
+    --muted-text-color: #6c757d;
+    --link-color: #0056b3;
+    --border-color: #ced4da;
+    --light-border-color: #dee2e6;
+    --results-border-color: #d1dff0;
+    --chart-border-color: #bcccdc; /* Border color for chart */
+    --border-radius: 5px;
+    --border-radius-sm: 4px;
+    --border-radius-lg: 6px;
+    --input-focus-border-color: #80bdff;
+    --input-focus-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    --error-bg-color: #f8d7da;
+    --default-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-h1, h2 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
+/* General Styles */
+body { font-family: var(--default-font-stack); line-height: 1.6; margin: 20px; background-color: var(--light-bg); color: var(--text-color); }
+h1 { text-align: center; color: var(--link-color); margin-bottom: 10px; }
+.page-description { text-align: center; color: var(--muted-text-color); margin-bottom: 30px; font-size: 0.95em; }
+.input-description { font-size: 0.9em; color: var(--muted-text-color); margin-bottom: 10px; padding-left: 5px; }
+h2 { color: #333; margin-top: 25px; margin-bottom: 10px; border-bottom: 2px solid var(--medium-gray-bg); padding-bottom: 8px; font-size: 1.2em; display: flex; align-items: center; gap: 8px; }
+h3 { font-size: 1.1em; margin-top: 15px; margin-bottom: 10px; color: #444; display: flex; align-items: center; gap: 6px;}
 
-.container {
+
+/* Footer */
+.footer { background-color: var(--light-gray-bg); color: var(--text-color); text-align: center; padding: 20px 0; margin-top: 50px; font-size: 0.9em; border-top: 1px solid var(--light-border-color); }
+.footer p { margin: 5px 0; }
+.footer a { color: var(--link-color); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* Spacing Adjustments */
+.input-section > h2:first-of-type { margin-top: 0; }
+
+.icon { font-size: 1.1em; }
+
+/* Layout */
+.container { display: flex; flex-wrap: wrap; gap: 30px; background-color: var(--white-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+.input-section, .output-section { flex: 1; min-width: 320px; flex-grow: 1; }
+
+
+/* Standard Wire Input Section */
+#standard-wire-inputs { margin-bottom: 15px; max-height: 220px; overflow-y: auto; border: 1px solid var(--light-border-color); padding: 10px; border-radius: var(--border-radius-lg); background-color: #f9f9f9; }
+
+/* Horizontal input group */
+.horizontal-input-group { display: flex; gap: 20px; margin-top: 20px; margin-bottom: 20px; align-items: flex-start; }
+.input-column { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.input-column #special-wire-inputs,
+.input-column #wrapping-inputs { margin-bottom: 15px; max-height: 150px; overflow-y: auto; border: 1px solid var(--light-border-color); padding: 10px; border-radius: var(--border-radius-lg); background-color: #f9f9f9; flex-grow: 1; }
+.input-column h2 { margin-top: 0; font-size: 1.1em; }
+.input-column .input-description { font-size: 0.85em; order: 2; } /* Order description after button */
+.input-column .input-controls { order: 1; margin-bottom: 5px; } /* Order button before description */
+.input-column #special-wire-inputs,
+.input-column #wrapping-inputs { order: 3; } /* Order input area last */
+
+
+/* Styles for Input Rows */
+.standard-wire-input-row, .special-wire-input-row, .wrapping-input-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; padding: 10px; border-bottom: 1px dashed #e0e0e0; background-color: var(--white-bg); border-radius: var(--border-radius-sm); transition: background-color 0.2s ease-in-out; padding-left: 5px; }
+.standard-wire-input-row:last-child, .special-wire-input-row:last-child, .wrapping-input-row:last-child { border-bottom: none; margin-bottom: 0; }
+.standard-wire-input-row:hover, .special-wire-input-row:hover, .wrapping-input-row:hover { background-color: var(--light-gray-bg); }
+.row-number { display: inline-block; min-width: 25px; text-align: right; margin-right: 8px; font-weight: bold; color: var(--muted-text-color); }
+
+
+/* Input Elements Styling */
+.standard-wire-input-row label, .special-wire-input-row label, .wrapping-input-row label { display: flex; align-items: center; gap: 5px; font-size: 0.9em; color: #495057; margin-bottom: 5px; }
+.standard-wire-input-row select,
+.standard-wire-input-row input[type="number"],
+.special-wire-input-row input[type="number"],
+.wrapping-input-row input[type="number"] { padding: 8px 10px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm); font-size: 0.95em; transition: border-color 0.2s, box-shadow 0.2s; min-width: 25px; flex-grow: 1; max-width: 70px; }
+.standard-wire-input-row .wire-gauge-select { max-width: 100px; }
+.standard-wire-input-row .wire-type-select { max-width: 120px; }
+.standard-wire-input-row .wire-quantity-std,
+.special-wire-input-row .wire-quantity-sp,
+.wrapping-input-row .wrapping-thickness { max-width: 80px; }
+.standard-wire-input-row select:focus,
+.standard-wire-input-row input[type="number"]:focus,
+.special-wire-input-row input[type="number"]:focus,
+.wrapping-input-row input[type="number"]:focus { border-color: var(--input-focus-border-color); outline: 0; box-shadow: var(--input-focus-box-shadow); }
+.input-error { border-color: var(--danger-color) !important; background-color: var(--error-bg-color) !important; }
+.auto-od-display { font-size: 0.9em; color: var(--link-color); font-weight: bold; background-color: var(--medium-gray-bg); padding: 8px 10px; border-radius: var(--border-radius-sm); min-width: 60px; text-align: center; border: 1px solid var(--border-color); margin-left: 5px; white-space: nowrap; }
+.auto-od-display.na { color: var(--danger-color); font-style: italic; }
+
+
+.input-controls { display: flex; gap: 10px; /* Removed margin-top/bottom, handled by flex order */ }
+
+/* General Button Styles */
+button { padding: 9px 18px; background-color: var(--primary-color); color: var(--white-bg); border: none; border-radius: var(--border-radius); cursor: pointer; transition: background-color 0.2s, transform 0.1s; font-size: 0.95em; display: inline-flex; align-items: center; gap: 6px; }
+button:hover { background-color: var(--primary-hover-color); }
+button:active { transform: scale(0.98); }
+button:disabled { background-color: var(--secondary-color); cursor: not-allowed; }
+.remove-button { background-color: var(--secondary-color); font-size: 0.85em; padding: 5px 10px; margin-left: auto; }
+.remove-button:hover { background-color: var(--danger-color); }
+
+/* Simulation Options */
+.simulation-options { margin-top: 20px; margin-bottom: 25px; font-size: 0.95em; display: flex; align-items: center; gap: 10px; background-color: var(--light-gray-bg); padding: 10px; border-radius: var(--border-radius); flex-wrap: wrap; }
+.simulation-options label { white-space: nowrap; }
+#num-simulations-slider { flex-grow: 1; cursor: pointer; min-width: 100px; }
+.slider-value { font-weight: bold; min-width: 25px; text-align: right; color: var(--link-color); }
+.tooltip { font-size: 0.85em; color: var(--muted-text-color); flex-basis: 100%; text-align: center; margin-top: 5px; }
+
+/* Action Buttons Containers */
+.action-buttons-container { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
+/* Specific alignment for buttons */
+.input-reset-button-container { justify-content: flex-end; margin-bottom: 10px; /* Space before first H2 */ }
+.output-calculate-button-container { justify-content: flex-end; } /* Default was already flex-end */
+
+
+/* Calculate Button */
+#calculate-button { padding: 10px 25px; font-size: 1.05em; margin-top: 0; background-color: var(--success-color); position: relative; min-height: 40px; } /* Removed order */
+#calculate-button:hover { background-color: var(--success-hover-color); }
+#calculate-button:disabled { background-color: var(--secondary-hover-color); }
+#calculate-button-text { /* No styles needed */ }
+
+/* Reset Button */
+.reset-button-prominent { background-color: var(--danger-color) !important; color: var(--white-bg) !important; font-weight: bold; padding: 10px 20px; border: none; border-radius: var(--border-radius); cursor: pointer; transition: background-color 0.2s, transform 0.1s; font-size: 1em; display: inline-flex; align-items: center; gap: 8px; } /* Removed order */
+
+/* Spinner */
+.spinner { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: var(--white-bg); animation: spin 1s ease-in-out infinite; -webkit-animation: spin 1s ease-in-out infinite; }
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@-webkit-keyframes spin { to { -webkit-transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* Error Message */
+.error-message { color: var(--danger-color); font-size: 0.9em; margin-top: 10px; text-align: right; font-weight: bold; flex-basis: 100%; /* Removed order, stays with calculate button */ }
+
+
+/* Output Section Layout */
+.output-layout-container { display: flex; flex-wrap: wrap; gap: 25px; align-items: flex-start; }
+.results-column { flex: 1 1 55%; min-width: 280px; display: flex; flex-direction: column; }
+.simulation-column { flex: 1 1 40%; min-width: 300px; display: flex; flex-direction: column; }
+
+/* Results Header (H2 + Toggle Button) */
+.results-header {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    justify-content: space-between; /* Pushes H2 and button apart */
+    align-items: center; /* Vertically align items */
+    /* H2 already has bottom border and margin */
 }
-
-.input-section, .output-section {
-    flex: 1;
-    min-width: 350px;
+.results-header h2 {
+    margin-bottom: 0; /* Remove default bottom margin */
+    border-bottom: none; /* Remove default bottom border */
+    margin-top: 0; /* Override default H2 margin */
 }
-
-.input-section h2, .output-section h2 {
-     text-align: left;
-     margin-bottom: 15px;
-     border-bottom: 1px solid #eee;
-     padding-bottom: 5px;
+.toggle-chart-button {
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.85em; /* Smaller font */
+    background-color: var(--secondary-color); /* Default secondary color */
+    line-height: 1; /* Adjust line height */
+    margin-left: 10px; /* Space from title */
 }
-
-
-#wire-inputs {
-    margin-bottom: 15px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 10px; /* For scrollbar */
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-}
-
-.wire-input-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    padding: 8px;
-    border-bottom: 1px dashed #eee;
-}
-.wire-input-row:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
+.toggle-chart-button:hover {
+    background-color: var(--secondary-hover-color);
 }
 
 
-.wire-input-row label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.9em;
-}
-
-.wire-input-row input[type="number"] {
-    width: 60px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    font-size: 0.9em;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.remove-wire-type {
-    background-color: #dc3545;
-    font-size: 0.8em;
-    padding: 4px 8px;
-}
-
-.remove-wire-type:hover {
-    background-color: #c82333;
-}
-
-.simulation-options {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 0.9em;
-}
-
-.simulation-options label {
-     margin-right: 5px;
-}
-.simulation-options input[type="number"] {
-     width: 50px;
-     padding: 5px;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-}
-
-.tooltip {
-    font-size: 0.8em;
-    color: #666;
-    margin-left: 10px;
-}
-
-
-#calculate-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    font-size: 1.1em;
-    margin-top: 10px;
-    background-color: #28a745;
-}
-#calculate-button:hover {
-     background-color: #218838;
-}
-
-
-#loading-indicator {
-    margin-top: 10px;
-    color: #fc7c1c;
-    font-weight: bold;
-    text-align: center;
-}
-
-
+/* Output Section - General Results Box */
 #results {
-    background-color: #e9ecef;
+    background-color: #f9f9f9;
+    padding: 15px 20px;
+    border-radius: var(--border-radius-lg);
+    margin-top: 10px; /* Space below header */
+    margin-bottom: 20px; /* Space before chart */
+    border: 1px solid var(--light-border-color);
+    order: 1;
+}
+#results p:not(.results-note) { margin: 8px 0; font-size: 0.95em; color: var(--text-color); display: flex; justify-content: space-between; border-bottom: 1px dotted #d1d1d1; padding-bottom: 8px; flex-wrap: wrap; gap: 5px; }
+#results p:not(.results-note):last-of-type { border-bottom: none; margin-bottom: 0; }
+#results span { font-weight: bold; color: var(--text-color); text-align: right; flex-shrink: 0; font-size: 1em; }
+.results-note { font-size: 0.85em; color: var(--muted-text-color); margin-top: 15px; border-top: 1px solid var(--light-border-color); padding-top: 10px; line-height: 1.4; border-bottom: none; margin-bottom: 0; }
+
+
+/* Highlighted Average Diameter (Now inside #results) */
+#average-diameter-highlight {
+    background-color: var(--highlight-bg-color);
+    border: 1px solid var(--primary-color); /* Thinner border */
+    border-radius: var(--border-radius); /* Standard radius */
+    padding: 15px 20px; /* Adjusted padding */
+    text-align: center;
+    margin-top: 10px; /* Space above highlight box */
+    margin-bottom: 10px; /* Space below highlight box */
+    /* Removed order, margin, box-shadow as it's inside #results */
+}
+#average-diameter-highlight h3 { margin-top: 0; margin-bottom: 5px; font-size: 1.0em; color: var(--primary-hover-color); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
+#average-diameter-highlight p { margin: 0; padding: 0; font-size: 1.0em; color: var(--text-color); border-bottom: none; display: block; line-height: 1.3; }
+#average-diameter-highlight #avg-od { font-size: 1.8em; /* Adjusted size */ font-weight: 700; color: var(--primary-hover-color); display: block; margin-top: 2px; text-align: center; }
+
+/* NEW: Simulation History Chart */
+.simulation-chart-container {
+    margin-top: 0; /* Space handled by #results margin */
+    margin-bottom: 0; /* Space handled by column gap */
     padding: 15px;
-    border-radius: 4px;
-    margin-bottom: 20px;
+    border: 1px solid var(--chart-border-color);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--white-bg);
+    order: 2; /* Place after #results */
+}
+.simulation-chart-container.hidden {
+    display: none;
+}
+.simulation-chart-container h3 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.0em;
+    color: var(--muted-text-color);
+    font-weight: 500;
+}
+#simulation-history-chart {
+    max-width: 100%;
+    height: auto; /* Let chart.js control height */
+    max-height: 250px; /* Limit chart height */
 }
 
-#results p {
-    margin: 8px 0;
-    font-size: 1em;
-     color: #333;
-}
-#results span {
-    font-weight: bold;
-    color: #0056b3;
-}
-.note {
-    font-size: 0.85em;
-    color: #6c757d;
-    margin-top: 15px;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-}
 
-#packing-canvas {
-    border: 1px solid #ccc;
+/* Simulation Canvas */
+.simulation-column h2 { margin-top: 0; } /* Title */
+#packing-canvas { /* Canvas */
+    border: 1px solid var(--border-color);
     display: block;
-    margin: 0 auto; /* Center canvas */
-    background-color: #fff;
+    background-color: var(--white-bg);
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .input-section, .output-section {
-        min-width: 100%;
-    }
+@media (max-width: 992px) { /* Stacking columns */
+    .output-layout-container { flex-direction: column; gap: 25px; }
+    .results-column, .simulation-column { flex-basis: auto; width: 100%; min-width: unset; }
+    .simulation-column { align-items: center; }
+    #packing-canvas { max-width: 400px; }
+    /* Ensure toggle button is visible if results wrap */
+    .results-header { flex-wrap: wrap; } /* Allow button to wrap below title */
+    .toggle-chart-button { margin-top: 5px; margin-left: 0; }
+}
+
+
+@media (max-width: 768px) { /* General mobile */
+    .container { flex-direction: column; padding: 15px; }
+    .input-section, .output-section { min-width: 100%; }
+    h1 { font-size: 1.6em; }
+    h2 { font-size: 1.1em; }
+
+    /* Input Rows Stack Vertically */
+    .standard-wire-input-row, .special-wire-input-row, .wrapping-input-row { flex-direction: column; align-items: stretch; padding-left: 10px; }
+    .standard-wire-input-row label, .special-wire-input-row label, .wrapping-input-row label { min-width: 100%; margin-bottom: 8px; }
+    .standard-wire-input-row select, .standard-wire-input-row input[type="number"],
+    .special-wire-input-row input[type="number"], .wrapping-input-row input[type="number"] { max-width: 100%; }
+    .auto-od-display { margin-left: 0; margin-top: 5px; width: 100%; box-sizing: border-box; }
+    .remove-button { margin-left: 0; margin-top: 10px; width: 100%; justify-content: center; }
+    .row-number { display: none; }
+
+    /* Horizontal Group Stacks Vertically */
+    .horizontal-input-group { flex-direction: column; gap: 15px; margin-top: 15px; margin-bottom: 15px; }
+    .input-column { flex: none; width: 100%; }
+
+    /* Adjust max-heights */
+    #standard-wire-inputs { max-height: 180px; }
+    .input-column #special-wire-inputs,
+    .input-column #wrapping-inputs { max-height: 120px; }
+
+    /* Simulation Options Layout */
+    .simulation-options { flex-wrap: wrap; justify-content: center; }
+    #num-simulations-slider { flex-basis: 100%; margin-top: 5px; }
+    .tooltip { display: block; text-align: center; margin-top: 8px; flex-basis: 100%; }
+
+    /* Action Buttons Stack Vertically */
+    .action-buttons-container { flex-direction: column; align-items: stretch; gap: 10px; }
+    /* Ensure correct stacking order/alignment */
+    .input-reset-button-container { order: -1; /* Place reset button at the top of input section */ align-items: stretch; margin-bottom: 15px; }
+    .output-calculate-button-container { order: 1; /* Keep calc button below options */ align-items: stretch; }
+    #calculate-button, .reset-button-prominent { width: 100%; }
+    .error-message { text-align: center; } /* Center error message */
+
+    /* Results Section (Stacked on mobile anyway) */
+    #results p:not(.results-note) { flex-direction: column; align-items: flex-start; }
+    #results span { text-align: left; margin-top: 3px; }
+
+    /* Highlighted Section Adjustments (Mobile) */
+    #average-diameter-highlight { padding: 10px 15px; }
+    #average-diameter-highlight h3 { font-size: 1.0em; }
+    #average-diameter-highlight p { font-size: 0.95em; }
+    #average-diameter-highlight #avg-od { font-size: 1.6em; }
+
+     /* Canvas width */
+     #packing-canvas { width: 300px; max-width: 100%; }
 }

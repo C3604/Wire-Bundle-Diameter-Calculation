@@ -3,48 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>线束直径计算器 (圆堆积模拟)</title>
+    <title>线束直径计算器 (规格选择 + 包裹物)</title>
     <link rel="stylesheet" href="style.css">
+    <!-- 引入 Chart.js -->
+    <script src="chart.umd.js"></script>
 </head>
 <body>
-    <h1>线束直径计算器 (物理模拟)</h1>
-
+    <!-- H1 and Page Description Removed for brevity based on previous structure -->
     <div class="container">
         <div class="input-section">
-            <h2>输入导线规格</h2>
-            <div id="wire-inputs">
-                <div class="wire-input-row">
-                    <label>直径 (mm): <input type="number" class="wire-diameter" step="0.1" min="0.1" value="1.6"></label>
-                    <label>数量: <input type="number" class="wire-count" min="1" value="10"></label>
-                    <button class="remove-wire-type" onclick="removeWireType(this)">移除</button>
+
+             <!-- Standard Wire Inputs -->
+                 <div class="action-buttons-container input-reset-button-container"> <!-- Added class for specific styling -->
+                 <button id="reset-button" class="reset-button-prominent" title="清空所有输入和结果">
+                    <span class="icon">🔄</span> 重置所有输入
+                </button>
+            </div>
+            <h2><span class="icon">📏</span> 标准导线规格 (基于 ISO/DIN 等)</h2>
+            <div class="input-controls">
+                <button id="add-standard-wire-button" title="添加一种标准规格导线">
+                    <span class="icon">➕</span> 添加标准规格导线
+                </button>
+            </div>
+            <p class="input-description">选择线径(Gauge/mm²)、绝缘类型和数量。直径(OD)将自动查找。</p>
+            <div id="standard-wire-inputs">
+                <!-- Standard wire input rows will be added here by JS -->
+            </div>
+
+
+             <!-- Container for side-by-side sections -->
+            <div class="horizontal-input-group">
+
+                <!-- Special Wire Inputs -->
+                <div class="input-column special-wire-section">
+                    <h2><span class="icon">✨</span> 特殊导线规格</h2>
+                    <div class="input-controls">
+                        <button id="add-special-wire-button" title="添加一种自定义直径的导线">
+                            <span class="icon">➕</span> 添加特殊规格导线
+                        </button>
+                    </div>
+                    <p class="input-description">直接输入非标准导线的直径(OD)和数量。</p>
+                    <div id="special-wire-inputs">
+                         <!-- Special wire input rows will be added here by JS -->
+                    </div>
+
                 </div>
-            </div>
-            <button onclick="addWireType()">增加导线类型</button>
 
-            <div class="simulation-options">
-                <label for="num-simulations">模拟次数:</label>
-                <input type="number" id="num-simulations" value="10" min="1" max="100">
-                 <span class="tooltip">多次模拟可提高结果可靠性，但会增加计算时间。</span>
-            </div>
+                <!-- Wrapping Inputs -->
+                 <div class="input-column wrapping-section">
+                    <h2><span class="icon">🎁</span> 添加外部包裹物</h2>
+                    <div class="input-controls wrapping-controls">
+                        <button id="add-wrapping-layer-button" title="添加一层包裹物及其厚度">
+                            <span class="icon">➕</span> 增加包裹层
+                        </button>
+                    </div>
+                     <p class="input-description">添加包裹层厚度（如胶带、波纹管壁厚）。每层厚度将累加。</p>
+                    <div id="wrapping-inputs">
+                         <!-- Wrapping input rows will be added here by JS -->
+                    </div>
 
-            <button id="calculate-button" onclick="startCalculation()">计算线束直径</button>
-             <div id="loading-indicator" style="display: none;">正在计算中，请稍候...</div>
-        </div>
+                </div>
+
+            </div> <!-- End of horizontal-input-group -->
+
+        </div> <!-- End input-section -->
 
         <div class="output-section">
-            <h2>计算结果</h2>
-            <div id="results">
-                <p>总导线数量: <span id="total-wires">-</span></p>
-                <p>估算最小直径 (mm): <span id="min-od">-</span></p>
-                <p>估算最大直径 (mm): <span id="max-od">-</span></p>
-                <p>估算平均直径 (mm): <span id="avg-od">-</span></p>
-                 <p class="note">注意：这是基于物理模拟的估算值，实际直径可能因捆扎方式、松紧度等因素有所不同。</p>
+            <!-- Container for Calculate Button -->
+            <div class="action-buttons-container output-calculate-button-container"> <!-- Added class -->
+                <button id="calculate-button">
+                    <span id="calculate-button-text">计算最终直径</span>
+                    <div id="loading-indicator" class="spinner" style="display: none;"></div>
+                </button>
+                <div id="input-error" class="error-message" style="display: none;"></div>
             </div>
-             <h2>模拟截面图 (最后一次模拟结果)</h2>
-            <canvas id="packing-canvas" width="400" height="400"></canvas>
-        </div>
-    </div>
 
+             <!-- Simulation Options -->
+             <h2><span class="icon">⏱️</span> 模拟设置</h2>
+            <div class="simulation-options">
+                <label for="num-simulations-slider" title="模拟次数越多，结果统计越可靠，但计算时间越长。">模拟次数:</label>
+                <input type="range" id="num-simulations-slider" value="10" min="1" max="50" step="1">
+                <span id="num-simulations-value" class="slider-value">10</span>
+                 <span class="tooltip">更高的次数会提高结果可靠性，但显著增加计算时间。</span>
+            </div>
+
+            <!-- Container for side-by-side output layout -->
+            <div class="output-layout-container">
+
+                <!-- Column 1: Results -->
+                <div class="results-column">
+
+                    <!-- Moved Results Title and Toggle Button Here -->
+                    <div class="results-header">
+                        <h2><span class="icon">📊</span> 计算结果</h2>
+                        <button id="toggle-chart-button" class="toggle-chart-button" title="显示/隐藏模拟历史记录" style="display: none;"> <!-- Initially hidden -->
+                            <span class="icon">📈</span> 详细数据
+                        </button>
+                    </div>
+
+                    <div id="results">
+                        <p title="所有输入导线的总和 (数量>0)">总导线数量: <span id="total-wires">-</span></p>
+                        <p title="所有包裹层厚度之和">总包裹层厚度 (mm): <span id="total-wrapping-thickness">-</span></p>
+                        <p title="多次模拟得到的最小线束直径 + (2 * 总包裹层厚度)">最终最小直径 (mm): <span id="min-od">-</span></p>
+                        <p title="多次模拟得到的最大线束直径 + (2 * 总包裹层厚度)">最终最大直径 (mm): <span id="max-od">-</span></p>
+                        <!-- Highlighted Average Diameter moved inside results -->
+                        <div id="average-diameter-highlight">
+                            <h3><span class="icon">⭐</span> 最终平均直径 (mm)</h3> <!-- Modified title -->
+                            <p title="多次模拟得到的平均线束直径 + (2 * 总包裹层厚度)">
+                                <span id="avg-od">-</span>
+                            </p>
+                        </div>
+                        <p class="results-note note">注意：最终直径=模拟线束直径 + 2倍总包裹层厚度。</br>模拟结果基于理想二维物理模型，实际直径受多种因素影响。</p>
+                    </div>
+                </div> <!-- End results-column -->
+                <!-- Column 2: Simulation Visualization -->
+                <div class="simulation-column">
+                    <h2><span class="icon">🖼️</span> 线束截面模拟 (不含包裹物)</h2>
+                    <canvas id="packing-canvas" width="400" height="400"></canvas>
+                </div> <!-- End simulation-column -->
+
+            </div> <!-- End output-layout-container -->
+            <!-- NEW: Chart Container (Initially hidden) -->
+             <div id="simulation-chart-container" class="simulation-chart-container hidden">
+                <h3><span class="icon">📉</span> 模拟历史直径 (不含包裹层)</h3>
+                <canvas id="simulation-history-chart"></canvas>
+             </div>
+        </div> <!-- End output-section -->
+    </div> <!-- End container -->
+
+<footer class="footer">
+    <p>如果有任何问题，请联系：<a href="mailto:mail@mail.com">mail@mail.com</a></p>
+    <p>© 2025 Wire Bundle Diameter Tool-V1.0.0.5(20250413)</p>    
+</footer>
+    <!-- <script src="wireData.js"></script> -->
     <script src="simulation.js"></script>
 </body>
 </html>
