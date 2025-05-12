@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线束直径计算器 (圆堆积模拟)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>线束直径计算器 (物理模拟)</h1>
+
+    <div class="container">
+        <div class="input-section">
+            <h2>输入导线规格</h2>
+            <div id="wire-inputs">
+                <div class="wire-input-row">
+                    <label>直径 (mm): <input type="number" class="wire-diameter" step="0.1" min="0.1" value="1.6"></label>
+                    <label>数量: <input type="number" class="wire-count" min="1" value="10"></label>
+                    <button class="remove-wire-type" onclick="removeWireType(this)">移除</button>
+                </div>
+            </div>
+            <button onclick="addWireType()">增加导线类型</button>
+
+            <div class="simulation-options">
+                <label for="num-simulations">模拟次数:</label>
+                <input type="number" id="num-simulations" value="10" min="1" max="100">
+                 <span class="tooltip">多次模拟可提高结果可靠性，但会增加计算时间。</span>
+            </div>
+
+            <button id="calculate-button" onclick="startCalculation()">计算线束直径</button>
+             <div id="loading-indicator" style="display: none;">正在计算中，请稍候...</div>
+        </div>
+
+        <div class="output-section">
+            <h2>计算结果</h2>
+            <div id="results">
+                <p>总导线数量: <span id="total-wires">-</span></p>
+                <p>估算最小直径 (mm): <span id="min-od">-</span></p>
+                <p>估算最大直径 (mm): <span id="max-od">-</span></p>
+                <p>估算平均直径 (mm): <span id="avg-od">-</span></p>
+                 <p class="note">注意：这是基于物理模拟的估算值，实际直径可能因捆扎方式、松紧度等因素有所不同。</p>
+            </div>
+             <h2>模拟截面图 (最后一次模拟结果)</h2>
+            <canvas id="packing-canvas" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <script src="simulation.js"></script>
+</body>
+</html>
