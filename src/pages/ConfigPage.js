@@ -135,7 +135,8 @@ export function getEffectiveStandardWires() {
 export function renderConfigPage(container) {
   container.innerHTML = `
     <div class="page-config">
-      <div class="layout-config">
+      <div class="layout-left">
+        <!-- 左侧：自定义标准导线配置区 -->
         <div class="group-config-table" id="group-config-table">
           <div class="group-title">
             <span>⚙️ 自定义标准导线</span>
@@ -172,8 +173,458 @@ export function renderConfigPage(container) {
           </div>
         </div>
       </div>
+
+      <div class="layout-right">
+        <!-- 右侧：模拟参数配置区域 -->
+        <div class="group-simulation-params" id="layout-simulation-params">
+          <div class="group-title">
+            <span>🎮 模拟参数配置</span>
+            <div class="group-actions">
+              <button class="calc-table-btn" id="save-sim-params-btn">💾 保存</button>
+              <button class="calc-table-btn btn-danger" id="restore-sim-params-btn">🔄 恢复默认</button>
+            </div>
+          </div>
+          <div class="simulation-params-content">
+            <!-- PI 参数配置 -->
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title">π (PI)</div>
+                <button class="param-reset-btn" data-param="pi" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description">
+                圆周率常数，用于计算圆形面积和周长。通常使用3.1415926，除非有特殊需求，建议保持默认值。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="pi-range" class="drag-area-range" min="3.14" max="3.15" step="0.0001" value="3.1415926">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="pi-input" class="drag-area-input" value="3.1415926">
+                </div>
+              </div>
+            </div>
+
+            <!-- SNG_R2_TO_R1 参数配置 -->
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title">容器半径比 (R2/R1)</div>
+                <button class="param-reset-btn" data-param="r2r1" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description">
+                外部容器半径与内部填充区域半径的比率。值越大，预留空间越多，但可能影响填充效率。默认值1.01通常能平衡空间利用和计算效率。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="r2r1-range" class="drag-area-range" min="1" max="1.1" step="0.001" value="1.01">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="r2r1-input" class="drag-area-input" value="1.01">
+                </div>
+              </div>
+            </div>
+
+            <!-- ACCELERATION 参数配置 -->
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title">加速系数</div>
+                <button class="param-reset-btn" data-param="accel" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description">
+                圆形每步互相推开的强度系数。较大的值可以加快收敛速度，但可能导致不稳定；较小的值收敛更稳定但计算较慢。默认值1.7在速度和稳定性之间取得平衡。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="accel-range" class="drag-area-range" min="1" max="3" step="0.1" value="1.7">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="accel-input" class="drag-area-input" value="1.7">
+                </div>
+              </div>
+            </div>
+
+            <!-- WEIGHT_FACTOR 参数配置 -->
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title">质量因子</div>
+                <button class="param-reset-btn" data-param="weight" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description">
+                质量计算的指数(r^WF)，影响大圆推小圆的程度。较大的值会使大直径导线的影响更显著，较小的值则使各导线影响更均匀。默认值2.0适用于大多数情况。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="weight-range" class="drag-area-range" min="1" max="5" step="0.1" value="2">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="weight-input" class="drag-area-input" value="2">
+                </div>
+              </div>
+            </div>
+
+            <!-- CONVERGENCE_THRESHOLD 参数配置 -->
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title">收敛阈值</div>
+                <button class="param-reset-btn" data-param="conv" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description">
+                收敛判定阈值，表示平均穿透深度与半径的比值。值越小要求精度越高但计算时间更长，值越大计算更快但精度较低。默认值0.001在精度和速度间取得良好平衡。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="conv-range" class="drag-area-range" min="0.0001" max="0.01" step="0.0001" value="0.001">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="conv-input" class="drag-area-input" value="0.001">
+                </div>
+              </div>
+            </div>
+
+            <!-- MAX_ITERATIONS_RUNPACKING 参数配置 -->
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title">主循环最大迭代次数</div>
+                <button class="param-reset-btn" data-param="max-iter-run" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description">
+                主填充循环的安全中断迭代次数。如果超过此次数仍未收敛，将终止计算。较大的值可以处理更复杂的情况，但可能增加计算时间。默认值500适用于大多数情况。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="max-iter-run-range" class="drag-area-range" min="100" max="1000" step="10" value="500">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="max-iter-run-input" class="drag-area-input" value="500">
+                </div>
+              </div>
+            </div>
+
+            <!-- MAX_ITERATIONS_PACKSTEP 参数配置 -->
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title">单步最大迭代次数</div>
+                <button class="param-reset-btn" data-param="max-iter-step" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description">
+                每个主循环步骤中，在调整容器大小之前的最大迭代次数。较大的值可以提高每步的精度，但会增加计算时间。默认值15通常能满足精度要求。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="max-iter-step-range" class="drag-area-range" min="5" max="30" step="1" value="15">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="max-iter-step-input" class="drag-area-input" value="15">
+                </div>
+              </div>
+            </div>
+
+            <!-- CONTAINER_ADJUST_FACTOR 参数配置 -->
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title">容器调整系数</div>
+                <button class="param-reset-btn" data-param="container-adjust" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description">
+                根据穿透情况调整容器大小的幅度。较大的值调整更激进可能导致不稳定，较小的值调整更平缓但收敛较慢。默认值0.05提供了稳定性和收敛速度的良好平衡。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="container-adjust-range" class="drag-area-range" min="0.01" max="0.2" step="0.01" value="0.05">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="container-adjust-input" class="drag-area-input" value="0.05">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `;
+
+  // 更新样式
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = `
+    .page-config {
+      display: flex;
+      gap: 24px;
+      padding: 0;
+      min-width: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      height: calc(100vh - 40px);
+    }
+
+    .layout-left, .layout-right {
+      background: #FFFFFF;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .layout-left {
+      flex: 6;
+      min-width: 600px;
+    }
+
+    .layout-right {
+      flex: 4;
+      min-width: 380px;
+    }
+
+    .group-config-table, .group-simulation-params {
+      margin-bottom: 0;
+      padding: 16px 18px;
+      border-bottom: none;
+      background: #F8F9FA;
+      border-radius: 8px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .calc-table-content {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+    }
+
+    #actual-table-display-area {
+      flex: 1;
+      overflow-y: auto;
+      margin-top: -1px;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .simulation-params-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+      overflow-y: auto;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .group-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #495057;
+      letter-spacing: normal;
+    }
+
+    .group-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .param-group {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      background: #FFFFFF;
+      border-radius: 6px;
+      padding: 8px 12px;
+      box-shadow: none;
+      border: 1px solid #EAECEF;
+    }
+
+    .param-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .param-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #495057;
+    }
+
+    .param-description {
+      font-size: 12px;
+      color: #6C757D;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .drag-area-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .drag-area-range {
+      flex: 1;
+      margin: 0;
+      vertical-align: middle;
+      height: 32px;
+      accent-color: #3A86FF;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .drag-area-input {
+      width: 65px;
+      height: 32px;
+      text-align: center;
+      border-radius: 4px;
+      border: 1px solid #CED4DA;
+      vertical-align: middle;
+      box-sizing: border-box;
+      font-size: 14px;
+      color: #495057;
+      flex-shrink: 0;
+      background: #FFFFFF;
+    }
+
+    .input-with-unit-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .param-reset-btn {
+      padding: 4px 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .param-reset-btn:hover {
+      opacity: 1;
+      background: var(--color-bg-subtle);
+    }
+
+    /* 美化滑块样式 */
+    .drag-area-range {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .drag-area-range::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #DEE2E6;
+      border-radius: 2px;
+      transform: translateY(-50%);
+    }
+
+    .drag-area-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #3A86FF;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      transition: all 0.2s;
+    }
+
+    .drag-area-range::-webkit-slider-thumb:hover {
+      background: #2563EB;
+      transform: scale(1.1);
+    }
+
+    .drag-area-range:focus {
+      outline: none;
+    }
+
+    .drag-area-range:focus::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
+    }
+
+    .drag-area-input {
+      padding: 6px 10px;
+      border: 1px solid #CED4DA;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: right;
+      transition: all 0.2s;
+    }
+
+    .drag-area-input:hover {
+      border-color: #ADB5BD;
+    }
+
+    .drag-area-input:focus {
+      border-color: #3A86FF;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+    }
+
+    /* 移除数字输入框的上下箭头 */
+    .drag-area-input::-webkit-outer-spin-button,
+    .drag-area-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .drag-area-input {
+      -moz-appearance: textfield;
+    }
+
+    /* 滚动条样式 */
+    .simulation-params-content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .simulation-params-content::-webkit-scrollbar-track {
+      background: var(--color-bg-subtle);
+      border-radius: 4px;
+      margin: 4px;
+    }
+
+    .simulation-params-content::-webkit-scrollbar-thumb {
+      background: var(--color-border-default);
+      border-radius: 4px;
+      border: 2px solid var(--color-bg-subtle);
+    }
+
+    .simulation-params-content::-webkit-scrollbar-thumb:hover {
+      background: var(--color-border-muted);
+    }
+
+    /* 响应式布局调整 */
+    @media (max-width: 1100px) {
+      .page-config {
+        flex-direction: column;
+        gap: 16px;
+        min-width: 0;
+        height: auto;
+        padding-bottom: 20px;
+      }
+
+      .layout-left, .layout-right {
+        width: 100%;
+        min-width: 0;
+      }
+
+      #actual-table-display-area {
+        max-height: 500px;
+      }
+
+      .simulation-params-content {
+        max-height: 600px;
+      }
+    }
+  `;
+  document.head.appendChild(styleSheet);
 
   const tableContainer = container.querySelector('#group-config-table');
   const tableDisplayArea = container.querySelector('#actual-table-display-area');
@@ -527,4 +978,216 @@ export function renderConfigPage(container) {
 
   // --- 初始加载 ---
   loadInitialData();
+
+  // 模拟参数配置逻辑
+  const simParamsConfig = [
+    {
+      name: 'pi',
+      title: 'π (PI)',
+      defaultValue: 3.1415926,
+      min: 3.14,
+      max: 3.15,
+      step: 0.0001,
+      precision: 7
+    },
+    {
+      name: 'r2r1',
+      title: '容器半径比 (R2/R1)',
+      defaultValue: 1.01,
+      min: 1,
+      max: 1.1,
+      step: 0.001,
+      precision: 3
+    },
+    {
+      name: 'accel',
+      title: '加速系数',
+      defaultValue: 1.7,
+      min: 1,
+      max: 3,
+      step: 0.1,
+      precision: 1
+    },
+    {
+      name: 'weight',
+      title: '质量因子',
+      defaultValue: 2,
+      min: 1,
+      max: 5,
+      step: 0.1,
+      precision: 1
+    },
+    {
+      name: 'conv',
+      title: '收敛阈值',
+      defaultValue: 0.001,
+      min: 0.0001,
+      max: 0.01,
+      step: 0.0001,
+      precision: 4
+    },
+    {
+      name: 'max-iter-run',
+      title: '主循环最大迭代次数',
+      defaultValue: 500,
+      min: 100,
+      max: 1000,
+      step: 10,
+      precision: 0
+    },
+    {
+      name: 'max-iter-step',
+      title: '单步最大迭代次数',
+      defaultValue: 15,
+      min: 5,
+      max: 30,
+      step: 1,
+      precision: 0
+    },
+    {
+      name: 'container-adjust',
+      title: '容器调整系数',
+      defaultValue: 0.05,
+      min: 0.01,
+      max: 0.2,
+      step: 0.01,
+      precision: 2
+    }
+  ];
+
+  // 从localStorage加载保存的参数
+  function loadSimulationParams() {
+    const savedParams = localStorage.getItem('simulationParams');
+    if (savedParams) {
+      try {
+        return JSON.parse(savedParams);
+      } catch (e) {
+        console.error('加载模拟参数失败:', e);
+        return null;
+      }
+    }
+    return null;
+  }
+
+  // 保存参数到localStorage
+  function saveSimulationParams() {
+    const params = {};
+    simParamsConfig.forEach(config => {
+      const input = document.getElementById(`${config.name}-input`);
+      if (input) {
+        params[config.name] = parseFloat(input.value);
+      }
+    });
+    try {
+      localStorage.setItem('simulationParams', JSON.stringify(params));
+      // 触发一个自定义事件，通知其他页面参数已更新
+      const event = new CustomEvent('simulationParamsUpdated', { 
+        detail: { params }
+      });
+      window.dispatchEvent(event);
+      alert('模拟参数已保存！');
+    } catch (e) {
+      console.error('保存模拟参数失败:', e);
+      alert('保存模拟参数失败，请检查浏览器控制台。');
+    }
+  }
+
+  // 恢复默认参数
+  function restoreDefaultParams() {
+    if (confirm('确定要恢复所有模拟参数到默认值吗？')) {
+      simParamsConfig.forEach(config => {
+        const range = document.getElementById(`${config.name}-range`);
+        const input = document.getElementById(`${config.name}-input`);
+        if (range && input) {
+          range.value = config.defaultValue;
+          input.value = config.defaultValue.toFixed(config.precision);
+        }
+      });
+      localStorage.removeItem('simulationParams');
+      // 触发参数更新事件
+      const event = new CustomEvent('simulationParamsUpdated', { 
+        detail: { params: null }
+      });
+      window.dispatchEvent(event);
+    }
+  }
+
+  // 为每个参数的重置按钮添加事件监听
+  const resetButtons = container.querySelectorAll('.param-reset-btn');
+  resetButtons.forEach(btn => {
+    const paramName = btn.dataset.param;
+    const config = simParamsConfig.find(c => c.name === paramName);
+    if (config) {
+      btn.onclick = () => {
+        const range = document.getElementById(`${paramName}-range`);
+        const input = document.getElementById(`${paramName}-input`);
+        if (range && input) {
+          range.value = config.defaultValue;
+          input.value = config.defaultValue.toFixed(config.precision);
+        }
+      };
+    }
+  });
+
+  // 为所有滑块和输入框添加联动事件监听
+  simParamsConfig.forEach(config => {
+    const range = document.getElementById(`${config.name}-range`);
+    const input = document.getElementById(`${config.name}-input`);
+    
+    if (range && input) {
+      // 滑块值变化时更新输入框
+      range.addEventListener('input', () => {
+        const value = parseFloat(range.value);
+        input.value = value.toFixed(config.precision);
+      });
+
+      // 输入框值变化时更新滑块
+      input.addEventListener('input', () => {
+        let value = parseFloat(input.value);
+        if (!isNaN(value)) {
+          // 确保值在范围内
+          value = Math.max(config.min, Math.min(config.max, value));
+          range.value = value;
+        }
+      });
+
+      // 输入框失焦时格式化数值
+      input.addEventListener('blur', () => {
+        let value = parseFloat(input.value);
+        if (isNaN(value)) {
+          value = config.defaultValue;
+        }
+        // 确保值在范围内
+        value = Math.max(config.min, Math.min(config.max, value));
+        range.value = value;
+        input.value = value.toFixed(config.precision);
+      });
+    }
+  });
+
+  // 加载保存的参数
+  const savedParams = loadSimulationParams();
+  if (savedParams) {
+    simParamsConfig.forEach(config => {
+      const range = document.getElementById(`${config.name}-range`);
+      const input = document.getElementById(`${config.name}-input`);
+      if (range && input && savedParams[config.name] !== undefined) {
+        const value = savedParams[config.name];
+        range.value = value;
+        input.value = value.toFixed(config.precision);
+      }
+    });
+  }
+
+  // 保存按钮事件监听
+  const saveSimParamsBtn = container.querySelector('#save-sim-params-btn');
+  if (saveSimParamsBtn) {
+    saveSimParamsBtn.addEventListener('click', saveSimulationParams);
+  }
+
+  // 恢复默认按钮事件监听
+  const restoreSimParamsBtn = container.querySelector('#restore-sim-params-btn');
+  if (restoreSimParamsBtn) {
+    restoreSimParamsBtn.addEventListener('click', restoreDefaultParams);
+  }
 } 

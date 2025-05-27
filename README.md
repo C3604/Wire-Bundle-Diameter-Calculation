@@ -1,11 +1,12 @@
 # 线束直径计算工具 (Wire Bundle Diameter Calculator)
 
-[![Edge Add-on](https://img.shields.io/badge/Edge%20Add--on-v1.0.2.5-blue)](https://microsoftedge.microsoft.com/addons/detail/线束直径计算器/dcinhgdofeolfogjefdocphbnmdicopj)
+[![Edge Add-on](https://img.shields.io/badge/Edge%20Add--on-v1.2.0.6-blue)](https://microsoftedge.microsoft.com/addons/detail/线束直径计算器/dcinhgdofeolfogjefdocphbnmdicopj)
+[![Firefox Add-on](https://img.shields.io/badge/Firefox%20Add--on-v1.2.0.6-orange)](https://addons.mozilla.org/firefox/addon/wirebundle/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## 📝 项目简介
 
-本工具是一款基于二维圆形填充算法的线束直径估算插件。它可以帮助你根据输入的多种规格导线、包裹物层数和厚度，通过模拟计算来估算线束的最终直径，并提供可视化结果和配置管理功能。
+本工具是一款基于二维圆形填充算法的线束直径估算插件。它可以帮助你根据输入的多种规格导线、包裹物层数和厚度，通过模拟计算来估算线束的最终直径，并提供可视化结果和配置管理功能。现已支持Chrome/Edge和Firefox浏览器。
 
 ![程序核心功能截图](src/assets/img1.jpg)
 
@@ -44,8 +45,17 @@
 
 ### 1. 安装扩展
 
+#### Edge/Chrome版本
 - 推荐：从 [Microsoft Edge 应用商店](https://microsoftedge.microsoft.com/addons/detail/线束直径计算器/dcinhgdofeolfogjefdocphbnmdicopj) 一键安装
 - 或：下载本仓库代码，开发者模式加载（edge://extensions/ → 加载已解压的扩展）
+
+#### Firefox版本
+- 推荐：从 [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/wirebundle/) 安装
+- 或：下载本仓库代码，使用以下步骤加载：
+  1. 在地址栏输入：`about:debugging`
+  2. 点击"此 Firefox"（This Firefox）
+  3. 点击"临时载入附加组件"（Load Temporary Add-on）
+  4. 选择扩展目录中的manifest.json文件
 
 ### 2. 计算流程示例
 
@@ -77,7 +87,7 @@
 
 - HTML5 + CSS3
 - JavaScript (ES6+)
-- Chrome/Edge Extension API
+- 浏览器扩展API（Chrome/Edge & Firefox）
 - Canvas API（可视化）
 - 本地存储（localStorage）
 
@@ -95,11 +105,45 @@
 │   ├── components/    # UI组件
 │   ├── logic/         # 业务逻辑
 │   ├── pages/         # 页面
+│   ├── utils/         # 工具函数
+│   │   └── browserPolyfill.js  # 浏览器兼容层
 │   └── storage/       # 数据存储
-├── manifest.json      # 扩展配置
+├── manifest.chrome.json   # Chrome/Edge扩展配置
+├── manifest.firefox.json  # Firefox扩展配置
+├── build.bat          # 构建脚本
 ├── popup.html         # 主界面
 └── README.md          # 项目说明
 ```
+
+---
+
+## 🔧 开发指南
+
+### 构建不同版本
+
+项目提供了构建脚本用于生成不同浏览器的版本：
+
+1. Chrome/Edge版本构建：
+```powershell
+.\build.bat chrome
+```
+
+2. Firefox版本构建：
+```powershell
+.\build.bat firefox
+```
+
+### 开发注意事项
+
+1. 浏览器API调用：
+   - 使用 `src/utils/browserPolyfill.js` 中的统一接口
+   - 不要直接调用 `chrome` 或 `browser` 对象
+   - 所有API调用都通过 `browserAPI` 对象进行
+
+2. manifest文件：
+   - `manifest.chrome.json`: Chrome/Edge版本配置（V3）
+   - `manifest.firefox.json`: Firefox版本配置（V2）
+   - 构建时会自动选择对应版本
 
 ---
 
@@ -116,6 +160,12 @@
 
 - **Q: 如何反馈问题或建议？**  
   A: 请通过 GitHub Issue 或邮件联系作者。
+
+- **Q: 不同浏览器版本有功能差异吗？**  
+  A: 不同浏览器版本的功能完全一致，仅在底层实现上有所不同以适配各浏览器的特性。
+
+- **Q: 为什么有两个manifest文件？**  
+  A: 由于Chrome和Firefox的扩展规范有所不同，需要分别维护两个配置文件。使用构建脚本可以自动选择正确的配置文件。
 
 ---
 

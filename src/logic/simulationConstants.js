@@ -59,15 +59,28 @@ export function getStandardGauges() {
 // WIRE_TYPES 通常是固定的，代表绝缘层类型
 export const WIRE_TYPES = ["Thin", "Thick", "Ultra Thin"];
 
+// 从localStorage获取模拟参数，如果没有则使用默认值
+function getSimulationParam(paramName, defaultValue) {
+  try {
+    const savedParams = JSON.parse(localStorage.getItem('simulationParams'));
+    if (savedParams && savedParams[paramName] !== undefined) {
+      return savedParams[paramName];
+    }
+  } catch (e) {
+    console.warn(`获取模拟参数 ${paramName} 失败:`, e);
+  }
+  return defaultValue;
+}
+
 // 物理和模拟常量
-export const PI = Math.PI;
-export const SNG_R2_TO_R1 = 1.01; // 外部容器半径 / 内部填充区域半径 的比率
-export const ACCELERATION = 1.7; // 圆形每步互相推开的强度系数
-export const WEIGHT_FACTOR = 2; // 质量计算的指数 (r^WF) -> 影响大圆推小圆的程度
-export const CONVERGENCE_THRESHOLD = 0.001; // 收敛目标：平均穿透深度与半径的比值
-export const MAX_ITERATIONS_RUNPACKING = 500; // 主填充循环的安全中断迭代次数
-export const MAX_ITERATIONS_PACKSTEP = 15; // 每个主循环步骤中，在调整容器大小之前的最大迭代次数
-export const CONTAINER_ADJUST_FACTOR = 0.05; // 根据穿透情况调整容器大小的幅度
+export const PI = getSimulationParam('pi', 3.1415926);
+export const SNG_R2_TO_R1 = getSimulationParam('r2r1', 1.01); // 外部容器半径 / 内部填充区域半径 的比率
+export const ACCELERATION = getSimulationParam('accel', 1.7); // 圆形每步互相推开的强度系数
+export const WEIGHT_FACTOR = getSimulationParam('weight', 2); // 质量计算的指数 (r^WF) -> 影响大圆推小圆的程度
+export const CONVERGENCE_THRESHOLD = getSimulationParam('conv', 0.001); // 收敛目标：平均穿透深度与半径的比值
+export const MAX_ITERATIONS_RUNPACKING = getSimulationParam('max-iter-run', 500); // 主填充循环的安全中断迭代次数
+export const MAX_ITERATIONS_PACKSTEP = getSimulationParam('max-iter-step', 15); // 每个主循环步骤中，在调整容器大小之前的最大迭代次数
+export const CONTAINER_ADJUST_FACTOR = getSimulationParam('container-adjust', 0.05); // 根据穿透情况调整容器大小的幅度
 
 // 新增：提供一个方法来获取默认标准导线数据，ConfigPage 会用到
 // 返回一个深拷贝以防止意外修改原始数据

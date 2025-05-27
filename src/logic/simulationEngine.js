@@ -216,12 +216,57 @@ export function runPackingSimulation(circles, currentAcceleration = ACCELERATION
     return { finalCircles: circles, containerRadius: circles[1].r };
 }
 
+// 当前使用的参数
+let currentParams = {
+    pi: PI,
+    r2r1: SNG_R2_TO_R1,
+    accel: ACCELERATION,
+    weight: WEIGHT_FACTOR,
+    conv: CONVERGENCE_THRESHOLD,
+    maxIterRun: MAX_ITERATIONS_RUNPACKING,
+    maxIterStep: MAX_ITERATIONS_PACKSTEP,
+    containerAdjust: CONTAINER_ADJUST_FACTOR
+};
+
+// 重新加载参数的函数
+export function reloadParameters() {
+    currentParams = {
+        pi: PI,
+        r2r1: SNG_R2_TO_R1,
+        accel: ACCELERATION,
+        weight: WEIGHT_FACTOR,
+        conv: CONVERGENCE_THRESHOLD,
+        maxIterRun: MAX_ITERATIONS_RUNPACKING,
+        maxIterStep: MAX_ITERATIONS_PACKSTEP,
+        containerAdjust: CONTAINER_ADJUST_FACTOR
+    };
+    console.log('模拟引擎参数已重新加载:', currentParams);
+}
+
+// 将 reloadParameters 函数添加到 window.simulationEngine
+if (typeof window !== 'undefined') {
+    window.simulationEngine = window.simulationEngine || {};
+    window.simulationEngine.reloadParameters = reloadParameters;
+}
+
 /**
  * 针对给定的一组电线半径，设置并运行单次堆叠模拟。
  * @param {Array<number>} wireRadii - 要堆叠的电线的半径数组。
  * @returns {Object} 来自 runPackingSimulation 的结果 { finalCircles, containerRadius }
  */
 export function runSingleSimulation(wireRadii) {
+    // 使用当前参数进行模拟
+    const {
+        pi: PI,
+        r2r1: SNG_R2_TO_R1,
+        accel: ACCELERATION,
+        weight: WEIGHT_FACTOR,
+        conv: CONVERGENCE_THRESHOLD,
+        maxIterRun: MAX_ITERATIONS_RUNPACKING,
+        maxIterStep: MAX_ITERATIONS_PACKSTEP,
+        containerAdjust: CONTAINER_ADJUST_FACTOR
+    } = currentParams;
+
     const nWires = wireRadii.length;
     if (nWires === 0) return { finalCircles: [], containerRadius: 0 };
 

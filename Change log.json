@@ -1,6 +1,15 @@
 {
     "versions": [
         {
+            "version": "1.2.0.6",
+            "changes": [
+                "新增：支持Firefox浏览器，实现跨浏览器兼容。",
+                "新增：构建脚本build.bat，支持一键构建不同浏览器版本。",
+                "新增：浏览器API兼容层，统一Chrome和Firefox的API调用。",
+                "优化：项目结构调整，分离不同浏览器的manifest配置。"
+            ]
+        },
+        {
             "version": "1.0.2.5",
             "changes": [
                 "修复标准导线类型下拉框Ultra Thin命名不一致导致无法显示的问题。",

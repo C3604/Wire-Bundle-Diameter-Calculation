@@ -9,6 +9,15 @@ import { renderSimulationHistoryChart } from '../components/chartRenderer.js';
 import { getStandardGauges, getWireOdTable, WIRE_TYPES } from '../logic/simulationConstants.js'; // 导入动态数据获取函数和WIRE_TYPES
 import { getEffectiveStandardWires } from './ConfigPage.js'; // 路径按实际项目结构调整
 
+// 监听模拟参数更新事件
+window.addEventListener('simulationParamsUpdated', (event) => {
+  // 强制重新加载模拟参数
+  if (window.simulationEngine && typeof window.simulationEngine.reloadParameters === 'function') {
+    window.simulationEngine.reloadParameters();
+  }
+  console.log('模拟参数已更新，将在下次计算时生效');
+});
+
 // 预设的导线颜色列表
 const WIRE_COLORS = [
   '#3A86FF', // 蓝色
