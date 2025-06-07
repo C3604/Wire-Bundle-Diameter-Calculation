@@ -16,6 +16,15 @@ import {
     fastCheckCollision,
     fRand
 } from '../utils/mathUtils.js';
+import { simulationParameters } from './simulationConstants.js';
+
+// 从 simulationConstants.js 导入参数
+let {
+    DAMPING,
+    TIME_STEP,
+    MAX_STEPS,
+    STOP_THRESHOLD
+} = simulationParameters;
 
 /**
  * 计算"接触范数" - 衡量圆形重叠（穿透）程度的指标。
@@ -216,38 +225,8 @@ export function runPackingSimulation(circles, currentAcceleration = ACCELERATION
     return { finalCircles: circles, containerRadius: circles[1].r };
 }
 
-// 当前使用的参数
-let currentParams = {
-    pi: PI,
-    r2r1: SNG_R2_TO_R1,
-    accel: ACCELERATION,
-    weight: WEIGHT_FACTOR,
-    conv: CONVERGENCE_THRESHOLD,
-    maxIterRun: MAX_ITERATIONS_RUNPACKING,
-    maxIterStep: MAX_ITERATIONS_PACKSTEP,
-    containerAdjust: CONTAINER_ADJUST_FACTOR
-};
-
-// 重新加载参数的函数
-export function reloadParameters() {
-    currentParams = {
-        pi: PI,
-        r2r1: SNG_R2_TO_R1,
-        accel: ACCELERATION,
-        weight: WEIGHT_FACTOR,
-        conv: CONVERGENCE_THRESHOLD,
-        maxIterRun: MAX_ITERATIONS_RUNPACKING,
-        maxIterStep: MAX_ITERATIONS_PACKSTEP,
-        containerAdjust: CONTAINER_ADJUST_FACTOR
-    };
-    console.log('模拟引擎参数已重新加载:', currentParams);
-}
-
-// 将 reloadParameters 函数添加到 window.simulationEngine
-if (typeof window !== 'undefined') {
-    window.simulationEngine = window.simulationEngine || {};
-    window.simulationEngine.reloadParameters = reloadParameters;
-}
+// 全局变量，用于跟踪模拟状态
+let animationFrameId = null;
 
 /**
  * 针对给定的一组电线半径，设置并运行单次堆叠模拟。
@@ -265,7 +244,7 @@ export function runSingleSimulation(wireRadii) {
         maxIterRun: MAX_ITERATIONS_RUNPACKING,
         maxIterStep: MAX_ITERATIONS_PACKSTEP,
         containerAdjust: CONTAINER_ADJUST_FACTOR
-    } = currentParams;
+    } = simulationParameters;
 
     const nWires = wireRadii.length;
     if (nWires === 0) return { finalCircles: [], containerRadius: 0 };
@@ -300,4 +279,69 @@ export function runSingleSimulation(wireRadii) {
     }
 
     return runPackingSimulation(circles); // 运行模拟, 使用默认加速度
+}
+
+// --- 内部数学/计算函数 ---
+
+/**
+ * 计算一组圆的总面积
+ * @param {Array<number>} radii - 所有圆的半径数组
+ * @returns {number} 总面积
+ */
+function calculateTotalCircleArea(radii) {
+    return radii.reduce((acc, r) => acc + PI * r * r, 0);
+}
+
+/**
+ * 计算包围所有圆形的最小圆的半径
+ * @param {Array<object>} circles - 所有圆形的数组，每个对象包含 x, y, r
+ * @returns {number} 边界半径
+ */
+function calculateBoundingRadius(circles) {
+    let maxDistSq = 0;
+    circles.forEach(c => {
+        const distSq = c.x * c.x + c.y * c.y;
+        if (distSq > maxDistSq) {
+            maxDistSq = distSq;
+        }
+    });
+    return Math.sqrt(maxDistSq);
+}
+
+/**
+ * 计算填充密度
+ * @param {Array<number>} wireRadii - 所有导线半径的数组
+ * @param {number} containerRadius - 容器半径
+ * @returns {number} 填充密度 (0到1之间)
+ */
+function calculatePackingDensity(wireRadii, containerRadius) {
+    if (containerRadius === 0) return 0;
+    const totalWireArea = calculateTotalCircleArea(wireRadii);
+    const containerArea = PI * containerRadius * containerRadius;
+    return totalWireArea / containerArea;
+}
+
+/**
+ * 计算最终的线束外径
+ * @param {Array<object>} circles - 所有圆形的数组
+ * @returns {number} 线束外径
+ */
+function calculateBundleDiameter(circles) {
+    let maxRadius = 0;
+    circles.forEach(circle => {
+        const dist = Math.sqrt(circle.x * circle.x + circle.y * circle.y) + circle.r;
+        if (dist > maxRadius) {
+            maxRadius = dist;
+        }
+    });
+    return maxRadius * 2;
+}
+
+/**
+ * 计算所有电线的总截面积
+ * @param {Array<number>} wireRadii - 所有导线半径的数组
+ * @returns {number} 总截面积
+ */
+function calculateTotalWireCrossSection(wireRadii) {
+    return calculateTotalCircleArea(wireRadii);
 } 

@@ -1,29 +1,55 @@
 // src/logic/simulationConstants.js
-import { standardWiresData as defaultStandardWiresData } from '../storage/standardWires.js'; // 从 .js 文件导入
+import { standardWiresData } from '../storage/standardWires.js';
+import { getSimulationParameters } from './wireManager.js';
 
-// 辅助函数：获取当前使用的导线数据（用户定义优先，否则为默认）
-function getCurrentWireData() {
-  const userWiresString = localStorage.getItem('userDefinedStandardWires');
-  if (userWiresString) {
-    try {
-      const userWires = JSON.parse(userWiresString);
-      // 基本验证：检查是否为数组且结构基本正确 (至少有 gauge)
-      if (Array.isArray(userWires) && userWires.every(wire => wire.hasOwnProperty('gauge'))) {
-        return userWires;
-      } else {
-        console.warn('localStorage中的userDefinedStandardWires格式不正确，将使用默认值。');
-        // 清理掉损坏的数据
-        localStorage.removeItem('userDefinedStandardWires');
-        return defaultStandardWiresData;
-      }
-    } catch (error) {
-      console.error('从localStorage解析userDefinedStandardWires失败:', error, '将使用默认值。');
-      // 清理掉损坏的数据
-      localStorage.removeItem('userDefinedStandardWires');
-      return defaultStandardWiresData;
-    }
-  }
-  return defaultStandardWiresData;
+// 初始加载一次模拟参数
+let simulationParameters = getSimulationParameters();
+
+/**
+ * @deprecated The `reloadParameters` function is deprecated. Parameters are now managed by wireManager.js
+ * and the engine should get them from there.
+ */
+export function reloadParameters() {
+  console.warn("reloadParameters is deprecated and will be removed in a future version.");
+  simulationParameters = getSimulationParameters();
+}
+
+// 导出动态参数
+export { simulationParameters };
+
+// --- 静态数据 ---
+
+// 提供一个标准的线规外径查找表 (gauge to OD)
+const WIRE_OD_TABLE = new Map(standardWiresData.map(item => [item.gauge, item]));
+
+/**
+ * 根据线规(gauge)获取对应的导线数据对象
+ * @param {string | number} gauge - 线规值
+ * @returns {object | undefined} 导线数据对象或undefined
+ */
+export function getWireDataByGauge(gauge) {
+  return WIRE_OD_TABLE.get(String(gauge));
+}
+
+/**
+ * @deprecated This function is deprecated. Please use `getEffectiveStandardWires` from `wireManager.js` instead.
+ * 获取当前的电线规格数据（这是一个历史遗留函数，为了兼容保留）
+ * @returns {Array} 电线规格数组
+ */
+export function getCurrentWireData() {
+  console.warn("getCurrentWireData is deprecated. Use getEffectiveStandardWires from wireManager.js instead.");
+  // 在这个简化后的版本里，我们仅返回默认值，因为动态合并的逻辑已经移至 wireManager.js
+  return standardWiresData;
+}
+
+/**
+ * @deprecated This function is deprecated. Please use `getEffectiveStandardWires` from `wireManager.js` instead.
+ * 获取默认的标准电线数据
+ * @returns {Array}
+ */
+export function getDefaultStandardWires() {
+  console.warn("getDefaultStandardWires is deprecated. Use getEffectiveStandardWires from wireManager.js instead.");
+  return standardWiresData;
 }
 
 // 导出一个函数来获取最新的 WIRE_OD_TABLE
@@ -81,12 +107,6 @@ export const CONVERGENCE_THRESHOLD = getSimulationParam('conv', 0.001); // 收�
 export const MAX_ITERATIONS_RUNPACKING = getSimulationParam('max-iter-run', 500); // 主填充循环的安全中断迭代次数
 export const MAX_ITERATIONS_PACKSTEP = getSimulationParam('max-iter-step', 15); // 每个主循环步骤中，在调整容器大小之前的最大迭代次数
 export const CONTAINER_ADJUST_FACTOR = getSimulationParam('container-adjust', 0.05); // 根据穿透情况调整容器大小的幅度
-
-// 新增：提供一个方法来获取默认标准导线数据，ConfigPage 会用到
-// 返回一个深拷贝以防止意外修改原始数据
-export function getDefaultStandardWires() {
-    return JSON.parse(JSON.stringify(defaultStandardWiresData));
-}
 
 // 可选：如果需要全局通知配置变更，可以取消注释并使用
 // export function dispatchWireConfigChangeEvent() {

@@ -1,5 +1,4 @@
 // 线束直径计算页面静态布局（每个列表区表头直接写入HTML，tbody留空）
-// import { fetchJson } from '../utils/helpers.js'; // 这个导入可能不再需要，除非 fetchJson 被其他地方使用
 // import '../styles/CalcPage.css'; // 再次移除CSS导入，应在HTML中通过<link>引入
 // 导入新模块
 import { runSingleSimulation } from '../logic/simulationEngine.js';
@@ -7,7 +6,7 @@ import { drawCirclesOnCanvas } from '../components/simulationRenderer.js';
 import { renderSimulationHistoryChart } from '../components/chartRenderer.js';
 // import { standardWiresData } from '../storage/standardWires.js'; // 移除静态导入
 import { getStandardGauges, getWireOdTable, WIRE_TYPES } from '../logic/simulationConstants.js'; // 导入动态数据获取函数和WIRE_TYPES
-import { getEffectiveStandardWires } from './ConfigPage.js'; // 路径按实际项目结构调整
+import { getEffectiveStandardWires } from '../logic/wireManager.js';
 
 // 监听模拟参数更新事件
 window.addEventListener('simulationParamsUpdated', (event) => {

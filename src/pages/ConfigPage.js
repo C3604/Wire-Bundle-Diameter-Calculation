@@ -1,5 +1,12 @@
-import { getDefaultStandardWires } from '../logic/simulationConstants.js';
 import { standardWiresData } from '../storage/standardWires.js';
+import { 
+    getEffectiveStandardWires, 
+    saveCustomWireLibraries,
+    getSimulationParameters,
+    saveSimulationParameters,
+    restoreDefaultSimulationParameters,
+    getDefaultSimulationParameters
+} from '../logic/wireManager.js';
 
 // 全局变量，用于存储当前表格显示的数据和初始快照
 let currentDisplayData = [];
@@ -70,17 +77,7 @@ function updateDuplicateGaugeState() {
 
 // 合并标准库和自定义内容，返回合并后的数组
 function getMergedWireList() {
-  const stdMap = {};
-  standardWiresData.forEach(item => {
-    const key = String(item.gauge).trim();
-    if (key) stdMap[key] = { ...item };
-  });
-  const userWires = getStoredUserWires() || [];
-  userWires.forEach(item => {
-    const key = String(item.gauge).trim();
-    if (key) stdMap[key] = { ...item };
-  });
-  return Object.values(stdMap).sort((a, b) => String(a.gauge).localeCompare(String(b.gauge), 'zh-CN', {numeric: true}));
+    return getEffectiveStandardWires();
 }
 
 // 只保存与标准库不同或新增的自定义条目
@@ -90,9 +87,12 @@ function getUserCustomWires() {
     const key = String(item.gauge).trim();
     if (key) stdMap[key] = { ...item };
   });
+
   return currentDisplayData.filter(item => {
     const key = String(item.gauge).trim();
+    if (!key) return false; // 忽略空的 gauge
     const std = stdMap[key];
+    // 如果标准库中不存在，或者任一外径值不同，则视为自定义
     return !std ||
       std.thin !== item.thin ||
       std.thick !== item.thick ||
@@ -115,21 +115,6 @@ function getUserCustomWiresFromStorage() {
     }
   }
   return [];
-}
-
-// 获取"标准库"用于业务/计算（标准库+自定义合并，外部可直接调用）
-export function getEffectiveStandardWires() {
-  const stdMap = {};
-  standardWiresData.forEach(item => {
-    const key = String(item.gauge).trim();
-    if (key) stdMap[key] = { ...item };
-  });
-  const userWires = getUserCustomWiresFromStorage();
-  userWires.forEach(item => {
-    const key = String(item.gauge).trim();
-    if (key) stdMap[key] = { ...item };
-  });
-  return Object.values(stdMap).sort((a, b) => String(a.gauge).localeCompare(String(b.gauge), 'zh-CN', {numeric: true}));
 }
 
 export function renderConfigPage(container) {
@@ -736,6 +721,8 @@ export function renderConfigPage(container) {
       const scrollbarWidth = bodyWrapper.offsetWidth - bodyWrapper.clientWidth;
       headerWrapper.style.paddingRight = scrollbarWidth > 0 ? `${scrollbarWidth}px` : '0px';
     }
+    // 重新附加事件监听器
+    attachEventListenersToTable();
   }
 
   // 处理输入框失焦和回车事件的函数
@@ -979,7 +966,206 @@ export function renderConfigPage(container) {
   // --- 初始加载 ---
   loadInitialData();
 
-  // 模拟参数配置逻辑
+  // 加载初始数据
+  loadSimulationParams();
+}
+
+// 渲染表格
+function renderTable() {
+  updateDuplicateGaugeState();
+  const tableBody = document.querySelector('#actual-table-display-area table tbody');
+  if (!tableBody) return;
+  tableBody.innerHTML = '';
+  if (currentDisplayData.length === 0) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 6;
+    td.style.textAlign = 'center';
+    td.style.padding = '20px';
+    td.textContent = '暂无配置数据';
+    tr.appendChild(td);
+    tableBody.appendChild(tr);
+    return;
+  }
+  // 获取所有线规（标准库+自定义合并）
+  const allGauges = getEffectiveStandardWires().map(w => String(w.gauge).trim());
+  currentDisplayData.forEach((wireData, index) => {
+    const tr = document.createElement('tr');
+    // 序号单元格
+    const thIndex = tr.insertCell();
+    thIndex.textContent = index + 1;
+    // 线规单元格（仅输入框，自动匹配参数）
+    const gaugeTd = tr.insertCell();
+    const gaugeInput = document.createElement('input');
+    gaugeInput.type = 'text';
+    gaugeInput.className = 'config-input';
+    gaugeInput.dataset.index = index;
+    gaugeInput.dataset.field = 'gauge';
+    gaugeInput.placeholder = '';
+    let displayValue = '';
+    const gaugeModelValue = wireData.gauge;
+    if (gaugeModelValue !== null && gaugeModelValue !== undefined) {
+        displayValue = String(gaugeModelValue);
+    }
+    gaugeInput.value = displayValue;
+    gaugeInput.classList.remove('input-error');
+    if (displayValue.trim() !== '' && duplicateGaugeValues.has(displayValue.trim())) {
+        gaugeInput.classList.add('input-error');
+    }
+    // 输入时自动匹配参数
+    gaugeInput.addEventListener('input', e => {
+      const value = e.target.value;
+      currentDisplayData[index].gauge = value;
+      updateDuplicateGaugeState();
+    });
+    gaugeInput.addEventListener('blur', e => {
+      const value = e.target.value;
+      // 匹配标准库或自定义库
+      const match = getEffectiveStandardWires().find(w => String(w.gauge).trim() === value.trim());
+      if (match) {
+        currentDisplayData[index].thin = match.thin;
+        currentDisplayData[index].thick = match.thick;
+        currentDisplayData[index].ultraThin = match.ultraThin;
+      }
+      handleInputBlurFormatValidation(e);
+    });
+    gaugeInput.addEventListener('keydown', handleInputKeydownFormatValidation);
+    gaugeTd.appendChild(gaugeInput);
+    // OD 单元格
+    ['thin', 'thick', 'ultraThin'].forEach(type => {
+      const td = tr.insertCell();
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.step = 'any';
+      input.min = '0';
+      input.dataset.index = index;
+      input.dataset.field = type;
+      input.className = 'config-input';
+      const value = wireData[type];
+      let odDisplayValue = '';
+      if (value !== null && value !== undefined) {
+          odDisplayValue = String(value);
+          if (document.activeElement !== input && !isNaN(parseFloat(odDisplayValue))) {
+               odDisplayValue = parseFloat(odDisplayValue).toFixed(2);
+          }
+      }
+      input.value = odDisplayValue;
+      input.addEventListener('input', handleInputChange);
+      input.addEventListener('blur', handleInputBlurFormatValidation);
+      input.addEventListener('keydown', handleInputKeydownFormatValidation);
+      td.appendChild(input);
+    });
+    // 操作单元格
+    const actionTd = tr.insertCell();
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '❌'; 
+    deleteBtn.className = 'calc-table-btn btn-danger btn-small'; 
+    deleteBtn.dataset.index = index;
+    deleteBtn.addEventListener('click', handleDeleteRow);
+    deleteBtn.title = "删除此行"; 
+    actionTd.appendChild(deleteBtn);
+    tableBody.appendChild(tr);
+  });
+  // 滚动条宽度调整逻辑
+  const bodyWrapper = document.querySelector('#actual-table-display-area');
+  const headerWrapper = document.querySelector('#config-table-header-wrapper');
+  if (bodyWrapper && headerWrapper) {
+    const scrollbarWidth = bodyWrapper.offsetWidth - bodyWrapper.clientWidth;
+    headerWrapper.style.paddingRight = scrollbarWidth > 0 ? `${scrollbarWidth}px` : '0px';
+  }
+  // 重新附加事件监听器
+  attachEventListenersToTable();
+}
+
+// --- 模拟参数区逻辑 ---
+
+// 加载当前模拟参数并更新UI
+function loadSimulationParams() {
+    const params = getSimulationParameters();
+    
+    // PI
+    document.getElementById('pi-range').value = params.PI;
+    document.getElementById('pi-input').value = params.PI;
+
+    // SNG_R2_TO_R1
+    document.getElementById('r2r1-range').value = params.SNG_R2_TO_R1;
+    document.getElementById('r2r1-input').value = params.SNG_R2_TO_R1;
+
+    // ACCELERATION
+    document.getElementById('accel-range').value = params.ACCELERATION;
+    document.getElementById('accel-input').value = params.ACCELERATION;
+
+    // WEIGHT_FACTOR
+    document.getElementById('weight-range').value = params.WEIGHT_FACTOR;
+    document.getElementById('weight-input').value = params.WEIGHT_FACTOR;
+
+    // DAMPING
+    document.getElementById('damping-range').value = params.DAMPING;
+    document.getElementById('damping-input').value = params.DAMPING;
+
+    // TIME_STEP
+    document.getElementById('timestep-range').value = params.TIME_STEP;
+    document.getElementById('timestep-input').value = params.TIME_STEP;
+
+    // MAX_STEPS
+    document.getElementById('maxsteps-range').value = params.MAX_STEPS;
+    document.getElementById('maxsteps-input').value = params.MAX_STEPS;
+
+    // STOP_THRESHOLD
+    document.getElementById('stopthresh-range').value = params.STOP_THRESHOLD;
+    document.getElementById('stopthresh-input').value = params.STOP_THRESHOLD;
+}
+
+
+// 保存当前模拟参数
+function saveSimulationParams() {
+    const paramsToSave = {
+        PI: parseFloat(document.getElementById('pi-input').value),
+        SNG_R2_TO_R1: parseFloat(document.getElementById('r2r1-input').value),
+        ACCELERATION: parseFloat(document.getElementById('accel-input').value),
+        WEIGHT_FACTOR: parseFloat(document.getElementById('weight-input').value),
+        DAMPING: parseFloat(document.getElementById('damping-input').value),
+        TIME_STEP: parseFloat(document.getElementById('timestep-input').value),
+        MAX_STEPS: parseInt(document.getElementById('maxsteps-input').value, 10),
+        STOP_THRESHOLD: parseFloat(document.getElementById('stopthresh-input').value)
+    };
+    saveSimulationParameters(paramsToSave);
+    alert('模拟参数已保存！');
+}
+
+// 恢复默认模拟参数
+function restoreDefaultParams() {
+    if (confirm('确定要将所有模拟参数恢复为默认设置吗？此操作不可撤销。')) {
+        restoreDefaultSimulationParameters();
+        loadSimulationParams(); // 重新加载UI以显示默认值
+        alert('模拟参数已恢复为默认值！');
+    }
+}
+
+// 给单个参数重置按钮绑定事件
+function attachResetButtonListener(button, paramKey) {
+    button.addEventListener('click', () => {
+        const defaultParams = getDefaultSimulationParameters();
+        const defaultValue = defaultParams[paramKey];
+        
+        const rangeInput = button.closest('.param-group').querySelector('input[type="range"]');
+        const textInput = button.closest('.param-group').querySelector('input[type="text"]');
+        
+        if (rangeInput) rangeInput.value = defaultValue;
+        if (textInput) textInput.value = defaultValue;
+    });
+}
+
+// 重新附加事件监听器
+function attachEventListenersToTable() {
+  const tableContainer = document.querySelector('#group-config-table');
+  const tableDisplayArea = document.querySelector('#actual-table-display-area');
+  const actionsContainer = tableContainer.querySelector('.group-actions');
+  const addNewWireBtn = actionsContainer.querySelector('#add-new-wire-btn-cfg');
+  const saveBtn = actionsContainer.querySelector('#save-config-btn-cfg');
+  const restoreDefaultsBtn = actionsContainer.querySelector('#restore-defaults-btn-cfg');
+
+  // 为所有滑块和输入框添加联动事件监听
   const simParamsConfig = [
     {
       name: 'pi',
@@ -1055,81 +1241,6 @@ export function renderConfigPage(container) {
     }
   ];
 
-  // 从localStorage加载保存的参数
-  function loadSimulationParams() {
-    const savedParams = localStorage.getItem('simulationParams');
-    if (savedParams) {
-      try {
-        return JSON.parse(savedParams);
-      } catch (e) {
-        console.error('加载模拟参数失败:', e);
-        return null;
-      }
-    }
-    return null;
-  }
-
-  // 保存参数到localStorage
-  function saveSimulationParams() {
-    const params = {};
-    simParamsConfig.forEach(config => {
-      const input = document.getElementById(`${config.name}-input`);
-      if (input) {
-        params[config.name] = parseFloat(input.value);
-      }
-    });
-    try {
-      localStorage.setItem('simulationParams', JSON.stringify(params));
-      // 触发一个自定义事件，通知其他页面参数已更新
-      const event = new CustomEvent('simulationParamsUpdated', { 
-        detail: { params }
-      });
-      window.dispatchEvent(event);
-      alert('模拟参数已保存！');
-    } catch (e) {
-      console.error('保存模拟参数失败:', e);
-      alert('保存模拟参数失败，请检查浏览器控制台。');
-    }
-  }
-
-  // 恢复默认参数
-  function restoreDefaultParams() {
-    if (confirm('确定要恢复所有模拟参数到默认值吗？')) {
-      simParamsConfig.forEach(config => {
-        const range = document.getElementById(`${config.name}-range`);
-        const input = document.getElementById(`${config.name}-input`);
-        if (range && input) {
-          range.value = config.defaultValue;
-          input.value = config.defaultValue.toFixed(config.precision);
-        }
-      });
-      localStorage.removeItem('simulationParams');
-      // 触发参数更新事件
-      const event = new CustomEvent('simulationParamsUpdated', { 
-        detail: { params: null }
-      });
-      window.dispatchEvent(event);
-    }
-  }
-
-  // 为每个参数的重置按钮添加事件监听
-  const resetButtons = container.querySelectorAll('.param-reset-btn');
-  resetButtons.forEach(btn => {
-    const paramName = btn.dataset.param;
-    const config = simParamsConfig.find(c => c.name === paramName);
-    if (config) {
-      btn.onclick = () => {
-        const range = document.getElementById(`${paramName}-range`);
-        const input = document.getElementById(`${paramName}-input`);
-        if (range && input) {
-          range.value = config.defaultValue;
-          input.value = config.defaultValue.toFixed(config.precision);
-        }
-      };
-    }
-  });
-
-  // 为所有滑块和输入框添加联动事件监听
   simParamsConfig.forEach(config => {
     const range = document.getElementById(`${config.name}-range`);
     const input = document.getElementById(`${config.name}-input`);
@@ -1165,28 +1276,31 @@ export function renderConfigPage(container) {
     }
   });
 
-  // 加载保存的参数
-  const savedParams = loadSimulationParams();
-  if (savedParams) {
-    simParamsConfig.forEach(config => {
-      const range = document.getElementById(`${config.name}-range`);
-      const input = document.getElementById(`${config.name}-input`);
-      if (range && input && savedParams[config.name] !== undefined) {
-        const value = savedParams[config.name];
-        range.value = value;
-        input.value = value.toFixed(config.precision);
-      }
-    });
-  }
+  // 为每个参数的重置按钮添加事件监听
+  const resetButtons = document.querySelectorAll('.param-reset-btn');
+  resetButtons.forEach(btn => {
+    const paramName = btn.dataset.param;
+    const config = simParamsConfig.find(c => c.name === paramName);
+    if (config) {
+      btn.onclick = () => {
+        const range = document.getElementById(`${paramName}-range`);
+        const input = document.getElementById(`${paramName}-input`);
+        if (range && input) {
+          range.value = config.defaultValue;
+          input.value = config.defaultValue.toFixed(config.precision);
+        }
+      };
+    }
+  });
 
   // 保存按钮事件监听
-  const saveSimParamsBtn = container.querySelector('#save-sim-params-btn');
+  const saveSimParamsBtn = document.querySelector('#save-sim-params-btn');
   if (saveSimParamsBtn) {
     saveSimParamsBtn.addEventListener('click', saveSimulationParams);
   }
 
   // 恢复默认按钮事件监听
-  const restoreSimParamsBtn = container.querySelector('#restore-sim-params-btn');
+  const restoreSimParamsBtn = document.querySelector('#restore-sim-params-btn');
   if (restoreSimParamsBtn) {
     restoreSimParamsBtn.addEventListener('click', restoreDefaultParams);
   }
