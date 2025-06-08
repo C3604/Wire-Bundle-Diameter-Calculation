@@ -374,17 +374,17 @@ div.sidebar-divider > #collapseBtn svg {
   opacity: 0.75; /* 进一步弱化 */
   cursor: pointer;
   border-radius: 4px; /* 轻微圆角 */
-  width: 32px; /* 设置按钮宽度 */
-  height: 32px; /* 设置按钮高度 */
+  width: 48px; /* 设置按钮宽度 */
+  height: 48px; /* 设置按钮高度 */
   display: flex; /* 使用flex布局使SVG居中 */
   align-items: center; /* 垂直居中SVG */
   justify-content: center; /* 水平居中SVG */
   /* text-align: center; */ /* display:flex 时不再需要 */
 }
 
-#btn-help .help-icon-svg { /* 直接为SVG元素设置大小 */
-  width: 20px; /* SVG图标的宽度 */
-  height: 20px; /* SVG图标的高度 */
+#btn-help svg { /* 直接为SVG元素设置大小 */
+  width: 28px; /* SVG图标的宽度 */
+  height: 28px; /* SVG图标的高度 */
 }
 
 #btn-help:hover {
@@ -392,24 +392,54 @@ div.sidebar-divider > #collapseBtn svg {
   opacity: 1;
 }
 
-/* #btn-help .emoji { margin-right: 0; } */ /* 移除旧的 emoji 样式 */
-
 /* 如果希望帮助按钮在侧边栏收起时也显示 emoji */
-/* .sidebar.collapsed #btn-help .text { display: none; } */ /* 移除，因为没有 .text span 了 */
-
-.sidebar.collapsed #btn-help .help-icon-svg { /* SVG 在收起时的样式 */
+.sidebar.collapsed #btn-help svg { /* SVG 在收起时的样式 */
   /* display: inline; */ /* SVG 默认为 inline-block 或可由 flex 控制 */
-  width: 22px; /* 在收起状态下可以稍微大一点 */
-  height: 22px;
+  width: 28px; /* 在收起状态下可以稍微大一点 */
+  height: 28px;
   /* padding: 5px 0; */ /* 移除，按钮大小已固定 */
 }
 
 .sidebar.collapsed #btn-help {
-  width: 40px; /* 调整收起时按钮的整体宽度 */
-  height: 40px; /* 调整收起时按钮的整体高度 */
+  width: 36px; /* 调整收起时按钮的整体宽度 */
+  height: 36px; /* 调整收起时按钮的整体高度 */
   /* padding: 8px 0; */ /* 移除，因为按钮使用固定宽高和flex居中 */
   /* width: 100%; */ /* 不再占满宽度，而是固定大小 */
-} 
+}
+
+/* 语言切换按钮样式 */
+#btn-language {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #555; /* Changed to match #btn-help color */
+  opacity: 0.75; /* Added to match #btn-help opacity */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+
+#btn-language:hover {
+  background: #F8F9FA;
+  color: #3A86FF;
+  opacity: 1; /* Make it fully opaque on hover */
+}
+
+#btn-language svg {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar.collapsed #btn-language {
+  width: 48px;
+  height: 48px;
+}
 
 /* 从 src/styles/ConfigPage.css 导入的样式 */
 /* --------------------------------------- */
@@ -842,8 +872,23 @@ div.sidebar-divider > #collapseBtn svg {
   margin-bottom: 12px;
   font-size: 15px;
   font-weight: 600;
-  color: #495057;
-  letter-spacing: normal;
+  color: #343A40;
+}
+.title-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #343A40;
+}
+.title-container .emoji {
+  margin-right: 8px; /* 在 emoji 和标题文本之间添加一些间距 */
+  font-size: 20px;
+}
+.group-actions {
+  display: flex;
+  gap: 8px; /* 在按钮之间添加一些间距 */
 }
 .chart-container-wrapper {
   background: #FFFFFF; 
@@ -1060,7 +1105,7 @@ div.sidebar-divider > #collapseBtn svg {
   /* background: #FFFFFF; */
   /* border-radius: 12px; */
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
-  /* margin-bottom: 16px; */ /* 这个间距可以由父级 .history-layout 的 gap 控制 */
+  /* margin-bottom: 16px; /* 这个间距可以由父级 .history-layout 的 gap 控制 */
 }
 
 /* 左侧标题 */
@@ -1258,16 +1303,15 @@ div.sidebar-divider > #collapseBtn svg {
 .group-wire-standard,
 .group-wire-special,
 .group-wrap,
-.group-config-table,
-.group-history-list {
-  background: #F8F9FA;
-  border-radius: 8px;
-  padding: 16px 18px;
-  margin-bottom: 0;
-  /* 可根据需要添加统一的 box-shadow 或 border */
+.group-tolerance,
+.group-score {
+  background-color: #FFFFFF;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  margin-bottom: 20px;
 }
 
-/* 标题区统一样式 */
 .group-title, .section-title {
   display: flex;
   justify-content: space-between;
@@ -1275,17 +1319,26 @@ div.sidebar-divider > #collapseBtn svg {
   margin-bottom: 12px;
   font-size: 15px;
   font-weight: 600;
-  color: #495057;
-  letter-spacing: normal;
+  color: #343A40;
 }
 
-/* 按钮区统一样式 */
+.title-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #343A40;
+}
+
+.title-container .emoji {
+  margin-right: 8px; /* 在 emoji 和标题文本之间添加一些间距 */
+  font-size: 20px;
+}
+
 .group-actions {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 8px; /* 在按钮之间添加一些间距 */
 }
 
 /* 主表格统一ID样式 */
@@ -1507,5 +1560,30 @@ input[type="number"] {
   -webkit-appearance: textfield;   /* Chrome/Safari */
   -moz-appearance: textfield;      /* Firefox */
 }
+
+/* Appending styles from CalcPage.css */
+.calc-left {
+  flex: 4;
+  padding-right: 24px;
+}
+
+.calc-right {
+  flex: 3;
+}
+
+/* Correcting the background for simulation/result groups */
+.group-simulation,
+.group-result.chart-container-wrapper {
+  margin-bottom: 24px;
+  padding: 24px;
+  background: #FFFFFF; /* Ensure white background */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.group-result.chart-container-wrapper {
+  margin-bottom: 0;
+}
+
 
 

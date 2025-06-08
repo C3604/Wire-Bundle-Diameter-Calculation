@@ -1,16 +1,6 @@
 // src/logic/simulationEngine.js
 
 import {
-    PI,
-    SNG_R2_TO_R1,
-    ACCELERATION,
-    WEIGHT_FACTOR,
-    CONVERGENCE_THRESHOLD,
-    MAX_ITERATIONS_RUNPACKING,
-    MAX_ITERATIONS_PACKSTEP,
-    CONTAINER_ADJUST_FACTOR
-} from './simulationConstants.js';
-import {
     distanceSq,
     distance,
     fastCheckCollision,
@@ -18,13 +8,13 @@ import {
 } from '../utils/mathUtils.js';
 import { simulationParameters } from './simulationConstants.js';
 
-// 从 simulationConstants.js 导入参数
-let {
-    DAMPING,
-    TIME_STEP,
-    MAX_STEPS,
-    STOP_THRESHOLD
-} = simulationParameters;
+// 此处顶层导入的参数已废弃，核心逻辑将从函数内部的 simulationParameters 中动态获取
+// let {
+//     DAMPING,
+//     TIME_STEP,
+//     MAX_STEPS,
+//     STOP_THRESHOLD
+// } = simulationParameters;
 
 /**
  * 计算"接触范数" - 衡量圆形重叠（穿透）程度的指标。
@@ -107,8 +97,10 @@ export function calculateContactNorm(circles) {
  * 执行堆叠模拟的一个步骤。
  * @param {Array<Object>} circles - 圆形对象数组 {x, y, r, ...}
  * @param {number} acceleration - 决定圆形每步移动多少的因子。
+ * @param {number} PI - 圆周率
+ * @param {number} WEIGHT_FACTOR - 质量权重因子
  */
-export function packStep(circles, acceleration) {
+export function packStep(circles, acceleration, PI, WEIGHT_FACTOR) {
     const nCircles = circles.length;
     if (nCircles < 2 || !circles[1]) return; // 至少需要内外容器和电线圆
 
@@ -184,10 +176,16 @@ export function packStep(circles, acceleration) {
 /**
  * 运行主堆叠模拟循环。
  * @param {Array<Object>} circles - 初始圆形对象数组。
- * @param {number} [currentAcceleration=ACCELERATION] - 当前使用的加速度，默认为全局ACCELERATION常量。
  * @returns {Object} { finalCircles: Array<Object>, containerRadius: number } 包含最终圆形数据和容器半径的对象
  */
-export function runPackingSimulation(circles, currentAcceleration = ACCELERATION) {
+export function runPackingSimulation(circles) {
+    // 从 simulationParameters 获取所有需要的参数
+    const {
+        PI, SNG_R2_TO_R1, ACCELERATION, WEIGHT_FACTOR,
+        CONVERGENCE_THRESHOLD, MAX_ITERATIONS_RUNPACKING,
+        MAX_ITERATIONS_PACKSTEP, CONTAINER_ADJUST_FACTOR
+    } = simulationParameters;
+
     if (circles.length < 3 || !circles[0] || !circles[1]) {
         console.error("用于模拟的初始圆形数组无效。");
         return { finalCircles: circles, containerRadius: 0 };
@@ -204,15 +202,13 @@ export function runPackingSimulation(circles, currentAcceleration = ACCELERATION
         }
         circles[0].r = circles[1].r * SNG_R2_TO_R1; // 外层容器半径随内层容器半径调整
 
-        // let innerConverged = false; // 内部小循环是否收敛的标志 (在原代码中未使用，移除)
         for (let i = 0; i < MAX_ITERATIONS_PACKSTEP; i++) {
-            packStep(circles, currentAcceleration); // 执行一步堆叠
+            packStep(circles, ACCELERATION, PI, WEIGHT_FACTOR); // 执行一步堆叠
             lastAvgPenetration = avgPenetration;
             avgPenetration = calculateContactNorm(circles); // 计算新的接触范数
 
             // 如果达到收敛阈值，或变化量足够小，则认为内部循环收敛
             if (avgPenetration < CONVERGENCE_THRESHOLD || Math.abs(avgPenetration - lastAvgPenetration) < CONVERGENCE_THRESHOLD / 50) {
-                // innerConverged = true; // 标记收敛
                 break; // 跳出内部循环
             }
         }
@@ -225,9 +221,6 @@ export function runPackingSimulation(circles, currentAcceleration = ACCELERATION
     return { finalCircles: circles, containerRadius: circles[1].r };
 }
 
-// 全局变量，用于跟踪模拟状态
-let animationFrameId = null;
-
 /**
  * 针对给定的一组电线半径，设置并运行单次堆叠模拟。
  * @param {Array<number>} wireRadii - 要堆叠的电线的半径数组。
@@ -235,50 +228,57 @@ let animationFrameId = null;
  */
 export function runSingleSimulation(wireRadii) {
     // 使用当前参数进行模拟
-    const {
-        pi: PI,
-        r2r1: SNG_R2_TO_R1,
-        accel: ACCELERATION,
-        weight: WEIGHT_FACTOR,
-        conv: CONVERGENCE_THRESHOLD,
-        maxIterRun: MAX_ITERATIONS_RUNPACKING,
-        maxIterStep: MAX_ITERATIONS_PACKSTEP,
-        containerAdjust: CONTAINER_ADJUST_FACTOR
-    } = simulationParameters;
+    // 修正：确保解构时使用大写键名，与 wireManager.js 中提供的对象一致
+    const { PI, SNG_R2_TO_R1 } = simulationParameters;
 
-    const nWires = wireRadii.length;
+    // --- 输入验证和过滤 ---
+    const validRadii = wireRadii
+        .map(r => parseFloat(r)) // 转换为数字
+        .filter(r => !isNaN(r) && r > 0); // 过滤掉NaN和非正数
+
+    const nWires = validRadii.length;
     if (nWires === 0) return { finalCircles: [], containerRadius: 0 };
 
-    const nCircles = nWires + 2; // 总圆形数 = 电线数 + 2个容器圆
-    const circles = new Array(nCircles);
-
+    // --- 初始容器半径估算 (采用 ref/simulation.js 的健壮算法) ---
     let totalArea = 0;
     let maxSingleRadius = 0;
-    for (const r of wireRadii) {
+    for (const r of validRadii) {
         totalArea += PI * r * r;
-        if (r > maxSingleRadius) maxSingleRadius = r;
-    } // 计算总面积和最大半径
-
-    // 初始堆叠半径：基于总面积估算，并确保至少比最大单根电线半径大一点
+        if (r > maxSingleRadius) {
+            maxSingleRadius = r;
+        }
+    }
+    // 结合面积和最大半径进行估算，提供一个更合理的初始值
     const initialPackingRadius = Math.max(Math.sqrt(totalArea / PI) * 1.15, maxSingleRadius * 1.05);
 
-    circles[0] = { x: 0, y: 0, r: initialPackingRadius * SNG_R2_TO_R1, isContainer: true }; // 外层容器
-    circles[1] = { x: 0, y: 0, r: initialPackingRadius, isInnerContainer: true }; // 内层容器
-
-    for (let i = 0; i < nWires; i++) {
-        const radius = wireRadii[i];
-        if (radius <= 0) { // 跳过半径为0的无效电线
-            circles[i + 2] = { x: 0, y: 0, r: 0 };
-            continue;
-        }
-        // 随机放置电线圆在内层容器中
-        const maxPlacementRadius = Math.max(0, initialPackingRadius - radius); // 最大允许放置的中心点离容器中心的距离
+    let circles = [];
+    // 外层容器
+    circles.push({ r: initialPackingRadius * SNG_R2_TO_R1, x: 0, y: 0, isContainer: true });
+    // 内层容器
+    circles.push({ r: initialPackingRadius, x: 0, y: 0, isInnerContainer: true });
+    
+    // --- 随机放置圆形 (采用 ref/simulation.js 的均匀分布算法) ---
+    validRadii.forEach((radius, i) => {
+        // 确保圆形不会超出初始容器边界
+        const maxPlacementRadius = Math.max(0, initialPackingRadius - radius);
+        // 使用开方确保在圆形区域内均匀分布，而不是向中心聚集
         const angle = fRand(0, 2 * PI);
-        const rPos = Math.sqrt(fRand(0, 1)) * maxPlacementRadius; // 使用 sqrt(random) 使分布更均匀
-        circles[i + 2] = { x: rPos * Math.cos(angle), y: rPos * Math.sin(angle), r: radius };
-    }
+        const rPos = Math.sqrt(fRand(0, 1)) * maxPlacementRadius;
+        
+        circles.push({
+            r: radius,
+            x: rPos * Math.cos(angle),
+            y: rPos * Math.sin(angle),
+            id: `wire_${i}`
+        });
+    });
 
-    return runPackingSimulation(circles); // 运行模拟, 使用默认加速度
+    // 运行模拟并返回结果
+    const result = runPackingSimulation(circles);
+    return {
+        finalCircles: result.finalCircles,
+        containerRadius: result.containerRadius
+    };
 }
 
 // --- 内部数学/计算函数 ---
@@ -289,6 +289,7 @@ export function runSingleSimulation(wireRadii) {
  * @returns {number} 总面积
  */
 function calculateTotalCircleArea(radii) {
+    const { PI } = simulationParameters;
     return radii.reduce((acc, r) => acc + PI * r * r, 0);
 }
 
@@ -300,9 +301,11 @@ function calculateTotalCircleArea(radii) {
 function calculateBoundingRadius(circles) {
     let maxDistSq = 0;
     circles.forEach(c => {
-        const distSq = c.x * c.x + c.y * c.y;
-        if (distSq > maxDistSq) {
-            maxDistSq = distSq;
+        if (!c.isContainer && !c.isInnerContainer) { // 只考虑电线圆
+            const distSq = c.x * c.x + c.y * c.y;
+            if (distSq > maxDistSq) {
+                maxDistSq = distSq;
+            }
         }
     });
     return Math.sqrt(maxDistSq);
@@ -316,6 +319,7 @@ function calculateBoundingRadius(circles) {
  */
 function calculatePackingDensity(wireRadii, containerRadius) {
     if (containerRadius === 0) return 0;
+    const { PI } = simulationParameters;
     const totalWireArea = calculateTotalCircleArea(wireRadii);
     const containerArea = PI * containerRadius * containerRadius;
     return totalWireArea / containerArea;
@@ -329,6 +333,8 @@ function calculatePackingDensity(wireRadii, containerRadius) {
 function calculateBundleDiameter(circles) {
     let maxRadius = 0;
     circles.forEach(circle => {
+        // 跳过容器圆
+        if (circle.isContainer || circle.isInnerContainer) return;
         const dist = Math.sqrt(circle.x * circle.x + circle.y * circle.y) + circle.r;
         if (dist > maxRadius) {
             maxRadius = dist;

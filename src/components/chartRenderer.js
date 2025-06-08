@@ -1,19 +1,118 @@
 // import Chart from '../lib/chart.umd.js'; // Chart对象将从全局作用域获取
 // src/components/chartRenderer.js
 
+let chartInstance = null; // 在模块作用域内维护图表实例
+
+/**
+ * 将电线数量分布渲染为饼图。
+ * @param {Object} wireCounts - 一个对象，键是电线规格，值是数量。
+ */
+export function renderChart(wireCounts) {
+    const ctx = document.getElementById('chart-canvas')?.getContext('2d');
+    if (!ctx) {
+        console.error('无法找到ID为 "chart-canvas" 的Canvas元素或其2D上下文。');
+        return;
+    }
+
+    // 如果已存在图表实例，先销毁它
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    const labels = Object.keys(wireCounts);
+    const data = Object.values(wireCounts);
+
+    // 为每个标签生成稳定且独特的颜色
+    const backgroundColors = labels.map(label => getColorForString(label));
+
+    chartInstance = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '电线数量',
+                data: data,
+                backgroundColor: backgroundColors,
+                borderColor: '#ffffff',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: '电线规格分布'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed !== null) {
+                                label += context.parsed;
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+/**
+ * 清除画布上的图表。
+ */
+export function clearChart() {
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+    }
+    // 即使实例不存在，也尝试清理画布
+    const ctx = document.getElementById('chart-canvas')?.getContext('2d');
+    if (ctx) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
+}
+
+
+/**
+ * 为给定的字符串生成一个伪随机但确定的颜色。
+ * 这确保了相同的电线规格总是有相同的颜色。
+ * @param {string} str - 输入字符串 (例如, "AWG 20")
+ * @returns {string} - 返回一个HSL格式的颜色字符串。
+ */
+function getColorForString(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const h = hash % 360;
+    return `hsl(${h}, 70%, 50%)`;
+}
+
+
+// -- 旧的历史页面图表函数，暂时保留以备将来使用 --
+
 /**
  * 渲染或更新模拟历史的折线图。
- * 此函数假定 Chart.js 库已在页面中全局可用。
  * @param {string} canvasElementId - 用于渲染图表的HTML canvas元素的ID。
- * @param {Array<number>} diameters - 每次模拟运行的直径数组 (不包括包裹层)。
- * @param {Chart | null} currentChartInstance - 当前的 Chart.js 实例 (如果存在)，用于销毁旧图表。
- * @returns {Chart | null} 新创建的 Chart.js 实例，或者在没有数据或出错时返回 null。
+ * @param {Array<number>} diameters - 每次模拟运行的直径数组。
+ * @param {Chart | null} currentChartInstance - 当前的 Chart.js 实例。
+ * @returns {Chart | null} 新创建的 Chart.js 实例。
  */
 export function renderSimulationHistoryChart(canvasElementId, diameters, currentChartInstance) {
     const chartCanvas = document.getElementById(canvasElementId);
     if (!chartCanvas) {
         console.error(`图表画布元素 (ID: '${canvasElementId}') 未找到。`);
-        return currentChartInstance; // 返回传入的实例或null
+        return currentChartInstance;
     }
     const chartCtx = chartCanvas.getContext('2d');
     if (!chartCtx) {
@@ -21,26 +120,17 @@ export function renderSimulationHistoryChart(canvasElementId, diameters, current
         return currentChartInstance;
     }
 
-    // 如果存在旧的图表实例，先销毁它
     if (currentChartInstance) {
         currentChartInstance.destroy();
     }
 
-    // 如果没有直径数据，则清空画布并显示提示信息
     if (!diameters || diameters.length === 0) {
         chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
-        if (chartCanvas.width > 0 && chartCanvas.height > 0) {
-            chartCtx.fillStyle = '#aaa';
-            chartCtx.textAlign = 'center';
-            chartCtx.font = '12px sans-serif';
-            chartCtx.fillText("无模拟历史数据", chartCanvas.width / 2, chartCanvas.height / 2);
-        }
-        return null; // 没有创建新的图表实例
+        return null;
     }
 
     const labels = diameters.map((_, index) => `模拟 ${index + 1}`);
 
-    // 创建新的 Chart.js 实例
     try {
         const newChartInstance = new Chart(chartCtx, {
             type: 'line',
@@ -50,56 +140,18 @@ export function renderSimulationHistoryChart(canvasElementId, diameters, current
                     label: '模拟直径 (mm)',
                     data: diameters,
                     borderColor: 'rgb(75, 192, 192)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderWidth: 1.5,
-                    tension: 0.1,
-                    pointBackgroundColor: 'rgb(75, 192, 192)',
-                    pointRadius: 3,
-                    pointHoverRadius: 5,
                     fill: false
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        title: { display: true, text: '线束直径 (mm)' }
-                    },
-                    x: {
-                        title: { display: true, text: '模拟次数' }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            title: (tooltipItems) => tooltipItems[0].label,
-                            label: (context) => {
-                                let label = context.dataset.label || '';
-                                if (label) label += ': ';
-                                if (context.parsed.y !== null) {
-                                    label += context.parsed.y.toFixed(3) + ' mm';
-                                }
-                                return label;
-                            }
-                        }
-                    },
-                    legend: { display: false } // 通常在简单历史图中不需要图例
-                },
-                interaction: {
-                    mode: 'nearest',
-                    axis: 'x',
-                    intersect: false
-                }
+                scales: { y: { beginAtZero: false } }
             }
         });
         return newChartInstance;
     } catch (error) {
         console.error("创建 Chart.js 实例时出错:", error);
-        // 尝试清空画布以避免显示损坏的图表
         chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
         return null;
     }

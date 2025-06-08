@@ -1,13 +1,15 @@
+import i18n from '../lib/i18n.js';
+
 export function renderHistoryPage(container) {
   container.innerHTML = `
     <div class="page-history">
       <div class="layout-history">
         <div class="group-history-list">
           <div class="group-title">
-            <span>📄 历史记录列表</span>
+            <div class="title-container"><span class="emoji">📄</span><span data-i18n="history_title">历史记录列表</span></div>
             <div class="group-actions">
-              <button class="calc-table-btn" id="export-csv-btn">📤 导出CSV</button>
-              <button class="calc-table-btn btn-danger" id="clear-history-btn">🗑️ 清除历史</button>
+              <button class="calc-table-btn" id="export-csv-btn"><span class="emoji">📤</span><span class="text" data-i18n="history_button_export">导出CSV</span></button>
+              <button class="calc-table-btn btn-danger" id="clear-history-btn"><span class="emoji">🗑️</span><span class="text" data-i18n="history_button_clear">清除历史</span></button>
             </div>
           </div>
           <div class="calc-table-content" id="history-table-content">
@@ -15,16 +17,16 @@ export function renderHistoryPage(container) {
               <table id="main-data-table-history" class="main-data-table calc-table calc-table-fixed">
                 <thead>
                   <tr>
-                    <th>序号</th>
-                    <th>计算时间</th>
-                    <th>标准导线</th>
-                    <th>特殊导线</th>
-                    <th>包覆物</th>
-                    <th>制造公差</th>
-                    <th>最大理论直径 (mm)</th>
-                    <th>最小理论直径 (mm)</th>
-                    <th>平均理论直径 (mm)</th>
-                    <th>最终直径 (mm)</th>
+                    <th data-i18n="history_table_header_index">序号</th>
+                    <th data-i18n="history_table_header_time">计算时间</th>
+                    <th data-i18n="history_table_header_standard_wires">标准导线</th>
+                    <th data-i18n="history_table_header_special_wires">特殊导线</th>
+                    <th data-i18n="history_table_header_wrapping">包覆物</th>
+                    <th data-i18n="history_table_header_tolerance">制造公差</th>
+                    <th data-i18n="history_table_header_max_theoretical">最大理论直径 (mm)</th>
+                    <th data-i18n="history_table_header_min_theoretical">最小理论直径 (mm)</th>
+                    <th data-i18n="history_table_header_avg_theoretical">平均理论直径 (mm)</th>
+                    <th data-i18n="history_table_header_final_diameter">最终直径 (mm)</th>
                   </tr>
                 </thead>
               </table>
@@ -77,11 +79,11 @@ export function renderHistoryPage(container) {
             historyTableBody.appendChild(tr);
           });
         } else {
-          historyTableBody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:20px;">暂无历史记录</td></tr>';
+          historyTableBody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:20px;">${i18n.getMessage('history_message_no_records')}</td></tr>`;
         }
       } catch (e) {
         console.error('加载历史记录失败:', e);
-        historyTableBody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:20px;">加载历史记录出错</td></tr>';
+        historyTableBody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:20px;">${i18n.getMessage('history_message_load_error')}</td></tr>`;
       }
     }
 
@@ -101,14 +103,14 @@ export function renderHistoryPage(container) {
   if (clearHistoryBtn) {
     clearHistoryBtn.onclick = () => {
       console.log('清除历史记录按钮被点击');
-      if (confirm('确定要清除所有历史记录吗？此操作不可恢复。')) {
+      if (confirm(i18n.getMessage('history_confirm_clear'))) {
         try {
           localStorage.removeItem('calculationHistory');
           loadAndRenderHistory(); // 重新加载并渲染，此时应显示"暂无历史记录"
-          alert('历史记录已清除。');
+          alert(i18n.getMessage('history_message_cleared'));
         } catch (e) {
           console.error('清除历史记录失败:', e);
-          alert('清除历史记录时发生错误。');
+          alert(i18n.getMessage('history_message_clear_error'));
         }
       }
     };
@@ -120,22 +122,22 @@ export function renderHistoryPage(container) {
       try {
         const history = JSON.parse(localStorage.getItem('calculationHistory')) || [];
         if (history.length === 0) {
-          alert('没有历史记录可导出。');
+          alert(i18n.getMessage('history_message_no_records_to_export'));
           return;
         }
 
         // CSV头部，与表格列对应
         const headers = [
-          '序号',
-          '计算时间',
-          '标准导线',
-          '特殊导线',
-          '包覆物',
-          '制造公差 (%)',
-          '最大理论直径 (mm)',
-          '最小理论直径 (mm)',
-          '平均理论直径 (mm)',
-          '最终平均直径 (mm)'
+          i18n.getMessage('history_csv_header_index'),
+          i18n.getMessage('history_csv_header_time'),
+          i18n.getMessage('history_csv_header_standard_wires'),
+          i18n.getMessage('history_csv_header_special_wires'),
+          i18n.getMessage('history_csv_header_wrapping'),
+          i18n.getMessage('history_csv_header_tolerance'),
+          i18n.getMessage('history_csv_header_max_theoretical'),
+          i18n.getMessage('history_csv_header_min_theoretical'),
+          i18n.getMessage('history_csv_header_avg_theoretical'),
+          i18n.getMessage('history_csv_header_final_diameter')
         ];
 
         // 辅助函数，处理多条目数据，将其合并到单个CSV单元格，用分号分隔
@@ -178,16 +180,21 @@ export function renderHistoryPage(container) {
           document.body.removeChild(link);
           URL.revokeObjectURL(url);
         } else {
-          alert('您的浏览器不支持程序化文件下载。请尝试手动复制数据。');
+          alert(i18n.getMessage('history_message_download_not_supported'));
         }
 
       } catch (e) {
         console.error('导出CSV失败:', e);
-        alert('导出CSV时发生错误。');
+        alert(i18n.getMessage('history_message_export_error'));
       }
     };
   }
 
   // 初始加载历史记录
   loadAndRenderHistory();
+  
+  // 更新国际化文本
+  if (i18n && i18n.isInitialized()) {
+    i18n.updatePageTexts();
+  }
 } 

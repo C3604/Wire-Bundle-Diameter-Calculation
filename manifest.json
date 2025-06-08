@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "__MSG_extName__",
-  "version": "1.2.0.6",
-  "description": "__MSG_extDescription__",
+  "name": "线束直径计算工具",
+  "version": "1.0.2.6",
+  "description": "基于二维圆形填充的线束直径估算工具，支持多规格导线、包裹物层、可视化与配置管理。",
   "default_locale": "zh_CN",
   "background": {
     "service_worker": "src/background/openWindow.js",

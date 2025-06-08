@@ -3,10 +3,19 @@
 import { renderCalcPage } from './CalcPage.js';
 import { renderHistoryPage } from './HistoryPage.js';
 import { renderConfigPage } from './ConfigPage.js';
+import i18n from '../lib/i18n.js';
 
 // 侧边栏收缩/展开逻辑
 
 document.addEventListener('DOMContentLoaded', async function () {
+  // 初始化i18n
+  try {
+    await i18n.init();
+    console.log('I18n initialized successfully');
+  } catch (error) {
+    console.error('Failed to initialize i18n:', error);
+  }
+
   const mainContainer = document.querySelector('.main-container');
   const sidebar = document.getElementById('sidebar');
   const collapseBtn = document.getElementById('collapseBtn');
@@ -18,28 +27,48 @@ document.addEventListener('DOMContentLoaded', async function () {
   const btnHistory = document.getElementById('btn-history');
   const btnConfig = document.getElementById('btn-config');
   const btnHelp = document.getElementById('btn-help');
+  const btnLanguage = document.getElementById('btn-language');
 
   let currentPageId = null; // 用于追踪当前活动页面
 
-  // Load and set SVG icon for collapseBtn
-  if (collapseBtn) {
+  // Function to load and set SVG icon for a button, returns the button element
+  async function loadSvgIcon(button, iconName, titleKey = null) {
+    if (!button) return null;
     try {
-      const response = await fetch(chrome.runtime.getURL('icons/SideOpen_Close.svg'));
+      const response = await fetch(chrome.runtime.getURL(`icons/${iconName}.svg`));
       if (!response.ok) {
         throw new Error(`SVG fetch error: ${response.statusText}`);
       }
       let svgText = await response.text();
-      // Remove XML declaration and DOCTYPE for inline use
       svgText = svgText.replace(/<\?xml[^>]*\?>/i, '').replace(/<!DOCTYPE[^>]*>/i, '');
-      // Replace hardcoded fill with "currentColor" so CSS can control it
-      svgText = svgText.replace(/fill="[^"_]*"/g, 'fill="currentColor"');
-      
-      collapseBtn.innerHTML = svgText;
+      // Remove any existing fill attributes from paths and then add fill="currentColor" to all paths.
+      // This ensures all paths are controlled by CSS color.
+      svgText = svgText.replace(/fill="[^"]*"/g, '');
+      svgText = svgText.replace(/<path/g, '<path fill="currentColor"');
+      svgText = svgText.replace(/p-id="\d+"/g, '');
+      button.innerHTML = svgText;
+      if (titleKey) {
+        button.setAttribute('title', i18n.getMessage(titleKey));
+      }
     } catch (error) {
-      console.error('Failed to load SVG icon for collapse button:', error);
-      // Fallback text will be handled by updateCollapseBtn if SVG fails
+      console.error(`Failed to load SVG icon ${iconName}:`, error);
+      // Fallback text will be handled by other parts of the code
     }
+    return button;
   }
+  
+  // New function to update language button icon and tooltip
+  async function updateLanguageButton() {
+    if (!btnLanguage) return;
+    const currentLang = i18n.getCurrentLanguage();
+    const iconName = currentLang === 'zh_CN' ? 'Language_cn' : 'Language_en';
+    await loadSvgIcon(btnLanguage, iconName, 'language_switch');
+  }
+
+  // Load and set SVG icon for collapseBtn
+  loadSvgIcon(collapseBtn, 'SideOpen_Close');
+  // Load and set SVG icon for helpBtn
+  loadSvgIcon(btnHelp, 'help', 'sidebar_tooltip_help');
 
   function updateCollapseBtn() {
     if (!collapseBtn || !sidebar || !mainContainer) return; 
@@ -53,14 +82,14 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
       collapseBtn.classList.add('rotate-icon');
       mainContainer.classList.add('sidebar-collapsed');
-      collapseBtn.setAttribute('title', '展开侧边栏');
+      collapseBtn.setAttribute('title', i18n.getMessage('sidebar_tooltip_expand'));
     } else { 
       if (!svgElement) { 
         collapseBtn.innerText = '<';
       }
       collapseBtn.classList.remove('rotate-icon');
       mainContainer.classList.remove('sidebar-collapsed');
-      collapseBtn.setAttribute('title', '收起侧边栏');
+      collapseBtn.setAttribute('title', i18n.getMessage('sidebar_tooltip_collapse'));
     }
   }
 
@@ -74,6 +103,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   // 页面切换逻辑
   function showPage(pageId) {
+    // Clean up previous page's styles before rendering the new one
+    const oldStyles = document.getElementById('config-page-styles');
+    if (oldStyles) {
+      oldStyles.remove();
+    }
+    
     console.log('Popup.js: Switching to page:', pageId);
     currentPageId = pageId;
     if (!mainContent) {
@@ -97,10 +132,25 @@ document.addEventListener('DOMContentLoaded', async function () {
   if(btnHistory) btnHistory.onclick = () => showPage('history');
   if(btnConfig) btnConfig.onclick = () => showPage('config');
 
+  // 语言切换按钮事件
+  if(btnLanguage) {
+    btnLanguage.onclick = async () => {
+      try {
+        const currentLang = i18n.getCurrentLanguage();
+        const newLang = currentLang === 'zh_CN' ? 'en' : 'zh_CN';
+        // 切换语言，这将触发 'languageChanged' 事件来更新UI
+        await i18n.switchLanguage(newLang);
+      } catch (error) {
+        console.error('Failed to switch language:', error);
+      }
+    };
+  }
+
   // 帮助按钮点击事件
   if(btnHelp) {
     btnHelp.onclick = () => {
-      const helpPageUrl = chrome.runtime.getURL('src/pages/help.html');
+      const currentLang = i18n.getCurrentLanguage();
+      const helpPageUrl = chrome.runtime.getURL(`src/pages/help.html?lang=${currentLang}`);
       chrome.windows.create({
         url: helpPageUrl,
         type: 'popup',
@@ -128,6 +178,28 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   });
 
+  // 监听语言切换事件
+  document.addEventListener('languageChanged', function(event) {
+    console.log('Language changed event received:', event.detail);
+    // 更新页面中的静态文本
+    i18n.updatePageTexts();
+    updateLanguageButton(); // 更新图标和提示
+    // 手动更新需要动态设置的 tooltip
+    if (btnHelp) {
+      btnHelp.setAttribute('title', i18n.getMessage('sidebar_tooltip_help'));
+    }
+    // 重新渲染当前页面以更新动态文本
+    if (currentPageId) {
+      showPage(currentPageId);
+    }
+    // 更新版本显示
+    displayAppVersion();
+  });
+
+  // 初始化页面文本
+  i18n.updatePageTexts();
+  updateLanguageButton(); // 初始化语言按钮
+
   // 默认显示计算页面
   if(mainContent && typeof renderCalcPage === 'function') showPage('calc');
 
@@ -138,14 +210,14 @@ document.addEventListener('DOMContentLoaded', async function () {
       const version = manifest.version;
       const versionDisplayElement = document.getElementById('version-display');
       if (versionDisplayElement) {
-        versionDisplayElement.textContent = `版本: ${version}`;
+        versionDisplayElement.textContent = i18n.getMessage('version_display', { version });
         versionDisplayElement.addEventListener('click', showChangelogModal);
       }
     } catch (error) {
       console.error('无法获取扩展版本号:', error);
       const versionDisplayElement = document.getElementById('version-display');
       if (versionDisplayElement) {
-        versionDisplayElement.textContent = '版本 N/A';
+        versionDisplayElement.textContent = i18n.getMessage('version_na');
       }
     }
   }
@@ -174,7 +246,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       };
 
       const modalTitle = document.createElement('h2');
-      modalTitle.textContent = '更新日志';
+      modalTitle.textContent = i18n.getMessage('changelog_title');
 
       const changelogList = document.createElement('div');
       changelogList.className = 'changelog-list';

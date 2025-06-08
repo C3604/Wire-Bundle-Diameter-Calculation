@@ -62,16 +62,16 @@ export function getEffectiveStandardWires() {
 
 // --- 模拟参数管理 ---
 
-// 默认模拟参数
+// 默认模拟参数（已与 ref/simulation.js 和 simulationConfig.json 对齐）
 const DEFAULT_SIMULATION_PARAMETERS = {
-    PI: 3.1415926,
+    PI: 3.1415926535,
     SNG_R2_TO_R1: 1.01,
     ACCELERATION: 1.7,
     WEIGHT_FACTOR: 2.0,
-    DAMPING: 0.99,
-    TIME_STEP: 1.0,
-    MAX_STEPS: 1000,
-    STOP_THRESHOLD: 1e-5
+    CONVERGENCE_THRESHOLD: 0.001,
+    MAX_ITERATIONS_RUNPACKING: 500,
+    MAX_ITERATIONS_PACKSTEP: 15,
+    CONTAINER_ADJUST_FACTOR: 0.05,
 };
 
 /**

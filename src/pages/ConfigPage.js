@@ -7,6 +7,7 @@ import {
     restoreDefaultSimulationParameters,
     getDefaultSimulationParameters
 } from '../logic/wireManager.js';
+import i18n from '../lib/i18n.js';
 
 // 全局变量，用于存储当前表格显示的数据和初始快照
 let currentDisplayData = [];
@@ -124,11 +125,11 @@ export function renderConfigPage(container) {
         <!-- 左侧：自定义标准导线配置区 -->
         <div class="group-config-table" id="group-config-table">
           <div class="group-title">
-            <span>⚙️ 自定义标准导线</span>
+            <div class="title-container"><span class="emoji">⚙️</span><span data-i18n="config_standard_wires_title">自定义标准导线</span></div>
             <div class="group-actions">
-              <button class="calc-table-btn" id="add-new-wire-btn-cfg">✨ 新增</button>
-              <button class="calc-table-btn" id="save-config-btn-cfg">💾 保存</button>
-              <button class="calc-table-btn btn-danger" id="restore-defaults-btn-cfg">🔄 恢复默认</button>
+              <button class="calc-table-btn" id="add-new-wire-btn-cfg"><span class="emoji">✨</span><span class="text" data-i18n="config_standard_wires_button_add_new">新增</span></button>
+              <button class="calc-table-btn" id="save-config-btn-cfg"><span class="emoji">💾</span><span class="text" data-i18n="config_standard_wires_button_save">保存</span></button>
+              <button class="calc-table-btn btn-danger" id="restore-defaults-btn-cfg"><span class="emoji">🔄</span><span class="text" data-i18n="config_standard_wires_button_restore_defaults">恢复默认</span></button>
             </div>
           </div>
           <div class="calc-table-content" id="config-table-content">
@@ -136,12 +137,12 @@ export function renderConfigPage(container) {
               <table id="main-data-table-config" class="main-data-table calc-table calc-table-fixed">
                 <thead>
                   <tr>
-                    <th>序号</th>
-                    <th>线规 (mm²)</th>
-                    <th>Thin</th>
-                    <th>Thick</th>
-                    <th>UltraThin</th>
-                    <th>操作</th>
+                    <th data-i18n="config_standard_wires_table_header_number">序号</th>
+                    <th data-i18n="config_standard_wires_table_header_gauge">线规 (mm²)</th>
+                    <th data-i18n="config_standard_wires_table_header_thin">Thin</th>
+                    <th data-i18n="config_standard_wires_table_header_thick">Thick</th>
+                    <th data-i18n="config_standard_wires_table_header_ultra_thin">UltraThin</th>
+                    <th data-i18n="config_standard_wires_table_header_operations">操作</th>
                   </tr>
                 </thead>
               </table>
@@ -150,7 +151,7 @@ export function renderConfigPage(container) {
               <table id="main-data-table-config" class="main-data-table calc-table calc-table-fixed">
                 <tbody>
                   <tr>
-                    <td colspan="6" style="text-align:center;padding:20px;">正在加载配置...</td>
+                    <td colspan="6" style="text-align:center;padding:20px;" data-i18n="config_standard_wires_table_loading">正在加载配置...</td>
                   </tr>
                 </tbody>
               </table>
@@ -163,20 +164,20 @@ export function renderConfigPage(container) {
         <!-- 右侧：模拟参数配置区域 -->
         <div class="group-simulation-params" id="layout-simulation-params">
           <div class="group-title">
-            <span>🎮 模拟参数配置</span>
+            <div class="title-container"><span class="emoji">🎮</span><span data-i18n="config_simulation_params_title">模拟参数配置</span></div>
             <div class="group-actions">
-              <button class="calc-table-btn" id="save-sim-params-btn">💾 保存</button>
-              <button class="calc-table-btn btn-danger" id="restore-sim-params-btn">🔄 恢复默认</button>
+              <button class="calc-table-btn" id="save-sim-params-btn"><span class="emoji">💾</span><span class="text" data-i18n="config_simulation_params_button_save">保存</span></button>
+              <button class="calc-table-btn btn-danger" id="restore-sim-params-btn"><span class="emoji">🔄</span><span class="text" data-i18n="config_simulation_params_button_restore_defaults">恢复默认</span></button>
             </div>
           </div>
           <div class="simulation-params-content">
             <!-- PI 参数配置 -->
             <div class="param-group">
               <div class="param-header">
-                <div class="param-title">π (PI)</div>
-                <button class="param-reset-btn" data-param="pi" title="恢复此参数为默认值">🔄</button>
+                <div class="param-title" data-i18n="config_simulation_params_params_pi_title">π (PI)</div>
+                <button class="param-reset-btn" data-param="pi" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
-              <div class="param-description">
+              <div class="param-description" data-i18n="config_simulation_params_params_pi_description">
                 圆周率常数，用于计算圆形面积和周长。通常使用3.1415926，除非有特殊需求，建议保持默认值。
               </div>
               <div class="drag-area-content">
@@ -190,10 +191,10 @@ export function renderConfigPage(container) {
             <!-- SNG_R2_TO_R1 参数配置 -->
             <div class="param-group">
               <div class="param-header">
-                <div class="param-title">容器半径比 (R2/R1)</div>
-                <button class="param-reset-btn" data-param="r2r1" title="恢复此参数为默认值">🔄</button>
+                <div class="param-title" data-i18n="config_simulation_params_params_r2r1_title">容器半径比 (R2/R1)</div>
+                <button class="param-reset-btn" data-param="r2r1" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
-              <div class="param-description">
+              <div class="param-description" data-i18n="config_simulation_params_params_r2r1_description">
                 外部容器半径与内部填充区域半径的比率。值越大，预留空间越多，但可能影响填充效率。默认值1.01通常能平衡空间利用和计算效率。
               </div>
               <div class="drag-area-content">
@@ -207,10 +208,10 @@ export function renderConfigPage(container) {
             <!-- ACCELERATION 参数配置 -->
             <div class="param-group">
               <div class="param-header">
-                <div class="param-title">加速系数</div>
-                <button class="param-reset-btn" data-param="accel" title="恢复此参数为默认值">🔄</button>
+                <div class="param-title" data-i18n="config_simulation_params_params_acceleration_title">加速系数</div>
+                <button class="param-reset-btn" data-param="accel" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
-              <div class="param-description">
+              <div class="param-description" data-i18n="config_simulation_params_params_acceleration_description">
                 圆形每步互相推开的强度系数。较大的值可以加快收敛速度，但可能导致不稳定；较小的值收敛更稳定但计算较慢。默认值1.7在速度和稳定性之间取得平衡。
               </div>
               <div class="drag-area-content">
@@ -224,10 +225,10 @@ export function renderConfigPage(container) {
             <!-- WEIGHT_FACTOR 参数配置 -->
             <div class="param-group">
               <div class="param-header">
-                <div class="param-title">质量因子</div>
-                <button class="param-reset-btn" data-param="weight" title="恢复此参数为默认值">🔄</button>
+                <div class="param-title" data-i18n="config_simulation_params_params_weight_factor_title">质量因子</div>
+                <button class="param-reset-btn" data-param="weight" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
-              <div class="param-description">
+              <div class="param-description" data-i18n="config_simulation_params_params_weight_factor_description">
                 质量计算的指数(r^WF)，影响大圆推小圆的程度。较大的值会使大直径导线的影响更显著，较小的值则使各导线影响更均匀。默认值2.0适用于大多数情况。
               </div>
               <div class="drag-area-content">
@@ -241,10 +242,10 @@ export function renderConfigPage(container) {
             <!-- CONVERGENCE_THRESHOLD 参数配置 -->
             <div class="param-group">
               <div class="param-header">
-                <div class="param-title">收敛阈值</div>
-                <button class="param-reset-btn" data-param="conv" title="恢复此参数为默认值">🔄</button>
+                <div class="param-title" data-i18n="config_simulation_params_params_convergence_threshold_title">收敛阈值</div>
+                <button class="param-reset-btn" data-param="conv" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
-              <div class="param-description">
+              <div class="param-description" data-i18n="config_simulation_params_params_convergence_threshold_description">
                 收敛判定阈值，表示平均穿透深度与半径的比值。值越小要求精度越高但计算时间更长，值越大计算更快但精度较低。默认值0.001在精度和速度间取得良好平衡。
               </div>
               <div class="drag-area-content">
@@ -258,10 +259,10 @@ export function renderConfigPage(container) {
             <!-- MAX_ITERATIONS_RUNPACKING 参数配置 -->
             <div class="param-group">
               <div class="param-header">
-                <div class="param-title">主循环最大迭代次数</div>
-                <button class="param-reset-btn" data-param="max-iter-run" title="恢复此参数为默认值">🔄</button>
+                <div class="param-title" data-i18n="config_simulation_params_params_max_iterations_run_title">主循环最大迭代次数</div>
+                <button class="param-reset-btn" data-param="max-iter-run" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
-              <div class="param-description">
+              <div class="param-description" data-i18n="config_simulation_params_params_max_iterations_run_description">
                 主填充循环的安全中断迭代次数。如果超过此次数仍未收敛，将终止计算。较大的值可以处理更复杂的情况，但可能增加计算时间。默认值500适用于大多数情况。
               </div>
               <div class="drag-area-content">
@@ -275,10 +276,10 @@ export function renderConfigPage(container) {
             <!-- MAX_ITERATIONS_PACKSTEP 参数配置 -->
             <div class="param-group">
               <div class="param-header">
-                <div class="param-title">单步最大迭代次数</div>
-                <button class="param-reset-btn" data-param="max-iter-step" title="恢复此参数为默认值">🔄</button>
+                <div class="param-title" data-i18n="config_simulation_params_params_max_iterations_step_title">单步最大迭代次数</div>
+                <button class="param-reset-btn" data-param="max-iter-step" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
-              <div class="param-description">
+              <div class="param-description" data-i18n="config_simulation_params_params_max_iterations_step_description">
                 每个主循环步骤中，在调整容器大小之前的最大迭代次数。较大的值可以提高每步的精度，但会增加计算时间。默认值15通常能满足精度要求。
               </div>
               <div class="drag-area-content">
@@ -292,10 +293,10 @@ export function renderConfigPage(container) {
             <!-- CONTAINER_ADJUST_FACTOR 参数配置 -->
             <div class="param-group">
               <div class="param-header">
-                <div class="param-title">容器调整系数</div>
-                <button class="param-reset-btn" data-param="container-adjust" title="恢复此参数为默认值">🔄</button>
+                <div class="param-title" data-i18n="config_simulation_params_params_container_adjust_title">容器调整系数</div>
+                <button class="param-reset-btn" data-param="container-adjust" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
-              <div class="param-description">
+              <div class="param-description" data-i18n="config_simulation_params_params_container_adjust_description">
                 根据穿透情况调整容器大小的幅度。较大的值调整更激进可能导致不稳定，较小的值调整更平缓但收敛较慢。默认值0.05提供了稳定性和收敛速度的良好平衡。
               </div>
               <div class="drag-area-content">
@@ -313,6 +314,7 @@ export function renderConfigPage(container) {
 
   // 更新样式
   const styleSheet = document.createElement('style');
+  styleSheet.id = 'config-page-styles';
   styleSheet.textContent = `
     .page-config {
       display: flex;
@@ -350,15 +352,13 @@ export function renderConfigPage(container) {
       margin-bottom: 0;
       padding: 16px 18px;
       border-bottom: none;
-      background: #F8F9FA;
+      background: #FFFFFF;
       border-radius: 8px;
-      height: 100%;
       display: flex;
       flex-direction: column;
     }
 
     .calc-table-content {
-      flex: 1;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -366,7 +366,7 @@ export function renderConfigPage(container) {
     }
 
     #actual-table-display-area {
-      flex: 1;
+      max-height: 750px;
       overflow-y: auto;
       margin-top: -1px;
       background: #fff;
@@ -375,7 +375,6 @@ export function renderConfigPage(container) {
     }
 
     .simulation-params-content {
-      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -384,6 +383,7 @@ export function renderConfigPage(container) {
       background: #fff;
       border: 1px solid #e0e0e0;
       border-radius: 6px;
+      max-height: 800px;
     }
 
     .group-title {
@@ -630,7 +630,7 @@ export function renderConfigPage(container) {
       td.colSpan = 6;
       td.style.textAlign = 'center';
       td.style.padding = '20px';
-      td.textContent = '暂无配置数据';
+      td.textContent = i18n.getMessage('config_standard_wires_table_no_data');
       tr.appendChild(td);
       tableBody.appendChild(tr);
       return;
@@ -710,7 +710,7 @@ export function renderConfigPage(container) {
       deleteBtn.className = 'calc-table-btn btn-danger btn-small'; 
       deleteBtn.dataset.index = index;
       deleteBtn.addEventListener('click', handleDeleteRow);
-      deleteBtn.title = "删除此行"; 
+      deleteBtn.title = i18n.getMessage('config_standard_wires_table_delete_row'); 
       actionTd.appendChild(deleteBtn);
       tableBody.appendChild(tr);
     });
@@ -859,7 +859,7 @@ export function renderConfigPage(container) {
 
     // 4. 在过滤后检查重复的线规值
     if (duplicateGaugeValues.size > 0) {
-         alert('错误：检测到重复的线规值。请修正高亮的输入框后再保存。');
+         alert(i18n.getMessage('config_standard_wires_message_duplicate_gauge_error'));
          return; // 终止保存
     }
 
@@ -870,10 +870,10 @@ export function renderConfigPage(container) {
     );
 
     if (currentDisplayData.length === 0 && hadPotentiallyValidGaugesInput) {
-        if (confirm("所有之前输入的线规均为空或无效，已被移除。保存后列表将为空。是否继续？")) {
+        if (confirm(i18n.getMessage('config_standard_wires_message_confirm_save_empty'))) {
             // 用户确认保存空列表，currentDisplayData 已为空，后续逻辑将保存空数组
         } else {
-            alert("保存操作已取消。您的输入(包括无效行)已被保留供编辑。");
+            alert(i18n.getMessage('config_standard_wires_message_save_cancelled'));
             // 恢复原始数据，以便用户可以编辑被过滤掉的行
             currentDisplayData = originalDataBeforeFiltering;
             updateDuplicateGaugeState(); // 基于原始数据重新检查重复状态
@@ -898,7 +898,7 @@ export function renderConfigPage(container) {
             if (odVal !== null && String(odVal).trim() !== '') { // 如果OD值不为空
                 let odNum = parseFloat(String(odVal));
                 if (isNaN(odNum) || odNum < 0) {
-                    alert(`错误：序号 ${displayIndex} (线规 ${wire.gauge}) 的 ${type} 外径值无效或为负数。`);
+                    alert(i18n.getMessage('config_standard_wires_message_invalid_od_error', {index: displayIndex, gauge: wire.gauge, type: type}));
                     isValid = false;
                 } else {
                     wire[type] = parseFloat(odNum.toFixed(2)); // 格式化有效的OD值
@@ -922,7 +922,7 @@ export function renderConfigPage(container) {
     for (const wire of dataToSave) {
         const gaugeKey = String(wire.gauge).trim();
         if (finalGaugeSet.has(gaugeKey)) {
-             alert(`内部错误或并发修改：线规 ${wire.gauge} 在最终准备保存的数据中仍存在重复。请刷新页面或重试。`);
+             alert(i18n.getMessage('config_standard_wires_message_internal_error', {gauge: wire.gauge}));
              isValid = false;
              return; // 终止保存
         }
@@ -939,17 +939,17 @@ export function renderConfigPage(container) {
         localStorage.setItem('userDefinedStandardWires', JSON.stringify(getUserCustomWires()));
         currentDisplayData = deepClone(getUserCustomWires()); // 保存后只显示自定义内容
         initialDataSnapshot = deepClone(currentDisplayData);
-        alert('配置已成功保存！');
+        alert(i18n.getMessage('config_standard_wires_message_saved'));
         updateDuplicateGaugeState();
         renderTable();
     } catch (error) {
         console.error('保存配置到localStorage失败:', error);
-        alert('保存配置失败，请检查浏览器控制台。\n' + error.message);
+        alert(i18n.getMessage('config_standard_wires_message_save_fail', {error: error.message}));
     }
   });
 
   restoreDefaultsBtn.addEventListener('click', () => {
-    if (confirm('您确定要恢复所有标准导线参数到出厂默认设置吗？所有自定义导线参数（包括已保存的）都将丢失。')) {
+    if (confirm(i18n.getMessage('config_standard_wires_message_confirm_restore'))) {
         try {
             localStorage.removeItem('userDefinedStandardWires');
             currentDisplayData = [];
@@ -958,7 +958,7 @@ export function renderConfigPage(container) {
             renderTable();
         } catch (error) {
             console.error('恢复默认配置失败:', error);
-            alert('恢复默认配置失败，请检查浏览器控制台。\n' + error.message);
+            alert(i18n.getMessage('config_standard_wires_message_restore_fail', {error: error.message}));
         }
     }
   });
@@ -968,6 +968,12 @@ export function renderConfigPage(container) {
 
   // 加载初始数据
   loadSimulationParams();
+  
+  // 重新附加所有事件监听器
+  attachEventListenersToTable();
+  
+  // 更新国际化文本
+  i18n.updatePageTexts();
 }
 
 // 渲染表格
@@ -982,7 +988,7 @@ function renderTable() {
     td.colSpan = 6;
     td.style.textAlign = 'center';
     td.style.padding = '20px';
-    td.textContent = '暂无配置数据';
+    td.textContent = i18n.getMessage('config_standard_wires_table_no_data');
     tr.appendChild(td);
     tableBody.appendChild(tr);
     return;
@@ -1062,7 +1068,7 @@ function renderTable() {
     deleteBtn.className = 'calc-table-btn btn-danger btn-small'; 
     deleteBtn.dataset.index = index;
     deleteBtn.addEventListener('click', handleDeleteRow);
-    deleteBtn.title = "删除此行"; 
+    deleteBtn.title = i18n.getMessage('config_standard_wires_table_delete_row'); 
     actionTd.appendChild(deleteBtn);
     tableBody.appendChild(tr);
   });
@@ -1079,66 +1085,67 @@ function renderTable() {
 
 // --- 模拟参数区逻辑 ---
 
+// UI元素名到逻辑参数名的映射
+const PARAM_MAPPING = {
+  'pi': 'PI',
+  'r2r1': 'SNG_R2_TO_R1',
+  'accel': 'ACCELERATION',
+  'weight': 'WEIGHT_FACTOR',
+  'conv': 'STOP_THRESHOLD',
+  'max-iter-run': 'MAX_STEPS',
+  'max-iter-step': 'MAX_ITER_STEP',
+  'container-adjust': 'CONTAINER_ADJUST_FACTOR'
+};
+
 // 加载当前模拟参数并更新UI
 function loadSimulationParams() {
     const params = getSimulationParameters();
     
-    // PI
-    document.getElementById('pi-range').value = params.PI;
-    document.getElementById('pi-input').value = params.PI;
+    for (const [uiName, logicName] of Object.entries(PARAM_MAPPING)) {
+        const rangeEl = document.getElementById(`${uiName}-range`);
+        const inputEl = document.getElementById(`${uiName}-input`);
+        const value = params[logicName];
 
-    // SNG_R2_TO_R1
-    document.getElementById('r2r1-range').value = params.SNG_R2_TO_R1;
-    document.getElementById('r2r1-input').value = params.SNG_R2_TO_R1;
-
-    // ACCELERATION
-    document.getElementById('accel-range').value = params.ACCELERATION;
-    document.getElementById('accel-input').value = params.ACCELERATION;
-
-    // WEIGHT_FACTOR
-    document.getElementById('weight-range').value = params.WEIGHT_FACTOR;
-    document.getElementById('weight-input').value = params.WEIGHT_FACTOR;
-
-    // DAMPING
-    document.getElementById('damping-range').value = params.DAMPING;
-    document.getElementById('damping-input').value = params.DAMPING;
-
-    // TIME_STEP
-    document.getElementById('timestep-range').value = params.TIME_STEP;
-    document.getElementById('timestep-input').value = params.TIME_STEP;
-
-    // MAX_STEPS
-    document.getElementById('maxsteps-range').value = params.MAX_STEPS;
-    document.getElementById('maxsteps-input').value = params.MAX_STEPS;
-
-    // STOP_THRESHOLD
-    document.getElementById('stopthresh-range').value = params.STOP_THRESHOLD;
-    document.getElementById('stopthresh-input').value = params.STOP_THRESHOLD;
+        if (value !== undefined) {
+            if (rangeEl) {
+                rangeEl.value = value;
+            }
+            if (inputEl) {
+                inputEl.value = value;
+            }
+        }
+    }
 }
 
 
 // 保存当前模拟参数
 function saveSimulationParams() {
-    const paramsToSave = {
-        PI: parseFloat(document.getElementById('pi-input').value),
-        SNG_R2_TO_R1: parseFloat(document.getElementById('r2r1-input').value),
-        ACCELERATION: parseFloat(document.getElementById('accel-input').value),
-        WEIGHT_FACTOR: parseFloat(document.getElementById('weight-input').value),
-        DAMPING: parseFloat(document.getElementById('damping-input').value),
-        TIME_STEP: parseFloat(document.getElementById('timestep-input').value),
-        MAX_STEPS: parseInt(document.getElementById('maxsteps-input').value, 10),
-        STOP_THRESHOLD: parseFloat(document.getElementById('stopthresh-input').value)
-    };
+    const paramsToSave = getSimulationParameters(); // 先获取现有所有参数，以保留那些不在UI上的参数
+
+    for (const [uiName, logicName] of Object.entries(PARAM_MAPPING)) {
+        const inputEl = document.getElementById(`${uiName}-input`);
+        if (inputEl) {
+            const value = parseFloat(inputEl.value);
+            if (!isNaN(value)) {
+                // MAX_STEPS 和 MAX_ITER_STEP 需要是整数
+                if (logicName === 'MAX_STEPS' || logicName === 'MAX_ITER_STEP') {
+                    paramsToSave[logicName] = parseInt(value, 10);
+                } else {
+                    paramsToSave[logicName] = value;
+                }
+            }
+        }
+    }
     saveSimulationParameters(paramsToSave);
-    alert('模拟参数已保存！');
+    alert(i18n.getMessage('config_simulation_params_message_saved'));
 }
 
 // 恢复默认模拟参数
 function restoreDefaultParams() {
-    if (confirm('确定要将所有模拟参数恢复为默认设置吗？此操作不可撤销。')) {
+    if (confirm(i18n.getMessage('config_simulation_params_message_confirm_restore'))) {
         restoreDefaultSimulationParameters();
         loadSimulationParams(); // 重新加载UI以显示默认值
-        alert('模拟参数已恢复为默认值！');
+        alert(i18n.getMessage('config_simulation_params_message_restored'));
     }
 }
 

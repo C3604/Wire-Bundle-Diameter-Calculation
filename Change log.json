@@ -1,8 +1,9 @@
 {
     "versions": [
         {
-            "version": "1.2.0.6",
+            "version": "1.0.2.6",
             "changes": [
+                "新增：增加页面中英双语支持。",
                 "新增：支持Firefox浏览器，实现跨浏览器兼容。",
                 "新增：构建脚本build.bat，支持一键构建不同浏览器版本。",
                 "新增：浏览器API兼容层，统一Chrome和Firefox的API调用。",

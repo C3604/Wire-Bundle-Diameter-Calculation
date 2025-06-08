@@ -3,24 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1600, initial-scale=1.0">
-  <title>线束直径计算工具</title>
+  <title data-i18n="appTitle">线束直径计算工具</title>
   <link rel="stylesheet" href="src/styles/main.css">
 </head>
 <body>
   <div class="main-container">
     <aside class="sidebar" id="sidebar">
-      <button id="btn-calc"><span class="emoji">🧮</span><span class="text">计算</span></button>
-      <button id="btn-history"><span class="emoji">📜</span><span class="text">历史</span></button>
-      <button id="btn-config"><span class="emoji">⚙️</span><span class="text">配置</span></button>
-      <button id="btn-help" title="帮助文档">
-        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="help-icon-svg">
-          <path d="M568.944 494.933c0-17.067-5.689-28.444-17.067-34.133-11.378-11.378-22.756-17.067-39.822-17.067s-28.444 5.689-39.822 17.067c-11.378 11.378-17.067 22.756-17.067 34.133v244.622c0 17.067 5.689 28.444 17.067 34.133 11.378 11.378 22.756 17.067 39.822 17.067s28.444-5.689 39.822-17.067 17.067-22.756 17.067-34.133V494.933z m-56.888-250.311c-17.067 0-34.133 5.689-45.511 17.067-17.067 11.378-22.756 28.444-22.756 45.511s5.689 34.133 17.067 45.511 28.444 17.067 45.511 17.067 34.133-5.689 45.511-17.067 17.067-28.444 17.067-45.511-5.689-34.133-17.067-45.511c-5.689-11.378-22.756-17.067-39.822-17.067z m0 739.556c-62.578 0-125.156-11.378-182.044-34.133s-108.089-56.889-147.911-102.4c-45.511-45.511-73.956-91.022-102.4-147.911-22.756-56.889-34.133-119.467-34.133-182.044s11.378-125.156 34.133-182.044 56.889-108.089 102.4-147.911c45.511-45.511 91.022-73.956 147.911-102.4 56.889-22.756 119.467-34.133 182.044-34.133S637.212 62.58 694.1 85.335s108.089 56.889 147.911 102.4c45.511 45.511 73.956 91.022 102.4 147.911 22.756 56.889 34.133 119.467 34.133 182.044s-11.378 125.156-34.133 182.044-56.889 108.089-102.4 147.911C796.5 893.156 750.989 921.601 694.1 950.045c-56.889 22.756-119.467 34.133-182.044 34.133z"></path>
-        </svg>
-      </button>
-      <div id="version-display" class="version-info"></div>
-    </aside>
+      <button id="btn-calc"><span class="emoji">🧮</span><span class="text" data-i18n="sidebar_button_calc">计算</span></button>
+      <button id="btn-history"><span class="emoji">📜</span><span class="text" data-i18n="sidebar_button_history">历史</span></button>
+      <button id="btn-config"><span class="emoji">⚙️</span><span class="text" data-i18n="sidebar_button_config">配置</span></button>
+      <button id="btn-help" title="帮助文档"></button>
+      <button id="btn-language" class="language-switcher" title="语言切换"></button>
+        <div id="version-display" class="version-info"></div>
+      </aside>
     <div class="sidebar-divider">
-      <button class="mini-collapse-btn" id="collapseBtn" title="收起/展开侧边栏"><</button>
+      <button class="mini-collapse-btn" id="collapseBtn" title="收起/展开侧边栏"></button>
     </div>
     <section class="content">
       <div id="main-content"></div>
