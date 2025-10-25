@@ -1,6 +1,6 @@
 # 线束直径计算工具 (Wire Bundle Diameter Calculator)
 
-[![Edge Add-on](https://img.shields.io/badge/Edge%20Add--on-v1.2.0.7-blue)](https://microsoftedge.microsoft.com/addons/detail/%E7%BA%BF%E6%9D%9F%E7%9B%B4%E5%BE%84%E8%AE%A1%E7%AE%97%E5%B7%A5%E5%85%B7/dcinhgdofeolfogjefdocphbnmdicopj)
+[![Edge Add-on](https://img.shields.io/badge/Edge%20Add--on-v1.2.0.8-blue)](https://microsoftedge.microsoft.com/addons/detail/%E7%BA%BF%E6%9D%9F%E7%9B%B4%E5%BE%84%E8%AE%A1%E7%AE%97%E5%B7%A5%E5%85%B7/dcinhgdofeolfogjefdocphbnmdicopj)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## 项目简介
