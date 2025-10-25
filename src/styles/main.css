@@ -1,12 +1,12 @@
-/* 主样式文件（基于 Adobe Color Trends UI/UX 灵感） */
+﻿/* 涓绘牱寮忔枃浠讹紙鍩轰簬 Adobe Color Trends UI/UX 鐏垫劅锛?*/
 
 body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  background: #F8F9FA; /* 背景浅灰 */
+  background: #F8F9FA; /* 鑳屾櫙娴呯伆 */
   min-height: 100vh;
-  color: #495057; /* 文字深灰 */
+  color: #495057; /* 鏂囧瓧娣辩伆 */
 }
 
 .main-container {
@@ -17,7 +17,7 @@ body {
 
 .sidebar {
   width: 220px;
-  background: #FFFFFF; /* 背景白 */
+  background: #FFFFFF; /* 鑳屾櫙鐧?*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,11 +87,11 @@ div.sidebar-divider > #collapseBtn svg {
 .sidebar button {
   width: 170px;
   height: 48px;
-  margin-bottom: 20px; /* 调整间距 */
+  margin-bottom: 20px; /* 璋冩暣闂磋窛 */
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: #495057; /* 文字深灰 */
+  color: #495057; /* 鏂囧瓧娣辩伆 */
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 1px;
@@ -105,8 +105,8 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 .sidebar button.active {
-  background: #EBF4FF; /* 浅蓝背景 (主色蓝的浅色变体) */
-  color: #3A86FF; /* 主色蓝 */
+  background: #EBF4FF; /* 娴呰摑鑳屾櫙 (涓昏壊钃濈殑娴呰壊鍙樹綋) */
+  color: #3A86FF; /* 涓昏壊钃?*/
   font-weight: 600;
 }
 
@@ -132,8 +132,8 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 .sidebar button:not(.active):hover {
-  background: #F8F9FA; /* 背景浅灰 */
-  color: #3A86FF; /* 主色蓝 */
+  background: #F8F9FA; /* 鑳屾櫙娴呯伆 */
+  color: #3A86FF; /* 涓昏壊钃?*/
 }
 
 .content {
@@ -143,23 +143,23 @@ div.sidebar-divider > #collapseBtn svg {
   padding: 24px 32px;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #F8F9FA; /* 背景浅灰 */
+  background: #F8F9FA; /* 鑳屾櫙娴呯伆 */
   position: relative; /* Establish a stacking context */
   z-index: 1; /* Lower than sidebar's z-index */
 }
 
-/* 移除旧的面板样式，这些应由具体页面控制 */
+/* 绉婚櫎鏃х殑闈㈡澘鏍峰紡锛岃繖浜涘簲鐢卞叿浣撻〉闈㈡帶鍒?*/
 /* #input-panel, #output-panel, #visualization { ... } */
 
 .sidebar-divider {
   width: 1px;
-  background: #CED4DA; /* 边框灰 */
+  background: #CED4DA; /* 杈规鐏?*/
   cursor: col-resize;
   position: relative;
   z-index: 22; /* Increased z-index to be above sidebar (20) */
 }
 
-/* 移除旧的 mini-collapse-btn */
+/* 绉婚櫎鏃х殑 mini-collapse-btn */
 /* .mini-collapse-btn { ... } */
 
 /* Bottom Action Bar */
@@ -202,8 +202,8 @@ div.sidebar-divider > #collapseBtn svg {
   }
 }
 
-/* --- 移除 main.css 中 CalcPage 相关样式 --- */
-/* 这些样式已迁移到 CalcPage.css */
+/* --- 绉婚櫎 main.css 涓?CalcPage 鐩稿叧鏍峰紡 --- */
+/* 杩欎簺鏍峰紡宸茶縼绉诲埌 CalcPage.css */
 /* .calc-layout { ... } */
 /* .calc-left { ... } */
 /* .calc-list-group { ... } */
@@ -227,52 +227,52 @@ div.sidebar-divider > #collapseBtn svg {
 /* #tolerance-drag-area { ... } */
 /* #tolerance-range { ... } */
 
-/* 版本信息样式 */
+/* 鐗堟湰淇℃伅鏍峰紡 */
 .version-info {
-  /* position: absolute; */ /* 移除绝对定位 */
-  /* bottom: 15px; */       /* 移除 bottom 定位 */
+  /* position: absolute; */ /* 绉婚櫎缁濆瀹氫綅 */
+  /* bottom: 15px; */       /* 绉婚櫎 bottom 瀹氫綅 */
   /* left: 0; */
   /* right: 0; */
-  width: 100%; /* 使其宽度适应侧边栏，便于文本居中 */
+  width: 100%; /* 浣垮叾瀹藉害閫傚簲渚ц竟鏍忥紝渚夸簬鏂囨湰灞呬腑 */
   text-align: center;
   font-size: 12px;
-  color: #868E96; /* 与折叠按钮颜色一致，或使用较浅的灰色 */
-  padding: 0 10px;    /* 左右内边距，防止文字紧贴边缘 */
+  color: #868E96; /* 涓庢姌鍙犳寜閽鑹蹭竴鑷达紝鎴栦娇鐢ㄨ緝娴呯殑鐏拌壊 */
+  padding: 0 10px;    /* 宸﹀彸鍐呰竟璺濓紝闃叉鏂囧瓧绱ц创杈圭紭 */
   box-sizing: border-box;
-  white-space: nowrap; /* 防止文字换行 */
-  overflow: hidden;    /* 超出部分隐藏 */
-  text-overflow: ellipsis; /* 超出部分显示省略号 */
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* 过渡效果 */
+  white-space: nowrap; /* 闃叉鏂囧瓧鎹㈣ */
+  overflow: hidden;    /* 瓒呭嚭閮ㄥ垎闅愯棌 */
+  text-overflow: ellipsis; /* 瓒呭嚭閮ㄥ垎鏄剧ず鐪佺暐鍙?*/
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* 杩囨浮鏁堟灉 */
   opacity: 1;
   visibility: visible;
-  margin-bottom: 15px; /* 调整与侧边栏底部的间距 */
-  /* margin-top: 5px; */ /* 可选：如果希望版本信息与帮助按钮有明确的顶部间距，但通常由帮助按钮的 margin-bottom 控制 */
+  margin-bottom: 15px; /* 璋冩暣涓庝晶杈规爮搴曢儴鐨勯棿璺?*/
+  /* margin-top: 5px; */ /* 鍙€夛細濡傛灉甯屾湜鐗堟湰淇℃伅涓庡府鍔╂寜閽湁鏄庣‘鐨勯《閮ㄩ棿璺濓紝浣嗛€氬父鐢卞府鍔╂寜閽殑 margin-bottom 鎺у埗 */
 }
 
 .sidebar.collapsed .version-info {
-  opacity: 0;         /* 收起时完全透明 */
-  visibility: hidden; /* 收起时不可见且不参与布局 */
-  pointer-events: none; /* 避免在隐藏时仍可交互 */
+  opacity: 0;         /* 鏀惰捣鏃跺畬鍏ㄩ€忔槑 */
+  visibility: hidden; /* 鏀惰捣鏃朵笉鍙涓斾笉鍙備笌甯冨眬 */
+  pointer-events: none; /* 閬垮厤鍦ㄩ殣钘忔椂浠嶅彲浜や簰 */
 }
 
-/* 更新日志模态窗口样式 */
+/* 鏇存柊鏃ュ織妯℃€佺獥鍙ｆ牱寮?*/
 .changelog-modal-overlay {
-  position: fixed; /* 固定定位，覆盖整个视口 */
+  position: fixed; /* 鍥哄畾瀹氫綅锛岃鐩栨暣涓鍙?*/
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* 半透明黑色背景 */
+  background-color: rgba(0, 0, 0, 0.6); /* 鍗婇€忔槑榛戣壊鑳屾櫙 */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /*确保在最上层 */
+  z-index: 1000; /*纭繚鍦ㄦ渶涓婂眰 */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
-/* 当模态窗口被添加到DOM后，通过JS添加此类来触发显示动画 */
+/* 褰撴ā鎬佺獥鍙ｈ娣诲姞鍒癉OM鍚庯紝閫氳繃JS娣诲姞姝ょ被鏉ヨЕ鍙戞樉绀哄姩鐢?*/
 .changelog-modal-overlay.visible {
   opacity: 1;
   visibility: visible;
@@ -285,9 +285,9 @@ div.sidebar-divider > #collapseBtn svg {
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   width: 80%;
-  max-width: 600px; /* 最大宽度 */
-  max-height: 80vh; /* 最大高度，内容超出则滚动 */
-  overflow-y: auto; /* 内容超出时垂直滚动 */
+  max-width: 600px; /* 鏈€澶у搴?*/
+  max-height: 80vh; /* 鏈€澶ч珮搴︼紝鍐呭瓒呭嚭鍒欐粴鍔?*/
+  overflow-y: auto; /* 鍐呭瓒呭嚭鏃跺瀭鐩存粴鍔?*/
   position: relative;
   transform: scale(0.95);
   transition: transform 0.3s ease;
@@ -332,7 +332,7 @@ div.sidebar-divider > #collapseBtn svg {
 .changelog-version-entry {
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #E9ECEF; /* 分隔线 */
+  border-bottom: 1px solid #E9ECEF; /* 鍒嗛殧绾?*/
 }
 
 .changelog-version-entry:last-child {
@@ -350,7 +350,7 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 .changelog-version-entry ul {
-  list-style-type: disc; /* 使用实心圆点 */
+  list-style-type: disc; /* 浣跨敤瀹炲績鍦嗙偣 */
   padding-left: 25px;
   margin: 0;
   color: #6C757D;
@@ -362,52 +362,52 @@ div.sidebar-divider > #collapseBtn svg {
   margin-bottom: 6px;
 }
 
-/* 帮助按钮的弱化样式 */
+/* 甯姪鎸夐挳鐨勫急鍖栨牱寮?*/
 #btn-help {
   background-color: transparent;
   border: none;
-  color: #555; /* 比其他按钮文字颜色稍浅一些 */
-  padding: 0; /* 重置内边距，由SVG大小和按钮大小控制 */
-  margin-top: auto; /* 将按钮推向底部 */
-  margin-bottom: 8px; /* 与版本信息保持一些间距，略微调整 */
-  /* font-size: 1.1em; */ /* 移除 emoji 的字体大小控制 */
-  opacity: 0.75; /* 进一步弱化 */
+  color: #555; /* 姣斿叾浠栨寜閽枃瀛楅鑹茬◢娴呬竴浜?*/
+  padding: 0; /* 閲嶇疆鍐呰竟璺濓紝鐢盨VG澶у皬鍜屾寜閽ぇ灏忔帶鍒?*/
+  margin-top: auto; /* 灏嗘寜閽帹鍚戝簳閮?*/
+  margin-bottom: 8px; /* 涓庣増鏈俊鎭繚鎸佷竴浜涢棿璺濓紝鐣ュ井璋冩暣 */
+  /* font-size: 1.1em; */ /* 绉婚櫎 emoji 鐨勫瓧浣撳ぇ灏忔帶鍒?*/
+  opacity: 0.75; /* 杩涗竴姝ュ急鍖?*/
   cursor: pointer;
-  border-radius: 4px; /* 轻微圆角 */
-  width: 48px; /* 设置按钮宽度 */
-  height: 48px; /* 设置按钮高度 */
-  display: flex; /* 使用flex布局使SVG居中 */
-  align-items: center; /* 垂直居中SVG */
-  justify-content: center; /* 水平居中SVG */
-  /* text-align: center; */ /* display:flex 时不再需要 */
+  border-radius: 4px; /* 杞诲井鍦嗚 */
+  width: 48px; /* 璁剧疆鎸夐挳瀹藉害 */
+  height: 48px; /* 璁剧疆鎸夐挳楂樺害 */
+  display: flex; /* 浣跨敤flex甯冨眬浣縎VG灞呬腑 */
+  align-items: center; /* 鍨傜洿灞呬腑SVG */
+  justify-content: center; /* 姘村钩灞呬腑SVG */
+  /* text-align: center; */ /* display:flex 鏃朵笉鍐嶉渶瑕?*/
 }
 
-#btn-help svg { /* 直接为SVG元素设置大小 */
-  width: 28px; /* SVG图标的宽度 */
-  height: 28px; /* SVG图标的高度 */
+#btn-help svg { /* 鐩存帴涓篠VG鍏冪礌璁剧疆澶у皬 */
+  width: 28px; /* SVG鍥炬爣鐨勫搴?*/
+  height: 28px; /* SVG鍥炬爣鐨勯珮搴?*/
 }
 
 #btn-help:hover {
-  background-color: rgba(0, 0, 0, 0.05); /* 轻微的悬停效果 */
+  background-color: rgba(0, 0, 0, 0.05); /* 杞诲井鐨勬偓鍋滄晥鏋?*/
   opacity: 1;
 }
 
-/* 如果希望帮助按钮在侧边栏收起时也显示 emoji */
-.sidebar.collapsed #btn-help svg { /* SVG 在收起时的样式 */
-  /* display: inline; */ /* SVG 默认为 inline-block 或可由 flex 控制 */
-  width: 28px; /* 在收起状态下可以稍微大一点 */
+/* 濡傛灉甯屾湜甯姪鎸夐挳鍦ㄤ晶杈规爮鏀惰捣鏃朵篃鏄剧ず emoji */
+.sidebar.collapsed #btn-help svg { /* SVG 鍦ㄦ敹璧锋椂鐨勬牱寮?*/
+  /* display: inline; */ /* SVG 榛樿涓?inline-block 鎴栧彲鐢?flex 鎺у埗 */
+  width: 28px; /* 鍦ㄦ敹璧风姸鎬佷笅鍙互绋嶅井澶т竴鐐?*/
   height: 28px;
-  /* padding: 5px 0; */ /* 移除，按钮大小已固定 */
+  /* padding: 5px 0; */ /* 绉婚櫎锛屾寜閽ぇ灏忓凡鍥哄畾 */
 }
 
 .sidebar.collapsed #btn-help {
-  width: 36px; /* 调整收起时按钮的整体宽度 */
-  height: 36px; /* 调整收起时按钮的整体高度 */
-  /* padding: 8px 0; */ /* 移除，因为按钮使用固定宽高和flex居中 */
-  /* width: 100%; */ /* 不再占满宽度，而是固定大小 */
+  width: 36px; /* 璋冩暣鏀惰捣鏃舵寜閽殑鏁翠綋瀹藉害 */
+  height: 36px; /* 璋冩暣鏀惰捣鏃舵寜閽殑鏁翠綋楂樺害 */
+  /* padding: 8px 0; */ /* 绉婚櫎锛屽洜涓烘寜閽娇鐢ㄥ浐瀹氬楂樺拰flex灞呬腑 */
+  /* width: 100%; */ /* 涓嶅啀鍗犳弧瀹藉害锛岃€屾槸鍥哄畾澶у皬 */
 }
 
-/* 语言切换按钮样式 */
+/* 璇█鍒囨崲鎸夐挳鏍峰紡 */
 #btn-language {
   width: 48px;
   height: 48px;
@@ -441,48 +441,48 @@ div.sidebar-divider > #collapseBtn svg {
   height: 48px;
 }
 
-/* 从 src/styles/ConfigPage.css 导入的样式 */
+/* 浠?src/styles/ConfigPage.css 瀵煎叆鐨勬牱寮?*/
 /* --------------------------------------- */
 /* src/styles/ConfigPage.css */
 .config-page-layout {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* 各区块之间的间距 */
-  padding: 0; /* 修改：与 calc-layout 一致，依赖父级 .content 的 padding */
+  gap: 20px; /* 鍚勫尯鍧椾箣闂寸殑闂磋窛 */
+  padding: 0; /* 淇敼锛氫笌 calc-layout 涓€鑷达紝渚濊禆鐖剁骇 .content 鐨?padding */
 }
 
 .config-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* 在小屏幕上换行 */
-  gap: 10px; /* 标题和按钮组之间的间距 */
+  flex-wrap: wrap; /* 鍦ㄥ皬灞忓箷涓婃崲琛?*/
+  gap: 10px; /* 鏍囬鍜屾寜閽粍涔嬮棿鐨勯棿璺?*/
 }
 
 .config-title {
   margin: 0;
   font-size: 1.5em;
   color: #333;
-  font-weight: 600; /* 新增：与 history-title 统一 */
-  line-height: 1.4; /* 新增：与 history-title 统一 */
+  font-weight: 600; /* 鏂板锛氫笌 history-title 缁熶竴 */
+  line-height: 1.4; /* 鏂板锛氫笌 history-title 缁熶竴 */
 }
 
 .config-actions {
   display: flex;
-  justify-content: flex-end; /* 修改：使按钮组靠右 */
-  align-items: center; /* 新增：与 section-title 对齐 */
-  margin-bottom: 12px; /* 新增：与 section-title 对齐 */
-  gap: 10px; /* 重新显式声明 gap */
+  justify-content: flex-end; /* 淇敼锛氫娇鎸夐挳缁勯潬鍙?*/
+  align-items: center; /* 鏂板锛氫笌 section-title 瀵归綈 */
+  margin-bottom: 12px; /* 鏂板锛氫笌 section-title 瀵归綈 */
+  gap: 10px; /* 閲嶆柊鏄惧紡澹版槑 gap */
 }
 
 .config-table-container {
   overflow-x: auto;
   border-radius: 8px;
-  background: #F8F9FA; /* 修改：参考 calc-table-group */
-  padding: 16px 18px; /* 修改：参考 calc-table-group */
+  background: #F8F9FA; /* 淇敼锛氬弬鑰?calc-table-group */
+  padding: 16px 18px; /* 淇敼锛氬弬鑰?calc-table-group */
 }
 
-/* .config-table th, (这些将被 .calc-table th, td 统一)
+/* .config-table th, (杩欎簺灏嗚 .calc-table th, td 缁熶竴)
 .config-table td {
   border: 1px solid #e0e0e0;
   padding: 8px 10px; 
@@ -497,28 +497,27 @@ div.sidebar-divider > #collapseBtn svg {
   color: #444;
 }
 */
-/* 序号列和操作列的文本居中 - 保留并确保适用于 .calc-table.config-table */
+/* 搴忓彿鍒楀拰鎿嶄綔鍒楃殑鏂囨湰灞呬腑 - 淇濈暀骞剁‘淇濋€傜敤浜?.calc-table.config-table */
 .calc-table.config-table th:first-child, 
 .calc-table.config-table td:first-child, 
 .calc-table.config-table th:last-child,  
 .calc-table.config-table td:last-child {  
   text-align: center;
-  width: 60px; /* 明确指定序号和操作列的宽度 */
-  white-space: nowrap; /* 确保这些列不换行 */
+  width: 60px; /* 鏄庣‘鎸囧畾搴忓彿鍜屾搷浣滃垪鐨勫搴?*/
+  white-space: nowrap; /* 纭繚杩欎簺鍒椾笉鎹㈣ */
 }
 
 .config-table input.config-input[type="number"] {
-  width: 70px; /* 将输入框宽度调整为 70px */
+  width: 70px; /* 灏嗚緭鍏ユ瀹藉害璋冩暣涓?70px */
   padding: 6px 8px;
-  border: 1px solid #ccc; /* 默认边框 */
+  border: 1px solid #ccc; /* 榛樿杈规 */
   border-radius: 3px;
   box-sizing: border-box; 
-  text-align: center; /* 输入框文本居中 */
-  background-color: #fff; /* 默认背景色 */
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out; /* 添加过渡效果 */
-  appearance: textfield;           /* 标准写法，优先写在最前面 */
+  text-align: center; /* 杈撳叆妗嗘枃鏈眳涓?*/
+  background-color: #fff; /* 榛樿鑳屾櫙鑹?*/
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out; /* 娣诲姞杩囨浮鏁堟灉 */
+  appearance: textfield;           /* 鏍囧噯鍐欐硶锛屼紭鍏堝啓鍦ㄦ渶鍓嶉潰 */
   -webkit-appearance: textfield;   /* Chrome/Safari */
-  -moz-appearance: textfield;      /* Firefox */
 }
 
 .config-table input.config-input[type="number"]:focus {
@@ -527,33 +526,33 @@ div.sidebar-divider > #collapseBtn svg {
   box-shadow: 0 0 0 0.1rem rgba(0,123,255,.25);
 }
 
-/* 用于高亮错误输入框的样式 */
+/* 鐢ㄤ簬楂樹寒閿欒杈撳叆妗嗙殑鏍峰紡 */
 .config-table input.config-input.input-error {
-  border-color: red !important; /* 强制红色边框 */
-  background-color: #ffe0e0 !important; /* 淡红色背景底纹 */
-  box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.35) !important; /* 可选：更明显的红色阴影 */
-  color: #d8000c; /* 可选：将文字颜色也变深红，以确保对比度 */
+  border-color: red !important; /* 寮哄埗绾㈣壊杈规 */
+  background-color: #ffe0e0 !important; /* 娣＄孩鑹茶儗鏅簳绾?*/
+  box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.35) !important; /* 鍙€夛細鏇存槑鏄剧殑绾㈣壊闃村奖 */
+  color: #d8000c; /* 鍙€夛細灏嗘枃瀛楅鑹蹭篃鍙樻繁绾紝浠ョ‘淇濆姣斿害 */
 }
 
-/* 如果希望聚焦时的错误状态也保持错误样式，可以添加 */
+/* 濡傛灉甯屾湜鑱氱劍鏃剁殑閿欒鐘舵€佷篃淇濇寔閿欒鏍峰紡锛屽彲浠ユ坊鍔?*/
 .config-table input.config-input.input-error:focus {
   border-color: red !important; 
   background-color: #ffe0e0 !important; 
-  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important; /* 聚焦时阴影更明显一些 */
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important; /* 鑱氱劍鏃堕槾褰辨洿鏄庢樉涓€浜?*/
   color: #d8000c !important;
 }
 
-/* 小号删除按钮样式，如果全局 calc-table-btn btn-danger btn-small 不够具体 */
+/* 灏忓彿鍒犻櫎鎸夐挳鏍峰紡锛屽鏋滃叏灞€ calc-table-btn btn-danger btn-small 涓嶅鍏蜂綋 */
 .config-table .btn-small {
-    padding: 3px 6px; /* 进一步减小按钮内边距 */
-    font-size: 0.9em; /* 减小字体大小 */
-    line-height: 1.2; /* 调整行高以适应新的padding和font-size */
+    padding: 3px 6px; /* 杩涗竴姝ュ噺灏忔寜閽唴杈硅窛 */
+    font-size: 0.9em; /* 鍑忓皬瀛椾綋澶у皬 */
+    line-height: 1.2; /* 璋冩暣琛岄珮浠ラ€傚簲鏂扮殑padding鍜宖ont-size */
 }
 
 
-/* 从 src/styles/CalcPage.css 导入的样式 */
+/* 浠?src/styles/CalcPage.css 瀵煎叆鐨勬牱寮?*/
 /* ------------------------------------ */
-/* CalcPage 页面样式，抽取自原JS内嵌<style>标签 */
+/* CalcPage 椤甸潰鏍峰紡锛屾娊鍙栬嚜鍘烰S鍐呭祵<style>鏍囩 */
 .calc-layout {
   display: flex;
   gap: 24px;
@@ -588,14 +587,14 @@ div.sidebar-divider > #collapseBtn svg {
   padding: 16px 18px;
   border-bottom: none;
   background: #F8F9FA;
-  border-radius: 8px; /* 统一圆角 */
+  border-radius: 8px; /* 缁熶竴鍦嗚 */
 }
 .calc-table-btns {
   display: flex;
   gap: 8px;
 }
-/* .calc-table-btn 被定义在 HistoryPage.css 和 main.css (通用按钮) 中，这里注释掉以避免直接冲突 */
-/* 如果需要 CalcPage 特有的 calc-table-btn 样式，请取消注释并调整或确保其特异性更高 */
+/* .calc-table-btn 琚畾涔夊湪 HistoryPage.css 鍜?main.css (閫氱敤鎸夐挳) 涓紝杩欓噷娉ㄩ噴鎺変互閬垮厤鐩存帴鍐茬獊 */
+/* 濡傛灉闇€瑕?CalcPage 鐗规湁鐨?calc-table-btn 鏍峰紡锛岃鍙栨秷娉ㄩ噴骞惰皟鏁存垨纭繚鍏剁壒寮傛€ф洿楂?*/
 /*
 .calc-table-btn {
   padding: 4px 16px;
@@ -622,11 +621,11 @@ div.sidebar-divider > #collapseBtn svg {
   margin-bottom: 0;
 }
 .calc-table {
-  width: 100%; /* 默认让表格宽度占满其容器 */
+  width: 100%; /* 榛樿璁╄〃鏍煎搴﹀崰婊″叾瀹瑰櫒 */
   border-collapse: collapse;
   font-size: 14px;
   color: #495057;
-  /* table-layout: fixed; -- 移除全局 fixed，由具体表格按需设置 (如 .calc-table-fixed) */
+  /* table-layout: fixed; -- 绉婚櫎鍏ㄥ眬 fixed锛岀敱鍏蜂綋琛ㄦ牸鎸夐渶璁剧疆 (濡?.calc-table-fixed) */
 }
 .calc-table input, .calc-table select {
   width: 95%;
@@ -651,20 +650,20 @@ div.sidebar-divider > #collapseBtn svg {
 }
 .calc-table th, 
 .calc-table td {
-  padding: 8px 10px; /* 统一内边距 */
-  border: 1px solid #E0E0E0; /* 统一边框颜色 */
-  vertical-align: middle; /* 统一垂直居中 */
+  padding: 8px 10px; /* 缁熶竴鍐呰竟璺?*/
+  border: 1px solid #E0E0E0; /* 缁熶竴杈规棰滆壊 */
+  vertical-align: middle; /* 缁熶竴鍨傜洿灞呬腑 */
 }
 .calc-table th {
   background: #F8F9FA;
   font-weight: 600;
   color: #495057;
-  text-align: center; /* 表头文字默认居中 */
-  white-space: nowrap; /* 表头默认不换行 */
+  text-align: center; /* 琛ㄥご鏂囧瓧榛樿灞呬腑 */
+  white-space: nowrap; /* 琛ㄥご榛樿涓嶆崲琛?*/
 }
 .calc-table td {
-  text-align: center; /* 表格数据默认居中 (原为 left) */
-  /* white-space: normal; -- 默认允许换行，特定列可设为nowrap */
+  text-align: center; /* 琛ㄦ牸鏁版嵁榛樿灞呬腑 (鍘熶负 left) */
+  /* white-space: normal; -- 榛樿鍏佽鎹㈣锛岀壒瀹氬垪鍙涓簄owrap */
 }
 .calc-drag-area {
   margin-top: 8px;
@@ -675,30 +674,30 @@ div.sidebar-divider > #collapseBtn svg {
   width: 100%;
   height: auto;
 }
-/* 列表区1 (标准导线) 列宽调整 */
-#table1-header-table th:nth-child(1), #table1-body-table td:nth-child(1) { min-width: 48px; width: 8%; } /* 序号 */
-#table1-header-table th:nth-child(2), #table1-body-table td:nth-child(2) { min-width: 80px; width: 20%; } /* 线径 */
-#table1-header-table th:nth-child(3), #table1-body-table td:nth-child(3) { min-width: 80px; width: 20%; } /* 类型 */
-#table1-header-table th:nth-child(4), #table1-body-table td:nth-child(4) { min-width: 70px; width: 12%; } /* 直径(mm) - 减小 */
-#table1-header-table th:nth-child(5), #table1-body-table td:nth-child(5) { min-width: 70px; width: 20%; } /* 数量 */
-#table1-header-table th:nth-child(6), #table1-body-table td:nth-child(6) { min-width: 50px; width: 10%; } /* 删除 - 减小 */
+/* 鍒楄〃鍖? (鏍囧噯瀵肩嚎) 鍒楀璋冩暣 */
+#table1-header-table th:nth-child(1), #table1-body-table td:nth-child(1) { min-width: 48px; width: 8%; } /* 搴忓彿 */
+#table1-header-table th:nth-child(2), #table1-body-table td:nth-child(2) { min-width: 80px; width: 20%; } /* 绾垮緞 */
+#table1-header-table th:nth-child(3), #table1-body-table td:nth-child(3) { min-width: 80px; width: 20%; } /* 绫诲瀷 */
+#table1-header-table th:nth-child(4), #table1-body-table td:nth-child(4) { min-width: 70px; width: 12%; } /* 鐩村緞(mm) - 鍑忓皬 */
+#table1-header-table th:nth-child(5), #table1-body-table td:nth-child(5) { min-width: 70px; width: 20%; } /* 鏁伴噺 */
+#table1-header-table th:nth-child(6), #table1-body-table td:nth-child(6) { min-width: 50px; width: 10%; } /* 鍒犻櫎 - 鍑忓皬 */
 
-/* 列表区2 (特殊导线) 列宽调整 */
-#table2-header-table th:nth-child(1), #table2-body-table td:nth-child(1) { min-width: 48px; width: 15%; } /* 序号 */
-#table2-header-table th:nth-child(2), #table2-body-table td:nth-child(2) { min-width: 80px; width: 40%; } /* 直径(mm) */
-#table2-header-table th:nth-child(3), #table2-body-table td:nth-child(3) { min-width: 70px; width: 30%; } /* 数量 */
-#table2-header-table th:nth-child(4), #table2-body-table td:nth-child(4) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
+/* 鍒楄〃鍖? (鐗规畩瀵肩嚎) 鍒楀璋冩暣 */
+#table2-header-table th:nth-child(1), #table2-body-table td:nth-child(1) { min-width: 48px; width: 15%; } /* 搴忓彿 */
+#table2-header-table th:nth-child(2), #table2-body-table td:nth-child(2) { min-width: 80px; width: 40%; } /* 鐩村緞(mm) */
+#table2-header-table th:nth-child(3), #table2-body-table td:nth-child(3) { min-width: 70px; width: 30%; } /* 鏁伴噺 */
+#table2-header-table th:nth-child(4), #table2-body-table td:nth-child(4) { min-width: 50px; width: 15%; } /* 鍒犻櫎 - 鍑忓皬 */
 
-/* 列表区3 (包裹物) 列宽调整 */
-#table3-header-table th:nth-child(1), #table3-body-table td:nth-child(1) { min-width: 48px; width: 30%; } /* 序号 */
-#table3-header-table th:nth-child(2), #table3-body-table td:nth-child(2) { min-width: 80px; width: 55%; } /* 厚度(mm) */
-#table3-header-table th:nth-child(3), #table3-body-table td:nth-child(3) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
+/* 鍒楄〃鍖? (鍖呰９鐗? 鍒楀璋冩暣 */
+#table3-header-table th:nth-child(1), #table3-body-table td:nth-child(1) { min-width: 48px; width: 30%; } /* 搴忓彿 */
+#table3-header-table th:nth-child(2), #table3-body-table td:nth-child(2) { min-width: 80px; width: 55%; } /* 鍘氬害(mm) */
+#table3-header-table th:nth-child(3), #table3-body-table td:nth-child(3) { min-width: 50px; width: 15%; } /* 鍒犻櫎 - 鍑忓皬 */
 
 #table1-header-wrapper,
 #table2-header-wrapper,
 #table3-header-wrapper {
-  padding-right: 15px; /* 常见滚动条宽度，根据需要调整 */
-  box-sizing: border-box; /* 确保内边距包含在元素总宽度内 */
+  padding-right: 15px; /* 甯歌婊氬姩鏉″搴︼紝鏍规嵁闇€瑕佽皟鏁?*/
+  box-sizing: border-box; /* 纭繚鍐呰竟璺濆寘鍚湪鍏冪礌鎬诲搴﹀唴 */
 }
 .calc-table td {
   vertical-align: middle;
@@ -831,9 +830,9 @@ div.sidebar-divider > #collapseBtn svg {
   border-color: #DC3545;
 }
 .btn-reset-action:hover {
-  background-color: #DC3545; /* 修改：背景变为危险红色 */
-  border-color: #DC3545;   /* 修改：边框保持危险红色 (之前为 #C82333) */
-  color: #FFFFFF;         /* 修改：文字变为白色 (之前为 #C82333) */
+  background-color: #DC3545; /* 淇敼锛氳儗鏅彉涓哄嵄闄╃孩鑹?*/
+  border-color: #DC3545;   /* 淇敼锛氳竟妗嗕繚鎸佸嵄闄╃孩鑹?(涔嬪墠涓?#C82333) */
+  color: #FFFFFF;         /* 淇敼锛氭枃瀛楀彉涓虹櫧鑹?(涔嬪墠涓?#C82333) */
 }
 .btn-calculate-action {
   background-color: #FFFFFF; 
@@ -883,12 +882,12 @@ div.sidebar-divider > #collapseBtn svg {
   color: #343A40;
 }
 .title-container .emoji {
-  margin-right: 8px; /* 在 emoji 和标题文本之间添加一些间距 */
+  margin-right: 8px; /* 鍦?emoji 鍜屾爣棰樻枃鏈箣闂存坊鍔犱竴浜涢棿璺?*/
   font-size: 20px;
 }
 .group-actions {
   display: flex;
-  gap: 8px; /* 在按钮之间添加一些间距 */
+  gap: 8px; /* 鍦ㄦ寜閽箣闂存坊鍔犱竴浜涢棿璺?*/
 }
 .chart-container-wrapper {
   background: #FFFFFF; 
@@ -1079,67 +1078,67 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 
-/* 从 src/styles/HistoryPage.CSS 导入的样式 */
+/* 浠?src/styles/HistoryPage.CSS 瀵煎叆鐨勬牱寮?*/
 /* ---------------------------------------- */
-/* HistoryPage 页面样式 - 全新版本 */
+/* HistoryPage 椤甸潰鏍峰紡 - 鍏ㄦ柊鐗堟湰 */
 
-/* 页面整体布局 */
+/* 椤甸潰鏁翠綋甯冨眬 */
 .history-layout {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0; /* 修改：与 calc-layout 一致，依赖父级 .content 的 padding */
-  /* background: #F0F2F5; -- 取消灰色背景 */
-  min-height: calc(100vh - 60px); /* 假设导航栏高度为60px */
+  padding: 0; /* 淇敼锛氫笌 calc-layout 涓€鑷达紝渚濊禆鐖剁骇 .content 鐨?padding */
+  /* background: #F0F2F5; -- 鍙栨秷鐏拌壊鑳屾櫙 */
+  min-height: calc(100vh - 60px); /* 鍋囪瀵艰埅鏍忛珮搴︿负60px */
 }
 
-/* 顶部控制栏 (.history-controls) */
+/* 椤堕儴鎺у埗鏍?(.history-controls) */
 .history-controls {
-  display: flex;                  /* 启用Flexbox布局 */
-  justify-content: space-between; /* 左侧标题推到最左，右侧控件组推到最右 */
-  align-items: center;          /* 修改：与 config-header 一致 */
-  flex-wrap: wrap;                /* 新增：与 config-header 一致 */
-  gap: 10px;                      /* 新增：与 config-header 一致 */
-  /* 移除以下卡片化样式 */
+  display: flex;                  /* 鍚敤Flexbox甯冨眬 */
+  justify-content: space-between; /* 宸︿晶鏍囬鎺ㄥ埌鏈€宸︼紝鍙充晶鎺т欢缁勬帹鍒版渶鍙?*/
+  align-items: center;          /* 淇敼锛氫笌 config-header 涓€鑷?*/
+  flex-wrap: wrap;                /* 鏂板锛氫笌 config-header 涓€鑷?*/
+  gap: 10px;                      /* 鏂板锛氫笌 config-header 涓€鑷?*/
+  /* 绉婚櫎浠ヤ笅鍗＄墖鍖栨牱寮?*/
   /* padding: 15px 20px; */
   /* background: #FFFFFF; */
   /* border-radius: 12px; */
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); */
-  /* margin-bottom: 16px; /* 这个间距可以由父级 .history-layout 的 gap 控制 */
+  /* margin-bottom: 16px; /* 杩欎釜闂磋窛鍙互鐢辩埗绾?.history-layout 鐨?gap 鎺у埗 */
 }
 
-/* 左侧标题 */
+/* 宸︿晶鏍囬 */
 .history-title {
-  font-size: 1.5em; /* 修改：与 config-title 一致 */
+  font-size: 1.5em; /* 淇敼锛氫笌 config-title 涓€鑷?*/
   font-weight: 600;
-  color: #333;       /* 修改：与 config-title 一致 */
-  margin: 0; /* 移除默认外边距 */
-  padding: 0; /* 移除默认内边距 */
-  line-height: 1.4; /* 微调行高以帮助垂直对齐，可根据实际效果调整 */
+  color: #333;       /* 淇敼锛氫笌 config-title 涓€鑷?*/
+  margin: 0; /* 绉婚櫎榛樿澶栬竟璺?*/
+  padding: 0; /* 绉婚櫎榛樿鍐呰竟璺?*/
+  line-height: 1.4; /* 寰皟琛岄珮浠ュ府鍔╁瀭鐩村榻愶紝鍙牴鎹疄闄呮晥鏋滆皟鏁?*/
 }
 
-/* 右侧控件容器 (包含缓存信息和按钮组) */
+/* 鍙充晶鎺т欢瀹瑰櫒 (鍖呭惈缂撳瓨淇℃伅鍜屾寜閽粍) */
 .history-rhs-controls {
   display: flex;
-  flex-direction: column;   /* 内部元素垂直堆叠：缓存信息在上，按钮组在下 */
-  align-items: flex-end;    /* 内部元素（缓存信息文本、按钮组）均靠右对齐 */
-  /* gap: 8px; */ /* 缓存信息和按钮组之间的垂直间距 - 现在只有一个子元素，gap不起作用 */
+  flex-direction: column;   /* 鍐呴儴鍏冪礌鍨傜洿鍫嗗彔锛氱紦瀛樹俊鎭湪涓婏紝鎸夐挳缁勫湪涓?*/
+  align-items: flex-end;    /* 鍐呴儴鍏冪礌锛堢紦瀛樹俊鎭枃鏈€佹寜閽粍锛夊潎闈犲彸瀵归綈 */
+  /* gap: 8px; */ /* 缂撳瓨淇℃伅鍜屾寜閽粍涔嬮棿鐨勫瀭鐩撮棿璺?- 鐜板湪鍙湁涓€涓瓙鍏冪礌锛実ap涓嶈捣浣滅敤 */
 }
 
-/* 缓存信息文本 - 相关样式被移除 */
+/* 缂撳瓨淇℃伅鏂囨湰 - 鐩稿叧鏍峰紡琚Щ闄?*/
 /* .cache-info { ... } */
 /* .cache-info .cache-value { ... } */
 
-/* 按钮动作组 */
+/* 鎸夐挳鍔ㄤ綔缁?*/
 .history-actions {
   display: flex;
-  justify-content: flex-end; /* 修改：使按钮组靠右 */
-  align-items: center; /* 新增：与 section-title 对齐 */
-  margin-bottom: 12px; /* 新增：与 section-title 对齐 */
-  gap: 12px; /* 重新显式声明 gap */
+  justify-content: flex-end; /* 淇敼锛氫娇鎸夐挳缁勯潬鍙?*/
+  align-items: center; /* 鏂板锛氫笌 section-title 瀵归綈 */
+  margin-bottom: 12px; /* 鏂板锛氫笌 section-title 瀵归綈 */
+  gap: 12px; /* 閲嶆柊鏄惧紡澹版槑 gap */
 }
 
-/* 通用按钮样式 (参考CalcPage) */
+/* 閫氱敤鎸夐挳鏍峰紡 (鍙傝€僀alcPage) */
 /* .calc-table-btn is already defined in CalcPage.css section (or globally if that was kept) */
 /* If specific overrides for HistoryPage are needed for .calc-table-btn, they should be more specific */
 /*
@@ -1160,20 +1159,20 @@ div.sidebar-divider > #collapseBtn svg {
   color: #3A86FF;
 }
 */
-.calc-table-btn.btn-danger:hover { /* "清除历史"按钮的特定悬停效果 */
+.calc-table-btn.btn-danger:hover { /* "娓呴櫎鍘嗗彶"鎸夐挳鐨勭壒瀹氭偓鍋滄晥鏋?*/
   background: #FEEAEA;
   border-color: #D00000;
   color: #D00000;
 }
 
-/* 表格区域样式 */
+/* 琛ㄦ牸鍖哄煙鏍峰紡 */
 .history-table-group {
   background: #F8F9FA;
   border-radius: 8px;
   padding: 16px 18px;
 }
 
-/* 注释掉HistoryPage表格的特殊列宽、对齐样式 */
+/* 娉ㄩ噴鎺塇istoryPage琛ㄦ牸鐨勭壒娈婂垪瀹姐€佸榻愭牱寮?*/
 /*
 #history-table-header-table th:nth-child(1), #history-table-body-table td:nth-child(1) { width: 5%; text-align: center;}
 #history-table-header-table th:nth-child(2), #history-table-body-table td:nth-child(2) { width: 15%; text-align: center;}
@@ -1187,7 +1186,7 @@ div.sidebar-divider > #collapseBtn svg {
 #history-table-header-table th:nth-child(10), #history-table-body-table td:nth-child(10) { width: 10%; text-align: right; font-weight: bold; color: #3A86FF;}
 */
 
-/* 主表格统一样式（已在文件后部定义）
+/* 涓昏〃鏍肩粺涓€鏍峰紡锛堝凡鍦ㄦ枃浠跺悗閮ㄥ畾涔夛級
 .main-data-table, [id^=main-data-table] {
   width: 100%;
   border-collapse: collapse;
@@ -1212,14 +1211,14 @@ div.sidebar-divider > #collapseBtn svg {
 }
 */
 
-/* 保留 .history-table-group 的背景、圆角、padding 与 .calc-table-group 一致 */
+/* 淇濈暀 .history-table-group 鐨勮儗鏅€佸渾瑙掋€乸adding 涓?.calc-table-group 涓€鑷?*/
 .history-table-group {
   background: #F8F9FA;
   border-radius: 8px;
   padding: 16px 18px;
 }
 
-/* 注释掉HistoryPage表格的特殊列宽、对齐样式 */
+/* 娉ㄩ噴鎺塇istoryPage琛ㄦ牸鐨勭壒娈婂垪瀹姐€佸榻愭牱寮?*/
 /*
 #history-table-header-table th:nth-child(1), #history-table-body-table td:nth-child(1) { width: 5%; text-align: center;}
 #history-table-header-table th:nth-child(2), #history-table-body-table td:nth-child(2) { width: 15%; text-align: center;}
@@ -1233,53 +1232,53 @@ div.sidebar-divider > #collapseBtn svg {
 #history-table-header-table th:nth-child(10), #history-table-body-table td:nth-child(10) { width: 10%; text-align: right; font-weight: bold; color: #3A86FF;}
 */
 
-/* 如果需要，可以添加针对历史记录页面中特定元素的更精细样式 */
+/* 濡傛灉闇€瑕侊紝鍙互娣诲姞閽堝鍘嗗彶璁板綍椤甸潰涓壒瀹氬厓绱犵殑鏇寸簿缁嗘牱寮?*/
 
 #history-table-header-table th:nth-child(9), #history-table-body-table td:nth-child(9) { width: 10%; text-align: right;}
 #history-table-header-table th:nth-child(10), #history-table-body-table td:nth-child(10) { width: 10%; text-align: right; font-weight: bold; color: #3A86FF;}
 
-/* section-title 复用 CalcPage 的样式，或在此处定义/覆盖 */
-/* .section-title 及其子元素 .history-table-header .table-group-subtitle 的样式被移除，因为元素已删除 */
+/* section-title 澶嶇敤 CalcPage 鐨勬牱寮忥紝鎴栧湪姝ゅ瀹氫箟/瑕嗙洊 */
+/* .section-title 鍙婂叾瀛愬厓绱?.history-table-header .table-group-subtitle 鐨勬牱寮忚绉婚櫎锛屽洜涓哄厓绱犲凡鍒犻櫎 */
 
-/* 如果需要，可以添加针对历史记录页面中特定元素的更精细样式 */
+/* 濡傛灉闇€瑕侊紝鍙互娣诲姞閽堝鍘嗗彶璁板綍椤甸潰涓壒瀹氬厓绱犵殑鏇寸簿缁嗘牱寮?*/
 
-.calc-table-btn { /* 通用表格/操作按钮样式 */
-  padding: 6px 16px; /* 调整内边距使其更一致 */
+.calc-table-btn { /* 閫氱敤琛ㄦ牸/鎿嶄綔鎸夐挳鏍峰紡 */
+  padding: 6px 16px; /* 璋冩暣鍐呰竟璺濅娇鍏舵洿涓€鑷?*/
   font-size: 14px;
-  border-radius: 8px; /* 统一增加圆角 */
-  border: 1px solid #CED4DA; /* 默认边框颜色 */
-  background: #FFFFFF; /* 默认白色背景 */
-  color: #495057; /* 默认文字颜色 */
+  border-radius: 8px; /* 缁熶竴澧炲姞鍦嗚 */
+  border: 1px solid #CED4DA; /* 榛樿杈规棰滆壊 */
+  background: #FFFFFF; /* 榛樿鐧借壊鑳屾櫙 */
+  color: #495057; /* 榛樿鏂囧瓧棰滆壊 */
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s; /* 添加 box-shadow 过渡 */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 轻微阴影 */
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s; /* 娣诲姞 box-shadow 杩囨浮 */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 杞诲井闃村奖 */
 }
-.calc-table-btn:hover { /* 通用悬停效果 */
-  border-color: #ADB5BD; /* 边框变深 */
-  background-color: #F8F9FA; /* 背景变浅灰 */
-  /* color: #3A86FF; -- 移除默认的蓝色悬停文字，除非是特定功能按钮 */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* 悬停时阴影加深 */
+.calc-table-btn:hover { /* 閫氱敤鎮仠鏁堟灉 */
+  border-color: #ADB5BD; /* 杈规鍙樻繁 */
+  background-color: #F8F9FA; /* 鑳屾櫙鍙樻祬鐏?*/
+  /* color: #3A86FF; -- 绉婚櫎榛樿鐨勮摑鑹叉偓鍋滄枃瀛楋紝闄ら潪鏄壒瀹氬姛鑳芥寜閽?*/
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* 鎮仠鏃堕槾褰卞姞娣?*/
 }
 .calc-table-btn:active {
-  background-color: #E9ECEF; /* 点击时背景更深 */
+  background-color: #E9ECEF; /* 鐐瑰嚮鏃惰儗鏅洿娣?*/
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
 
 
-/* 取消红色悬停动画，改为柔和效果 */
+/* 鍙栨秷绾㈣壊鎮仠鍔ㄧ敾锛屾敼涓烘煍鍜屾晥鏋?*/
 #reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover,
 .calc-table-btn.btn-danger:hover {
-  background: #F8F9FA; /* 轻微背景变化 */
-  border-color: #DC3545; /* 边框变危险色 */
-  color: #DC3545;       /* 文字变危险色 */
+  background: #F8F9FA; /* 杞诲井鑳屾櫙鍙樺寲 */
+  border-color: #DC3545; /* 杈规鍙樺嵄闄╄壊 */
+  color: #DC3545;       /* 鏂囧瓧鍙樺嵄闄╄壊 */
 }
 
-/* 页面级容器（无样式，仅结构）
+/* 椤甸潰绾у鍣紙鏃犳牱寮忥紝浠呯粨鏋勶級
 .page-calc {}
 .page-history {}
 .page-config {}
 
-/* 区块容器（大区分区） */
+/* 鍖哄潡瀹瑰櫒锛堝ぇ鍖哄垎鍖猴級 */
 .layout-calc, .layout-history, .layout-config {
   display: flex;
   gap: 24px;
@@ -1299,7 +1298,7 @@ div.sidebar-divider > #collapseBtn svg {
   gap: 16px;
 }
 
-/* 功能区块统一样式 */
+/* 鍔熻兘鍖哄潡缁熶竴鏍峰紡 */
 .group-wire-standard,
 .group-wire-special,
 .group-wrap,
@@ -1332,16 +1331,16 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 .title-container .emoji {
-  margin-right: 8px; /* 在 emoji 和标题文本之间添加一些间距 */
+  margin-right: 8px; /* 鍦?emoji 鍜屾爣棰樻枃鏈箣闂存坊鍔犱竴浜涢棿璺?*/
   font-size: 20px;
 }
 
 .group-actions {
   display: flex;
-  gap: 8px; /* 在按钮之间添加一些间距 */
+  gap: 8px; /* 鍦ㄦ寜閽箣闂存坊鍔犱竴浜涢棿璺?*/
 }
 
-/* 主表格统一ID样式 */
+/* 涓昏〃鏍肩粺涓€ID鏍峰紡 */
 .main-data-table, [id^=main-data-table] {
   width: 100%;
   border-collapse: collapse;
@@ -1365,11 +1364,11 @@ div.sidebar-divider > #collapseBtn svg {
   text-align: center;
 }
 
-/* 其它原有样式保留，后续逐步迁移 */
+/* 鍏跺畠鍘熸湁鏍峰紡淇濈暀锛屽悗缁€愭杩佺Щ */
 
-/* --------- 全部主表格统一为.simulation-results-table样式 --------- */
+/* --------- 鍏ㄩ儴涓昏〃鏍肩粺涓€涓?simulation-results-table鏍峰紡 --------- */
 
-/* 1. 注释掉原有 .main-data-table、.calc-table、.config-table、.history-table-group 等表格样式 */
+/* 1. 娉ㄩ噴鎺夊師鏈?.main-data-table銆?calc-table銆?config-table銆?history-table-group 绛夎〃鏍兼牱寮?*/
 /*
 .main-data-table, [id^=main-data-table],
 .calc-table, .config-table {
@@ -1397,7 +1396,7 @@ div.sidebar-divider > #collapseBtn svg {
 }
 */
 
-/* 2. 统一所有主表格为.simulation-results-table样式 */
+/* 2. 缁熶竴鎵€鏈変富琛ㄦ牸涓?simulation-results-table鏍峰紡 */
 .main-data-table, [id^=main-data-table],
 .calc-table, .config-table {
   width: 100%;
@@ -1408,7 +1407,7 @@ div.sidebar-divider > #collapseBtn svg {
 .main-data-table th, .main-data-table td, [id^=main-data-table] th, [id^=main-data-table] td,
 .calc-table th, .calc-table td, .config-table th, .config-table td {
   padding: 10px 8px;
-  text-align: center; /* 强制居中 */
+  text-align: center; /* 寮哄埗灞呬腑 */
   border-bottom: 1px dashed #EAECEF;
   border-right: none !important;
   border-left: none !important;
@@ -1420,14 +1419,14 @@ div.sidebar-divider > #collapseBtn svg {
   font-weight: 600;
   background-color: #F8F9FA;
   border-bottom: 2px solid #E0E0E0;
-  text-align: center; /* 表头也居中 */
+  text-align: center; /* 琛ㄥご涔熷眳涓?*/
 }
 .main-data-table tr:last-child td, [id^=main-data-table] tr:last-child td,
 .calc-table tr:last-child td, .config-table tr:last-child td {
   border-bottom: none;
 }
 
-/* 3. 兼容原有按钮、输入框等表格内元素样式（如有需要可补充） */
+/* 3. 鍏煎鍘熸湁鎸夐挳銆佽緭鍏ユ绛夎〃鏍煎唴鍏冪礌鏍峰紡锛堝鏈夐渶瑕佸彲琛ュ厖锛?*/
 
 .group-simulation {
   background: #F8F9FA;
@@ -1471,19 +1470,19 @@ div.sidebar-divider > #collapseBtn svg {
   margin-right: auto;
 }
 
-/* 标准导线配置表格滚动区域样式 */
+/* 鏍囧噯瀵肩嚎閰嶇疆琛ㄦ牸婊氬姩鍖哄煙鏍峰紡 */
 #actual-table-display-area {
-  max-height: 800px; /* 15行的高度，假设每行约40px */
+  max-height: 800px; /* 15琛岀殑楂樺害锛屽亣璁炬瘡琛岀害40px */
   overflow-y: auto;
   min-width: 500px;
   background: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 0;
-  position: relative; /* 为固定表头提供定位上下文 */
+  position: relative; /* 涓哄浐瀹氳〃澶存彁渚涘畾浣嶄笂涓嬫枃 */
 }
 
-/* 固定表头样式 */
+/* 鍥哄畾琛ㄥご鏍峰紡 */
 #main-data-table-config thead {
   position: sticky;
   top: 0;
@@ -1499,7 +1498,7 @@ div.sidebar-divider > #collapseBtn svg {
   border-bottom: 2px solid #E0E0E0;
 }
 
-/* 美化滚动条样式 */
+/* 缇庡寲婊氬姩鏉℃牱寮?*/
 #actual-table-display-area::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -1519,7 +1518,7 @@ div.sidebar-divider > #collapseBtn svg {
   background: #a8a8a8;
 }
 
-/* 历史记录表格滚动区域样式 */
+/* 鍘嗗彶璁板綍琛ㄦ牸婊氬姩鍖哄煙鏍峰紡 */
 #history-table-body-wrapper {
   max-height: 800px;
   overflow-y: auto;
@@ -1529,7 +1528,7 @@ div.sidebar-divider > #collapseBtn svg {
   position: relative;
 }
 
-/* 美化历史记录表格滚动条样式 */
+/* 缇庡寲鍘嗗彶璁板綍琛ㄦ牸婊氬姩鏉℃牱寮?*/
 #history-table-body-wrapper::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -1549,16 +1548,15 @@ div.sidebar-divider > #collapseBtn svg {
   background: #a8a8a8;
 }
 
-/* 移除所有数字输入框的微调按钮（上下小箭头） */
+/* 绉婚櫎鎵€鏈夋暟瀛楄緭鍏ユ鐨勫井璋冩寜閽紙涓婁笅灏忕澶达級 */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 input[type="number"] {
-  appearance: textfield;           /* 标准写法，优先写在最前面 */
+  appearance: textfield;           /* 鏍囧噯鍐欐硶锛屼紭鍏堝啓鍦ㄦ渶鍓嶉潰 */
   -webkit-appearance: textfield;   /* Chrome/Safari */
-  -moz-appearance: textfield;      /* Firefox */
 }
 
 /* Appending styles from CalcPage.css */

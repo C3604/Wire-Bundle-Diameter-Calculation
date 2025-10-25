@@ -1,196 +1,138 @@
-# 线束直径计算工具 (Wire Bundle Diameter Calculator)
+﻿# 线束直径计算工具 (Wire Bundle Diameter Calculator)
 
-[![Edge Add-on](https://img.shields.io/badge/Edge%20Add--on-v1.2.0.6-blue)](https://microsoftedge.microsoft.com/addons/detail/线束直径计算器/dcinhgdofeolfogjefdocphbnmdicopj)
-[![Firefox Add-on](https://img.shields.io/badge/Firefox%20Add--on-v1.2.0.6-orange)](https://addons.mozilla.org/firefox/addon/wirebundle/)
+[![Edge Add-on](https://img.shields.io/badge/Edge%20Add--on-v1.2.0.6-blue)](https://microsoftedge.microsoft.com/addons/detail/%E7%BA%BF%E6%9D%9F%E7%9B%B4%E5%BE%84%E8%AE%A1%E7%AE%97%E5%B7%A5%E5%85%B7/dcinhgdofeolfogjefdocphbnmdicopj)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 📝 项目简介
+## 项目简介
 
-本工具是一款基于二维圆形填充算法的线束直径估算插件。它可以帮助你根据输入的多种规格导线、包裹物层数和厚度，通过模拟计算来估算线束的最终直径，并提供可视化结果和配置管理功能。现已支持Chrome/Edge和Firefox浏览器。
+线束直径计算工具是一款基于二维圆形填充算法的浏览器扩展，帮助工程师根据导线规格、包覆层和制造公差快速评估线束外径。项目现仅支持 Chromium 内核浏览器（如 Microsoft Edge 与 Google Chrome），不再提供 Firefox 版本。
 
 ![程序核心功能截图](src/assets/img1.jpg)
 
 ---
 
-## ✨ 主要功能
+## 核心功能
 
-- **多规格导线支持**：支持标准导线（多种线规/壁厚类型）、特殊导线（自定义直径）、数量灵活配置
-- **包裹物层管理**：支持多层包裹物（如胶带、波纹管），厚度可自定义
-- **制造公差调整**：可设置制造公差百分比，模拟实际生产偏差
-- **蒙特卡洛模拟**：多次随机堆叠模拟，统计最小/最大/平均直径
-- **可视化展示**：自动生成线束截面图、直径分布折线图、图例
-- **历史记录与导出**：自动保存每次计算参数与结果，支持导出 CSV
-- **参数配置**：可自定义标准导线库，适应企业/个人特殊需求
-- **多语言支持**：内置中文和英文界面
-
----
-
-## 🖥️ 界面概览
-
-- **左侧导航栏**：  
-  - 🧮 计算：主功能页面，输入参数并执行模拟计算  
-  - 📜 历史：查看和导出历史计算记录  
-  - ⚙️ 配置：自定义标准导线参数  
-  - 版本号与侧边栏收起/展开按钮
-
-- **主内容区**（以"计算"页面为例）：  
-  - 标准导线、特殊导线、包裹物输入表格  
-  - 制造公差、计算次数滑块  
-  - 计算按钮、重置按钮、保存历史选项  
-  - 右侧为截面模拟图、直径统计表、分布折线图等
+- **多规格导线支持**：同时配置标准导线与自定义导线，灵活调整数量与尺寸。
+- **包裹层管理**：为线束添加多层包覆材料，支持自定义厚度与顺序。
+- **制造公差仿真**：通过可配置的公差与蒙特卡洛模拟估算极值与平均直径。
+- **可视化输出**：生成截面示意图、统计表与分布折线图，便于沟通与归档。
+- **历史记录与导出**：自动保存计算参数，可导出 CSV 做进一步分析。
+- **参数配置中心**：内置标准导线库，允许按企业标准定制并持久化到浏览器本地。
+- **多语言界面**：默认提供简体中文与英文，方便全球团队协同。
 
 ---
 
-## 🚀 快速上手
+## 界面概览
 
-### 1. 安装扩展
-
-#### Edge/Chrome版本
-- 推荐：从 [Microsoft Edge 应用商店](https://microsoftedge.microsoft.com/addons/detail/线束直径计算器/dcinhgdofeolfogjefdocphbnmdicopj) 一键安装
-- 或：下载本仓库代码，开发者模式加载（edge://extensions/ → 加载已解压的扩展）
-
-#### Firefox版本
-- 推荐：从 [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/wirebundle/) 安装
-- 或：下载本仓库代码，使用以下步骤加载：
-  1. 在地址栏输入：`about:debugging`
-  2. 点击"此 Firefox"（This Firefox）
-  3. 点击"临时载入附加组件"（Load Temporary Add-on）
-  4. 选择扩展目录中的manifest.json文件
-
-### 2. 计算流程示例
-
-1. 点击浏览器工具栏中的扩展图标，弹出主界面
-2. 在"标准导线"区域，选择线规、类型，输入数量
-3. 如有特殊导线，在"特殊导线"区域输入直径和数量
-4. 在"包裹物"区域添加包裹层及厚度
-5. 调整制造公差和计算次数（可选）
-6. 点击"计算直径"按钮或直接按 Enter 键
-7. 查看右侧模拟图、直径统计和分布图
-8. 勾选"保存历史记录"可自动归档本次计算
+- **侧边导航**：包含“计算”“历史”“配置”等入口，右侧显示当前版本号与快速操作按钮。
+- **主工作区**：根据所选页面展示导线表格、包覆层配置、仿真参数以及结果可视化组件。
+- **辅助要素**：提供语言切换、历史清理、数据导出与图像展示等工具。
 
 ---
 
-## 📊 主要界面说明
+## 快速上手
 
-- **标准导线**：下拉选择线规和类型，自动填充直径，输入数量即可
-- **特殊导线**：直接输入外径和数量，适合非标线材
-- **包裹物**：每层单独输入厚度，可多层叠加
-- **制造公差**：通过滑块或输入百分比调整
-- **计算次数**：决定模拟精度，次数越多结果越稳定
-- **结果区**：显示模拟截面图、最终直径、详细统计和分布折线图
-- **历史记录**：可导出为 CSV，支持一键清空
-- **配置页面**：自定义标准导线库，支持本地保存和恢复默认
+### 安装扩展
+
+- **Microsoft Edge 应用商店**：推荐直接通过 [扩展商店](https://microsoftedge.microsoft.com/addons/detail/%E7%BA%BF%E6%9D%9F%E7%9B%B4%E5%BE%84%E8%AE%A1%E7%AE%97%E5%B7%A5%E5%85%B7/dcinhgdofeolfogjefdocphbnmdicopj) 安装稳定版本。
+- **开发者模式侧载**：
+  1. 在浏览器地址栏输入 `edge://extensions/` 或 `chrome://extensions/`。
+  2. 打开“开发者模式”。
+  3. 点击“加载已解压的扩展程序”。
+  4. 选择仓库根目录，使用 `manifest.json` 启动扩展。
+
+### 计算流程示例
+
+1. 点击浏览器工具栏中的扩展图标，打开主界面。
+2. 在“标准导线”区域选择线规、类型并录入数量；必要时在“特殊导线”添加自定义导线。
+3. 为线束配置包裹层与厚度，按需调整制造公差与模拟次数。
+4. 点击“计算直径”或按 Enter 键运行仿真，右侧将实时刷新截面图与统计数据。
+5. 勾选“保存历史记录”可将结果写入历史列表，支持后续导出。
 
 ---
 
-## 🛠️ 技术栈
+## 技术栈
 
-- HTML5 + CSS3
+- HTML5 与 CSS3
 - JavaScript (ES6+)
-- 浏览器扩展API（Chrome/Edge & Firefox）
-- Canvas API（可视化）
-- 本地存储（localStorage）
+- Chromium Extension Manifest V3 API
+- Canvas API（绘制截面与折线图）
+- LocalStorage（本地配置与历史记录持久化）
 
 ---
 
-## 📁 项目结构
+## 项目结构
 
 ```
-├── _locales/           # 国际化资源
-│   ├── zh_CN/         # 中文语言包
-│   └── en/            # 英文语言包
-├── icons/             # 扩展图标
-├── src/               # 源代码
-│   ├── assets/        # 截图与图片
-│   ├── components/    # UI组件
-│   ├── logic/         # 业务逻辑
-│   ├── pages/         # 页面
-│   ├── utils/         # 工具函数
-│   │   └── browserPolyfill.js  # 浏览器兼容层
-│   └── storage/       # 数据存储
-├── manifest.chrome.json   # Chrome/Edge扩展配置
-├── manifest.firefox.json  # Firefox扩展配置
-├── build.bat          # 构建脚本
-├── popup.html         # 主界面
-└── README.md          # 项目说明
+├── _locales/               # 国际化资源（zh_CN、en）
+├── icons/                  # 扩展图标与界面按钮
+├── src/
+│   ├── assets/             # 截图与静态资源
+│   ├── background/         # 背景脚本（MV3 service worker）
+│   ├── components/         # UI 组件
+│   ├── logic/              # 核心业务逻辑与模拟引擎
+│   ├── pages/              # 页面容器
+│   ├── storage/            # 数据持久化封装
+│   ├── styles/             # 样式文件
+│   └── utils/              # 通用工具函数
+├── manifest.chrome.json    # Chromium 版本清单模板
+├── manifest.json           # 实际加载的扩展清单（由脚本生成）
+├── build.bat               # Windows 构建脚本
+└── popup.html              # 主界面入口
 ```
 
 ---
 
-## 🔧 开发指南
+## 构建与调试
 
-### 构建不同版本
+构建脚本会将 `manifest.chrome.json` 复制为 `manifest.json`，确保侧载时使用最新配置：
 
-项目提供了构建脚本用于生成不同浏览器的版本：
-
-1. Chrome/Edge版本构建：
 ```powershell
 .\build.bat chrome
 ```
 
-2. Firefox版本构建：
-```powershell
-.\build.bat firefox
-```
-
-### 开发注意事项
-
-1. 浏览器API调用：
-   - 使用 `src/utils/browserPolyfill.js` 中的统一接口
-   - 不要直接调用 `chrome` 或 `browser` 对象
-   - 所有API调用都通过 `browserAPI` 对象进行
-
-2. manifest文件：
-   - `manifest.chrome.json`: Chrome/Edge版本配置（V3）
-   - `manifest.firefox.json`: Firefox版本配置（V2）
-   - 构建时会自动选择对应版本
+执行后即可在 `edge://extensions` 或 `chrome://extensions` 中加载 `manifest.json` 进行调试。若仅修改前端资源，可直接刷新扩展页面，无需重新运行脚本。
 
 ---
 
-## ❓ 常见问题（FAQ）
+## 开发注意事项
 
-- **Q: 为什么有些线径没有"超薄壁"选项？**  
-  A: 只有标准库中定义了"Ultra Thin"类型的线规才会显示该选项，若无数据则不显示。
-
-- **Q: 为什么直接打开 popup.html 会报 CORS 错误？**  
-  A: 请务必通过浏览器扩展方式加载和启动，不能直接用 file:// 协议打开 HTML 文件。
-
-- **Q: 历史记录/自定义配置会丢失吗？**  
-  A: 所有数据均保存在本地浏览器，清除浏览器数据或更换设备会导致数据丢失。
-
-- **Q: 如何反馈问题或建议？**  
-  A: 请通过 GitHub Issue 或邮件联系作者。
-
-- **Q: 不同浏览器版本有功能差异吗？**  
-  A: 不同浏览器版本的功能完全一致，仅在底层实现上有所不同以适配各浏览器的特性。
-
-- **Q: 为什么有两个manifest文件？**  
-  A: 由于Chrome和Firefox的扩展规范有所不同，需要分别维护两个配置文件。使用构建脚本可以自动选择正确的配置文件。
+- **扩展 API**：背景服务线程直接使用 `chrome.action`、`chrome.windows` 等 Chromium API；如需 Promise 化封装，可在各模块内部实现。
+- **Manifest 管理**：仅维护 `manifest.chrome.json` 与 `manifest.json`；提交前请确认 `manifest.json` 与模板保持一致，避免携带历史产物。
+- **国际化**：新增文案时同步更新 `_locales/zh_CN/messages.json` 与 `_locales/en/messages.json`，保持 key 命名统一。
+- **样式规范**：统一使用四空格缩进，Sass/Less 等预处理暂未启用；已移除全部 Firefox 专用样式前缀。
 
 ---
 
-## 🤝 贡献指南
+## 常见问题（FAQ）
 
-欢迎提交 Issue 和 Pull Request 来帮助改进本项目。请确保代码规范、注释清晰，并附带必要的说明。
-
----
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
-
----
-
-## 👥 作者
-
-- C3604 - [GitHub](https://github.com/C3604)
+- **Q: 是否仍支持 Firefox？**  
+  A: 项目当前仅支持 Chromium 内核浏览器，Firefox 专用代码已全部移除。
+- **Q: 为什么运行脚本后 manifest.json 会变化？**  
+  A: `build.bat` 会从模板覆盖生成 `manifest.json`，以统一国际化占位符和版本信息。
+- **Q: 历史记录或自定义导线会丢失吗？**  
+  A: 所有数据仅保存在浏览器本地，清理浏览器数据或更换设备会导致记录丢失。
 
 ---
 
-## 📞 联系方式
+## 贡献指南
 
-- 提交 [Issue](https://github.com/C3604/Wire-Bundle-Diameter-Calculation/issues)
+欢迎通过 Issue 或 Pull Request 参与改进。提交代码前请确保：
+
+1. 已在最新的 Chromium 浏览器中验证主要功能与语言切换；
+2. 说明变更目的、影响范围及测试步骤；
+3. 若涉及界面更新，请附上前后对比截图。
 
 ---
 
-如果这个工具对您有帮助，欢迎给个 ⭐️ 支持一下！ 
+## 许可证
+
+本项目基于 [MIT License](LICENSE) 开源，欢迎在保留版权声明的前提下衍生与分发。
+
+---
+
+## 联系方式
+
+- GitHub Issues：<https://github.com/C3604/Wire-Bundle-Diameter-Calculation/issues>
+- 若扩展对你有帮助，欢迎 Star 支持。
