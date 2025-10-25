@@ -1,0 +1,19 @@
+# Normalize line endings: commit LF, checkout LF on all text files
+* text=auto eol=lf
+
+# Allow Windows scripts to use CRLF if needed
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Common binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.ttf binary
+*.woff binary
+*.woff2 binary

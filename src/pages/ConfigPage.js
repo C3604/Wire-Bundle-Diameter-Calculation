@@ -10,6 +10,7 @@ import {
 import i18n from "../lib/i18n.js";
 import { showToast, showConfirm } from "../components/feedback.js";
 import { getJSON, setJSON, remove } from "../lib/storage.js";
+import { loadUserCustomWires, saveUserCustomWires, clearUserCustomWires } from "./config/wiresStore.js";
 
 // 全局变量，用于存储当前表格显示的数据和初始快照
 let currentDisplayData = [];
@@ -897,7 +898,7 @@ export function renderConfigPage(container) {
 
   function loadInitialData() {
     // 配置界面只显示自定义内容
-    const userCustom = getUserCustomWiresFromStorage();
+    const userCustom = loadUserCustomWires();
     currentDisplayData = deepClone(userCustom);
     initialDataSnapshot = deepClone(currentDisplayData);
     updateDuplicateGaugeState();
@@ -1062,12 +1063,11 @@ export function renderConfigPage(container) {
       return;
     }
 
-    // 8. 保存到 localStorage
+    // 8. 保存到存储层
     try {
       // 只保存与标准库不同或新增的自定义条目
-      localStorage.setItem(
-        "userDefinedStandardWires",
-        JSON.stringify(getUserCustomWires()),
+      saveUserCustomWires(
+        getUserCustomWires(),
       );
       currentDisplayData = deepClone(getUserCustomWires()); // 保存后只显示自定义内容
       initialDataSnapshot = deepClone(currentDisplayData);
@@ -1075,7 +1075,7 @@ export function renderConfigPage(container) {
       updateDuplicateGaugeState();
       renderTable();
     } catch (error) {
-      console.error("保存配置到localStorage失败:", error);
+      console.error("保存配置到存储层失败:", error);
       showToast(i18n.getMessage("config_standard_wires_message_save_fail", { error: error.message }), "error");
     }
   });
@@ -1084,7 +1084,7 @@ export function renderConfigPage(container) {
     const ok = await showConfirm(i18n.getMessage("config_standard_wires_message_confirm_restore"));
     if (ok) {
       try {
-        localStorage.removeItem("userDefinedStandardWires");
+        remove("userDefinedStandardWires");
         currentDisplayData = [];
         initialDataSnapshot = [];
         updateDuplicateGaugeState();

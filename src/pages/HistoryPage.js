@@ -1,5 +1,6 @@
 import i18n from "../lib/i18n.js";
 import { showToast, showConfirm } from "../components/feedback.js";
+import { getJSON, remove } from "../lib/storage.js";
 
 // 映射类型值到本地化标签
 function getWireTypeLabel(type) {
@@ -71,8 +72,7 @@ export function renderHistoryPage(container) {
   function loadAndRenderHistory() {
     if (historyTableBody) {
       try {
-        const history =
-          JSON.parse(localStorage.getItem("calculationHistory")) || [];
+        const history = getJSON("calculationHistory", []);
         if (history.length > 0) {
           historyTableBody.innerHTML = ""; // 清空现有行
           // 为了更好的可读性，后保存的记录显示在前面
@@ -190,7 +190,7 @@ export function renderHistoryPage(container) {
       const ok = await showConfirm(i18n.getMessage("history_confirm_clear"));
       if (ok) {
         try {
-          localStorage.removeItem("calculationHistory");
+          remove("calculationHistory");
           loadAndRenderHistory();
           showToast(i18n.getMessage("history_message_cleared"), "success");
         } catch (e) {
@@ -205,8 +205,7 @@ export function renderHistoryPage(container) {
     exportCsvBtn.onclick = () => {
       console.log("导出CSV按钮被点击");
       try {
-        const history =
-          JSON.parse(localStorage.getItem("calculationHistory")) || [];
+        const history = getJSON("calculationHistory", []);
         if (history.length === 0) {
           showToast(i18n.getMessage("history_message_no_records_to_export"), "warning");
           return;
@@ -248,21 +247,24 @@ export function renderHistoryPage(container) {
             const row = [
               history.length - index, // 序号
               entry.calculationTime,
-              `"${formatWiresForCSV(entry.standardWires)}"`, // 加引号以处理可能的逗号或特殊字符
-              `"${formatWiresForCSV(entry.specialWires)}"`, // 加引号
-              `"${formatWrapsForCSV(entry.wraps)}"`, // 加引号
-              entry.tolerance, // 公差通常是数字，但以防万一也加上处理
+              formatWiresForCSV(entry.standardWires),
+              formatWiresForCSV(entry.specialWires),
+              formatWrapsForCSV(entry.wraps),
+              `${entry.tolerance}%`,
               entry.maxTheoreticalDiameter.replace(" mm", ""),
               entry.minTheoreticalDiameter.replace(" mm", ""),
               entry.avgTheoreticalDiameter.replace(" mm", ""),
               entry.avgFinalDiameter.replace(" mm", ""),
             ];
-            csvContent +=
-              row
-                .map((field) =>
-                  String(field).includes(",") ? `"${field}"` : field,
-                )
-                .join(",") + "\r\n";
+            // 规范CSV字段转义：若包含逗号、分号、换行或引号，则用双引号包裹并将内部引号翻倍
+            const escapeCsvField = (v) => {
+              const s = String(v);
+              if (/[",\n;]/.test(s)) {
+                return `"${s.replace(/"/g, '""')}"`;
+              }
+              return s;
+            };
+            csvContent += row.map(escapeCsvField).join(",") + "\r\n";
           });
 
         // 创建Blob对象
