@@ -1,5 +1,4 @@
 .lingmaignore
 git_sync.bat
-\rules
-\.lingma
-\.trae
+.lingma
+.trae

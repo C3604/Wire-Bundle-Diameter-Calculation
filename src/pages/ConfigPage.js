@@ -9,6 +9,7 @@ import {
 } from "../logic/wireManager.js";
 import i18n from "../lib/i18n.js";
 import { showToast, showConfirm } from "../components/feedback.js";
+import { getJSON, setJSON, remove } from "../lib/storage.js";
 
 // 全局变量，用于存储当前表格显示的数据和初始快照
 let currentDisplayData = [];
@@ -112,22 +113,14 @@ function getUserCustomWires() {
   });
 }
 
-// 获取自定义内容
+// 获取自定义内容（使用统一存储访问层）
 function getUserCustomWiresFromStorage() {
-  const userWiresString = localStorage.getItem("userDefinedStandardWires");
-  if (userWiresString) {
-    try {
-      const userWires = JSON.parse(userWiresString);
-      if (
-        Array.isArray(userWires) &&
-        userWires.every((wire) => wire.hasOwnProperty("gauge"))
-      ) {
-        return userWires;
-      }
-    } catch (error) {
-      console.error("从localStorage解析userDefinedStandardWires失败:", error);
-      return [];
-    }
+  const arr = getJSON("userDefinedStandardWires", []);
+  if (
+    Array.isArray(arr) &&
+    arr.every((wire) => wire && Object.prototype.hasOwnProperty.call(wire, "gauge"))
+  ) {
+    return arr;
   }
   return [];
 }
