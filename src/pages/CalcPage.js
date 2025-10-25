@@ -184,9 +184,9 @@ export function renderCalcPage(container) {
                 <div class="group-stats input-summary-container detail-separator-top">
                   <div class="group-title"><div class="title-container"><span class="emoji">⚙️</span><span data-i18n="calc_group_stats_title">输入统计</span></div></div>
                   <div id="input-summary">
-                    <div data-i18n="calc_group_stats_wire_count">总导线数量：<span id="total-wire-count">0</span></div>
-                    <div data-i18n="calc_group_stats_wrap_count">总包裹物层数：<span id="total-wrap-count">0</span></div>
-                    <div data-i18n="calc_group_stats_wrap_thickness">总包裹物厚度：<span id="total-wrap-thick">0</span></div>
+                    <div><span data-i18n="calc_group_stats_wire_count">总导线数量：</span><span id="total-wire-count" class="input-summary-value">0</span></div>
+                    <div><span data-i18n="calc_group_stats_wrap_count">总包裹物层数：</span><span id="total-wrap-count" class="input-summary-value">0</span></div>
+                    <div><span data-i18n="calc_group_stats_wrap_thickness">总包裹物厚度：</span><span id="total-wrap-thick" class="input-summary-value">0</span></div>
                   </div>
                 </div>
                 <!-- 直径计算详情区 -->
