@@ -203,22 +203,61 @@ document.addEventListener('DOMContentLoaded', async function () {
   // 默认显示计算页面
   if(mainContent && typeof renderCalcPage === 'function') showPage('calc');
 
-  // --- Functions for version display and changelog --- 
+  // --- Functions for version display and changelog ---
+  function compareVersions(a = '', b = '') {
+    const normalize = (v) => v.split('.').map(num => parseInt(num, 10) || 0);
+    const partsA = normalize(a);
+    const partsB = normalize(b);
+    const length = Math.max(partsA.length, partsB.length);
+    for (let i = 0; i < length; i++) {
+      const segmentA = partsA[i] || 0;
+      const segmentB = partsB[i] || 0;
+      if (segmentA > segmentB) return 1;
+      if (segmentA < segmentB) return -1;
+    }
+    return 0;
+  }
+
   async function displayAppVersion() {
+    const versionDisplayElement = document.getElementById('version-display');
+    if (!versionDisplayElement) {
+      return;
+    }
+
+    let resolvedVersion = '';
+
     try {
       const manifest = chrome.runtime.getManifest();
-      const version = manifest.version;
-      const versionDisplayElement = document.getElementById('version-display');
-      if (versionDisplayElement) {
-        versionDisplayElement.textContent = i18n.getMessage('version_display', { version });
-        versionDisplayElement.addEventListener('click', showChangelogModal);
+      if (manifest && manifest.version) {
+        resolvedVersion = manifest.version;
       }
     } catch (error) {
-      console.error('无法获取扩展版本号:', error);
-      const versionDisplayElement = document.getElementById('version-display');
-      if (versionDisplayElement) {
-        versionDisplayElement.textContent = i18n.getMessage('version_na');
+      console.warn('读取 manifest 版本号失败:', error);
+    }
+
+    try {
+      const changelogURL = chrome.runtime.getURL('Change log.json');
+      const response = await fetch(changelogURL);
+      if (response.ok) {
+        const changelogData = await response.json();
+        const latestEntry = changelogData?.versions?.[0];
+        if (latestEntry?.version && compareVersions(latestEntry.version, resolvedVersion) >= 0) {
+          resolvedVersion = latestEntry.version;
+        }
       }
+    } catch (error) {
+      console.warn('读取更新日志版本信息失败:', error);
+    }
+
+    if (resolvedVersion) {
+      versionDisplayElement.textContent = i18n.getMessage('version_display', { version: resolvedVersion });
+    } else {
+      versionDisplayElement.textContent = i18n.getMessage('version_na');
+    }
+
+    if (!versionDisplayElement.dataset.bound) {
+      versionDisplayElement.addEventListener('click', showChangelogModal);
+      versionDisplayElement.dataset.bound = 'true';
     }
   }
 

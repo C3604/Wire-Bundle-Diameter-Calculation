@@ -1,4 +1,4 @@
-{
+﻿{
   "manifest_version": 3,
   "name": "__MSG_extName__",
   "version": "1.0.2.7",
@@ -27,4 +27,4 @@
   "permissions": [
     "storage"
   ]
-} 
+}
