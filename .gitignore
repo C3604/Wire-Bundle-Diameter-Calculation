@@ -1,0 +1,5 @@
+.lingmaignore
+git_sync.bat
+\rules
+\.lingma
+\.trae

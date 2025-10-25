@@ -1,6 +1,6 @@
 // src/logic/simulationConstants.js
-import { standardWiresData } from '../storage/standardWires.js';
-import { getSimulationParameters } from './wireManager.js';
+import { standardWiresData } from "../storage/standardWires.js";
+import { getSimulationParameters, getEffectiveStandardWires } from "./wireManager.js";
 
 // 初始加载一次模拟参数
 let simulationParameters = getSimulationParameters();
@@ -10,25 +10,39 @@ let simulationParameters = getSimulationParameters();
  * and the engine should get them from there.
  */
 export function reloadParameters() {
-  console.warn("reloadParameters is deprecated and will be removed in a future version.");
+  console.warn(
+    "reloadParameters is deprecated and will be removed in a future version.",
+  );
   simulationParameters = getSimulationParameters();
+  // 同步更新导出的参数常量，保证渲染器等模块获取到最新值
+  PI = simulationParameters.PI;
+  SNG_R2_TO_R1 = simulationParameters.SNG_R2_TO_R1;
+  ACCELERATION = simulationParameters.ACCELERATION;
+  WEIGHT_FACTOR = simulationParameters.WEIGHT_FACTOR;
+  CONVERGENCE_THRESHOLD = simulationParameters.CONVERGENCE_THRESHOLD;
+  MAX_ITERATIONS_RUNPACKING = simulationParameters.MAX_ITERATIONS_RUNPACKING;
+  MAX_ITERATIONS_PACKSTEP = simulationParameters.MAX_ITERATIONS_PACKSTEP;
+  CONTAINER_ADJUST_FACTOR = simulationParameters.CONTAINER_ADJUST_FACTOR;
 }
 
-// 导出动态参数
+// 导出动态参数对象（供需要完整参数的模块使用）
 export { simulationParameters };
 
 // --- 静态数据 ---
 
 // 提供一个标准的线规外径查找表 (gauge to OD)
-const WIRE_OD_TABLE = new Map(standardWiresData.map(item => [item.gauge, item]));
+const WIRE_OD_TABLE = new Map(
+  standardWiresData.map((item) => [item.gauge, item]),
+);
 
 /**
- * 根据线规(gauge)获取对应的导线数据对象
+ * 根据线规(gauge)获取对应的导线数据对象（已与 wireManager 对齐）
  * @param {string | number} gauge - 线规值
  * @returns {object | undefined} 导线数据对象或undefined
  */
 export function getWireDataByGauge(gauge) {
-  return WIRE_OD_TABLE.get(String(gauge));
+  const table = buildWireOdTable();
+  return table[String(gauge)];
 }
 
 /**
@@ -37,9 +51,10 @@ export function getWireDataByGauge(gauge) {
  * @returns {Array} 电线规格数组
  */
 export function getCurrentWireData() {
-  console.warn("getCurrentWireData is deprecated. Use getEffectiveStandardWires from wireManager.js instead.");
-  // 在这个简化后的版本里，我们仅返回默认值，因为动态合并的逻辑已经移至 wireManager.js
-  return standardWiresData;
+  console.warn(
+    "getCurrentWireData is deprecated. Use getEffectiveStandardWires from wireManager.js instead.",
+  );
+  return getEffectiveStandardWires();
 }
 
 /**
@@ -48,65 +63,58 @@ export function getCurrentWireData() {
  * @returns {Array}
  */
 export function getDefaultStandardWires() {
-  console.warn("getDefaultStandardWires is deprecated. Use getEffectiveStandardWires from wireManager.js instead.");
+  console.warn(
+    "getDefaultStandardWires is deprecated. Use getEffectiveStandardWires from wireManager.js instead.",
+  );
   return standardWiresData;
 }
 
-// 导出一个函数来获取最新的 WIRE_OD_TABLE
-// WIRE_OD_TABLE 的键是导线规格 (string)，值是包含 Thin, Thick, "Ultra Thin" 外径的对象
-export function getWireOdTable() {
-  const dataToUse = getCurrentWireData();
+// 基于 wireManager 的有效库构建最新的 OD 映射表
+function buildWireOdTable() {
+  const dataToUse = getEffectiveStandardWires();
   return dataToUse.reduce((table, wire) => {
-    // 确保 wire.gauge 存在且不为 null/undefined
     if (wire.gauge !== undefined && wire.gauge !== null) {
-      table[String(wire.gauge)] = { // 确保键是字符串
-        Thin: wire.thin,       // 从 localStorage (或默认) 的 .thin 映射
-        Thick: wire.thick,     // 从 localStorage (或默认) 的 .thick 映射
-        "Ultra Thin": wire.ultraThin // 从 localStorage (或默认) 的 .ultraThin 映射
+      table[String(wire.gauge)] = {
+        Thin: wire.thin,
+        Thick: wire.thick,
+        "Ultra Thin": wire.ultraThin,
       };
     }
     return table;
   }, {});
 }
 
-// 导出一个函数来获取最新的 STANDARD_GAUGES 列表
+// 导出一个函数来获取最新的 WIRE_OD_TABLE（已与 wireManager 对齐）
+export function getWireOdTable() {
+  return buildWireOdTable();
+}
+
+// 导出一个函数来获取最新的 STANDARD_GAUGES 列表（已与 wireManager 对齐）
 // 返回一个已排序的字符串规格数组
 export function getStandardGauges() {
-  const dataToUse = getCurrentWireData();
+  const dataToUse = getEffectiveStandardWires();
   const gauges = dataToUse
-    .map(wire => wire.gauge)
-    .filter(gauge => gauge !== undefined && gauge !== null) // 过滤掉无效的 gauge
-    .map(gauge => String(gauge)); // 转换为字符串以保持一致性
-
-  // 去重并按数值排序
+    .map((wire) => wire.gauge)
+    .filter((gauge) => gauge !== undefined && gauge !== null)
+    .map((gauge) => String(gauge));
   return [...new Set(gauges)].sort((a, b) => parseFloat(a) - parseFloat(b));
 }
 
-// WIRE_TYPES 通常是固定的，代表绝缘层类型
+// WIRE_TYPES 通常是固定的，代表绝缘层类型（UI 使用 i18n 标签展示）
 export const WIRE_TYPES = ["Thin", "Thick", "Ultra Thin"];
 
-// 从localStorage获取模拟参数，如果没有则使用默认值
-function getSimulationParam(paramName, defaultValue) {
-  try {
-    const savedParams = JSON.parse(localStorage.getItem('simulationParams'));
-    if (savedParams && savedParams[paramName] !== undefined) {
-      return savedParams[paramName];
-    }
-  } catch (e) {
-    console.warn(`获取模拟参数 ${paramName} 失败:`, e);
-  }
-  return defaultValue;
-}
-
-// 物理和模拟常量
-export const PI = getSimulationParam('pi', 3.1415926);
-export const SNG_R2_TO_R1 = getSimulationParam('r2r1', 1.01); // 外部容器半径 / 内部填充区域半径 的比率
-export const ACCELERATION = getSimulationParam('accel', 1.7); // 圆形每步互相推开的强度系数
-export const WEIGHT_FACTOR = getSimulationParam('weight', 2); // 质量计算的指数 (r^WF) -> 影响大圆推小圆的程度
-export const CONVERGENCE_THRESHOLD = getSimulationParam('conv', 0.001); // 收敛目标：平均穿透深度与半径的比值
-export const MAX_ITERATIONS_RUNPACKING = getSimulationParam('max-iter-run', 500); // 主填充循环的安全中断迭代次数
-export const MAX_ITERATIONS_PACKSTEP = getSimulationParam('max-iter-step', 15); // 每个主循环步骤中，在调整容器大小之前的最大迭代次数
-export const CONTAINER_ADJUST_FACTOR = getSimulationParam('container-adjust', 0.05); // 根据穿透情况调整容器大小的幅度
+// --- 模拟参数常量（统一来源于 wireManager） ---
+export let PI = simulationParameters.PI;
+export let SNG_R2_TO_R1 = simulationParameters.SNG_R2_TO_R1;
+export let ACCELERATION = simulationParameters.ACCELERATION;
+export let WEIGHT_FACTOR = simulationParameters.WEIGHT_FACTOR;
+export let CONVERGENCE_THRESHOLD = simulationParameters.CONVERGENCE_THRESHOLD;
+export let MAX_ITERATIONS_RUNPACKING =
+  simulationParameters.MAX_ITERATIONS_RUNPACKING;
+export let MAX_ITERATIONS_PACKSTEP =
+  simulationParameters.MAX_ITERATIONS_PACKSTEP;
+export let CONTAINER_ADJUST_FACTOR =
+  simulationParameters.CONTAINER_ADJUST_FACTOR;
 
 // 可选：如果需要全局通知配置变更，可以取消注释并使用
 // export function dispatchWireConfigChangeEvent() {
@@ -125,4 +133,4 @@ export const CONTAINER_ADJUST_FACTOR = getSimulationParam('container-adjust', 0.
 // export const STANDARD_GAUGES = Object.keys(WIRE_OD_TABLE);
 
 // UI 相关常量 (例如 CANVAS_PADDING) 如果需要全局共享且与逻辑相关，也可以放在这里
-// export const CANVAS_PADDING = 15; // 或者由渲染器自行处理或作为参数传入 
+// export const CANVAS_PADDING = 15; // 或者由渲染器自行处理或作为参数传入

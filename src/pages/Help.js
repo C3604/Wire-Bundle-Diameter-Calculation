@@ -1,11 +1,14 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const translations = {
-        'zh_CN': {
-            'help_title': '线束直径计算工具 - 帮助文档',
-            'welcome_title': '欢迎使用 线束直径计算工具！',
-            'intro_p1': '本工具是一款基于二维圆形填充算法的线束直径估算插件。它可以帮助你根据输入的多种规格导线、包裹物层数和厚度，通过模拟计算来估算线束的最终直径，并提供可视化结果和配置管理功能。',
-            'toc_title': '目录',
-            'toc_list': `
+document.addEventListener("DOMContentLoaded", () => {
+  const translations = {
+    zh_CN: {
+      help_title: "线束直径计算工具 - 帮助文档",
+      welcome_title: "欢迎使用 线束直径计算工具！",
+      intro_p1:
+        "本工具是一款基于二维圆形填充算法的线束直径估算插件。它可以帮助你根据输入的多种规格导线、包裹物层数和厚度，通过模拟计算来估算线束的最终直径，并提供可视化结果和配置管理功能。",
+      toc_title: "目录",
+      search_placeholder_text: "搜索帮助内容...",
+      search_placeholder: "搜索帮助内容...",
+      toc_list: `
                 <li><a href="#section1">1. 如何启动插件</a></li>
                 <li><a href="#section2">2. 主界面概览</a>
                     <ul>
@@ -42,14 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="#section5">5. 插件配置 (<code>配置</code> 页面)</a></li>
                 <li><a href="#section6">6. 查看版本与更新日志</a></li>
             `,
-            'section1_title': '1. 如何启动插件',
-            'section1_p1': '安装插件后，在你的浏览器工具栏中找到 "线束直径计算工具" 的图标 (通常是一个图案图标)，点击它。插件的主界面会以一个新的弹出式窗口打开。',
-            'section1_caption1': '<em>这是插件的图标</em>',
-            'section2_title': '2. 主界面概览',
-            'section2_p1': '插件主界面分为左右两部分：左侧是 <strong>侧边栏导航</strong>，右侧是 <strong>主内容区</strong>。',
-            'section2_caption1': '<em>这是一个示意图，展示了侧边栏和主内容区的布局</em>',
-            'section2-1_title': '侧边栏',
-            'section2-1_content': `
+      section1_title: "1. 如何启动插件",
+      section1_p1:
+        '安装插件后，在你的浏览器工具栏中找到 "线束直径计算工具" 的图标 (通常是一个图案图标)，点击它。插件的主界面会以一个新的弹出式窗口打开。',
+      section1_caption1: "<em>这是插件的图标</em>",
+      section2_title: "2. 主界面概览",
+      section2_p1:
+        "插件主界面分为左右两部分：左侧是 <strong>侧边栏导航</strong>，右侧是 <strong>主内容区</strong>。",
+      section2_caption1:
+        "<em>这是一个示意图，展示了侧边栏和主内容区的布局</em>",
+      "section2-1_title": "侧边栏",
+      "section2-1_content": `
                 <p>侧边栏提供了主要的导航功能：</p>
                 <ul>
                     <li><strong><span class="emoji">🧮</span> 计算</strong>: 点击进入核心的线束直径计算页面。这是插件的主要功能模块。</li>
@@ -59,12 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong>收起/展开按钮 (<code>&lt;</code> 或 <code>&gt;</code>)</strong>: 位于侧边栏和主内容区之间，点击可以收起或展开侧边栏，以便为内容区提供更多空间。</li>
                 </ul>
             `,
-            'section2-2_title': '主内容区',
-            'section2-2_p1': '主内容区会根据你在侧边栏选择的选项动态显示不同的内容。默认情况下，打开插件后会显示 <strong>"计算"</strong> 页面的内容。',
-            'section3_title': '3. 核心功能：线束直径计算 (<code>计算</code> 页面)',
-            'section3_p1': '"计算" 页面是你进行所有线束直径参数输入、执行计算并查看结果的地方。',
-            'section3-1_title': '界面布局概览',
-            'section3-1_content': `
+      "section2-2_title": "主内容区",
+      "section2-2_p1":
+        '主内容区会根据你在侧边栏选择的选项动态显示不同的内容。默认情况下，打开插件后会显示 <strong>"计算"</strong> 页面的内容。',
+      section3_title: "3. 核心功能：线束直径计算 (<code>计算</code> 页面)",
+      section3_p1:
+        '"计算" 页面是你进行所有线束直径参数输入、执行计算并查看结果的地方。',
+      "section3-1_title": "界面布局概览",
+      "section3-1_content": `
                 <p>计算页面主要分为三个区域：</p>
                 <ol>
                     <li><strong>左侧参数输入区</strong>: 用于定义线束的组成部分，如导线规格、数量，包裹物厚度等，以及设置计算相关的参数。</li>
@@ -72,10 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong>底部操作控制栏</strong>: 包含执行计算、重置页面和保存历史记录的选项。</li>
                 </ol>
             `,
-            'section3-2_title': '左侧：参数输入区',
-            'section3-2_p1': '在这里，你需要输入构成线束的所有组件信息和计算参数。',
-            'section3-2-1_title': '<span class="emoji">📏</span> 标准导线',
-            'section3-2-1_content': `
+      "section3-2_title": "左侧：参数输入区",
+      "section3-2_p1": "在这里，你需要输入构成线束的所有组件信息和计算参数。",
+      "section3-2-1_title": '<span class="emoji">📏</span> 标准导线',
+      "section3-2-1_content": `
                 <p>此区域用于添加和管理符合预设规格的导线。</p>
                 <h5>表格列说明:</h5>
                 <ul>
@@ -100,8 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>如果添加错误或不再需要某行，点击该行末尾的"删除"按钮。</li>
                 </ol>
             `,
-            'section3-2-2_title': '<span class="emoji">🔗</span> 特殊导线',
-            'section3-2-2_content': `
+      "section3-2-2_title": '<span class="emoji">🔗</span> 特殊导线',
+      "section3-2-2_content": `
                 <p>如果你的线束中包含没有在"标准导线"列表中预设规格的导线，可以在这里添加。</p>
                  <h5>表格列说明:</h5>
                 <ul>
@@ -122,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>在"数量"列输入该导线的根数。</li>
                 </ol>
             `,
-            'section3-2-3_title': '<span class="emoji">🛡️</span> 包裹物',
-            'section3-2-3_content': `
+      "section3-2-3_title": '<span class="emoji">🛡️</span> 包裹物',
+      "section3-2-3_content": `
                 <p>此区域用于定义线束外部的包裹层，例如胶带、套管等。包裹物会增加线束的最终直径。</p>
                 <h5>表格列说明:</h5>
                 <ul>
@@ -142,8 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>在每一行的"厚度(mm)"列输入该层包裹的厚度。</li>
                 </ol>
             `,
-            'section3-2-4_title': '<span class="emoji">📐</span> 制造公差',
-            'section3-2-4_content': `
+      "section3-2-4_title": '<span class="emoji">📐</span> 制造公差',
+      "section3-2-4_content": `
                 <p>考虑到实际生产中的各种因素，线束的实际直径通常会比理论计算值稍大。这里可以设置一个放大系数。</p>
                 <h5>滑块与输入框:</h5>
                 <p>你可以通过拖动滑块或直接在输入框中输入百分比来调整制造公差。</p>
@@ -156,8 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong><span class="emoji">🔄</span> 重置</strong>: 点击将制造公差恢复到默认值 (110%)。</li>
                 </ul>
             `,
-            'section3-2-5_title': '<span class="emoji">🧮</span> 计算次数',
-            'section3-2-5_content': `
+      "section3-2-5_title": '<span class="emoji">🧮</span> 计算次数',
+      "section3-2-5_content": `
                 <p>本工具使用蒙特卡洛模拟方法来估算线束直径，这意味着它会进行多次随机的导线堆叠模拟，然后取统计结果。</p>
                 <h5>滑块与输入框:</h5>
                 <p>你可以通过拖动滑块或直接在输入框中输入次数来调整模拟计算的运行次数。</p>
@@ -170,8 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong><span class="emoji">🔄</span> 重置</strong>: 点击将计算次数恢复到默认值 (10)。</li>
                 </ul>
             `,
-            'section3-3_title': '底部：操作控制栏',
-            'section3-3_content': `
+      "section3-3_title": "底部：操作控制栏",
+      "section3-3_content": `
                 <ul>
                     <li><strong>保存历史记录 (复选框)</strong>:
                         <p>默认勾选。当勾选时，每次点击"<span class="emoji">📏</span> 计算直径"后，当前的输入参数和计算结果会自动保存到"历史"页面中，方便日后查阅。</p>
@@ -187,23 +195,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     </li>
                 </ul>
             `,
-            'section3-4_title': '右侧：结果展示区',
-            'section3-4_p1': '当你点击"<span class="emoji">📏</span> 计算直径"按钮后，计算结果会在这里显示。',
-            'section3-4-1_title': '<span class="emoji">🖼️</span> 截面模拟图',
-            'section3-4-1_content': `
+      "section3-4_title": "右侧：结果展示区",
+      "section3-4_p1":
+        '当你点击"<span class="emoji">📏</span> 计算直径"按钮后，计算结果会在这里显示。',
+      "section3-4-1_title": '<span class="emoji">🖼️</span> 截面模拟图',
+      "section3-4-1_content": `
                 <ul>
                     <li><strong>Canvas 画布</strong>: 这里会展示一个基于你输入的导线进行随机堆叠后的典型线束横截面示意图。不同直径的导线会用不同颜色表示。</li>
                     <li><strong>图例 (Legend)</strong>: 画布旁边或下方会有一个图例，说明截面图中不同颜色分别对应哪种直径的导线。</li>
                     <li><strong>内层容器边界</strong>: 图中可能会有一条虚线圆圈，它代表了所有导线（不含包裹物和公差）堆叠后形成的理论线束边界。</li>
                 </ul>
             `,
-            'section3-4-2_title': '<span class="emoji">✨</span> 高亮最终平均直径',
-            'section3-4-2_content': `
+      "section3-4-2_title": '<span class="emoji">✨</span> 高亮最终平均直径',
+      "section3-4-2_content": `
                 <p>在截面模拟图区域，会有一个醒目显示的数值，例如 "<strong>Ø 12.3 mm</strong>"。</p>
                 <p>这代表了<strong>最终的平均直径</strong>，它是综合考虑了所有导线、所有包裹层厚度以及你设定的制造公差后，向上取整得到的估算直径值。括号内通常会显示一个更精确（如保留两位小数）的计算值。</p>
             `,
-            'section3-4-3_title': '<span class="emoji">⚙️</span> 输入统计',
-            'section3-4-3_content': `
+      "section3-4-3_title": '<span class="emoji">⚙️</span> 输入统计',
+      "section3-4-3_content": `
                 <p>这里汇总了你当前输入的一些关键参数：</p>
                 <ul>
                     <li><strong>总导线数量</strong>: 你在"标准导线"和"特殊导线"中输入的导线总根数。</li>
@@ -211,8 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong>总包裹物厚度</strong>: 所有包裹层厚度的总和（单边）。</li>
                 </ul>
             `,
-            'section3-4-4_title': '<span class="emoji">📈</span> 直径计算详情',
-            'section3-4-4_content': `
+      "section3-4-4_title": '<span class="emoji">📈</span> 直径计算详情',
+      "section3-4-4_content": `
                 <p>这是一个表格，展示了更详细的直径计算结果：</p>
                 <h5>参数:</h5>
                 <ul>
@@ -225,8 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h5>模拟值 (mm):</h5>
                 <p>这一列显示的是<strong>最终的计算直径</strong>，它是在"裸线值"的基础上，加上了所有包裹层的总厚度（双边），并且应用了你设定的"制造公差"百分比后得到的直径。这些值通常是你更关心的最终结果。</p>
             `,
-            'section3-4-5_title': '<span class="emoji">📊</span> 计算结果分布图',
-            'section3-4-5_content': `
+      "section3-4-5_title": '<span class="emoji">📊</span> 计算结果分布图',
+      "section3-4-5_content": `
                 <p>这是一个直方图，显示了在多次模拟计算中，不同直径结果出现的频次分布。</p>
                 <ul>
                     <li><strong>横坐标 (X轴)</strong>: 线束直径 (mm)。</li>
@@ -234,8 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>这可以帮助你直观地了解计算结果的稳定性和集中趋势。如果分布很宽，说明结果波动较大。</li>
                 </ul>
             `,
-            'section3-5_title': '快速计算示例',
-            'section3-5_content': `
+      "section3-5_title": "快速计算示例",
+      "section3-5_content": `
                 <p>假设你需要计算一个由以下组件构成的线束：</p>
                 <ul>
                     <li>10根 0.5 mm² 的薄壁导线</li>
@@ -257,8 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>稍等片刻，右侧就会显示出详细的计算结果和截面模拟图。</li>
                 </ol>
             `,
-            'section4_title': '4. 查看与管理计算历史 (<code>历史</code> 页面)',
-            'section4_content': `
+      section4_title: "4. 查看与管理计算历史 (<code>历史</code> 页面)",
+      section4_content: `
                 <p>每次当你在"计算"页面启用了"保存历史记录"并执行计算后，该次计算的完整快照都会被保存在这里。</p>
                 <img src="../assets/img3.jpg" alt="历史页面示意图">
                 <h5>主要功能:</h5>
@@ -276,8 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </li>
                 </ul>
             `,
-            'section5_title': '5. 插件配置 (<code>配置</code> 页面)',
-            'section5_content': `
+      section5_title: "5. 插件配置 (<code>配置</code> 页面)",
+      section5_content: `
                 <p>在这里，你可以自定义插件的行为和参数，以更好地适应你的工作流程。</p>
                 <img src="../assets/img4.jpg" alt="配置页面示意图">
                 <h5>主要配置项:</h5>
@@ -306,19 +315,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     </li>
                 </ul>
             `,
-            'section6_title': '6. 查看版本与更新日志',
-            'section6_content': `
+      section6_title: "6. 查看版本与更新日志",
+      section6_content: `
                 <p>在主界面侧边栏的底部，你会看到当前插件的版本号，例如 <code>版本: 1.0.2.2</code>。</p>
                 <p><strong>点击这个版本号</strong>，会弹出一个窗口，显示详细的更新日志 (Changelog)。这可以帮助你了解每个版本新增了哪些功能或修复了哪些问题。</p>
                 <img src="../assets/img5.jpg" alt="更新日志示意图">
             `,
-        },
-        'en': {
-            'help_title': 'Wire Bundle Diameter Calculator - Help Document',
-            'welcome_title': 'Welcome to the Wire Bundle Diameter Calculator!',
-            'intro_p1': 'This tool is a plug-in for estimating the diameter of wire bundles based on a 2D circle packing algorithm. It can help you estimate the final diameter of a wire bundle by simulating calculations based on the input of various wire specifications, number of wrapping layers, and thickness, and provides visualization results and configuration management functions.',
-            'toc_title': 'Table of Contents',
-            'toc_list': `
+    },
+    en: {
+      help_title: "Wire Bundle Diameter Calculator - Help Document",
+      welcome_title: "Welcome to the Wire Bundle Diameter Calculator!",
+      intro_p1:
+        "This tool is a plug-in for estimating the diameter of wire bundles based on a 2D circle packing algorithm. It can help you estimate the final diameter of a wire bundle by simulating calculations based on the input of various wire specifications, number of wrapping layers, and thickness, and provides visualization results and configuration management functions.",
+      toc_title: "Table of Contents",
+      search_placeholder_text: "Search help content...",
+      search_placeholder: "Search help content...",
+      toc_list: `
                 <li><a href="#section1">1. How to launch the plugin</a></li>
                 <li><a href="#section2">2. Main Interface Overview</a>
                     <ul>
@@ -355,14 +367,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="#section5">5. Plugin Configuration (<code>Config</code> Page)</a></li>
                 <li><a href="#section6">6. View Version and Changelog</a></li>
             `,
-            'section1_title': '1. How to launch the plugin',
-            'section1_p1': 'After installing the plugin, find the "Wire Bundle Diameter Calculator" icon (usually a graphic icon) in your browser toolbar and click it. The main interface of the plugin will open in a new pop-up window.',
-            'section1_caption1': '<em>This is the plugin icon</em>',
-            'section2_title': '2. Main Interface Overview',
-            'section2_p1': 'The main interface of the plugin is divided into two parts: the left is the <strong>sidebar navigation</strong>, and the right is the <strong>main content area</strong>.',
-            'section2_caption1': '<em>This is a schematic diagram showing the layout of the sidebar and the main content area</em>',
-            'section2-1_title': 'Sidebar',
-            'section2-1_content': `
+      section1_title: "1. How to launch the plugin",
+      section1_p1:
+        'After installing the plugin, find the "Wire Bundle Diameter Calculator" icon (usually a graphic icon) in your browser toolbar and click it. The main interface of the plugin will open in a new pop-up window.',
+      section1_caption1: "<em>This is the plugin icon</em>",
+      section2_title: "2. Main Interface Overview",
+      section2_p1:
+        "The main interface of the plugin is divided into two parts: the left is the <strong>sidebar navigation</strong>, and the right is the <strong>main content area</strong>.",
+      section2_caption1:
+        "<em>This is a schematic diagram showing the layout of the sidebar and the main content area</em>",
+      "section2-1_title": "Sidebar",
+      "section2-1_content": `
                 <p>The sidebar provides the main navigation functions:</p>
                 <ul>
                     <li><strong><span class="emoji">🧮</span> Calculate</strong>: Click to enter the core wire bundle diameter calculation page. This is the main functional module of the plugin.</li>
@@ -372,12 +387,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong>Collapse/Expand Button (<code>&lt;</code> or <code>&gt;</code>)</strong>: Located between the sidebar and the main content area, click to collapse or expand the sidebar to provide more space for the content area.</li>
                 </ul>
             `,
-            'section2-2_title': 'Main Content Area',
-            'section2-2_p1': 'The main content area will dynamically display different content according to the options you select in the sidebar. By default, the content of the <strong>"Calculate"</strong> page will be displayed after opening the plugin.',
-            'section3_title': '3. Core Function: Wire Bundle Diameter Calculation (<code>Calculate</code> Page)',
-            'section3_p1': 'The "Calculate" page is where you enter all wire bundle diameter parameters, perform calculations, and view the results.',
-            'section3-1_title': 'Interface Layout Overview',
-            'section3-1_content': `
+      "section2-2_title": "Main Content Area",
+      "section2-2_p1":
+        'The main content area will dynamically display different content according to the options you select in the sidebar. By default, the content of the <strong>"Calculate"</strong> page will be displayed after opening the plugin.',
+      section3_title:
+        "3. Core Function: Wire Bundle Diameter Calculation (<code>Calculate</code> Page)",
+      section3_p1:
+        'The "Calculate" page is where you enter all wire bundle diameter parameters, perform calculations, and view the results.',
+      "section3-1_title": "Interface Layout Overview",
+      "section3-1_content": `
                 <p>The calculation page is mainly divided into three areas:</p>
                 <ol>
                     <li><strong>Left Parameter Input Area</strong>: Used to define the components of the wire bundle, such as wire specifications, quantity, wrapping thickness, etc., and to set calculation-related parameters.</li>
@@ -385,10 +403,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong>Bottom Operation Control Bar</strong>: Contains options for performing calculations, resetting the page, and saving history.</li>
                 </ol>
             `,
-            'section3-2_title': 'Left: Parameter Input Area',
-            'section3-2_p1': 'Here, you need to enter all the component information and calculation parameters that make up the wire bundle.',
-            'section3-2-1_title': '<span class="emoji">📏</span> Standard Wires',
-            'section3-2-1_content': `
+      "section3-2_title": "Left: Parameter Input Area",
+      "section3-2_p1":
+        "Here, you need to enter all the component information and calculation parameters that make up the wire bundle.",
+      "section3-2-1_title": '<span class="emoji">📏</span> Standard Wires',
+      "section3-2-1_content": `
                 <p>This area is used to add and manage wires that conform to preset specifications.</p>
                 <h5>Table Column Description:</h5>
                 <ul>
@@ -413,8 +432,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>If you add it incorrectly or no longer need a row, click the "Delete" button at the end of the row.</li>
                 </ol>
             `,
-            'section3-2-2_title': '<span class="emoji">🔗</span> Special Wires',
-            'section3-2-2_content': `
+      "section3-2-2_title": '<span class="emoji">🔗</span> Special Wires',
+      "section3-2-2_content": `
                 <p>If your wire bundle contains wires that are not pre-configured in the "Standard Wires" list, you can add them here.</p>
                  <h5>Table Column Description:</h5>
                 <ul>
@@ -435,8 +454,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>Enter the number of this wire in the "Quantity" column.</li>
                 </ol>
             `,
-            'section3-2-3_title': '<span class="emoji">🛡️</span> Wrappings',
-            'section3-2-3_content': `
+      "section3-2-3_title": '<span class="emoji">🛡️</span> Wrappings',
+      "section3-2-3_content": `
                 <p>This area is used to define the outer wrapping layers of the wire bundle, such as tape, tubing, etc. Wrappings will increase the final diameter of the wire bundle.</p>
                 <h5>Table Column Description:</h5>
                 <ul>
@@ -455,8 +474,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>Enter the thickness of this layer of wrapping in the "Thickness (mm)" column of each row.</li>
                 </ol>
             `,
-            'section3-2-4_title': '<span class="emoji">📐</span> Manufacturing Tolerance',
-            'section3-2-4_content': `
+      "section3-2-4_title":
+        '<span class="emoji">📐</span> Manufacturing Tolerance',
+      "section3-2-4_content": `
                 <p>Considering various factors in actual production, the actual diameter of the wire bundle is usually slightly larger than the theoretical calculated value. A magnification factor can be set here.</p>
                 <h5>Slider and Input Box:</h5>
                 <p>You can adjust the manufacturing tolerance by dragging the slider or directly entering a percentage in the input box.</p>
@@ -469,8 +489,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong><span class="emoji">🔄</span> Reset</strong>: Click to restore the manufacturing tolerance to the default value (110%).</li>
                 </ul>
             `,
-            'section3-2-5_title': '<span class="emoji">🧮</span> Number of Calculations',
-            'section3-2-5_content': `
+      "section3-2-5_title":
+        '<span class="emoji">🧮</span> Number of Calculations',
+      "section3-2-5_content": `
                 <p>This tool uses the Monte Carlo simulation method to estimate the wire bundle diameter, which means it will perform multiple random wire stacking simulations and then take the statistical results.</p>
                 <h5>Slider and Input Box:</h5>
                 <p>You can adjust the number of simulation calculations by dragging the slider or directly entering the number in the input box.</p>
@@ -483,8 +504,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong><span class="emoji">🔄</span> Reset</strong>: Click to restore the number of calculations to the default value (10).</li>
                 </ul>
             `,
-            'section3-3_title': 'Bottom: Operation Control Bar',
-            'section3-3_content': `
+      "section3-3_title": "Bottom: Operation Control Bar",
+      "section3-3_content": `
                 <ul>
                     <li><strong>Save History (Checkbox)</strong>:
                         <p>Checked by default. When checked, every time you click "<span class="emoji">📏</span> Calculate Diameter", the current input parameters and calculation results will be automatically saved to the "History" page for future reference.</p>
@@ -500,23 +521,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     </li>
                 </ul>
             `,
-            'section3-4_title': 'Right: Result Display Area',
-            'section3-4_p1': 'When you click the "<span class="emoji">📏</span> Calculate Diameter" button, the calculation results will be displayed here.',
-            'section3-4-1_title': '<span class="emoji">🖼️</span> Cross-section Simulation Diagram',
-            'section3-4-1_content': `
+      "section3-4_title": "Right: Result Display Area",
+      "section3-4_p1":
+        'When you click the "<span class="emoji">📏</span> Calculate Diameter" button, the calculation results will be displayed here.',
+      "section3-4-1_title":
+        '<span class="emoji">🖼️</span> Cross-section Simulation Diagram',
+      "section3-4-1_content": `
                 <ul>
                     <li><strong>Canvas</strong>: A typical cross-section diagram of a wire bundle based on the wires you entered will be displayed here after random stacking. Wires of different diameters will be represented by different colors.</li>
                     <li><strong>Legend</strong>: There will be a legend next to or below the canvas, explaining which diameter of wire the different colors in the cross-section diagram correspond to.</li>
                     <li><strong>Inner Container Boundary</strong>: There may be a dashed circle in the figure, which represents the theoretical wire bundle boundary formed by the stacking of all wires (excluding wrappings and tolerances).</li>
                 </ul>
             `,
-            'section3-4-2_title': '<span class="emoji">✨</span> Highlighted Final Average Diameter',
-            'section3-4-2_content': `
+      "section3-4-2_title":
+        '<span class="emoji">✨</span> Highlighted Final Average Diameter',
+      "section3-4-2_content": `
                 <p>In the cross-section simulation diagram area, there will be a prominently displayed value, for example, "<strong>Ø 12.3 mm</strong>".</p>
                 <p>This represents the <strong>final average diameter</strong>, which is the estimated diameter value obtained by rounding up after comprehensively considering all wires, all wrapping layer thicknesses, and the manufacturing tolerance you set. The value in parentheses usually shows a more precise calculated value (e.g., reserved to two decimal places).</p>
             `,
-            'section3-4-3_title': '<span class="emoji">⚙️</span> Input Statistics',
-            'section3-4-3_content': `
+      "section3-4-3_title": '<span class="emoji">⚙️</span> Input Statistics',
+      "section3-4-3_content": `
                 <p>Here are some key parameters you are currently entering:</p>
                 <ul>
                     <li><strong>Total number of wires</strong>: The total number of wires you entered in "Standard Wires" and "Special Wires".</li>
@@ -524,8 +548,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong>Total wrapping thickness</strong>: The sum of the thicknesses of all wrapping layers (single-sided).</li>
                 </ul>
             `,
-            'section3-4-4_title': '<span class="emoji">📈</span> Diameter Calculation Details',
-            'section3-4-4_content': `
+      "section3-4-4_title":
+        '<span class="emoji">📈</span> Diameter Calculation Details',
+      "section3-4-4_content": `
                 <p>This is a table showing more detailed diameter calculation results:</p>
                 <h5>Parameters:</h5>
                 <ul>
@@ -538,8 +563,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h5>Simulated value (mm):</h5>
                 <p>This column shows the <strong>final calculated diameter</strong>, which is the diameter obtained by adding the total thickness of all wrapping layers (double-sided) to the "bare wire value" and applying the "manufacturing tolerance" percentage you set. These values are usually the final results you are more concerned about.</p>
             `,
-            'section3-4-5_title': '<span class="emoji">📊</span> Calculation Result Distribution Chart',
-            'section3-4-5_content': `
+      "section3-4-5_title":
+        '<span class="emoji">📊</span> Calculation Result Distribution Chart',
+      "section3-4-5_content": `
                 <p>This is a histogram showing the frequency distribution of different diameter results in multiple simulation calculations.</p>
                 <ul>
                     <li><strong>Horizontal axis (X-axis)</strong>: Wire bundle diameter (mm).</li>
@@ -547,8 +573,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>This can help you intuitively understand the stability and central tendency of the calculation results. If the distribution is wide, it means that the results fluctuate greatly.</li>
                 </ul>
             `,
-            'section3-5_title': 'Quick Calculation Example',
-            'section3-5_content': `
+      "section3-5_title": "Quick Calculation Example",
+      "section3-5_content": `
                 <p>Suppose you need to calculate a wire bundle composed of the following components:</p>
                 <ul>
                     <li>10 thin-walled wires of 0.5 mm²</li>
@@ -570,8 +596,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li>After a while, the detailed calculation results and cross-section simulation diagram will be displayed on the right.</li>
                 </ol>
             `,
-            'section4_title': '4. View and Manage Calculation History (<code>History</code> Page)',
-            'section4_content': `
+      section4_title:
+        "4. View and Manage Calculation History (<code>History</code> Page)",
+      section4_content: `
                 <p>Every time you enable "Save History" and perform a calculation on the "Calculate" page, a complete snapshot of that calculation will be saved here.</p>
                 <img src="../assets/img3.jpg" alt="History page diagram">
                 <h5>Main functions:</h5>
@@ -589,8 +616,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </li>
                 </ul>
             `,
-            'section5_title': '5. Plugin Configuration (<code>Config</code> Page)',
-            'section5_content': `
+      section5_title: "5. Plugin Configuration (<code>Config</code> Page)",
+      section5_content: `
                 <p>Here, you can customize the behavior and parameters of the plugin to better suit your workflow.</p>
                 <img src="../assets/img4.jpg" alt="Configuration page diagram">
                 <h5>Main configuration items:</h5>
@@ -619,27 +646,143 @@ document.addEventListener('DOMContentLoaded', () => {
                     </li>
                 </ul>
             `,
-            'section6_title': '6. View Version and Changelog',
-            'section6_content': `
+      section6_title: "6. View Version and Changelog",
+      section6_content: `
                 <p>At the bottom of the main interface sidebar, you will see the current version number of the plugin, for example <code>Version: 1.0.2.2</code>.</p>
                 <p><strong>Click this version number</strong>, and a window will pop up showing the detailed changelog. This can help you understand what new features have been added or what problems have been fixed in each version.</p>
                 <img src="../assets/img5.jpg" alt="Changelog diagram">
             `,
-        }
-    };
+    },
+  };
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const lang = urlParams.get('lang') || 'zh_CN';
-    const t = translations[lang] || translations['zh_CN'];
+  // Search functionality
+  const searchInput = document.getElementById("search-input");
+  const clearSearchBtn = document.getElementById("clear-search");
+  const searchResults = document.getElementById("search-results");
+  const tocList = document.getElementById("toc-list");
 
-    document.querySelectorAll('[data-i18n-key]').forEach(element => {
-        const key = element.getAttribute('data-i18n-key');
-        if (t[key]) {
-            if (element.tagName.toLowerCase() === 'title') {
-                element.textContent = t[key];
-            } else {
-                element.innerHTML = t[key];
-            }
-        }
+  // Function to highlight search terms
+  function highlightText(text, searchTerm) {
+    if (!searchTerm) return text;
+    const regex = new RegExp(`(${searchTerm})`, "gi");
+    return text.replace(regex, '<span class="highlight">$1</span>');
+  }
+
+  // Function to search content
+  function searchContent(term) {
+    if (!term) {
+      searchResults.classList.remove("show");
+      clearSearchBtn.style.display = "none";
+      tocList.style.display = "block";
+      return;
+    }
+
+    clearSearchBtn.style.display = "flex";
+    tocList.style.display = "none";
+
+    const sections = document.querySelectorAll("main section");
+    const results = [];
+
+    sections.forEach((section) => {
+      const title = section.querySelector("h2, h3, h4, h5");
+      const content = section.textContent || section.innerText;
+
+      if (
+        title &&
+        (title.textContent.toLowerCase().includes(term.toLowerCase()) ||
+          content.toLowerCase().includes(term.toLowerCase()))
+      ) {
+        const titleText = title.textContent;
+        const snippet = content.substring(0, 150) + "...";
+        results.push({
+          id: section.id,
+          title: titleText,
+          snippet: snippet,
+        });
+      }
     });
-}); 
+
+    if (results.length > 0) {
+      let resultsHTML = "";
+      results.forEach((result) => {
+        resultsHTML += `
+                    <div class="search-result-item" data-target="${result.id}">
+                        <strong>${highlightText(result.title, term)}</strong>
+                        <div>${highlightText(result.snippet, term)}</div>
+                    </div>
+                `;
+      });
+      searchResults.innerHTML = resultsHTML;
+      searchResults.classList.add("show");
+    } else {
+      searchResults.innerHTML =
+        '<div class="search-result-item no-results">未找到相关结果</div>';
+      searchResults.classList.add("show");
+    }
+
+    // Add click event to search results
+    document.querySelectorAll(".search-result-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        const targetId = item.getAttribute("data-target");
+        if (targetId) {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: "smooth" });
+            // Highlight the target element temporarily
+            targetElement.style.backgroundColor = "#FFF3CD";
+            setTimeout(() => {
+              targetElement.style.backgroundColor = "";
+            }, 2000);
+          }
+        }
+      });
+    });
+  }
+
+  // Event listeners for search
+  searchInput.addEventListener("input", (e) => {
+    searchContent(e.target.value);
+  });
+
+  clearSearchBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    searchContent("");
+    searchInput.focus();
+  });
+
+  // Existing translation functionality
+  const urlParams = new URLSearchParams(window.location.search);
+  const lang = urlParams.get("lang") || "zh_CN";
+  const t = translations[lang] || translations["zh_CN"];
+
+  document.querySelectorAll("[data-i18n-key]").forEach((element) => {
+    const key = element.getAttribute("data-i18n-key");
+    if (t[key]) {
+      if (element.tagName.toLowerCase() === "title") {
+        element.textContent = t[key];
+      } else {
+        element.innerHTML = t[key];
+      }
+    }
+  });
+
+  // Add placeholder translation
+  const placeholderKey = searchInput.getAttribute("data-i18n-ph-key");
+  if (placeholderKey && t[placeholderKey]) {
+    searchInput.placeholder = t[placeholderKey];
+  }
+
+  // Existing TOC toggle functionality
+  const toc = document.getElementById("toc");
+  const tocToggleBtn = document.getElementById("toc-toggle-btn");
+  const helpContainer = document.querySelector(".help-container");
+
+  if (tocToggleBtn) {
+    tocToggleBtn.addEventListener("click", () => {
+      toc.classList.toggle("collapsed");
+      if (helpContainer) {
+        helpContainer.classList.toggle("toc-collapsed");
+      }
+    });
+  }
+});

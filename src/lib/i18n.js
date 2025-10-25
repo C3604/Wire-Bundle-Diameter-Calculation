@@ -5,10 +5,10 @@
 
 class I18nManager {
   constructor() {
-    this.currentLanguage = 'zh_CN'; // 默认语言
+    this.currentLanguage = "zh_CN"; // 默认语言
     this.messages = {}; // 缓存的语言包数据
-    this.supportedLanguages = ['zh_CN', 'en']; // 支持的语言列表
-    this.storageKey = 'i18n_language_preference'; // 存储键名
+    this.supportedLanguages = ["zh_CN", "en"]; // 支持的语言列表
+    this.storageKey = "i18n_language_preference"; // 存储键名
     this.initialized = false;
   }
 
@@ -20,22 +20,22 @@ class I18nManager {
     try {
       // 从存储中加载用户语言偏好
       await this.loadLanguagePreference();
-      
+
       // 加载当前语言包
       await this.loadMessages(this.currentLanguage);
-      
+
       this.initialized = true;
-      console.log('I18n initialized with language:', this.currentLanguage);
+      console.log("I18n initialized with language:", this.currentLanguage);
     } catch (error) {
-      console.error('Failed to initialize I18n:', error);
+      console.error("Failed to initialize I18n:", error);
       // 降级到默认语言
-      this.currentLanguage = 'zh_CN';
+      this.currentLanguage = "zh_CN";
       try {
         await this.loadMessages(this.currentLanguage);
         this.initialized = true;
       } catch (fallbackError) {
-        console.error('Failed to load fallback language:', fallbackError);
-        throw new Error('国际化初始化失败');
+        console.error("Failed to load fallback language:", fallbackError);
+        throw new Error("国际化初始化失败");
       }
     }
   }
@@ -47,19 +47,22 @@ class I18nManager {
   async loadLanguagePreference() {
     try {
       const result = await chrome.storage.local.get(this.storageKey);
-      if (result[this.storageKey] && this.supportedLanguages.includes(result[this.storageKey])) {
+      if (
+        result[this.storageKey] &&
+        this.supportedLanguages.includes(result[this.storageKey])
+      ) {
         this.currentLanguage = result[this.storageKey];
       } else {
         // 尝试从浏览器语言检测
         const browserLang = navigator.language || navigator.userLanguage;
-        if (browserLang.startsWith('zh')) {
-          this.currentLanguage = 'zh_CN';
+        if (browserLang.startsWith("zh")) {
+          this.currentLanguage = "zh_CN";
         } else {
-          this.currentLanguage = 'en';
+          this.currentLanguage = "en";
         }
       }
     } catch (error) {
-      console.warn('Failed to load language preference:', error);
+      console.warn("Failed to load language preference:", error);
       // 使用默认语言
     }
   }
@@ -73,7 +76,11 @@ class I18nManager {
     try {
       await chrome.storage.local.set({ [this.storageKey]: language });
     } catch (error) {
-      console.error('Failed to save language preference:', error);
+      // 非扩展环境下使用 localStorage 回退
+      try {
+        localStorage.setItem(this.storageKey, language);
+      } catch (_) {}
+      console.error("Failed to save language preference:", error);
     }
   }
 
@@ -88,24 +95,33 @@ class I18nManager {
     }
 
     try {
-      // 使用Chrome扩展的国际化API加载消息
-      // 由于Chrome扩展的限制，我们需要直接使用chrome.i18n.getMessage
-      // 或者从_locales目录加载JSON文件
-      
-      // 这里我们直接使用chrome.i18n，它会根据manifest.json中的default_locale自动选择
-      // 但为了支持动态切换，我们需要手动加载JSON文件
-      
-      const messagesUrl = chrome.runtime.getURL(`_locales/${language}/messages.json`);
-      const response = await fetch(messagesUrl);
-      
-      if (!response.ok) {
-        throw new Error(`Failed to fetch messages for ${language}: ${response.status}`);
+      // 使用Chrome扩展的国际化API加载消息；在非扩展环境下回退到相对路径
+      let messagesUrl;
+      if (
+        typeof chrome !== "undefined" &&
+        chrome.runtime &&
+        typeof chrome.runtime.getURL === "function"
+      ) {
+        messagesUrl = chrome.runtime.getURL(`_locales/${language}/messages.json`);
+      } else {
+        messagesUrl = `/_locales/${language}/messages.json`;
       }
-      
+      const response = await fetch(messagesUrl);
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch messages for ${language}: ${response.status}`,
+        );
+      }
+
       const messages = await response.json();
       this.messages[language] = messages;
-      
-      console.log(`Loaded messages for ${language}:`, Object.keys(messages).length, 'keys');
+
+      console.log(
+        `Loaded messages for ${language}:`,
+        Object.keys(messages).length,
+        "keys",
+      );
     } catch (error) {
       console.error(`Failed to load messages for ${language}:`, error);
       throw error;
@@ -142,9 +158,8 @@ class I18nManager {
 
       // 触发语言切换事件
       this.dispatchLanguageChangeEvent(oldLanguage, newLanguage);
-
     } catch (error) {
-      console.error('Failed to switch language:', error);
+      console.error("Failed to switch language:", error);
       throw error;
     }
   }
@@ -157,7 +172,7 @@ class I18nManager {
    */
   getMessage(key, substitutions = {}) {
     if (!this.initialized) {
-      console.warn('I18n not initialized, returning key:', key);
+      console.warn("I18n not initialized, returning key:", key);
       return key;
     }
 
@@ -169,34 +184,35 @@ class I18nManager {
       }
 
       // 处理嵌套键名（如 app.title）
-      const keyParts = key.split('.');
+      const keyParts = key.split(".");
       let message = messages;
 
       for (const part of keyParts) {
-        if (message && typeof message === 'object' && message[part]) {
+        if (message && typeof message === "object" && message[part]) {
           message = message[part];
         } else {
           // 键名不存在，尝试降级
-          console.warn(`Translation key not found: ${key} in language: ${this.currentLanguage}`);
+          console.warn(
+            `Translation key not found: ${key} in language: ${this.currentLanguage}`,
+          );
           return this.getFallbackMessage(key, substitutions);
         }
       }
 
       // 如果找到的是完整的消息对象
-      if (message && typeof message === 'object' && message.message) {
+      if (message && typeof message === "object" && message.message) {
         return this.substituteMessage(message.message, substitutions);
       }
 
       // 如果找到的是简单字符串
-      if (typeof message === 'string') {
+      if (typeof message === "string") {
         return this.substituteMessage(message, substitutions);
       }
 
       // 都不是，返回降级消息
       return this.getFallbackMessage(key, substitutions);
-
     } catch (error) {
-      console.error('Error getting message:', error);
+      console.error("Error getting message:", error);
       return this.getFallbackMessage(key, substitutions);
     }
   }
@@ -210,13 +226,27 @@ class I18nManager {
   getFallbackMessage(key, substitutions) {
     // 尝试使用chrome.i18n API作为降级
     try {
-      const message = chrome.i18n.getMessage(key, Object.values(substitutions));
-      if (message) {
-        return message;
+      if (
+        typeof chrome !== "undefined" &&
+        chrome.i18n &&
+        typeof chrome.i18n.getMessage === "function"
+      ) {
+        const message = chrome.i18n.getMessage(key, Object.values(substitutions));
+        if (message) {
+          return message;
+        }
       }
     } catch (error) {
-      console.warn('Chrome i18n API also failed:', error);
+      console.warn("Chrome i18n API also failed:", error);
     }
+
+    // 最终降级：如果已加载消息包，尝试直接返回对应键
+    try {
+      const msgObj = this.messages[this.currentLanguage]?.[key];
+      if (msgObj && typeof msgObj === "object" && msgObj.message) {
+        return this.substituteMessage(msgObj.message, substitutions);
+      }
+    } catch (_) {}
 
     // 最终降级：返回键名
     return key;
@@ -229,16 +259,16 @@ class I18nManager {
    * @returns {string}
    */
   substituteMessage(message, substitutions) {
-    if (!substitutions || typeof substitutions !== 'object') {
+    if (!substitutions || typeof substitutions !== "object") {
       return message;
     }
 
     let result = message;
     for (const [key, value] of Object.entries(substitutions)) {
       // 支持 {key} 格式的占位符
-      result = result.replace(new RegExp(`\\{${key}\\}`, 'g'), value);
+      result = result.replace(new RegExp(`\\{${key}\\}`, "g"), value);
       // 支持 $key$ 格式的占位符
-      result = result.replace(new RegExp(`\\$${key}\\$`, 'g'), value);
+      result = result.replace(new RegExp(`\\$${key}\\$`, "g"), value);
     }
 
     return result;
@@ -250,12 +280,12 @@ class I18nManager {
    * @param {string} newLanguage - 新语言
    */
   dispatchLanguageChangeEvent(oldLanguage, newLanguage) {
-    const event = new CustomEvent('languageChanged', {
+    const event = new CustomEvent("languageChanged", {
       detail: {
         oldLanguage,
         newLanguage,
-        i18n: this
-      }
+        i18n: this,
+      },
     });
     document.dispatchEvent(event);
   }
@@ -291,20 +321,26 @@ class I18nManager {
    */
   updatePageTexts(element = document.body) {
     if (!this.isInitialized()) {
-      console.warn('i18n is not initialized yet. Skipping text update.');
+      console.warn("i18n is not initialized yet. Skipping text update.");
       return;
     }
-    const elements = element.querySelectorAll('[data-i18n]');
-    elements.forEach(el => {
-      const key = el.getAttribute('data-i18n');
+    const elements = element.querySelectorAll("[data-i18n]");
+    elements.forEach((el) => {
+      const key = el.getAttribute("data-i18n");
       const translation = this.getMessage(key);
 
       if (translation) {
         // Check if the button contains only an icon (emoji or <i> tag)
-        const hasIcon = el.querySelector('i') !== null || /^[✨🔄✅❌📄📤🗑️⚙️📏🧹📐🧮🖼️🔗🛡️💾▶️⏸️⏹️]+$/.test(el.textContent.trim());
+        const hasIcon =
+          el.querySelector("i") !== null ||
+          /^[✨🔄✅❌📄📤🗑️⚙️📏🧹📐🧮🖼️🔗🛡️💾▶️⏸️⏹️]+$/.test(
+            el.textContent.trim(),
+          );
 
-        if (el.tagName === 'BUTTON' && hasIcon) {
-          const iconMatch = el.innerHTML.match(/^(\s*<i class="[^"]+"><\/i>\s*|^\s*[✨🔄✅❌📄📤🗑️⚙️📏🧹📐🧮🖼️🔗🛡️💾▶️⏸️⏹️]+)/);
+        if (el.tagName === "BUTTON" && hasIcon) {
+          const iconMatch = el.innerHTML.match(
+            /^(\s*<i class="[^"]+"><\/i>\s*|^\s*[✨🔄✅❌📄📤🗑️⚙️📏🧹📐🧮🖼️🔗🛡️💾▶️⏸️⏹️]+)/,
+          );
           if (iconMatch) {
             // Preserve the icon and append the translated text
             el.innerHTML = `${iconMatch[0]} ${translation}`;
@@ -328,12 +364,12 @@ class I18nManager {
    * @param {HTMLElement} [element=document.body] - The root element to search for internationalized elements.
    */
   updateElementAttributes(element = document.body) {
-    const elements = element.querySelectorAll('[data-i18n-title]');
-    elements.forEach(el => {
-      const key = el.getAttribute('data-i18n-title');
+    const elements = element.querySelectorAll("[data-i18n-title]");
+    elements.forEach((el) => {
+      const key = el.getAttribute("data-i18n-title");
       const translation = this.getMessage(key);
       if (translation) {
-        el.setAttribute('title', translation);
+        el.setAttribute("title", translation);
       }
     });
   }
@@ -344,10 +380,10 @@ class I18nManager {
    */
   updateElement(element) {
     if (!element) return;
-    
+
     // Update text content if data-i18n exists
-    if (element.hasAttribute('data-i18n')) {
-      const key = element.getAttribute('data-i18n');
+    if (element.hasAttribute("data-i18n")) {
+      const key = element.getAttribute("data-i18n");
       const translation = this.getMessage(key);
       if (translation) {
         element.textContent = translation;
@@ -355,11 +391,11 @@ class I18nManager {
     }
 
     // Update title attribute if data-i18n-title exists
-    if (element.hasAttribute('data-i18n-title')) {
-      const key = element.getAttribute('data-i18n-title');
+    if (element.hasAttribute("data-i18n-title")) {
+      const key = element.getAttribute("data-i18n-title");
       const translation = this.getMessage(key);
       if (translation) {
-        element.setAttribute('title', translation);
+        element.setAttribute("title", translation);
       }
     }
   }
@@ -370,4 +406,4 @@ const i18n = new I18nManager();
 
 // 导出实例和类
 export { i18n, I18nManager };
-export default i18n; 
+export default i18n;

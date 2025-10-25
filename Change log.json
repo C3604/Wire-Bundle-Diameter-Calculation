@@ -7,7 +7,8 @@
         "更新：重写 build.bat，默认输出 Chromium 清单，移除 Firefox 选项",
         "更新：清理浏览器兼容 polyfill 与 Firefox 专用样式，简化背景脚本",
         "修复：输入统计区域在切换语言后丢失计数的显示问题",
-        "文档：新增 AGENTS.md 并在 README 中强调仅支持 Chromium 内核浏览器"
+        "文档：新增 AGENTS.md 并在 README 中强调仅支持 Chromium 内核浏览器",
+        "规则：新增强制性语言规范与代码实现原则，并同步更新 AGENTS.md 与 README"
       ]
     },
     {

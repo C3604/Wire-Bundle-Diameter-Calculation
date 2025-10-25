@@ -363,6 +363,14 @@
     "message": "恢复默认",
     "description": "恢复默认设置按钮"
   },
+  "config_standard_wires_button_import": {
+    "message": "导入配置",
+    "description": "导入配置按钮"
+  },
+  "config_standard_wires_button_export": {
+    "message": "导出配置",
+    "description": "导出配置按钮"
+  },
   "config_standard_wires_table_header_number": {
     "message": "序号",
     "description": "表格序号列"
@@ -603,6 +611,22 @@
     "message": "错误：序号 {index} (线规 {gauge}) 的 {type} 外径值无效或为负数。",
     "description": "自定义导线表格中存在无效OD值时的错误信息。"
   },
+  "config_import_invalid_format": {
+    "message": "配置文件格式无效。",
+    "description": "导入配置时格式无效的错误信息"
+  },
+  "config_import_success": {
+    "message": "配置导入成功！",
+    "description": "导入配置成功的提示信息"
+  },
+  "config_import_error": {
+    "message": "导入配置时发生错误: {error}",
+    "description": "导入配置失败时的错误信息"
+  },
+  "config_export_error": {
+    "message": "导出配置时发生错误: {error}",
+    "description": "导出配置失败时的错误信息"
+  },
   "history_csv_header_index": {
     "message": "序号",
     "description": "CSV文件中的序号列表头"
@@ -647,6 +671,34 @@
     "message": "确定要清除所有历史记录吗？此操作不可恢复。",
     "description": "清除历史记录前的确认信息。"
   },
+  "calc_input_placeholder_qty": {
+    "message": "请输入数量",
+    "description": "输入框中数量字段"
+  },
+  "calc_input_placeholder_od": {
+    "message": "请输入直径",
+    "description": "输入框中直径字段"
+  },
+  "calc_input_placeholder_thick": {
+    "message": "请输入厚度",
+    "description": "输入框中厚度字段"
+  },
+  "config_input_placeholder_gauge": {
+    "message": "请输入线规",
+    "description": "配置页面线规输入框"
+  },
+  "config_input_placeholder_thin": {
+    "message": "请输入Thin值",
+    "description": "配置页面Thin值输入框"
+  },
+  "config_input_placeholder_thick": {
+    "message": "请输入Thick值",
+    "description": "配置页面Thick值输入框"
+  },
+  "config_input_placeholder_ultrathin": {
+    "message": "请输入UltraThin值",
+    "description": "配置页面UltraThin值输入框"
+  },
   "calc_input_tooltip_tolerance_range": {
     "message": "拖动调整制造公差百分比 (100%-200%)",
     "description": "制造公差范围滑块的提示文本"
@@ -662,5 +714,21 @@
   "calc_input_tooltip_score_input": {
     "message": "输入模拟计算次数 (1-100)",
     "description": "计算次数文本输入框的提示文本"
+  },
+  "wire_type_thin": {
+    "message": "薄壁",
+    "description": "导线绝缘类型：薄壁"
+  },
+  "wire_type_thick": {
+    "message": "厚壁",
+    "description": "导线绝缘类型：厚壁"
+  },
+  "wire_type_ultra_thin": {
+    "message": "超薄壁",
+    "description": "导线绝缘类型：超薄壁"
+  },
+  "calc_select_placeholder_choose": {
+    "message": "请选择",
+    "description": "下拉框"
   }
 }

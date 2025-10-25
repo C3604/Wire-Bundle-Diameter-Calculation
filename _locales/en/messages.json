@@ -331,6 +331,14 @@
     "message": "Restore",
     "description": "Restore default settings button"
   },
+  "config_standard_wires_button_import": {
+    "message": "Import",
+    "description": "Import configuration button"
+  },
+  "config_standard_wires_button_export": {
+    "message": "Export",
+    "description": "Export configuration button"
+  },
   "config_standard_wires_table_header_number": {
     "message": "No.",
     "description": "Table number column"
@@ -571,6 +579,22 @@
     "message": "Error: Row {index} (Gauge {gauge}) has an invalid or negative OD value for {type}.",
     "description": "Error message for an invalid OD value in the custom wires table."
   },
+  "config_import_invalid_format": {
+    "message": "Invalid configuration file format.",
+    "description": "Error message for invalid configuration file format during import"
+  },
+  "config_import_success": {
+    "message": "Configuration imported successfully!",
+    "description": "Success message for configuration import"
+  },
+  "config_import_error": {
+    "message": "Error importing configuration: {error}",
+    "description": "Error message for configuration import failure"
+  },
+  "config_export_error": {
+    "message": "Error exporting configuration: {error}",
+    "description": "Error message for configuration export failure"
+  },
   "history_csv_header_index": {
     "message": "No.",
     "description": "CSV header for index column."
@@ -662,5 +686,49 @@
   "calc_input_tooltip_score_input": {
     "message": "Enter simulation quantity (1-100)",
     "description": "Tooltip for the simulation quantity text input"
+  },
+  "calc_input_placeholder_qty": {
+    "message": "Enter quantity",
+    "description": "Placeholder text for quantity field in input boxes"
+  },
+  "calc_input_placeholder_od": {
+    "message": "Enter diameter",
+    "description": "Placeholder text for diameter field in input boxes"
+  },
+  "calc_input_placeholder_thick": {
+    "message": "Enter thickness",
+    "description": "Placeholder text for thickness field in input boxes"
+  },
+  "config_input_placeholder_gauge": {
+    "message": "Enter gauge",
+    "description": "Placeholder text for gauge input in configuration page"
+  },
+  "config_input_placeholder_thin": {
+    "message": "Enter Thin value",
+    "description": "Placeholder text for Thin value input in configuration page"
+  },
+  "config_input_placeholder_thick": {
+    "message": "Enter Thick value",
+    "description": "Placeholder text for Thick value input in configuration page"
+  },
+  "config_input_placeholder_ultrathin": {
+    "message": "Enter UltraThin value",
+    "description": "Placeholder text for UltraThin value input in configuration page"
+  },
+  "wire_type_thin": {
+    "message": "Thin",
+    "description": "Label for thin insulation type"
+  },
+  "wire_type_thick": {
+    "message": "Thick",
+    "description": "Label for thick insulation type"
+  },
+  "wire_type_ultra_thin": {
+    "message": "Ultra Thin",
+    "description": "Label for ultra-thin insulation type"
+  },
+  "calc_select_placeholder_choose": {
+    "message": "Please choose",
+    "description": "Generic select placeholder text"
   }
 }

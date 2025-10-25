@@ -9,9 +9,9 @@
  * @returns {number} 距离的平方
  */
 export function distanceSq(x1, y1, x2, y2) {
-    const dx = x1 - x2;
-    const dy = y1 - y2;
-    return dx * dx + dy * dy;
+  const dx = x1 - x2;
+  const dy = y1 - y2;
+  return dx * dx + dy * dy;
 }
 
 /**
@@ -23,7 +23,7 @@ export function distanceSq(x1, y1, x2, y2) {
  * @returns {number} 距离
  */
 export function distance(x1, y1, x2, y2) {
-    return Math.sqrt(distanceSq(x1, y1, x2, y2));
+  return Math.sqrt(distanceSq(x1, y1, x2, y2));
 }
 
 /**
@@ -38,12 +38,12 @@ export function distance(x1, y1, x2, y2) {
  * @returns {boolean} 如果碰撞则为true，否则为false
  */
 export function fastCheckCollision(x1, y1, r1, x2, y2, r2) {
-    const totalRadius = r1 + r2;
-    if (Math.abs(x1 - x2) > totalRadius || Math.abs(y1 - y2) > totalRadius) {
-        return false; // 基于边界框判断未碰撞
-    }
-    // 如果边界框重叠，则检查实际距离
-    return distanceSq(x1, y1, x2, y2) < totalRadius * totalRadius;
+  const totalRadius = r1 + r2;
+  if (Math.abs(x1 - x2) > totalRadius || Math.abs(y1 - y2) > totalRadius) {
+    return false; // 基于边界框判断未碰撞
+  }
+  // 如果边界框重叠，则检查实际距离
+  return distanceSq(x1, y1, x2, y2) < totalRadius * totalRadius;
 }
 
 /**
@@ -53,5 +53,5 @@ export function fastCheckCollision(x1, y1, r1, x2, y2, r2) {
  * @returns {number} 在 [min, max) 范围内的随机浮点数
  */
 export function fRand(min, max) {
-    return Math.random() * (max - min) + min;
-} 
+  return Math.random() * (max - min) + min;
+}
