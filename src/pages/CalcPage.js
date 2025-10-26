@@ -203,11 +203,7 @@ export function renderCalcPage(container) {
                 </div>
                 <!-- 输入统计区 -->
                 <div class="group-stats input-summary-container detail-separator-top">
-                  <div class="group-title">
-                  <!--
-                  <div class="title-container"><span class="emoji">⚙️</span><span data-i18n="calc_group_stats_title">输入统计</span></div>
-                  </div>
-                  -->
+                  <!-- <div class="title-container"><span class="emoji">⚙️</span><span data-i18n="calc_group_stats_title">输入统计</span></div> -->
                   <div id="input-summary">
                     <div><span data-i18n="calc_group_stats_wire_count">总导线数量：</span><span id="total-wire-count" class="input-summary-value">0</span></div>
                     <div><span data-i18n="calc_group_stats_wrap_count">总包裹物层数：</span><span id="total-wrap-count" class="input-summary-value">0</span></div>
