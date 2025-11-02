@@ -8,12 +8,6 @@ const TYPE_MESSAGE_KEYS = {
   "Ultra Thin": "wire_type_ultra_thin",
 };
 
-/**
- * Return the localized label for a wire type value.
- * Falls back to the raw type string when no translation is found.
- * @param {string} type
- * @returns {string}
- */
 export function getWireTypeLabel(type) {
   if (!type) return "";
   const messageKey = TYPE_MESSAGE_KEYS[type];
@@ -22,18 +16,4 @@ export function getWireTypeLabel(type) {
     if (localized) return localized;
   }
   return type;
-}
-
-/**
- * Provide localized option metadata for wire type selectors.
- * @param {string[]=} allowedTypes
- * @returns {{ value: string, label: string }[]}
- */
-export function getWireTypeOptions(allowedTypes = WIRE_TYPE_KEYS) {
-  return allowedTypes
-    .filter((type) => TYPE_MESSAGE_KEYS[type])
-    .map((type) => ({
-      value: type,
-      label: getWireTypeLabel(type),
-    }));
 }

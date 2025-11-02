@@ -1,4 +1,13 @@
+// 帮助页脚本：提供本地内置文档的翻译与渲染逻辑
 document.addEventListener("DOMContentLoaded", () => {
+  // 统一图片标签生成，减少重复与便于后续替换
+  const imgTag = (src, alt) => `<img src="../assets/${src}" alt="${alt}">`;
+  const IMG3_ZH = imgTag("img3.svg", "历史页面示意图");
+  const IMG4_ZH = imgTag("img4.svg", "配置页面示意图");
+  const IMG5_ZH = imgTag("img5.svg", "更新日志示意图");
+  const IMG3_EN = imgTag("img3.svg", "History page diagram");
+  const IMG4_EN = imgTag("img4.svg", "Configuration page diagram");
+  const IMG5_EN = imgTag("img5.svg", "Changelog diagram");
   const translations = {
     zh_CN: {
       help_title: "线束直径计算工具 - 帮助文档",
@@ -269,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section4_title: "4. 查看与管理计算历史 (<code>历史</code> 页面)",
       section4_content: `
                 <p>每次当你在"计算"页面启用了"保存历史记录"并执行计算后，该次计算的完整快照都会被保存在这里。</p>
-                <img src="../assets/img3.jpg" alt="历史页面示意图">
+                ${IMG3_ZH}
                 <h5>主要功能:</h5>
                 <ul>
                     <li><strong>历史记录列表</strong>:
@@ -288,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section5_title: "5. 插件配置 (<code>配置</code> 页面)",
       section5_content: `
                 <p>在这里，你可以自定义插件的行为和参数，以更好地适应你的工作流程。</p>
-                <img src="../assets/img4.jpg" alt="配置页面示意图">
+                ${IMG4_ZH}
                 <h5>主要配置项:</h5>
                 <ul>
                     <li><strong>标准导线规格管理</strong>:
@@ -319,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section6_content: `
                 <p>在主界面侧边栏的底部，你会看到当前插件的版本号，例如 <code>版本: 1.0.2.2</code>。</p>
                 <p><strong>点击这个版本号</strong>，会弹出一个窗口，显示详细的更新日志 (Changelog)。这可以帮助你了解每个版本新增了哪些功能或修复了哪些问题。</p>
-                <img src="../assets/img5.jpg" alt="更新日志示意图">
+                ${IMG5_ZH}
             `,
     },
     en: {
@@ -600,7 +609,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "4. View and Manage Calculation History (<code>History</code> Page)",
       section4_content: `
                 <p>Every time you enable "Save History" and perform a calculation on the "Calculate" page, a complete snapshot of that calculation will be saved here.</p>
-                <img src="../assets/img3.jpg" alt="History page diagram">
+                ${IMG3_EN}
                 <h5>Main functions:</h5>
                 <ul>
                     <li><strong>History List</strong>:
@@ -619,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section5_title: "5. Plugin Configuration (<code>Config</code> Page)",
       section5_content: `
                 <p>Here, you can customize the behavior and parameters of the plugin to better suit your workflow.</p>
-                <img src="../assets/img4.jpg" alt="Configuration page diagram">
+                ${IMG4_EN}
                 <h5>Main configuration items:</h5>
                 <ul>
                     <li><strong>Standard Wire Specification Management</strong>:
@@ -650,7 +659,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section6_content: `
                 <p>At the bottom of the main interface sidebar, you will see the current version number of the plugin, for example <code>Version: 1.0.2.2</code>.</p>
                 <p><strong>Click this version number</strong>, and a window will pop up showing the detailed changelog. This can help you understand what new features have been added or what problems have been fixed in each version.</p>
-                <img src="../assets/img5.jpg" alt="Changelog diagram">
+                ${IMG5_EN}
             `,
     },
   };
@@ -750,7 +759,14 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.focus();
   });
 
-  // Existing translation functionality
+// 开发者说明（P3）：目录与资源一致性检查
+// - 目录（TOC）与章节标题：需与 `help.html` 中的 `data-i18n-key`、章节 id 保持一致；
+//   当增删章节时，同时更新 `translations` 的 `toc_list` 与对应内容键，避免搜索/跳转失配。
+// - 图片资源：统一存放于 `src/assets/`，在 `help.html` 使用相对路径（如 `../assets/img5.svg`）；
+//   如更改文件名或位置，请同步 README 的截图引用与此处 IMG 片段常量，防止 404。
+// - 国际化：通过 URL `?lang=zh_CN|en` 切换文档语言；未匹配语言时回退到中文。
+//
+// Existing translation functionality
   const urlParams = new URLSearchParams(window.location.search);
   const lang = urlParams.get("lang") || "zh_CN";
   const t = translations[lang] || translations["zh_CN"];

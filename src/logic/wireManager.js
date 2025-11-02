@@ -27,20 +27,7 @@ function getCustomWireLibraries() {
   return [];
 }
 
-/**
- * 将用户自定义的电线库保存到 localStorage
- * @param {Array} customWires - 要保存的自定义电线库
- */
-export function saveCustomWireLibraries(customWires) {
-  if (!Array.isArray(customWires)) {
-    console.error("保存失败：自定义电线库必须是一个数组。");
-    return;
-  }
-  localStorage.setItem(
-    STORAGE_KEYS.CUSTOM_LIBRARIES,
-    JSON.stringify(customWires),
-  );
-}
+// 已由 pages/config/wiresStore.js 统一提供写入接口，移除此未使用导出
 
 /**
  * 获取合并后的有效电线标准库（标准库 + 用户自定义库）

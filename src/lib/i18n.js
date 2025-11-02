@@ -1,6 +1,14 @@
 /**
  * 国际化工具类
- * 提供语言包加载、语言切换、文本获取等功能
+ * 提供语言包加载、语言切换、文本获取等功能。
+ *
+ * 回退策略说明（文档层）：
+ * 1) 语言偏好优先读取 `chrome.storage.local`，不可用则按浏览器语言推断（zh→`zh_CN`，否则 `en`）。
+ * 2) 消息包加载优先使用 `chrome.runtime.getURL("_locales/.../messages.json")`；
+ *    非扩展环境自动回退为相对路径 `/_locales/.../messages.json`。
+ * 3) 初始化或加载失败时回退到默认语言 `zh_CN` 并记录错误日志；若仍失败则抛出初始化错误。
+ * 4) 获取文案失败时，尝试使用 `chrome.i18n.getMessage`；仍失败则回退到当前语言已加载的消息或直接返回 key。
+ * 5) 所有回退路径均以简短 `console.warn/console.error` 记录，不中断 UI 渲染。
  */
 
 class I18nManager {

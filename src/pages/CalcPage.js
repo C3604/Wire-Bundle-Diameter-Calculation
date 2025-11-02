@@ -1,15 +1,12 @@
 // 线束直径计算页面静态布局（每个列表区表头直接写入HTML，tbody留空）
-// import '../styles/CalcPage.css'; // 再次移除CSS导入，应在HTML中通过<link>引入
 // 导入新模块
 import { runSingleSimulation } from "../logic/simulationEngine.js";
 import { drawCirclesOnCanvas } from "../components/simulationRenderer.js";
 import { renderSimulationHistoryChart } from "../components/chartRenderer.js";
-// import { standardWiresData } from '../storage/standardWires.js'; // 移除静态导入
 import {
   getStandardGauges,
   getWireOdTable,
-  WIRE_TYPES,
-} from "../logic/simulationConstants.js"; // 导入动态数据获取函数和WIRE_TYPES
+} from "../logic/simulationConstants.js"; // 导入动态数据获取函数
 import {
   getEffectiveStandardWires,
   getSimulationParameters,
@@ -18,20 +15,9 @@ import i18n from "../lib/i18n.js";
 import { showToast, showConfirm } from "../components/feedback.js";
 import { collectAndValidateInputs } from "./calc/inputCollector.js";
 import { getJSON, setJSON } from "../lib/storage.js";
+import { getWireTypeLabel, WIRE_TYPE_KEYS } from "../utils/wireTypes.js";
 
-// 映射类型值到本地化标签
-function getWireTypeLabel(type) {
-  switch (type) {
-    case "Thin":
-      return i18n.getMessage("wire_type_thin");
-    case "Thick":
-      return i18n.getMessage("wire_type_thick");
-    case "Ultra Thin":
-      return i18n.getMessage("wire_type_ultra_thin");
-    default:
-      return type || "";
-  }
-}
+// 统一使用 utils/wireTypes 提供的本地化接口
 
 // 模拟参数采用显式传参，不再监听全局更新事件
 
@@ -211,7 +197,9 @@ export function renderCalcPage(container) {
                   </div>
                 </div>
                 <!-- 直径计算详情区 -->
-                <div class="group-result section-title detail-separator-top"><div class="title-container"><span class="emoji">📈</span><span data-i18n="calc_group_result_title">直径计算详情</span></div></div>
+                <div class="group-result section-title detail-separator-top">
+                <!-- <div class="title-container"><span class="emoji">📈</span><span data-i18n="calc_group_result_title">直径计算详情</span></div>-->
+                </div>
                 <table class="simulation-results-table">
                   <thead>
                     <tr>
@@ -478,7 +466,7 @@ export function renderCalcPage(container) {
         // 类型
         const tdType = document.createElement("td");
         const selectType = document.createElement("select");
-        let availableTypes = [...WIRE_TYPES];
+        let availableTypes = [...WIRE_TYPE_KEYS];
         const selectedGaugeStr = String(row.gauge);
         const wireDataForGauge = currentWireOdTable[selectedGaugeStr];
         if (wireDataForGauge) {

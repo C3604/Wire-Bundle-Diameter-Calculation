@@ -37,7 +37,7 @@
 
 - **Microsoft Edge 应用商店**：推荐直接通过 [扩展商店](https://microsoftedge.microsoft.com/addons/detail/%E7%BA%BF%E6%9D%9F%E7%9B%B4%E5%BE%84%E8%AE%A1%E7%AE%97%E5%B7%A5%E5%85%B7/dcinhgdofeolfogjefdocphbnmdicopj) 安装稳定版本。
 - **开发者模式侧载**：
-  1. 在浏览器地址栏输入 `edge://extensions/` 或 `chrome://extensions/`。
+  1. 在浏览器地址栏输入 `edge://extensions/` 
   2. 打开“开发者模式”。
   3. 点击“加载已解压的扩展程序”。
   4. 选择仓库根目录，使用 `manifest.json` 启动扩展。
@@ -76,47 +76,20 @@
 │   ├── storage/            # 数据持久化封装
 │   ├── styles/             # 样式文件
 │   └── utils/              # 通用工具函数
-├── manifest.chrome.json    # Chromium 版本清单模板
-├── manifest.json           # 实际加载的扩展清单（由脚本生成）
-├── build.bat               # Windows 构建脚本
+├── manifest.json           # 实际加载的扩展清单
 └── popup.html              # 主界面入口
 ```
-
----
-
-## 构建与调试
-
-构建脚本会将 `manifest.chrome.json` 复制为 `manifest.json`，确保侧载时使用最新配置：
-
-```powershell
-.\build.bat chrome
-```
-
-执行后即可在 `edge://extensions` 或 `chrome://extensions` 中加载 `manifest.json` 进行调试。若仅修改前端资源，可直接刷新扩展页面，无需重新运行脚本。
-
-预览说明：无需打包，可用任意静态服务打开 `popup.html` 进行纯 UI 检查（例如 `python -m http.server` 或 VSCode Live Server）；涉及扩展 API 的行为需在浏览器扩展环境侧载验证。
 
 ---
 
 ## 开发注意事项
 
 - **扩展 API**：背景服务线程直接使用 `chrome.action`、`chrome.windows` 等 Chromium API；如需 Promise 化封装，可在各模块内部实现。
-- **Manifest 管理**：仅维护 `manifest.chrome.json` 与 `manifest.json`；提交前请确认 `manifest.json` 与模板保持一致，避免携带历史产物。
+- **Manifest 管理**：仅维护 `manifest.json`；无需构建脚本，直接侧载。
 - **国际化**：新增文案时同步更新 `_locales/zh_CN/messages.json` 与 `_locales/en/messages.json`，保持 key 命名统一。
 - **样式规范**：统一使用四空格缩进，Sass/Less 等预处理暂未启用；已移除全部 Firefox 专用样式前缀。
 - **强制性语言规范**：除代码实现、专业术语与特定技术文档外，统一使用中文。
-- **代码实现原则**：显式优于隐式；禁止无明确需求的兼容实现；兼容需完成评审并说明技术限制与回滚策略。
-- **参数与线库来源统一**：`simulationConstants.js` 通过 `wireManager.js` 的 `getSimulationParameters`/`getEffectiveStandardWires` 提供数据；避免直接读取 `localStorage`；旧接口（如 `getCurrentWireData`）已标注废弃且保留兼容。
 
-#### 计算页状态流与校验顺序
-
-- 输入统一由 `collectAndValidateInputs()` 收集与校验，不在按钮处理器内直接读取 DOM。
-- 校验包含：导线数量与外径、包裹层厚度、容差 `100–200`、模拟次数 `1–100`；异常项仅给出警告并使用默认值，若导线为空则阻断计算。
-- 渲染顺序：禁用按钮 → 统一收集与校验 → 清理旧结果 → 运行 `simulateBundleDiameter()` → 更新 UI（平均值高亮、图表与图例） → 历史写入（如启用） → 恢复按钮。
-- 文案与提示统一调用 `i18n.getMessage`，禁止硬编码。
-- 若新增输入项，请在 `collectAndValidateInputs()` 内扩展校验逻辑并保持返回结构稳定。
-
----
 
 ### 国际化枚举约定
 
@@ -124,34 +97,3 @@
 - 通用下拉占位使用 `calc_select_placeholder_choose`，避免硬编码“请选择”。
 - UI 层展示采用本地化标签，但内部类型值仍使用 `Thin/Thick/Ultra Thin`，以兼容数据结构与计算逻辑。
 
-## 常见问题（FAQ）
-
-- **Q: 是否仍支持 Firefox？**  
-  A: 项目当前仅支持 Chromium 内核浏览器，Firefox 专用代码已全部移除。
-- **Q: 为什么运行脚本后 manifest.json 会变化？**  
-  A: `build.bat` 会从模板覆盖生成 `manifest.json`，以统一国际化占位符和版本信息。
-- **Q: 历史记录或自定义导线会丢失吗？**  
-  A: 所有数据仅保存在浏览器本地，清理浏览器数据或更换设备会导致记录丢失。
-
----
-
-## 贡献指南
-
-欢迎通过 Issue 或 Pull Request 参与改进。提交代码前请确保：
-
-1. 已在最新的 Chromium 浏览器中验证主要功能与语言切换；
-2. 说明变更目的、影响范围及测试步骤；
-3. 若涉及界面更新，请附上前后对比截图。
-
----
-
-## 许可证
-
-本项目基于 [MIT License](LICENSE) 开源，欢迎在保留版权声明的前提下衍生与分发。
-
----
-
-## 联系方式
-
-- GitHub Issues：<https://github.com/C3604/Wire-Bundle-Diameter-Calculation/issues>
-- 若扩展对你有帮助，欢迎 Star 支持。

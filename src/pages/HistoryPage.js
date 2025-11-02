@@ -1,20 +1,9 @@
 import i18n from "../lib/i18n.js";
 import { showToast, showConfirm } from "../components/feedback.js";
 import { getJSON, remove } from "../lib/storage.js";
+import { getWireTypeLabel } from "../utils/wireTypes.js";
 
-// 映射类型值到本地化标签
-function getWireTypeLabel(type) {
-  switch (type) {
-    case "Thin":
-      return i18n.getMessage("wire_type_thin");
-    case "Thick":
-      return i18n.getMessage("wire_type_thick");
-    case "Ultra Thin":
-      return i18n.getMessage("wire_type_ultra_thin");
-    default:
-      return type || "";
-  }
-}
+// 使用统一的 wireTypes 工具集中化本地化逻辑
 
 /**
  * 渲染“历史”页面并填充历史记录表与交互。

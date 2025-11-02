@@ -7,13 +7,7 @@ import {
   fRand,
 } from "../utils/mathUtils.js";
 
-// 此处顶层导入的参数已废弃，核心逻辑将从函数内部的 simulationParameters 中动态获取
-// let {
-//     DAMPING,
-//     TIME_STEP,
-//     MAX_STEPS,
-//     STOP_THRESHOLD
-// } = simulationParameters;
+// 约定：所有模拟参数通过函数显式传入（params），不从顶层导入。
 
 /**
  * 计算"接触范数" - 衡量圆形重叠（穿透）程度的指标。

@@ -1,4 +1,4 @@
-import { getJSON, setJSON, remove } from "../../lib/storage.js";
+import { getJSON, setJSON } from "../../lib/storage.js";
 
 export const STORAGE_KEY = "userDefinedStandardWires";
 
@@ -20,6 +20,4 @@ export function saveUserCustomWires(customWires) {
   setJSON(STORAGE_KEY, customWires);
 }
 
-export function clearUserCustomWires() {
-  remove(STORAGE_KEY);
-}
+// 清理函数未在当前代码路径中使用，移除以减少冗余

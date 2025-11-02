@@ -1,7 +1,6 @@
 import { standardWiresData } from "../storage/standardWires.js";
 import {
   getEffectiveStandardWires,
-  saveCustomWireLibraries,
   getSimulationParameters,
   saveSimulationParameters,
   restoreDefaultSimulationParameters,
@@ -10,7 +9,7 @@ import {
 import i18n from "../lib/i18n.js";
 import { showToast, showConfirm } from "../components/feedback.js";
 import { getJSON, setJSON, remove } from "../lib/storage.js";
-import { loadUserCustomWires, saveUserCustomWires, clearUserCustomWires } from "./config/wiresStore.js";
+import { loadUserCustomWires, saveUserCustomWires } from "./config/wiresStore.js";
 
 // 全局变量，用于存储当前表格显示的数据和初始快照
 let currentDisplayData = [];
@@ -38,32 +37,9 @@ if (!document.getElementById("gauge-list")) {
   document.body.appendChild(datalist);
 }
 
-// 由于 simulationConstants.js 中的 getCurrentWireData 已经被内部使用，
-// 这里我们直接使用导出的 getDefaultStandardWires 和 localStorage 来获取数据
-// 或者可以重命名 simulationConstants.js 中的 getCurrentWireData 为 getActiveWireData 并导出。
-// 为简单起见，我们在这里重新实现一个轻量级的 localStorage 读取，或者依赖于ConfigPage自身状态管理
+// 配置页统一使用 wireManager 与 wiresStore 作为数据来源与存储层
 
-function getStoredUserWires() {
-  const userWiresString = localStorage.getItem("userDefinedStandardWires");
-  if (userWiresString) {
-    try {
-      const userWires = JSON.parse(userWiresString);
-      if (
-        Array.isArray(userWires) &&
-        userWires.every((wire) => wire.hasOwnProperty("gauge"))
-      ) {
-        return userWires;
-      }
-    } catch (error) {
-      console.error(
-        "从localStorage解析userDefinedStandardWires失败 (ConfigPage):",
-        error,
-      );
-      return null;
-    }
-  }
-  return null;
-}
+// 已统一到 wiresStore 和 lib/storage 的读写方式，移除旧的本地读取函数
 
 // 深拷贝函数，用于创建数据副本
 function deepClone(data) {
@@ -88,9 +64,7 @@ function updateDuplicateGaugeState() {
 }
 
 // 合并标准库和自定义内容，返回合并后的数组
-function getMergedWireList() {
-  return getEffectiveStandardWires();
-}
+// 已改为直接使用 getEffectiveStandardWires，移除中转函数
 
 // 只保存与标准库不同或新增的自定义条目
 function getUserCustomWires() {
@@ -115,16 +89,7 @@ function getUserCustomWires() {
 }
 
 // 获取自定义内容（使用统一存储访问层）
-function getUserCustomWiresFromStorage() {
-  const arr = getJSON("userDefinedStandardWires", []);
-  if (
-    Array.isArray(arr) &&
-    arr.every((wire) => wire && Object.prototype.hasOwnProperty.call(wire, "gauge"))
-  ) {
-    return arr;
-  }
-  return [];
-}
+// 统一通过 wiresStore.loadUserCustomWires 访问，移除此函数
 
 /**
  * 渲染“配置”页面，绑定表格与模拟参数区的逻辑与事件。
