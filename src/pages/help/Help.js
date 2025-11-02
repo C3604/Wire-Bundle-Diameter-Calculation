@@ -1,7 +1,7 @@
 // 帮助页脚本：提供本地内置文档的翻译与渲染逻辑
 document.addEventListener("DOMContentLoaded", () => {
   // 统一图片标签生成，减少重复与便于后续替换
-  const imgTag = (src, alt) => `<img src="../assets/${src}" alt="${alt}">`;
+  const imgTag = (src, alt) => `<img src="./assets/${src}" alt="${alt}">`;
   const IMG3_ZH = imgTag("img3.svg", "历史页面示意图");
   const IMG4_ZH = imgTag("img4.svg", "配置页面示意图");
   const IMG5_ZH = imgTag("img5.svg", "更新日志示意图");
@@ -769,24 +769,98 @@ document.addEventListener("DOMContentLoaded", () => {
 // Existing translation functionality
   const urlParams = new URLSearchParams(window.location.search);
   const lang = urlParams.get("lang") || "zh_CN";
-  const t = translations[lang] || translations["zh_CN"];
 
-  document.querySelectorAll("[data-i18n-key]").forEach((element) => {
-    const key = element.getAttribute("data-i18n-key");
-    if (t[key]) {
-      if (element.tagName.toLowerCase() === "title") {
-        element.textContent = t[key];
+  const makeUrl = (p) => {
+    try {
+      if (
+        typeof chrome !== "undefined" &&
+        chrome.runtime &&
+        typeof chrome.runtime.getURL === "function"
+      ) {
+        return chrome.runtime.getURL(p);
+      }
+    } catch (_) {}
+    return `/${p}`;
+  };
+
+  async function loadExternalHelpTranslations(language) {
+    const path = `language/${language}/help.json`;
+    try {
+      const resp = await fetch(makeUrl(path));
+      if (!resp.ok) throw new Error(`fetch ${path} failed: ${resp.status}`);
+      return await resp.json();
+    } catch (e) {
+      console.warn("External help translations not available, using built-in.", e);
+      return null;
+    }
+  }
+
+  function applyHelpTranslations(tt) {
+    document.querySelectorAll("[data-i18n-key]").forEach((element) => {
+      const key = element.getAttribute("data-i18n-key");
+      if (tt[key]) {
+        if (element.tagName.toLowerCase() === "title") {
+          element.textContent = tt[key];
+        } else {
+          element.innerHTML = tt[key];
+        }
       } else {
-        element.innerHTML = t[key];
+        // 标记缺失键，供审计与视觉提示
+        element.classList.add("i18n-missing");
+        element.setAttribute("title", `未找到翻译键: ${key}`);
+      }
+    });
+
+    // Add placeholder translation
+    const placeholderKey = searchInput.getAttribute("data-i18n-ph-key");
+    if (placeholderKey) {
+      if (tt[placeholderKey]) {
+        searchInput.placeholder = tt[placeholderKey];
+      } else {
+        searchInput.classList.add("i18n-missing");
+        searchInput.setAttribute("title", `未找到翻译键: ${placeholderKey}`);
       }
     }
-  });
 
-  // Add placeholder translation
-  const placeholderKey = searchInput.getAttribute("data-i18n-ph-key");
-  if (placeholderKey && t[placeholderKey]) {
-    searchInput.placeholder = t[placeholderKey];
+    // 汇总缺失键并在页面顶部展示审计横幅
+    const missingElements = Array.from(
+      document.querySelectorAll(".i18n-missing")
+    );
+    if (missingElements.length > 0) {
+      const missingKeys = missingElements
+        .map((el) => el.getAttribute("data-i18n-key") || el.getAttribute("data-i18n-ph-key"))
+        .filter(Boolean);
+      const uniqueKeys = Array.from(new Set(missingKeys));
+
+      const banner = document.createElement("div");
+      banner.id = "i18n-missing-banner";
+      banner.className = "i18n-missing-banner";
+      const msgZh = `以下文案键缺失或未翻译：${uniqueKeys.join(", ")}`;
+      const msgEn = `Missing/Untranslated keys: ${uniqueKeys.join(", ")}`;
+      const text = (lang === "zh_CN") ? msgZh : msgEn;
+      banner.innerHTML = `
+        <div class="i18n-missing-banner__content">
+          <span>${text}</span>
+          <button class="i18n-missing-banner__close" aria-label="close">×</button>
+        </div>
+      `;
+      const container = document.querySelector(".help-container") || document.body;
+      container.insertBefore(banner, container.firstChild);
+      banner.querySelector(".i18n-missing-banner__close").addEventListener("click", () => {
+        banner.remove();
+      });
+      console.warn("Help i18n missing keys:", uniqueKeys);
+    }
   }
+
+  (async () => {
+    let t = translations[lang] || translations["zh_CN"];
+    const ext = await loadExternalHelpTranslations(lang);
+    if (ext && typeof ext === "object") {
+      t = { ...t, ...ext };
+    }
+    applyHelpTranslations(t);
+  })();
 
   // Existing TOC toggle functionality
   const toc = document.getElementById("toc");

@@ -40,14 +40,16 @@ action.onClicked.addListener(async () => {
   const createOptions = {
     url: "popup.html",
     type: "popup",
+    // 尝试在创建时直接最大化（不同浏览器对 popup 的支持可能不同）
+    state: "maximized",
   };
   if (storedBounds && storedBounds.width && storedBounds.height) {
     Object.assign(createOptions, storedBounds);
   } else {
     // 无存储时使用相对策略：尽量填满屏幕（最大化），若不支持则给出安全默认值
     // 注意：某些浏览器对 popup 窗口的 state 支持有限，这里优先使用数值回退
-    createOptions.width = 1200;
-    createOptions.height = 800;
+    createOptions.width = 1920;
+    createOptions.height = 1000;
     createOptions.left = 60;
     createOptions.top = 40;
   }
@@ -55,15 +57,29 @@ action.onClicked.addListener(async () => {
   chrome.windows.create(createOptions, async (win) => {
     if (!win || !win.id) return;
     await setMainWindowId(win.id);
-    // 初始写入当前尺寸，避免首次创建后没有记录
-    const bounds = {
-      left: typeof win.left === "number" ? win.left : createOptions.left,
-      top: typeof win.top === "number" ? win.top : createOptions.top,
-      width: typeof win.width === "number" ? win.width : createOptions.width,
-      height:
-        typeof win.height === "number" ? win.height : createOptions.height,
-    };
-    await setMainWindowBounds(bounds);
+
+    // 创建后再次尝试最大化，确保在不支持 createOptions.state 的环境也能生效
+    try {
+      chrome.windows.update(win.id, { state: "maximized" }, async (updatedWin) => {
+        const cur = updatedWin || win;
+        const bounds = {
+          left: typeof cur.left === "number" ? cur.left : createOptions.left,
+          top: typeof cur.top === "number" ? cur.top : createOptions.top,
+          width: typeof cur.width === "number" ? cur.width : createOptions.width,
+          height: typeof cur.height === "number" ? cur.height : createOptions.height,
+        };
+        await setMainWindowBounds(bounds);
+      });
+    } catch (_) {
+      // 回退：若 update 不可用或失败，则记录创建时的尺寸
+      const bounds = {
+        left: typeof win.left === "number" ? win.left : createOptions.left,
+        top: typeof win.top === "number" ? win.top : createOptions.top,
+        width: typeof win.width === "number" ? win.width : createOptions.width,
+        height: typeof win.height === "number" ? win.height : createOptions.height,
+      };
+      await setMainWindowBounds(bounds);
+    }
   });
 });
 

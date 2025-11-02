@@ -3,7 +3,7 @@
 import { renderCalcPage } from "./CalcPage.js";
 import { renderHistoryPage } from "./HistoryPage.js";
 import { renderConfigPage } from "./ConfigPage.js";
-import i18n from "../lib/i18n.js";
+import i18n from "../i18n/index.js";
 import { showToast } from "../components/feedback.js";
 import globalKeyManager from "./common/globalKeyManager.js";
 
@@ -181,8 +181,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         typeof chrome.runtime.getURL === "function" &&
         chrome.windows;
       const helpPageUrl = isExtensionEnv
-        ? chrome.runtime.getURL(`src/pages/help.html?lang=${currentLang}`)
-        : `src/pages/help.html?lang=${currentLang}`;
+        ? chrome.runtime.getURL(`src/pages/help/help.html?lang=${currentLang}`)
+        : `src/pages/help/help.html?lang=${currentLang}`;
 
       let stored = {};
       try {

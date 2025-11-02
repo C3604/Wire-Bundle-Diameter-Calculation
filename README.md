@@ -65,35 +65,24 @@
 ## 项目结构
 
 ```
-├── _locales/               # 国际化资源（zh_CN、en）
+ ├── language/               # 国际化资源（zh_CN、en）
 ├── icons/                  # 扩展图标与界面按钮
 ├── src/
 │   ├── assets/             # 截图与静态资源
 │   ├── background/         # 背景脚本（MV3 service worker）
 │   ├── components/         # UI 组件
+│   ├── i18n/               # 国际化运行时工具（加载与回退逻辑）
 │   ├── logic/              # 核心业务逻辑与模拟引擎
-│   ├── pages/              # 页面容器
-│   ├── storage/            # 数据持久化封装
+│   ├── pages/              # 页面容器（各页面域：HTML/CSS/JS/Assets）
+│   ├── services/           # 运行时服务（如存储、状态管理）
+│   ├── storage/            # 数据源与持久化封装
 │   ├── styles/             # 样式文件
-│   └── utils/              # 通用工具函数
+│   ├── utils/              # 通用纯工具函数（无副作用）
+│   └── vendor/             # 第三方打包产物（UMD 等）
 ├── manifest.json           # 实际加载的扩展清单
 └── popup.html              # 主界面入口
 ```
 
 ---
 
-## 开发注意事项
-
-- **扩展 API**：背景服务线程直接使用 `chrome.action`、`chrome.windows` 等 Chromium API；如需 Promise 化封装，可在各模块内部实现。
-- **Manifest 管理**：仅维护 `manifest.json`；无需构建脚本，直接侧载。
-- **国际化**：新增文案时同步更新 `_locales/zh_CN/messages.json` 与 `_locales/en/messages.json`，保持 key 命名统一。
-- **样式规范**：统一使用四空格缩进，Sass/Less 等预处理暂未启用；已移除全部 Firefox 专用样式前缀。
-- **强制性语言规范**：除代码实现、专业术语与特定技术文档外，统一使用中文。
-
-
-### 国际化枚举约定
-
-- 新增 `wire_type_thin`、`wire_type_thick`、`wire_type_ultra_thin` 用于类型标签本地化。
-- 通用下拉占位使用 `calc_select_placeholder_choose`，避免硬编码“请选择”。
-- UI 层展示采用本地化标签，但内部类型值仍使用 `Thin/Thick/Ultra Thin`，以兼容数据结构与计算逻辑。
 

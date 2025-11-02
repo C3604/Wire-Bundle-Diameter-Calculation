@@ -1,7 +1,17 @@
-// import Chart from '../lib/chart.umd.js'; // Chart对象将从全局作用域获取
 // src/components/chartRenderer.js
+// Chart 获取封装：优先从全局作用域读取（由 popup.html 引入 UMD），缺失时给出明确错误
+function getChartOrThrow() {
+  const ChartGlobal = typeof window !== "undefined" ? window.Chart : undefined;
+  if (!ChartGlobal) {
+    console.error(
+      "Chart.js 未加载：请确保 popup.html 中已引入 'src/vendor/chart.umd.js' 或改为模块化接入。",
+    );
+    throw new Error("Chart.js not available in global scope");
+  }
+  return ChartGlobal;
+}
 
-// 模拟历史折线图（CalcPage 使用），从全局 Chart 获取实例
+// 模拟历史折线图（CalcPage 使用），通过封装获取 Chart 构造器
 
 /**
  * 渲染或更新模拟历史的折线图。
@@ -40,7 +50,8 @@ export function renderSimulationHistoryChart(
   const labels = diameters.map((_, index) => `模拟 ${index + 1}`);
 
   try {
-    const newChartInstance = new Chart(chartCtx, {
+    const ChartCtor = getChartOrThrow();
+    const newChartInstance = new ChartCtor(chartCtx, {
       type: "line",
       data: {
         labels: labels,

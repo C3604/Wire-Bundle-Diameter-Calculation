@@ -1,0 +1,778 @@
+{
+  "extName": {
+    "message": "线束直径计算工具",
+    "description": "扩展名称"
+  },
+  "extDescription": {
+    "message": "基于二维圆形填充的线束直径估算工具，支持多规格导线、包裹物层、可视化与配置管理。",
+    "description": "扩展描述"
+  },
+  "app": {
+    "message": "线束直径计算工具",
+    "description": "应用程序标题"
+  },
+  "appTitle": {
+    "message": "线束直径计算工具",
+    "description": "应用程序标题"
+  },
+  "sidebar_button_calc": {
+    "message": "计算",
+    "description": "计算按钮文本"
+  },
+  "sidebar_button_history": {
+    "message": "历史",
+    "description": "历史记录按钮文本"
+  },
+  "sidebar_button_config": {
+    "message": "配置",
+    "description": "配置按钮文本"
+  },
+  "sidebar_button_help": {
+    "message": "帮助",
+    "description": "帮助按钮文本"
+  },
+  "sidebar_tooltip_collapse": {
+    "message": "收起/展开侧边栏",
+    "description": "收起/展开侧边栏提示"
+  },
+  "sidebar_tooltip_expand": {
+    "message": "展开侧边栏",
+    "description": "展开侧边栏提示"
+  },
+  "sidebar_tooltip_help": {
+    "message": "帮助文档",
+    "description": "帮助文档提示"
+  },
+  "version_display": {
+    "message": "版本: {version}",
+    "description": "版本显示文本"
+  },
+  "version_na": {
+    "message": "版本 N/A",
+    "description": "版本不可用显示文本"
+  },
+  "language_switch": {
+    "message": "语言切换",
+    "description": "语言切换按钮文本"
+  },
+  "language_current": {
+    "message": "当前语言: 中文",
+    "description": "当前语言显示"
+  },
+  "calc_group_standard_wire_title": {
+    "message": "标准导线",
+    "description": "标准导线区域标题"
+  },
+  "calc_group_standard_wire_button_add": {
+    "message": "增加",
+    "description": "增加标准导线按钮"
+  },
+  "calc_group_standard_wire_button_reset": {
+    "message": "重置",
+    "description": "重置标准导线按钮"
+  },
+  "calc_group_standard_wire_button_add_tooltip": {
+    "message": "增加一行标准导线输入",
+    "description": "增加标准导线按钮的提示文本"
+  },
+  "calc_group_standard_wire_button_reset_tooltip": {
+    "message": "重置标准导线表格内容为默认值",
+    "description": "重置标准导线按钮的提示文本"
+  },
+  "calc_group_standard_wire_table_header_index": {
+    "message": "序号",
+    "description": "序号列标题"
+  },
+  "calc_group_standard_wire_table_header_gauge": {
+    "message": "线规",
+    "description": "线规列标题"
+  },
+  "calc_group_standard_wire_table_header_type": {
+    "message": "类型",
+    "description": "类型列标题"
+  },
+  "calc_group_standard_wire_table_header_diameter": {
+    "message": "直径",
+    "description": "直径列标题"
+  },
+  "calc_group_standard_wire_table_header_count": {
+    "message": "数量",
+    "description": "数量列标题"
+  },
+  "calc_group_standard_wire_table_header_delete": {
+    "message": "删除",
+    "description": "删除列标题"
+  },
+  "calc_group_special_wire_title": {
+    "message": "特殊导线",
+    "description": "特殊导线区域标题"
+  },
+  "calc_group_special_wire_button_add": {
+    "message": "增加",
+    "description": "增加特殊导线按钮"
+  },
+  "calc_group_special_wire_button_reset": {
+    "message": "重置",
+    "description": "重置特殊导线按钮"
+  },
+  "calc_group_special_wire_button_add_tooltip": {
+    "message": "增加一行特殊导线输入",
+    "description": "增加特殊导线按钮的提示文本"
+  },
+  "calc_group_special_wire_button_reset_tooltip": {
+    "message": "重置特殊导线表格内容为默认值",
+    "description": "重置特殊导线按钮的提示文本"
+  },
+  "calc_group_special_wire_table_header_index": {
+    "message": "序号",
+    "description": "序号列标题"
+  },
+  "calc_group_special_wire_table_header_diameter": {
+    "message": "直径(mm)",
+    "description": "直径列标题"
+  },
+  "calc_group_special_wire_table_header_count": {
+    "message": "数量",
+    "description": "数量列标题"
+  },
+  "calc_group_special_wire_table_header_delete": {
+    "message": "删除",
+    "description": "删除列标题"
+  },
+  "calc_group_wrap_title": {
+    "message": "包裹物",
+    "description": "包裹物区域标题"
+  },
+  "calc_group_wrap_button_add": {
+    "message": "增加",
+    "description": "增加包裹物按钮"
+  },
+  "calc_group_wrap_button_reset": {
+    "message": "重置",
+    "description": "重置包裹物按钮"
+  },
+  "calc_group_wrap_button_add_tooltip": {
+    "message": "增加一层包裹物",
+    "description": "增加包裹物按钮的提示文本"
+  },
+  "calc_group_wrap_button_reset_tooltip": {
+    "message": "重置包裹物表格内容为默认值",
+    "description": "重置包裹物按钮的提示文本"
+  },
+  "calc_group_wrap_table_header_index": {
+    "message": "序号",
+    "description": "序号列标题"
+  },
+  "calc_group_wrap_table_header_thickness": {
+    "message": "厚度(mm)",
+    "description": "厚度列标题"
+  },
+  "calc_group_wrap_table_header_delete": {
+    "message": "删除",
+    "description": "删除列标题"
+  },
+  "calc_group_tolerance_title": {
+    "message": "制造公差",
+    "description": "制造公差区域标题"
+  },
+  "calc_group_tolerance_button_reset": {
+    "message": "重置",
+    "description": "重置制造公差按钮"
+  },
+  "calc_group_tolerance_button_reset_tooltip": {
+    "message": "重置制造公差为默认值 (110%)",
+    "description": "重置制造公差按钮的提示文本"
+  },
+  "calc_group_score_title": {
+    "message": "计算次数",
+    "description": "计算次数区域标题"
+  },
+  "calc_group_score_button_reset": {
+    "message": "重置",
+    "description": "重置计算次数按钮"
+  },
+  "calc_group_score_button_reset_tooltip": {
+    "message": "重置计算次数为默认值 (10)",
+    "description": "重置计算次数按钮的提示文本"
+  },
+  "calc_group_simulation_title": {
+    "message": "截面模拟",
+    "description": "截面模拟区域标题"
+  },
+  "calc_group_stats_title": {
+    "message": "输入统计",
+    "description": "输入统计区域标题"
+  },
+  "calc_group_stats_wire_count": {
+    "message": "总导线数量：",
+    "description": "总导线数量标签"
+  },
+  "calc_group_stats_wrap_count": {
+    "message": "总包裹物层数：",
+    "description": "总包裹物层数标签"
+  },
+  "calc_group_stats_wrap_thickness": {
+    "message": "总包裹物厚度：",
+    "description": "总包裹物厚度标签"
+  },
+  "calc_group_result_title": {
+    "message": "直径计算详情",
+    "description": "直径计算详情区域标题"
+  },
+  "calc_button_calculate": {
+    "message": "计算",
+    "description": "计算按钮"
+  },
+  "calc_button_save": {
+    "message": "保存",
+    "description": "保存按钮"
+  },
+  "calc_button_clear": {
+    "message": "清空",
+    "description": "清空按钮"
+  },
+  "calc_result_title": {
+    "message": "计算结果",
+    "description": "计算结果标题"
+  },
+  "calc_result_diameter": {
+    "message": "线束直径: {diameter} mm",
+    "description": "线束直径显示"
+  },
+  "calc_result_area": {
+    "message": "截面积: {area} mm²",
+    "description": "截面积显示"
+  },
+  "calc_bottom_bar_export_image": {
+    "message": "导出结果",
+    "description": "底部栏导出按钮文本"
+  },
+  "calc_bottom_bar_export_image_tooltip": {
+    "message": "导出右侧结果为图片",
+    "description": "底部栏导出按钮提示"
+  },
+  "export_preview_title": {
+    "message": "图片预览",
+    "description": "导出图片预览窗标题"
+  },
+  "export_copy_image": {
+    "message": "复制图片",
+    "description": "预览窗复制按钮"
+  },
+  "export_download_image": {
+    "message": "下载图片",
+    "description": "预览窗下载按钮"
+  },
+  "export_copy_success": {
+    "message": "图片已复制到剪贴板",
+    "description": "复制成功提示"
+  },
+  "export_copy_warning": {
+    "message": "环境不支持图片剪贴板，已复制图片链接",
+    "description": "复制降级提示"
+  },
+  "export_copy_error": {
+    "message": "复制失败，请手动下载图片",
+    "description": "复制失败提示"
+  },
+  "export_not_found_right": {
+    "message": "未找到右侧区域",
+    "description": "右侧区域缺失错误"
+  },
+  "export_lib_not_loaded": {
+    "message": "截图库未加载，请检查网络或脚本引入",
+    "description": "库未加载错误"
+  },
+  "export_failed": {
+    "message": "导出失败，请重试",
+    "description": "导出失败提示"
+  },
+  "calc_message_no_valid_wires": {
+    "message": "请输入至少一个有效数量和直径的导线进行计算。",
+    "description": "无有效导线输入错误提示"
+  },
+  "calc_message_no_valid_results": {
+    "message": "模拟计算未能生成有效结果，请检查输入参数是否合理。",
+    "description": "模拟计算无有效结果的错误提示"
+  },
+  "calc_message_calculation_error": {
+    "message": "计算过程中发生错误，请检查控制台获取更多信息。",
+    "description": "计算过程错误提示"
+  },
+  "calc_message_save_history_error": {
+    "message": "保存历史记录时出错。",
+    "description": "保存历史记录失败时的错误提示"
+  },
+  "changelog_title": {
+    "message": "更新日志",
+    "description": "更新日志标题"
+  },
+  "history_title": {
+    "message": "历史记录列表",
+    "description": "历史页面标题"
+  },
+  "history_button_export": {
+    "message": "导出CSV",
+    "description": "导出CSV按钮"
+  },
+  "history_button_clear": {
+    "message": "清除历史",
+    "description": "清除历史按钮"
+  },
+  "history_table_header_index": {
+    "message": "序号",
+    "description": "序号列标题"
+  },
+  "history_table_header_time": {
+    "message": "计算时间",
+    "description": "计算时间列标题"
+  },
+  "history_table_header_standard_wires": {
+    "message": "标准导线",
+    "description": "标准导线列标题"
+  },
+  "history_table_header_special_wires": {
+    "message": "特殊导线",
+    "description": "特殊导线列标题"
+  },
+  "history_table_header_wrapping": {
+    "message": "包覆物",
+    "description": "包覆物列标题"
+  },
+  "history_table_header_tolerance": {
+    "message": "制造公差",
+    "description": "制造公差列标题"
+  },
+  "history_table_header_max_theoretical": {
+    "message": "最大理论直径 (mm)",
+    "description": "最大理论直径列标题"
+  },
+  "history_table_header_min_theoretical": {
+    "message": "最小理论直径 (mm)",
+    "description": "最小理论直径列标题"
+  },
+  "history_table_header_avg_theoretical": {
+    "message": "平均理论直径 (mm)",
+    "description": "平均理论直径列标题"
+  },
+  "history_table_header_final_diameter": {
+    "message": "最终直径 (mm)",
+    "description": "最终直径列标题"
+  },
+  "history_message_no_records": {
+    "message": "暂无历史记录",
+    "description": "无历史记录提示"
+  },
+  "history_message_load_error": {
+    "message": "加载历史记录出错",
+    "description": "加载错误提示"
+  },
+  "history_message_cleared": {
+    "message": "历史记录已清除。",
+    "description": "清除成功提示"
+  },
+  "history_message_clear_error": {
+    "message": "清除历史记录时发生错误。",
+    "description": "清除错误提示"
+  },
+  "history_message_no_records_to_export": {
+    "message": "没有历史记录可导出。",
+    "description": "无记录可导出提示"
+  },
+  "history_message_download_not_supported": {
+    "message": "您的浏览器不支持程序化文件下载。请尝试手动复制数据。",
+    "description": "浏览器不支持下载提示"
+  },
+  "history_message_export_error": {
+    "message": "导出CSV时发生错误。",
+    "description": "导出错误提示"
+  },
+  "config_page_title": {
+    "message": "配置管理",
+    "description": "配置页面标题"
+  },
+  "config_standard_wires_title": {
+    "message": "自定义标准导线",
+    "description": "自定义标准导线区域标题"
+  },
+  "config_standard_wires_button_add_new": {
+    "message": "新增",
+    "description": "新增导线按钮"
+  },
+  "config_standard_wires_button_save": {
+    "message": "保存",
+    "description": "保存配置按钮"
+  },
+  "config_standard_wires_button_restore_defaults": {
+    "message": "恢复默认",
+    "description": "恢复默认设置按钮"
+  },
+  "config_standard_wires_button_import": {
+    "message": "导入配置",
+    "description": "导入配置按钮"
+  },
+  "config_standard_wires_button_export": {
+    "message": "导出配置",
+    "description": "导出配置按钮"
+  },
+  "config_standard_wires_table_header_number": {
+    "message": "序号",
+    "description": "表格序号列"
+  },
+  "config_standard_wires_table_header_gauge": {
+    "message": "线规 (mm²)",
+    "description": "表格线规列"
+  },
+  "config_standard_wires_table_header_thin": {
+    "message": "Thin",
+    "description": "表格Thin列"
+  },
+  "config_standard_wires_table_header_thick": {
+    "message": "Thick",
+    "description": "表格Thick列"
+  },
+  "config_standard_wires_table_header_ultra_thin": {
+    "message": "UltraThin",
+    "description": "表格UltraThin列"
+  },
+  "config_standard_wires_table_header_operations": {
+    "message": "操作",
+    "description": "表格操作列"
+  },
+  "config_standard_wires_table_loading": {
+    "message": "正在加载配置...",
+    "description": "加载配置时的提示"
+  },
+  "config_standard_wires_table_no_data": {
+    "message": "暂无配置数据",
+    "description": "无配置数据时的提示"
+  },
+  "config_standard_wires_table_delete_row": {
+    "message": "删除此行",
+    "description": "删除行按钮提示"
+  },
+  "config_simulation_params_title": {
+    "message": "模拟参数配置",
+    "description": "模拟参数配置区域标题"
+  },
+  "config_simulation_params_button_save": {
+    "message": "保存",
+    "description": "保存模拟参数按钮"
+  },
+  "config_simulation_params_button_restore_defaults": {
+    "message": "恢复默认",
+    "description": "恢复默认模拟参数按钮"
+  },
+  "config_simulation_params_params_pi_title": {
+    "message": "圆周率 (PI)",
+    "description": "PI参数标题"
+  },
+  "config_simulation_params_params_pi_description": {
+    "message": "圆周率常数，用于计算圆形面积和周长。通常使用3.1415926，除非有特殊需求，建议保持默认值。",
+    "description": "PI参数说明"
+  },
+  "config_simulation_params_params_r2r1_title": {
+    "message": "容器半径比 (R2/R1)",
+    "description": "容器半径比参数标题"
+  },
+  "config_simulation_params_params_r2r1_description": {
+    "message": "外部容器半径与内部填充区域半径的比率。值越大，预留空间越多，但可能影响填充效率。默认值1.01通常能平衡空间利用和计算效率。",
+    "description": "容器半径比参数说明"
+  },
+  "config_simulation_params_params_acceleration_title": {
+    "message": "加速系数",
+    "description": "加速系数参数标题"
+  },
+  "config_simulation_params_params_acceleration_description": {
+    "message": "圆形每步互相推开的强度系数。较大的值可以加快收敛速度，但可能导致不稳定；较小的值收敛更稳定但计算较慢。默认值1.7在速度和稳定性之间取得平衡。",
+    "description": "加速系数参数说明"
+  },
+  "config_simulation_params_params_weight_factor_title": {
+    "message": "质量因子",
+    "description": "质量因子参数标题"
+  },
+  "config_simulation_params_params_weight_factor_description": {
+    "message": "质量计算的指数(r^WF)，影响大圆推小圆的程度。较大的值会使大直径导线的影响更显著，较小的值则使各导线影响更均匀。默认值2.0适用于大多数情况。",
+    "description": "质量因子参数说明"
+  },
+  "config_simulation_params_params_convergence_threshold_title": {
+    "message": "收敛阈值",
+    "description": "收敛阈值参数标题"
+  },
+  "config_simulation_params_params_convergence_threshold_description": {
+    "message": "收敛判定阈值，表示平均穿透深度与半径的比值。值越小要求精度越高但计算时间更长，值越大计算更快但精度较低。默认值0.001在精度和速度间取得良好平衡。",
+    "description": "收敛阈值参数说明"
+  },
+  "config_simulation_params_params_max_iterations_run_title": {
+    "message": "主循环最大迭代次数",
+    "description": "主循环最大迭代次数参数标题"
+  },
+  "config_simulation_params_params_max_iterations_run_description": {
+    "message": "主填充循环的安全中断迭代次数。如果超过此次数仍未收敛，将终止计算。较大的值可以处理更复杂的情况，但可能增加计算时间。默认值500适用于大多数情况。",
+    "description": "主循环最大迭代次数参数说明"
+  },
+  "config_simulation_params_params_max_iterations_step_title": {
+    "message": "单步最大迭代次数",
+    "description": "单步最大迭代次数参数标题"
+  },
+  "config_simulation_params_params_max_iterations_step_description": {
+    "message": "每个主循环步骤中，在调整容器大小之前的最大迭代次数。较大的值可以提高每步的精度，但会增加计算时间。默认值15通常能满足精度要求。",
+    "description": "单步最大迭代次数参数说明"
+  },
+  "config_simulation_params_params_container_adjust_title": {
+    "message": "容器调整系数",
+    "description": "容器调整系数参数标题"
+  },
+  "config_simulation_params_params_container_adjust_description": {
+    "message": "根据穿透情况调整容器大小的幅度。较大的值调整更激进可能导致不稳定，较小的值调整更平缓但收敛较慢。默认值0.05提供了稳定性和收敛速度的良好平衡。",
+    "description": "容器调整系数参数说明"
+  },
+  "config_simulation_params_reset_button_title": {
+    "message": "恢复此参数为默认值",
+    "description": "重置参数按钮提示文本"
+  },
+  "config_simulation_params_message_saved": {
+    "message": "模拟参数已保存！",
+    "description": "保存成功提示"
+  },
+  "config_simulation_params_message_confirm_restore": {
+    "message": "确定要将所有模拟参数恢复为默认设置吗？此操作不可撤销。",
+    "description": "恢复默认设置确认提示"
+  },
+  "config_simulation_params_message_restored": {
+    "message": "模拟参数已恢复为默认值！",
+    "description": "恢复默认设置成功提示"
+  },
+  "calc_result_details_header_param": {
+    "message": "参数",
+    "description": "计算详情表格中的参数列标题"
+  },
+  "calc_result_details_header_bare": {
+    "message": "裸线值 (mm)",
+    "description": "计算详情表格中的裸线值列标题"
+  },
+  "calc_result_details_header_simulated": {
+    "message": "模拟值 (mm)",
+    "description": "计算详情表格中的模拟值列标题"
+  },
+  "calc_result_details_label_min": {
+    "message": "最小线径",
+    "description": "计算详情表格中的最小线径行标签"
+  },
+  "calc_result_details_label_max": {
+    "message": "最大线径",
+    "description": "计算详情表格中的最大线径行标签"
+  },
+  "calc_result_details_label_avg": {
+    "message": "平均线径",
+    "description": "计算详情表格中的平均线径行标签"
+  },
+  "calc_result_details_tooltip_theoretical": {
+    "message": "仅基于导线堆叠模拟计算的理论直径 (不含包裹物和公差)",
+    "description": "理论直径值的提示文本"
+  },
+  "calc_result_details_tooltip_final": {
+    "message": "包含包裹物厚度和制造公差的最终计算直径",
+    "description": "最终计算直径值的提示文本"
+  },
+  "calc_results_chart_title": {
+    "message": "计算结果",
+    "description": "计算结果图表区域的标题"
+  },
+  "calc_bottom_bar_save_history": {
+    "message": "保存历史记录",
+    "description": "保存历史复选框的标签"
+  },
+  "calc_bottom_bar_save_history_tooltip": {
+    "message": "勾选后，每次计算结果将自动保存到历史记录中",
+    "description": "保存历史复选框的提示文本"
+  },
+  "calc_bottom_bar_reset_all": {
+    "message": "全部重置",
+    "description": "全部重置按钮的文本"
+  },
+  "calc_bottom_bar_reset_all_tooltip": {
+    "message": "重置页面所有输入项为默认值",
+    "description": "全部重置按钮的提示文本"
+  },
+  "calc_bottom_bar_calculate": {
+    "message": "计算直径",
+    "description": "计算按钮的文本"
+  },
+  "calc_bottom_bar_calculate_tooltip": {
+    "message": "基于当前输入执行模拟计算并显示结果 (或按 Enter 键)",
+    "description": "计算直径按钮的提示文本"
+  },
+  "calc_bottom_bar_calculating": {
+    "message": "计算中...",
+    "description": "计算进行中时计算按钮的文本"
+  },
+  "calc_confirm_reset_all": {
+    "message": "确定要重置所有输入吗？",
+    "description": "重置所有输入时的确认信息"
+  },
+  "calc_result_highlight_tooltip": {
+    "message": "向上取整的最终平均直径，括号内为包含包裹物和公差的实际计算值 (保留两位小数)",
+    "description": "高亮显示的平均直径结果的提示文本"
+  },
+  "calc_result_error": {
+    "message": "计算错误",
+    "description": "发生计算错误时显示的文本"
+  },
+  "config_standard_wires_message_saved": {
+    "message": "配置已成功保存！",
+    "description": "成功保存自定义导线配置后的提示信息。"
+  },
+  "config_standard_wires_message_restore_fail": {
+    "message": "恢复默认配置失败，请检查浏览器控制台。\\n{error}",
+    "description": "恢复默认导线配置失败时的错误信息。"
+  },
+  "config_standard_wires_message_duplicate_gauge_error": {
+    "message": "错误：检测到重复的线规值。请修正高亮的输入框后再保存。",
+    "description": "存在重复线规值时的错误信息。"
+  },
+  "config_standard_wires_message_confirm_save_empty": {
+    "message": "所有之前输入的线规均为空或无效，已被移除。保存后列表将为空。是否继续？",
+    "description": "保存空的自定义导线列表时的确认信息。"
+  },
+  "config_standard_wires_message_save_cancelled": {
+    "message": "保存操作已取消。您的输入(包括无效行)已被保留供编辑。",
+    "description": "提示保存操作已取消的信息。"
+  },
+  "config_standard_wires_message_internal_error": {
+    "message": "内部错误或并发修改：线规 {gauge} 在最终准备保存的数据中仍存在重复。请刷新页面或重试。",
+    "description": "保荐期间发生内部错误时的错误信息。"
+  },
+  "config_standard_wires_message_confirm_restore": {
+    "message": "您确定要恢复所有标准导线参数到出厂默认设置吗？所有自定义导线参数（包括已保存的）都将丢失。",
+    "description": "恢复默认导线配置时的确认信息。"
+  },
+  "config_standard_wires_message_save_fail": {
+    "message": "保存配置失败，请检查浏览器控制台。\\n{error}",
+    "description": "保存导线配置失败时的错误信息。"
+  },
+  "config_standard_wires_message_invalid_od_error": {
+    "message": "错误：序号 {index} (线规 {gauge}) 的 {type} 外径值无效或为负数。",
+    "description": "自定义导线表格中存在无效OD值时的错误信息。"
+  },
+  "config_import_invalid_format": {
+    "message": "配置文件格式无效。",
+    "description": "导入配置时格式无效的错误信息"
+  },
+  "config_import_success": {
+    "message": "配置导入成功！",
+    "description": "导入配置成功的提示信息"
+  },
+  "config_import_error": {
+    "message": "导入配置时发生错误: {error}",
+    "description": "导入配置失败时的错误信息"
+  },
+  "config_export_error": {
+    "message": "导出配置时发生错误: {error}",
+    "description": "导出配置失败时的错误信息"
+  },
+  "history_csv_header_index": {
+    "message": "序号",
+    "description": "CSV文件中的序号列表头"
+  },
+  "history_csv_header_time": {
+    "message": "计算时间",
+    "description": "CSV文件中的计算时间列表头"
+  },
+  "history_csv_header_standard_wires": {
+    "message": "标准导线",
+    "description": "CSV文件中的标准导线列表头"
+  },
+  "history_csv_header_special_wires": {
+    "message": "特殊导线",
+    "description": "CSV文件中的特殊导线列表头"
+  },
+  "history_csv_header_wrapping": {
+    "message": "包覆物",
+    "description": "CSV文件中的包覆物列表头"
+  },
+  "history_csv_header_tolerance": {
+    "message": "制造公差 (%)",
+    "description": "CSV文件中的制造公差列表头"
+  },
+  "history_csv_header_max_theoretical": {
+    "message": "最大理论直径 (mm)",
+    "description": "CSV文件中的最大理论直径列表头"
+  },
+  "history_csv_header_min_theoretical": {
+    "message": "最小理论直径 (mm)",
+    "description": "CSV文件中的最小理论直径列表头"
+  },
+  "history_csv_header_avg_theoretical": {
+    "message": "平均理论直径 (mm)",
+    "description": "CSV文件中的平均理论直径列表头"
+  },
+  "history_csv_header_final_diameter": {
+    "message": "最终平均直径 (mm)",
+    "description": "CSV文件中的最终平均直径列表头"
+  },
+  "history_confirm_clear": {
+    "message": "确定要清除所有历史记录吗？此操作不可恢复。",
+    "description": "清除历史记录前的确认信息。"
+  },
+  "calc_input_placeholder_qty": {
+    "message": "请输入数量",
+    "description": "输入框中数量字段"
+  },
+  "calc_input_placeholder_od": {
+    "message": "请输入直径",
+    "description": "输入框中直径字段"
+  },
+  "calc_input_placeholder_thick": {
+    "message": "请输入厚度",
+    "description": "输入框中厚度字段"
+  },
+  "config_input_placeholder_gauge": {
+    "message": "请输入线规",
+    "description": "配置页面线规输入框"
+  },
+  "config_input_placeholder_thin": {
+    "message": "请输入Thin值",
+    "description": "配置页面Thin值输入框"
+  },
+  "config_input_placeholder_thick": {
+    "message": "请输入Thick值",
+    "description": "配置页面Thick值输入框"
+  },
+  "config_input_placeholder_ultrathin": {
+    "message": "请输入UltraThin值",
+    "description": "配置页面UltraThin值输入框"
+  },
+  "calc_input_tooltip_tolerance_range": {
+    "message": "拖动调整制造公差百分比 (100%-200%)",
+    "description": "制造公差范围滑块的提示文本"
+  },
+  "calc_input_tooltip_tolerance_input": {
+    "message": "输入制造公差百分比 (100-200)",
+    "description": "制造公差文本输入框的提示文本"
+  },
+  "calc_input_tooltip_score_range": {
+    "message": "拖动调整模拟计算次数 (1-100)",
+    "description": "计算次数范围滑块的提示文本"
+  },
+  "calc_input_tooltip_score_input": {
+    "message": "输入模拟计算次数 (1-100)",
+    "description": "计算次数文本输入框的提示文本"
+  },
+  "wire_type_thin": {
+    "message": "薄壁",
+    "description": "导线绝缘类型：薄壁"
+  },
+  "wire_type_thick": {
+    "message": "厚壁",
+    "description": "导线绝缘类型：厚壁"
+  },
+  "wire_type_ultra_thin": {
+    "message": "超薄壁",
+    "description": "导线绝缘类型：超薄壁"
+  },
+  "calc_select_placeholder_choose": {
+    "message": "请选择",
+    "description": "下拉框"
+  }
+}

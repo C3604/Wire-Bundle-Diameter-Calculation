@@ -1,4 +1,4 @@
-/* help-style.css */
+/* Help 页面样式：src/pages/help/help.css */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     line-height: 1.6;
@@ -339,4 +339,37 @@ footer {
     background-color: #FFF3CD;
     padding: 2px 4px;
     border-radius: 3px;
+}
+
+/* I18n missing key visual cues */
+.i18n-missing {
+    outline: 2px dashed #FFC107;
+    background-color: #FFF8E1;
+}
+
+.i18n-missing-banner {
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    background-color: #FFF3CD;
+    border: 1px solid #FFECB5;
+    color: #664d03;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.i18n-missing-banner__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.i18n-missing-banner__close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #664d03;
 }

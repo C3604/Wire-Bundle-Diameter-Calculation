@@ -1,4 +1,4 @@
-import { getJSON, setJSON } from "../../lib/storage.js";
+import { getJSON, setJSON } from "../../services/storage.js";
 
 export const STORAGE_KEY = "userDefinedStandardWires";
 

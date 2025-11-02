@@ -23,7 +23,10 @@
       <div id="main-content"></div>
     </section>
   </div>
-  <script src="src/lib/chart.umd.js"></script>
+  <!-- 兼容路径：Chart.js 由 UMD 全局注入；组件已封装，可后续移除 -->
+  <script src="src/vendor/chart.umd.js"></script>
+  <!-- 页面截图库：html2canvas（本地） -->
+  <script src="src/vendor/html2canvas.min.js"></script>
   <script src="src/pages/Popup.js" type="module"></script>
 </body>
-</html> 
+</html>

@@ -1,6 +1,12 @@
 ﻿{
   "versions": [
     {
+      "version": "1.0.3.0",
+      "changes": [
+        "新增：导出结果图片功能"
+      ]
+    },
+    {
       "version": "1.0.2.7",
       "changes": [
         "移除：停止维护 Firefox 版本，与 Chromium 版保持单一构建流程",

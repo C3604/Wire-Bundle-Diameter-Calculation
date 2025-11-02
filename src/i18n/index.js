@@ -4,8 +4,9 @@
  *
  * 回退策略说明（文档层）：
  * 1) 语言偏好优先读取 `chrome.storage.local`，不可用则按浏览器语言推断（zh→`zh_CN`，否则 `en`）。
- * 2) 消息包加载优先使用 `chrome.runtime.getURL("_locales/.../messages.json")`；
- *    非扩展环境自动回退为相对路径 `/_locales/.../messages.json`。
+ * 2) 消息包加载优先使用 `chrome.runtime.getURL("language/.../messages.json")`；
+ *    非扩展环境自动回退为相对路径 `/language/.../messages.json`；
+ *    若新路径不可用，最后回退到旧路径 `_locales/.../messages.json`。
  * 3) 初始化或加载失败时回退到默认语言 `zh_CN` 并记录错误日志；若仍失败则抛出初始化错误。
  * 4) 获取文案失败时，尝试使用 `chrome.i18n.getMessage`；仍失败则回退到当前语言已加载的消息或直接返回 key。
  * 5) 所有回退路径均以简短 `console.warn/console.error` 记录，不中断 UI 渲染。
@@ -103,31 +104,40 @@ class I18nManager {
     }
 
     try {
-      // 使用Chrome扩展的国际化API加载消息；在非扩展环境下回退到相对路径
-      let messagesUrl;
-      if (
-        typeof chrome !== "undefined" &&
-        chrome.runtime &&
-        typeof chrome.runtime.getURL === "function"
-      ) {
-        messagesUrl = chrome.runtime.getURL(`_locales/${language}/messages.json`);
-      } else {
-        messagesUrl = `/_locales/${language}/messages.json`;
-      }
-      const response = await fetch(messagesUrl);
+      // 优先从新目录 language 加载；失败则回退到旧目录 _locales
+      const makeUrl = (p) => {
+        if (
+          typeof chrome !== "undefined" &&
+          chrome.runtime &&
+          typeof chrome.runtime.getURL === "function"
+        ) {
+          return chrome.runtime.getURL(p);
+        }
+        return `/${p}`;
+      };
 
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch messages for ${language}: ${response.status}`,
+      const tryFetch = async (path) => {
+        const url = makeUrl(path);
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`fetch ${path} failed: ${resp.status}`);
+        return resp.json();
+      };
+
+      let messages;
+      try {
+        messages = await tryFetch(`language/${language}/messages.json`);
+      } catch (e1) {
+        console.warn(
+          `language/${language}/messages.json not available, fallback to _locales`,
+          e1,
         );
+        messages = await tryFetch(`_locales/${language}/messages.json`);
       }
 
-      const messages = await response.json();
       this.messages[language] = messages;
-
       console.log(
         `Loaded messages for ${language}:`,
-        Object.keys(messages).length,
+        Object.keys(messages || {}).length,
         "keys",
       );
     } catch (error) {

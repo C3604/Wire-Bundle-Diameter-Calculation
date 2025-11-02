@@ -1,4 +1,4 @@
-import i18n from "../lib/i18n.js";
+import i18n from "../i18n/index.js";
 
 export const WIRE_TYPE_KEYS = ["Thin", "Thick", "Ultra Thin"];
 

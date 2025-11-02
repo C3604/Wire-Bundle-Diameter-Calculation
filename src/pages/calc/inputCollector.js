@@ -1,4 +1,4 @@
-import i18n from "../../lib/i18n.js";
+import i18n from "../../i18n/index.js";
 
 /**
  * 统一的输入收集与校验流程，返回标准化状态与警告信息。

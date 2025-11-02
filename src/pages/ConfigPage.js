@@ -6,9 +6,9 @@ import {
   restoreDefaultSimulationParameters,
   getDefaultSimulationParameters,
 } from "../logic/wireManager.js";
-import i18n from "../lib/i18n.js";
+import i18n from "../i18n/index.js";
 import { showToast, showConfirm } from "../components/feedback.js";
-import { getJSON, setJSON, remove } from "../lib/storage.js";
+import { getJSON, setJSON, remove } from "../services/storage.js";
 import { loadUserCustomWires, saveUserCustomWires } from "./config/wiresStore.js";
 
 // 全局变量，用于存储当前表格显示的数据和初始快照
@@ -39,7 +39,7 @@ if (!document.getElementById("gauge-list")) {
 
 // 配置页统一使用 wireManager 与 wiresStore 作为数据来源与存储层
 
-// 已统一到 wiresStore 和 lib/storage 的读写方式，移除旧的本地读取函数
+// 已统一到 wiresStore 和 services/storage 的读写方式，移除旧的本地读取函数
 
 // 深拷贝函数，用于创建数据副本
 function deepClone(data) {

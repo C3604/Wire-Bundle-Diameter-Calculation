@@ -1,0 +1,778 @@
+{
+  "extName": {
+    "message": "Wire Bundle Diameter Calculator",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "A wire bundle diameter estimation tool based on 2D circular packing, supporting multiple wire specifications, wrapping layers, visualization and configuration management.",
+    "description": "Extension description"
+  },
+  "app": {
+    "message": "Wire Bundle Diameter Calculator",
+    "description": "Application title"
+  },
+  "appTitle": {
+    "message": "Wire Bundle Diameter Calculator",
+    "description": "Application title"
+  },
+  "sidebar_button_calc": {
+    "message": "Calculate",
+    "description": "Calculate button text"
+  },
+  "sidebar_button_history": {
+    "message": "History",
+    "description": "History button text"
+  },
+  "sidebar_button_config": {
+    "message": "Settings",
+    "description": "Settings button text"
+  },
+  "sidebar_button_help": {
+    "message": "Help",
+    "description": "Help button text"
+  },
+  "sidebar_tooltip_collapse": {
+    "message": "Collapse/Expand Sidebar",
+    "description": "Collapse/Expand sidebar tooltip"
+  },
+  "sidebar_tooltip_expand": {
+    "message": "Expand Sidebar",
+    "description": "Expand sidebar tooltip"
+  },
+  "sidebar_tooltip_help": {
+    "message": "Help Documentation",
+    "description": "Help documentation tooltip"
+  },
+  "version_display": {
+    "message": "Version: {version}",
+    "description": "Version display text"
+  },
+  "version_na": {
+    "message": "Version N/A",
+    "description": "Version not available display text"
+  },
+  "language_switch": {
+    "message": "Language Switch",
+    "description": "Language switch button text"
+  },
+  "language_current": {
+    "message": "Current Language: English",
+    "description": "Current language display"
+  },
+  "calc_group_standard_wire_title": {
+    "message": "Standard Wires",
+    "description": "Standard wires section title"
+  },
+  "calc_group_standard_wire_button_add": {
+    "message": "Add",
+    "description": "Add standard wire button"
+  },
+  "calc_group_standard_wire_button_reset": {
+    "message": "Reset",
+    "description": "Reset standard wires button"
+  },
+  "calc_group_standard_wire_table_header_index": {
+    "message": "No.",
+    "description": "Index column header"
+  },
+  "calc_group_standard_wire_table_header_gauge": {
+    "message": "Gauge",
+    "description": "Gauge column header"
+  },
+  "calc_group_standard_wire_table_header_type": {
+    "message": "Type",
+    "description": "Type column header"
+  },
+  "calc_group_standard_wire_table_header_diameter": {
+    "message": "Diameter",
+    "description": "Diameter column header"
+  },
+  "calc_group_standard_wire_table_header_count": {
+    "message": "Qty.",
+    "description": "Quantity column header (abbreviated)"
+  },
+  "calc_group_standard_wire_table_header_delete": {
+    "message": "Delete",
+    "description": "Delete column header"
+  },
+  "calc_group_special_wire_title": {
+    "message": "Special Wires",
+    "description": "Special wires section title"
+  },
+  "calc_group_special_wire_button_add": {
+    "message": "Add",
+    "description": "Add special wire button"
+  },
+  "calc_group_special_wire_button_reset": {
+    "message": "Reset",
+    "description": "Reset special wires button"
+  },
+  "calc_group_special_wire_table_header_index": {
+    "message": "No.",
+    "description": "Index column header"
+  },
+  "calc_group_special_wire_table_header_diameter": {
+    "message": "Diameter(mm)",
+    "description": "Diameter column header"
+  },
+  "calc_group_special_wire_table_header_count": {
+    "message": "Qty.",
+    "description": "Quantity column header (abbreviated)"
+  },
+  "calc_group_special_wire_table_header_delete": {
+    "message": "Delete",
+    "description": "Delete column header"
+  },
+  "calc_group_wrap_title": {
+    "message": "Wrapping",
+    "description": "Wrapping section title"
+  },
+  "calc_group_wrap_button_add": {
+    "message": "Add",
+    "description": "Add wrapping button"
+  },
+  "calc_group_wrap_button_reset": {
+    "message": "Reset",
+    "description": "Reset wrapping button"
+  },
+  "calc_group_wrap_table_header_index": {
+    "message": "No.",
+    "description": "Index column header"
+  },
+  "calc_group_wrap_table_header_thickness": {
+    "message": "Thickness(mm)",
+    "description": "Thickness column header"
+  },
+  "calc_group_wrap_table_header_delete": {
+    "message": "Delete",
+    "description": "Delete column header"
+  },
+  "calc_group_tolerance_title": {
+    "message": "Manufacturing Tolerance",
+    "description": "Manufacturing tolerance section title"
+  },
+  "calc_group_tolerance_button_reset": {
+    "message": "Reset",
+    "description": "Reset tolerance button"
+  },
+  "calc_group_score_title": {
+    "message": "Calculation Quantity",
+    "description": "Calculation quantity section title"
+  },
+  "calc_group_score_button_reset": {
+    "message": "Reset",
+    "description": "Reset calculation quantity button"
+  },
+  "calc_group_simulation_title": {
+    "message": "Cross-section Simulation",
+    "description": "Cross-section simulation section title"
+  },
+  "calc_group_stats_title": {
+    "message": "Input Statistics",
+    "description": "Input statistics section title"
+  },
+  "calc_group_stats_wire_count": {
+    "message": "Total Wire Quantity: ",
+    "description": "Total wire quantity label"
+  },
+  "calc_group_stats_wrap_count": {
+    "message": "Total Wrapping Layers: ",
+    "description": "Total wrapping layers label"
+  },
+  "calc_group_stats_wrap_thickness": {
+    "message": "Total wrapping thickness: ",
+    "description": "Total wrapping thickness label"
+  },
+  "calc_group_result_title": {
+    "message": "Diameter Calculation Details",
+    "description": "Diameter calculation details section title"
+  },
+  "calc_button_calculate": {
+    "message": "Calculate",
+    "description": "Calculate button"
+  },
+  "calc_button_save": {
+    "message": "Save",
+    "description": "Save button"
+  },
+  "calc_button_clear": {
+    "message": "Clear",
+    "description": "Clear button"
+  },
+  "calc_result_title": {
+    "message": "Calculation Results",
+    "description": "Calculation results title"
+  },
+  "calc_result_diameter": {
+    "message": "Bundle Diameter: {diameter} mm",
+    "description": "Bundle diameter display"
+  },
+  "calc_result_area": {
+    "message": "Cross-sectional Area: {area} mm²",
+    "description": "Cross-sectional area display"
+  },
+  "calc_bottom_bar_export_image": {
+    "message": "Export Result",
+    "description": "Bottom bar export button text"
+  },
+  "calc_bottom_bar_export_image_tooltip": {
+    "message": "Export right panel result as image",
+    "description": "Bottom bar export button tooltip"
+  },
+  "export_preview_title": {
+    "message": "Image Preview",
+    "description": "Export image preview modal title"
+  },
+  "export_copy_image": {
+    "message": "Copy Image",
+    "description": "Preview modal copy button"
+  },
+  "export_download_image": {
+    "message": "Download Image",
+    "description": "Preview modal download button"
+  },
+  "export_copy_success": {
+    "message": "Image copied to clipboard",
+    "description": "Copy success toast"
+  },
+  "export_copy_warning": {
+    "message": "Image clipboard unsupported; DataURL copied",
+    "description": "Copy fallback toast"
+  },
+  "export_copy_error": {
+    "message": "Copy failed, please download the image",
+    "description": "Copy error toast"
+  },
+  "export_not_found_right": {
+    "message": "Right panel not found",
+    "description": "Right area missing error"
+  },
+  "export_lib_not_loaded": {
+    "message": "Capture library not loaded; check network or script",
+    "description": "Library not loaded error"
+  },
+  "export_failed": {
+    "message": "Export failed, please retry",
+    "description": "Export failure toast"
+  },
+  "calc_message_no_valid_wires": {
+    "message": "Please enter at least one wire with valid quantity and diameter for calculation.",
+    "description": "No valid wire input error message"
+  },
+  "calc_message_no_valid_results": {
+    "message": "All simulations failed to produce valid results. Please check your inputs or parameters.",
+    "description": "No valid calculation results error message"
+  },
+  "calc_message_calculation_error": {
+    "message": "An error occurred during calculation. Please check the console for more information.",
+    "description": "Calculation process error message"
+  },
+  "calc_message_save_history_error": {
+    "message": "Error saving history record. Local storage may be full or disabled.",
+    "description": "Save history error message"
+  },
+  "changelog_title": {
+    "message": "Changelog",
+    "description": "Changelog title"
+  },
+  "history_title": {
+    "message": "History Records",
+    "description": "History page title"
+  },
+  "history_button_export": {
+    "message": "Export CSV",
+    "description": "Export CSV button"
+  },
+  "history_button_clear": {
+    "message": "Clear History",
+    "description": "Clear history button"
+  },
+  "history_table_header_index": {
+    "message": "No.",
+    "description": "Index column header"
+  },
+  "history_table_header_time": {
+    "message": "Time",
+    "description": "Calculation time column header"
+  },
+  "history_table_header_standard_wires": {
+    "message": "Std. Wires",
+    "description": "Standard wires column header"
+  },
+  "history_table_header_special_wires": {
+    "message": "Spl. Wires",
+    "description": "Special wires column header"
+  },
+  "history_table_header_wrapping": {
+    "message": "Wrapping",
+    "description": "Wrapping column header"
+  },
+  "history_table_header_tolerance": {
+    "message": "Tolerance",
+    "description": "Manufacturing tolerance column header"
+  },
+  "history_table_header_max_theoretical": {
+    "message": "Max. Theo. Dia. (mm)",
+    "description": "Max theoretical diameter column header"
+  },
+  "history_table_header_min_theoretical": {
+    "message": "Min. Theo. Dia. (mm)",
+    "description": "Min theoretical diameter column header"
+  },
+  "history_table_header_avg_theoretical": {
+    "message": "Avg. Theo. Dia. (mm)",
+    "description": "Avg theoretical diameter column header"
+  },
+  "history_table_header_final_diameter": {
+    "message": "Final Dia. (mm)",
+    "description": "Final diameter column header"
+  },
+  "history_message_no_records": {
+    "message": "No history records",
+    "description": "No history records message"
+  },
+  "history_message_load_error": {
+    "message": "Error loading history records",
+    "description": "Load error message"
+  },
+  "history_message_cleared": {
+    "message": "History records cleared.",
+    "description": "Clear success message"
+  },
+  "history_message_clear_error": {
+    "message": "Error occurred while clearing history records.",
+    "description": "Clear error message"
+  },
+  "history_message_no_records_to_export": {
+    "message": "No history records to export.",
+    "description": "No records to export message"
+  },
+  "history_message_download_not_supported": {
+    "message": "Browser doesn't support direct download. Please copy data manually.",
+    "description": "Browser download not supported message"
+  },
+  "history_message_export_error": {
+    "message": "Error occurred while exporting CSV.",
+    "description": "Export error message"
+  },
+  "config_page_title": {
+    "message": "Configuration Management",
+    "description": "Configuration page title"
+  },
+  "config_standard_wires_title": {
+    "message": "Custom Standard Wires",
+    "description": "Custom standard wires section title"
+  },
+  "config_standard_wires_button_add_new": {
+    "message": "Add",
+    "description": "Add new wire button"
+  },
+  "config_standard_wires_button_save": {
+    "message": "Save",
+    "description": "Save configuration button"
+  },
+  "config_standard_wires_button_restore_defaults": {
+    "message": "Restore",
+    "description": "Restore default settings button"
+  },
+  "config_standard_wires_button_import": {
+    "message": "Import",
+    "description": "Import configuration button"
+  },
+  "config_standard_wires_button_export": {
+    "message": "Export",
+    "description": "Export configuration button"
+  },
+  "config_standard_wires_table_header_number": {
+    "message": "No.",
+    "description": "Table number column"
+  },
+  "config_standard_wires_table_header_gauge": {
+    "message": "Gauge (mm²)",
+    "description": "Table gauge column"
+  },
+  "config_standard_wires_table_header_thin": {
+    "message": "Thin",
+    "description": "Table Thin column"
+  },
+  "config_standard_wires_table_header_thick": {
+    "message": "Thick",
+    "description": "Table Thick column"
+  },
+  "config_standard_wires_table_header_ultra_thin": {
+    "message": "UltraThin",
+    "description": "Table UltraThin column"
+  },
+  "config_standard_wires_table_header_operations": {
+    "message": "Operations",
+    "description": "Table operations column"
+  },
+  "config_standard_wires_table_loading": {
+    "message": "Loading configuration...",
+    "description": "Loading configuration message"
+  },
+  "config_standard_wires_table_no_data": {
+    "message": "No configuration data",
+    "description": "No configuration data message"
+  },
+  "config_standard_wires_table_delete_row": {
+    "message": "Delete this row",
+    "description": "Delete row button tooltip"
+  },
+  "config_simulation_params_title": {
+    "message": "Simulation Parameters",
+    "description": "Simulation parameters section title"
+  },
+  "config_simulation_params_button_save": {
+    "message": "Save",
+    "description": "Save simulation parameters button"
+  },
+  "config_simulation_params_button_restore_defaults": {
+    "message": "Restore",
+    "description": "Restore default simulation parameters button"
+  },
+  "config_simulation_params_params_pi_title": {
+    "message": "π (PI)",
+    "description": "PI parameter title"
+  },
+  "config_simulation_params_params_pi_description": {
+    "message": "Pi (π) for calculations. Keep default unless special needs.",
+    "description": "PI parameter description"
+  },
+  "config_simulation_params_params_r2r1_title": {
+    "message": "Container Radius Ratio (R2/R1)",
+    "description": "Container radius ratio parameter title"
+  },
+  "config_simulation_params_params_r2r1_description": {
+    "message": "Container to fill area radius ratio. Affects packing. Default 1.01 is a balance.",
+    "description": "Container radius ratio parameter description"
+  },
+  "config_simulation_params_params_acceleration_title": {
+    "message": "Acceleration Factor",
+    "description": "Acceleration factor parameter title"
+  },
+  "config_simulation_params_params_acceleration_description": {
+    "message": "Push-apart force. Higher is faster but less stable. Default 1.7 is a balance.",
+    "description": "Acceleration factor parameter description"
+  },
+  "config_simulation_params_params_weight_factor_title": {
+    "message": "Weight Factor",
+    "description": "Weight factor parameter title"
+  },
+  "config_simulation_params_params_weight_factor_description": {
+    "message": "Mass exponent (r^WF). Affects push force between large/small wires. Default 2.0.",
+    "description": "Weight factor parameter description"
+  },
+  "config_simulation_params_params_convergence_threshold_title": {
+    "message": "Convergence Threshold",
+    "description": "Convergence threshold parameter title"
+  },
+  "config_simulation_params_params_convergence_threshold_description": {
+    "message": "Convergence precision. Lower is more precise but slower. Default 0.001 is a balance.",
+    "description": "Convergence threshold parameter description"
+  },
+  "config_simulation_params_params_max_iterations_run_title": {
+    "message": "Max Main Loop Iterations",
+    "description": "Max main loop iterations parameter title"
+  },
+  "config_simulation_params_params_max_iterations_run_description": {
+    "message": "Max iterations for main loop. Prevents infinite loops. Default 500.",
+    "description": "Max main loop iterations parameter description"
+  },
+  "config_simulation_params_params_max_iterations_step_title": {
+    "message": "Max Step Iterations",
+    "description": "Max step iterations parameter title"
+  },
+  "config_simulation_params_params_max_iterations_step_description": {
+    "message": "Max iterations per step. Higher is more precise but slower. Default 15.",
+    "description": "Max step iterations parameter description"
+  },
+  "config_simulation_params_params_container_adjust_title": {
+    "message": "Container Adjustment Factor",
+    "description": "Container adjustment factor parameter title"
+  },
+  "config_simulation_params_params_container_adjust_description": {
+    "message": "Container resize step. Higher is faster but less stable. Default 0.05.",
+    "description": "Container adjustment factor parameter description"
+  },
+  "config_simulation_params_reset_button_title": {
+    "message": "Restore this parameter to default value",
+    "description": "Reset parameter button tooltip text"
+  },
+  "config_simulation_params_message_saved": {
+    "message": "Simulation parameters saved!",
+    "description": "Save success message"
+  },
+  "config_simulation_params_message_confirm_restore": {
+    "message": "Restore all simulation parameters to defaults? This is irreversible.",
+    "description": "Restore default settings confirmation message"
+  },
+  "config_simulation_params_message_restored": {
+    "message": "Simulation parameters restored to default values!",
+    "description": "Restore default settings success message"
+  },
+  "calc_result_details_header_param": {
+    "message": "Parameter",
+    "description": "Header for parameter column in calculation details table"
+  },
+  "calc_result_details_header_bare": {
+    "message": "Bare Value (mm)",
+    "description": "Header for bare wire value column in calculation details table"
+  },
+  "calc_result_details_header_simulated": {
+    "message": "Simulated Value (mm)",
+    "description": "Header for simulated value column in calculation details table"
+  },
+  "calc_result_details_label_min": {
+    "message": "Min Diameter",
+    "description": "Label for minimum diameter row in calculation details table"
+  },
+  "calc_result_details_label_max": {
+    "message": "Max Diameter",
+    "description": "Label for maximum diameter row in calculation details table"
+  },
+  "calc_result_details_label_avg": {
+    "message": "Avg Diameter",
+    "description": "Label for average diameter row in calculation details table"
+  },
+  "calc_result_details_tooltip_theoretical": {
+    "message": "Theoretical diameter based only on wire stacking simulation (excluding wrapping and tolerance)",
+    "description": "Tooltip for the theoretical diameter value"
+  },
+  "calc_result_details_tooltip_final": {
+    "message": "Final calculated diameter including wrapping thickness and manufacturing tolerance",
+    "description": "Tooltip for the final calculated diameter value"
+  },
+  "calc_results_chart_title": {
+    "message": "Calculation Results",
+    "description": "Title for the calculation results chart section"
+  },
+  "calc_bottom_bar_save_history": {
+    "message": "Save History",
+    "description": "Label for the save history checkbox"
+  },
+  "calc_bottom_bar_save_history_tooltip": {
+    "message": "If checked, each calculation result will be automatically saved to the history",
+    "description": "Tooltip for the save history checkbox"
+  },
+  "calc_bottom_bar_reset_all": {
+    "message": "Reset All",
+    "description": "Text for the reset all button"
+  },
+  "calc_bottom_bar_reset_all_tooltip": {
+    "message": "Reset all input fields on the page to their default values",
+    "description": "Tooltip for the reset all button"
+  },
+  "calc_bottom_bar_calculate": {
+    "message": "Calculate Diameter",
+    "description": "Text for the calculate button"
+  },
+  "calc_bottom_bar_calculate_tooltip": {
+    "message": "Perform simulation calculation based on current input and display results (or press Enter)",
+    "description": "Tooltip for the calculate button"
+  },
+  "calc_bottom_bar_calculating": {
+    "message": "Calculating...",
+    "description": "Text for the calculate button when calculation is in progress"
+  },
+  "calc_confirm_reset_all": {
+    "message": "Are you sure you want to reset all inputs?",
+    "description": "Confirmation message when resetting all inputs"
+  },
+  "calc_result_highlight_tooltip": {
+    "message": "Final average diameter rounded up, with the actual calculated value (including wrapping and tolerance) in parentheses (to 2 decimal places)",
+    "description": "Tooltip for the highlighted average diameter result"
+  },
+  "calc_result_error": {
+    "message": "Calculation Error",
+    "description": "Text to display when a calculation error occurs"
+  },
+  "config_standard_wires_message_saved": {
+    "message": "Configuration saved successfully!",
+    "description": "Success message after saving custom wire configuration."
+  },
+  "config_standard_wires_message_restore_fail": {
+    "message": "Failed to restore default configuration. Please check the browser console.\\n{error}",
+    "description": "Error message when restoring default wire configuration fails."
+  },
+  "config_standard_wires_message_duplicate_gauge_error": {
+    "message": "Error: Duplicate gauge values detected. Please correct the highlighted fields before saving.",
+    "description": "Error message for duplicate gauge values."
+  },
+  "config_standard_wires_message_confirm_save_empty": {
+    "message": "All previously entered gauges were empty or invalid and have been removed. The list will be empty after saving. Continue?",
+    "description": "Confirmation message when saving an empty list of custom wires."
+  },
+  "config_standard_wires_message_save_cancelled": {
+    "message": "Save operation cancelled. Your input (including invalid rows) has been retained for editing.",
+    "description": "Message indicating that the save operation was cancelled."
+  },
+  "config_standard_wires_message_internal_error": {
+    "message": "Internal error or concurrent modification: Gauge {gauge} is still duplicated in the final data to be saved. Please refresh the page or try again.",
+    "description": "Error message for an internal error during save."
+  },
+  "config_standard_wires_message_confirm_restore": {
+    "message": "Restore standard wires to factory defaults? All custom wires will be lost.",
+    "description": "Confirmation message for restoring default wire configurations."
+  },
+  "config_standard_wires_message_save_fail": {
+    "message": "Failed to save configuration. Please check the browser console.\\n{error}",
+    "description": "Error message when saving the wire configuration fails."
+  },
+  "config_standard_wires_message_invalid_od_error": {
+    "message": "Error: Row {index} (Gauge {gauge}) has an invalid or negative OD value for {type}.",
+    "description": "Error message for an invalid OD value in the custom wires table."
+  },
+  "config_import_invalid_format": {
+    "message": "Invalid configuration file format.",
+    "description": "Error message for invalid configuration file format during import"
+  },
+  "config_import_success": {
+    "message": "Configuration imported successfully!",
+    "description": "Success message for configuration import"
+  },
+  "config_import_error": {
+    "message": "Error importing configuration: {error}",
+    "description": "Error message for configuration import failure"
+  },
+  "config_export_error": {
+    "message": "Error exporting configuration: {error}",
+    "description": "Error message for configuration export failure"
+  },
+  "history_csv_header_index": {
+    "message": "No.",
+    "description": "CSV header for index column."
+  },
+  "history_csv_header_time": {
+    "message": "Calculation Time",
+    "description": "CSV header for calculation time column."
+  },
+  "history_csv_header_standard_wires": {
+    "message": "Standard Wires",
+    "description": "CSV header for standard wires column."
+  },
+  "history_csv_header_special_wires": {
+    "message": "Special Wires",
+    "description": "CSV header for special wires column."
+  },
+  "history_csv_header_wrapping": {
+    "message": "Wrapping",
+    "description": "CSV header for wrapping column."
+  },
+  "history_csv_header_tolerance": {
+    "message": "Tolerance (%)",
+    "description": "CSV header for tolerance column."
+  },
+  "history_csv_header_max_theoretical": {
+    "message": "Max. Theo. Dia. (mm)",
+    "description": "CSV header for max theoretical diameter column."
+  },
+  "history_csv_header_min_theoretical": {
+    "message": "Min. Theo. Dia. (mm)",
+    "description": "CSV header for min theoretical diameter column."
+  },
+  "history_csv_header_avg_theoretical": {
+    "message": "Avg. Theo. Dia. (mm)",
+    "description": "CSV header for avg theoretical diameter column."
+  },
+  "history_csv_header_final_diameter": {
+    "message": "Final Avg. Dia. (mm)",
+    "description": "CSV header for final average diameter column."
+  },
+  "history_confirm_clear": {
+    "message": "Are you sure you want to clear all history? This action cannot be undone.",
+    "description": "Confirmation message before clearing history."
+  },
+  "calc_group_standard_wire_button_add_tooltip": {
+    "message": "Add a new row for standard wire input",
+    "description": "Tooltip for the add standard wire button"
+  },
+  "calc_group_standard_wire_button_reset_tooltip": {
+    "message": "Reset the standard wires table to default values",
+    "description": "Tooltip for the reset standard wires button"
+  },
+  "calc_group_special_wire_button_add_tooltip": {
+    "message": "Add a new row for special wire input",
+    "description": "Tooltip for the add special wire button"
+  },
+  "calc_group_special_wire_button_reset_tooltip": {
+    "message": "Reset the special wires table to default values",
+    "description": "Tooltip for the reset special wires button"
+  },
+  "calc_group_wrap_button_add_tooltip": {
+    "message": "Add a new layer of wrapping",
+    "description": "Tooltip for the add wrapping button"
+  },
+  "calc_group_wrap_button_reset_tooltip": {
+    "message": "Reset the wrapping table to default values",
+    "description": "Tooltip for the reset wrapping button"
+  },
+  "calc_group_tolerance_button_reset_tooltip": {
+    "message": "Reset manufacturing tolerance to default value (110%)",
+    "description": "Tooltip for the reset tolerance button"
+  },
+  "calc_group_score_button_reset_tooltip": {
+    "message": "Reset calculation quantity to default value (10)",
+    "description": "Tooltip for the reset calculation quantity button"
+  },
+  "calc_input_tooltip_tolerance_range": {
+    "message": "Drag to adjust manufacturing tolerance percentage (100%-200%)",
+    "description": "Tooltip for the tolerance range slider"
+  },
+  "calc_input_tooltip_tolerance_input": {
+    "message": "Enter manufacturing tolerance percentage (100-200)",
+    "description": "Tooltip for the tolerance text input"
+  },
+  "calc_input_tooltip_score_range": {
+    "message": "Drag to adjust simulation quantity (1-100)",
+    "description": "Tooltip for the simulation quantity range slider"
+  },
+  "calc_input_tooltip_score_input": {
+    "message": "Enter simulation quantity (1-100)",
+    "description": "Tooltip for the simulation quantity text input"
+  },
+  "calc_input_placeholder_qty": {
+    "message": "Enter quantity",
+    "description": "Placeholder text for quantity field in input boxes"
+  },
+  "calc_input_placeholder_od": {
+    "message": "Enter diameter",
+    "description": "Placeholder text for diameter field in input boxes"
+  },
+  "calc_input_placeholder_thick": {
+    "message": "Enter thickness",
+    "description": "Placeholder text for thickness field in input boxes"
+  },
+  "config_input_placeholder_gauge": {
+    "message": "Enter gauge",
+    "description": "Placeholder text for gauge input in configuration page"
+  },
+  "config_input_placeholder_thin": {
+    "message": "Enter Thin value",
+    "description": "Placeholder text for Thin value input in configuration page"
+  },
+  "config_input_placeholder_thick": {
+    "message": "Enter Thick value",
+    "description": "Placeholder text for Thick value input in configuration page"
+  },
+  "config_input_placeholder_ultrathin": {
+    "message": "Enter UltraThin value",
+    "description": "Placeholder text for UltraThin value input in configuration page"
+  },
+  "wire_type_thin": {
+    "message": "Thin",
+    "description": "Label for thin insulation type"
+  },
+  "wire_type_thick": {
+    "message": "Thick",
+    "description": "Label for thick insulation type"
+  },
+  "wire_type_ultra_thin": {
+    "message": "Ultra Thin",
+    "description": "Label for ultra-thin insulation type"
+  },
+  "calc_select_placeholder_choose": {
+    "message": "Please choose",
+    "description": "Generic select placeholder text"
+  }
+}

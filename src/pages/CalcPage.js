@@ -11,10 +11,10 @@ import {
   getEffectiveStandardWires,
   getSimulationParameters,
 } from "../logic/wireManager.js";
-import i18n from "../lib/i18n.js";
+import i18n from "../i18n/index.js";
 import { showToast, showConfirm } from "../components/feedback.js";
 import { collectAndValidateInputs } from "./calc/inputCollector.js";
-import { getJSON, setJSON } from "../lib/storage.js";
+import { getJSON, setJSON } from "../services/storage.js";
 import { getWireTypeLabel, WIRE_TYPE_KEYS } from "../utils/wireTypes.js";
 
 // 统一使用 utils/wireTypes 提供的本地化接口
@@ -243,6 +243,7 @@ export function renderCalcPage(container) {
           <input type="checkbox" id="save-history-checkbox" data-i18n-title="calc_bottom_bar_save_history_tooltip" title="勾选后，每次计算结果将自动保存到历史记录中">
           <label for="save-history-checkbox" data-i18n="calc_bottom_bar_save_history" data-i18n-title="calc_bottom_bar_save_history_tooltip" title="勾选后，每次计算结果将自动保存到历史记录中">保存历史记录</label>
         </div>
+        <button id="btn-export-image" class="action-bar-btn" data-i18n-title="calc_bottom_bar_export_image_tooltip" title="导出右侧结果为图片"><span class="emoji">🖼️</span><span class="text" data-i18n="calc_bottom_bar_export_image">导出结果</span></button>
         <button id="btn-page-reset-all" class="action-bar-btn btn-reset-action" data-i18n-title="calc_bottom_bar_reset_all_tooltip" title="重置页面所有输入项为默认值"><span class="emoji">🧹</span><span class="text" data-i18n="calc_bottom_bar_reset_all">全部重置</span></button>
         <button id="btn-page-calculate" class="action-bar-btn btn-calculate-action" data-i18n-title="calc_bottom_bar_calculate_tooltip" title="基于当前输入执行模拟计算并显示结果 (或按 Enter 键)"><span class="emoji">📏</span><span class="text" data-i18n="calc_bottom_bar_calculate">计算直径</span></button>
       </div>
@@ -304,6 +305,189 @@ export function renderCalcPage(container) {
         "renderCalcPage: .layout-calc element not found within the container.",
       );
       return;
+    }
+
+    // 导出按钮：默认不可见且不可用，待生成模拟后再启用
+    const exportBtn = container.querySelector("#btn-export-image");
+    if (exportBtn) {
+      exportBtn.style.display = "none";
+      exportBtn.disabled = true;
+    }
+
+    // --- 导出右侧为图片并预览（放置在作用域内以访问 calcLayoutEl/container） ---
+    function openImagePreviewModal(dataUrl, blob) {
+      const overlay = document.createElement("div");
+      overlay.id = "image-export-modal";
+      overlay.style.position = "fixed";
+      overlay.style.left = "0";
+      overlay.style.top = "0";
+      overlay.style.width = "100%";
+      overlay.style.height = "100%";
+      overlay.style.background = "rgba(0,0,0,0.6)";
+      overlay.style.zIndex = "9999";
+      overlay.style.display = "flex";
+      overlay.style.alignItems = "center";
+      overlay.style.justifyContent = "center";
+      overlay.style.padding = "24px";
+
+      const modal = document.createElement("div");
+      modal.style.background = "#fff";
+      modal.style.borderRadius = "8px";
+      modal.style.width = "70vw"; // 预览窗口更小
+      modal.style.height = "70vh";
+      modal.style.maxWidth = "900px";
+      modal.style.maxHeight = "700px";
+      modal.style.boxShadow = "0 8px 24px rgba(0,0,0,0.25)";
+      modal.style.display = "flex";
+      modal.style.flexDirection = "column";
+      modal.style.overflow = "hidden";
+
+      const header = document.createElement("div");
+      header.style.display = "flex";
+      header.style.alignItems = "center";
+      header.style.justifyContent = "space-between";
+      header.style.padding = "12px 16px";
+      header.style.borderBottom = "1px solid #eee";
+      const title = document.createElement("div");
+      title.textContent = i18n.getMessage("export_preview_title");
+      const closeBtn = document.createElement("button");
+      closeBtn.textContent = "✖";
+      closeBtn.title = "关闭预览";
+      closeBtn.style.border = "none";
+      closeBtn.style.background = "transparent";
+      closeBtn.style.fontSize = "18px";
+      closeBtn.style.cursor = "pointer";
+      closeBtn.onclick = () => document.body.removeChild(overlay);
+      header.appendChild(title);
+      header.appendChild(closeBtn);
+
+      const imgWrapper = document.createElement("div");
+      imgWrapper.style.flex = "1";
+      imgWrapper.style.overflow = "hidden"; // 适配窗口显示整图
+      imgWrapper.style.background = "#f8f8f8";
+      imgWrapper.style.display = "flex";
+      imgWrapper.style.alignItems = "center";
+      imgWrapper.style.justifyContent = "center";
+      const imgEl = document.createElement("img");
+      imgEl.src = dataUrl;
+      imgEl.alt = "导出图片预览";
+      imgEl.style.display = "block";
+      imgEl.style.margin = "0";
+      imgEl.style.maxWidth = "100%";
+      imgEl.style.maxHeight = "100%"; // 最大高度约束，缩放以适配窗口
+      imgEl.style.width = "auto";
+      imgEl.style.height = "auto";
+      imgWrapper.appendChild(imgEl);
+
+      const footer = document.createElement("div");
+      footer.style.display = "flex";
+      footer.style.gap = "12px";
+      footer.style.padding = "12px 16px";
+      footer.style.borderTop = "1px solid #eee";
+      footer.style.justifyContent = "flex-end";
+      const copyBtn = document.createElement("button");
+      copyBtn.textContent = i18n.getMessage("export_copy_image");
+      copyBtn.className = "action-bar-btn";
+      copyBtn.onclick = async () => {
+        try {
+          if (navigator.clipboard && window.ClipboardItem && blob) {
+            const item = new ClipboardItem({ [blob.type]: blob });
+            await navigator.clipboard.write([item]);
+            showToast(i18n.getMessage("export_copy_success"));
+          } else {
+            await navigator.clipboard.writeText(dataUrl);
+            showToast(i18n.getMessage("export_copy_warning"), "warning");
+          }
+        } catch (err) {
+          console.error("复制失败:", err);
+          showToast(i18n.getMessage("export_copy_error"), "error");
+        }
+      };
+      const downloadBtn = document.createElement("button");
+      downloadBtn.textContent = i18n.getMessage("export_download_image");
+      downloadBtn.className = "action-bar-btn";
+      downloadBtn.onclick = () => {
+        const a = document.createElement("a");
+        a.href = dataUrl;
+        a.download = `calc-right-${Date.now()}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
+
+      footer.appendChild(copyBtn);
+      footer.appendChild(downloadBtn);
+
+      modal.appendChild(header);
+      modal.appendChild(imgWrapper);
+      modal.appendChild(footer);
+      overlay.appendChild(modal);
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) document.body.removeChild(overlay);
+      });
+
+      document.body.appendChild(overlay);
+    }
+
+    async function exportRightAreaAsImage() {
+      try {
+        const rightEl = calcLayoutEl.querySelector(".layout-right");
+        if (!rightEl) {
+          showToast(i18n.getMessage("export_not_found_right"), "error");
+          return;
+        }
+        if (!window.html2canvas) {
+          showToast(i18n.getMessage("export_lib_not_loaded"), "error");
+          return;
+        }
+        // 以主窗口宽度 1920 的状态生成图片
+        const targetWindowWidth = 1920;
+        const targetWindowHeight = document.documentElement.clientHeight; // 保持当前高度即可
+
+        // 临时强制页面主要布局宽度为 1920，使各组件按 1920 宽度重新排版
+        const originalLayoutWidth = calcLayoutEl.style.width;
+        const originalLayoutMaxWidth = calcLayoutEl.style.maxWidth;
+        const originalLayoutMinWidth = calcLayoutEl.style.minWidth;
+        calcLayoutEl.style.width = `${targetWindowWidth}px`;
+        calcLayoutEl.style.maxWidth = `${targetWindowWidth}px`;
+        calcLayoutEl.style.minWidth = `${targetWindowWidth}px`;
+
+        // 如果历史折线图已创建，触发一次尺寸更新以匹配新的容器宽度
+        if (simulationHistoryChartInstance && typeof simulationHistoryChartInstance.resize === "function") {
+          simulationHistoryChartInstance.resize();
+        }
+
+        // 等待一次浏览器回流/重绘，确保布局和图表尺寸已更新
+        await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+
+        const scale = Math.max(2, Math.floor(window.devicePixelRatio || 2));
+        let canvas;
+        try {
+          canvas = await window.html2canvas(rightEl, {
+            backgroundColor: "#ffffff",
+            scale,
+            windowWidth: targetWindowWidth,
+            windowHeight: targetWindowHeight,
+            useCORS: true,
+          });
+        } finally {
+          // 恢复原始布局宽度设置
+          calcLayoutEl.style.width = originalLayoutWidth || "";
+          calcLayoutEl.style.maxWidth = originalLayoutMaxWidth || "";
+          calcLayoutEl.style.minWidth = originalLayoutMinWidth || "";
+          // 再次提示图表恢复原尺寸（可选）
+          if (simulationHistoryChartInstance && typeof simulationHistoryChartInstance.resize === "function") {
+            simulationHistoryChartInstance.resize();
+          }
+        }
+        const dataUrl = canvas.toDataURL("image/png");
+        canvas.toBlob((blob) => {
+          openImagePreviewModal(dataUrl, blob || null);
+        }, "image/png");
+      } catch (e) {
+        console.error("导出图片失败:", e);
+        showToast(i18n.getMessage("export_failed"), "error");
+      }
     }
 
     // --- DOM元素引用 ---
@@ -817,6 +1001,11 @@ export function renderCalcPage(container) {
       lastSimulationCircles = null; // 重置最后一次模拟数据
       currentDiameterColorMap = []; // 清除颜色映射
       renderLegend([]); // 清空图例显示
+      // 清理时禁用并隐藏导出按钮
+      if (exportBtn) {
+        exportBtn.style.display = "none";
+        exportBtn.disabled = true;
+      }
     }
 
     // 统一的输入收集与校验流程已抽离至 ./calc/inputCollector.js
@@ -1078,6 +1267,11 @@ export function renderCalcPage(container) {
               );
 
               renderLegend(currentDiameterColorMap); // 渲染图例
+              // 生成有效结果后，显示并启用导出按钮
+              if (exportBtn) {
+                exportBtn.style.display = ""; // 恢复默认显示
+                exportBtn.disabled = false;
+              }
             } else {
               showToast(i18n.getMessage("calc_message_no_valid_results"));
               // 移除重复的 Toast，仅保留错误级别提示
@@ -1203,6 +1397,11 @@ export function renderCalcPage(container) {
           el.addEventListener(eventType, saveState);
         }
       });
+
+      // 导出图片按钮绑定
+      if (exportBtn) {
+        exportBtn.addEventListener("click", exportRightAreaAsImage);
+      }
 
       // 5. 更新i18n文本
       i18n.updatePageTexts();
