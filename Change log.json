@@ -1,5 +1,11 @@
-﻿{
+{
   "versions": [
+    {
+      "version": "1.0.3.1",
+      "changes": [
+        "修复：程序无法启动的bug"
+      ]
+    },
     {
       "version": "1.0.3.0",
       "changes": [
