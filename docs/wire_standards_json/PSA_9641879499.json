@@ -1,0 +1,126 @@
+{
+  "Standard": "PSA 9641879499",
+  "Wires": [
+    {
+      "WireSize": "0.22",
+      "WallThickness": {
+        "thin": 1.25,
+        "ultra_thin": 1.2
+      }
+    },
+    {
+      "WireSize": "0.35",
+      "WallThickness": {
+        "thin": {
+          "A": 1.4,
+          "B": 1.4
+        },
+        "ultra_thin": 1.35
+      }
+    },
+    {
+      "WireSize": "0.5",
+      "WallThickness": {
+        "thin": {
+          "A": 1.7,
+          "B": 1.7,
+          "C": 1.7
+        },
+        "ultra_thin": 1.6
+      }
+    },
+    {
+      "WireSize": "0.75",
+      "WallThickness": {
+        "thin": {
+          "A": 1.9,
+          "B": 1.9,
+          "C": 1.9
+        },
+        "ultra_thin": 1.8
+      }
+    },
+    {
+      "WireSize": "1",
+      "WallThickness": {
+        "thin": {
+          "A": 2.15,
+          "B": 2.15
+        },
+        "ultra_thin": 1.96
+      }
+    },
+    {
+      "WireSize": "1.5",
+      "WallThickness": {
+        "thin": {
+          "A": 2.4,
+          "B": 2.4,
+          "C": 2.4
+        },
+        "ultra_thin": 2.25
+      }
+    },
+    {
+      "WireSize": "2",
+      "WallThickness": {
+        "thin": {
+          "A": 2.8,
+          "B": 2.8,
+          "C": 2.8
+        }
+      }
+    },
+    {
+      "WireSize": "2.5",
+      "WallThickness": {
+        "thin": {
+          "A": 3.0,
+          "B": 3.0
+        },
+        "ultra_thin": 2.9
+      }
+    },
+    {
+      "WireSize": "3",
+      "WallThickness": {
+        "thin": {
+          "A": 3.45,
+          "B": 3.45,
+          "C": 3.45
+        }
+      }
+    },
+    {
+      "WireSize": "4",
+      "WallThickness": {
+        "thin": {
+          "A": 3.9,
+          "B": 3.9
+        },
+        "ultra_thin": 3.7
+      }
+    },
+    {
+      "WireSize": "5",
+      "WallThickness": {
+        "thin": {
+          "A": 4.0,
+          "B": 4.0,
+          "C": 4.0
+        }
+      }
+    },
+    {
+      "WireSize": "6",
+      "WallThickness": {
+        "thin": {
+          "A": 4.5,
+          "B": 4.5,
+          "C": 4.5
+        },
+        "ultra_thin": 4.3
+      }
+    }
+  ]
+}

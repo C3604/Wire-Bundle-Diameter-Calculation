@@ -1,21 +1,21 @@
 // 线束直径计算页面静态布局（每个列表区表头直接写入HTML，tbody留空）
 // 导入新模块
-import { runSingleSimulation } from "../logic/simulationEngine.js";
-import { drawCirclesOnCanvas } from "../components/simulationRenderer.js";
-import { renderSimulationHistoryChart } from "../components/chartRenderer.js";
+import { runSingleSimulation } from "../../logic/simulationEngine.js";
+import { drawCirclesOnCanvas } from "../../components/simulationRenderer.js";
+import { renderSimulationHistoryChart } from "../../components/chartRenderer.js";
 import {
   getStandardGauges,
   getWireOdTable,
-} from "../logic/simulationConstants.js"; // 导入动态数据获取函数
+} from "../../logic/simulationConstants.js"; // 导入动态数据获取函数
 import {
   getEffectiveStandardWires,
   getSimulationParameters,
-} from "../logic/wireManager.js";
-import i18n from "../i18n/index.js";
-import { showToast, showConfirm } from "../components/feedback.js";
-import { collectAndValidateInputs } from "./calc/inputCollector.js";
-import { getJSON, setJSON } from "../services/storage.js";
-import { getWireTypeLabel, WIRE_TYPE_KEYS } from "../utils/wireTypes.js";
+} from "../../logic/wireManager.js";
+import i18n from "../../i18n/index.js";
+import { showToast, showConfirm } from "../../components/feedback.js";
+import { collectAndValidateInputs } from "./inputCollector.js";
+import { getJSON, setJSON } from "../../services/storage.js";
+import { getWireTypeLabel, WIRE_TYPE_KEYS } from "../../utils/wireTypes.js";
 
 // 统一使用 utils/wireTypes 提供的本地化接口
 
@@ -288,13 +288,15 @@ export function renderCalcPage(container) {
       }
     }
 
-    // --- 全局事件处理 ---
-    function handleGlobalEnter(event) {
+    // --- 输入框回车事件处理 ---
+    function handleInputEnter(event) {
       if (event.key === "Enter") {
+        event.target.blur(); // 触发 blur 以确保验证逻辑执行
         const calculateButton = document.getElementById("btn-page-calculate");
         if (calculateButton && !calculateButton.disabled) {
           calculateButton.click();
         }
+        event.preventDefault();
       }
     }
 
@@ -713,6 +715,7 @@ export function renderCalcPage(container) {
           row.qty = e.target.value;
           updateInputSummary();
         };
+        inputQty.addEventListener("keydown", handleInputEnter);
         tdQty.appendChild(inputQty);
         tr.appendChild(tdQty);
         // 删除
@@ -786,6 +789,7 @@ export function renderCalcPage(container) {
           row.od = e.target.value;
           updateInputSummary();
         };
+        inputOD.addEventListener("keydown", handleInputEnter);
         tdOD.appendChild(inputOD);
         tr.appendChild(tdOD);
         // 数量
@@ -800,6 +804,7 @@ export function renderCalcPage(container) {
           row.qty = e.target.value;
           updateInputSummary();
         };
+        inputQty.addEventListener("keydown", handleInputEnter);
         tdQty.appendChild(inputQty);
         tr.appendChild(tdQty);
         // 删除
@@ -870,6 +875,7 @@ export function renderCalcPage(container) {
           row.thick = e.target.value;
           updateInputSummary();
         };
+        inputThick.addEventListener("keydown", handleInputEnter);
         tdThick.appendChild(inputThick);
         tr.appendChild(tdThick);
         // 删除

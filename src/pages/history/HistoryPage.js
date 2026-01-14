@@ -1,7 +1,7 @@
-import i18n from "../i18n/index.js";
-import { showToast, showConfirm } from "../components/feedback.js";
-import { getJSON, remove } from "../services/storage.js";
-import { getWireTypeLabel } from "../utils/wireTypes.js";
+import i18n from "../../i18n/index.js";
+import { showToast, showConfirm } from "../../components/feedback.js";
+import { getJSON, remove } from "../../services/storage.js";
+import { getWireTypeLabel } from "../../utils/wireTypes.js";
 
 // 使用统一的 wireTypes 工具集中化本地化逻辑
 

@@ -1,15 +1,15 @@
-import { standardWiresData } from "../storage/standardWires.js";
+import { standardWiresData } from "../../storage/standardWires.js";
 import {
   getEffectiveStandardWires,
   getSimulationParameters,
   saveSimulationParameters,
   restoreDefaultSimulationParameters,
   getDefaultSimulationParameters,
-} from "../logic/wireManager.js";
-import i18n from "../i18n/index.js";
-import { showToast, showConfirm } from "../components/feedback.js";
-import { getJSON, setJSON, remove } from "../services/storage.js";
-import { loadUserCustomWires, saveUserCustomWires } from "./config/wiresStore.js";
+} from "../../logic/wireManager.js";
+import i18n from "../../i18n/index.js";
+import { showToast, showConfirm } from "../../components/feedback.js";
+import { getJSON, setJSON, remove } from "../../services/storage.js";
+import { loadUserCustomWires, saveUserCustomWires } from "./wiresStore.js";
 
 // 全局变量，用于存储当前表格显示的数据和初始快照
 let currentDisplayData = [];
@@ -302,6 +302,7 @@ export function renderConfigPage(container) {
   styleSheet.textContent = `
     .page-config {
       display: flex;
+      flex-wrap: wrap;
       gap: 24px;
       padding: 0;
       min-width: 0;
@@ -309,6 +310,7 @@ export function renderConfigPage(container) {
       border-radius: 0;
       box-shadow: none;
       height: calc(100vh - 40px);
+      height: auto;
       padding-bottom: 80px; /* 为底部操作栏留出空间 */
     }
 
@@ -324,13 +326,13 @@ export function renderConfigPage(container) {
     }
 
     .layout-left {
-      flex: 6;
-      min-width: 600px;
+      flex: 1 1 520px;
+      min-width: 0;
     }
 
     .layout-right {
-      flex: 4;
-      min-width: 380px;
+      flex: 1 1 360px;
+      min-width: 0;
     }
 
     .group-config-table, .group-simulation-params {
@@ -351,7 +353,7 @@ export function renderConfigPage(container) {
     }
 
     #actual-table-display-area {
-      max-height: 750px;
+      max-height: min(60vh, 750px);
       overflow-y: auto;
       margin-top: -1px;
       background: #fff;
@@ -368,7 +370,7 @@ export function renderConfigPage(container) {
       background: #fff;
       border: 1px solid #e0e0e0;
       border-radius: 6px;
-      max-height: 800px;
+      max-height: min(60vh, 800px);
     }
 
     .group-title {
@@ -585,13 +587,13 @@ export function renderConfigPage(container) {
       box-sizing: border-box;
       height: 72px;
       transition: left 0.3s ease, width 0.3s ease;
-      left: 220px;
-      width: calc(100% - 220px);
+      left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
     }
 
     .main-container.sidebar-collapsed .config-bottom-bar {
-      left: 72px;
-      width: calc(100% - 72px);
+      left: var(--sidebar-collapsed-width);
+      width: calc(100% - var(--sidebar-collapsed-width));
     }
 
     .config-bottom-bar .action-bar-btn {
@@ -635,11 +637,11 @@ export function renderConfigPage(container) {
       }
 
       #actual-table-display-area {
-        max-height: 500px;
+        max-height: min(50vh, 500px);
       }
 
       .simulation-params-content {
-        max-height: 600px;
+        max-height: min(50vh, 600px);
       }
       
       .config-bottom-bar {

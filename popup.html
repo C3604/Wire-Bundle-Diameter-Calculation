@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1600, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="appTitle">线束直径计算工具</title>
   <link rel="stylesheet" href="src/styles/main.css">
 </head>
@@ -12,10 +12,14 @@
       <button id="btn-calc"><span class="emoji">🧮</span><span class="text" data-i18n="sidebar_button_calc">计算</span></button>
       <button id="btn-history"><span class="emoji">📜</span><span class="text" data-i18n="sidebar_button_history">历史</span></button>
       <button id="btn-config"><span class="emoji">⚙️</span><span class="text" data-i18n="sidebar_button_config">配置</span></button>
-      <button id="btn-help" title="帮助文档"></button>
-      <button id="btn-language" class="language-switcher" title="语言切换"></button>
+      <div class="sidebar-footer">
+        <div class="footer-buttons">
+          <button id="btn-help" title="帮助文档"></button>
+          <button id="btn-language" class="language-switcher" title="语言切换"></button>
+        </div>
         <div id="version-display" class="version-info"></div>
-      </aside>
+      </div>
+    </aside>
     <div class="sidebar-divider">
       <button class="mini-collapse-btn" id="collapseBtn" title="收起/展开侧边栏"></button>
     </div>

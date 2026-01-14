@@ -1,8 +1,8 @@
 // 主界面页面（侧边栏收缩/展开逻辑及调试输出）
 
-import { renderCalcPage } from "./CalcPage.js";
-import { renderHistoryPage } from "./HistoryPage.js";
-import { renderConfigPage } from "./ConfigPage.js";
+import { renderCalcPage } from "./calc/CalcPage.js";
+import { renderHistoryPage } from "./history/HistoryPage.js";
+import { renderConfigPage } from "./config/ConfigPage.js";
 import i18n from "../i18n/index.js";
 import { showToast } from "../components/feedback.js";
 import globalKeyManager from "./common/globalKeyManager.js";
@@ -79,14 +79,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function updateLanguageButton() {
     if (!btnLanguage) return;
     const currentLang = i18n.getCurrentLanguage();
-    const iconName = currentLang === "zh_CN" ? "Language_cn" : "Language_en";
-    await loadSvgIcon(btnLanguage, iconName, "language_switch");
+    const emoji = currentLang === "zh_CN" ? "🇨🇳" : "🇺🇸";
+    btnLanguage.innerHTML = `<span class="emoji">${emoji}</span>`;
+    btnLanguage.setAttribute("title", i18n.getMessage("language_switch"));
   }
 
   // Load and set SVG icon for collapseBtn
   loadSvgIcon(collapseBtn, "SideOpen_Close");
-  // Load and set SVG icon for helpBtn
-  loadSvgIcon(btnHelp, "help", "sidebar_tooltip_help");
+  if (btnHelp) {
+    btnHelp.innerHTML = `<span class="emoji">❓</span>`;
+    btnHelp.setAttribute("title", i18n.getMessage("sidebar_tooltip_help"));
+  }
 
   function updateCollapseBtn() {
     if (!collapseBtn || !sidebar || !mainContainer) return;
@@ -122,8 +125,50 @@ document.addEventListener("DOMContentLoaded", async function () {
     collapseBtn.onclick = function () {
       sidebar.classList.toggle("collapsed");
       updateCollapseBtn();
+      responsiveCollapsed = false; // 用户手动操作时清除响应式折叠标记
     };
   }
+
+  // —— 响应式侧边栏折叠 ——
+  const layoutSwitchWidth = 1100;
+  const autoCollapseWidth = 1280;
+  let responsiveCollapsed = false;
+  function setSidebarCollapsed(isCollapsed) {
+    if (!sidebar || !mainContainer) return;
+    const current = sidebar.classList.contains("collapsed");
+    if (current !== isCollapsed) {
+      sidebar.classList.toggle("collapsed", isCollapsed);
+      updateCollapseBtn();
+    }
+  }
+  function applyResponsiveSidebar() {
+    const width = window.innerWidth;
+    if (width <= layoutSwitchWidth) {
+      if (sidebar.classList.contains("collapsed")) {
+        setSidebarCollapsed(false);
+      }
+      responsiveCollapsed = false;
+      return;
+    }
+    const shouldCollapse = width < autoCollapseWidth;
+    if (shouldCollapse) {
+      if (!sidebar.classList.contains("collapsed")) {
+        setSidebarCollapsed(true);
+        responsiveCollapsed = true;
+      }
+    } else if (responsiveCollapsed && sidebar.classList.contains("collapsed")) {
+      setSidebarCollapsed(false);
+      responsiveCollapsed = false;
+    }
+  }
+  // 首次应用
+  applyResponsiveSidebar();
+  // 监听窗口尺寸变化（轻微防抖）
+  let resizeTimer = null;
+  window.addEventListener("resize", () => {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyResponsiveSidebar, 100);
+  });
 
   // 页面切换逻辑
   function showPage(pageId) {
@@ -319,6 +364,44 @@ document.addEventListener("DOMContentLoaded", async function () {
     return 0;
   }
 
+  /**
+   * Fetches and parses CHANGELOG.md
+   * @returns {Promise<{versions: Array<{version: string, changes: string[]}>}>}
+   */
+  async function fetchAndParseChangelog() {
+    const changelogURL = chrome.runtime.getURL("CHANGELOG.md");
+    const response = await fetch(changelogURL);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch CHANGELOG.md: ${response.status}`);
+    }
+    const text = await response.text();
+    const versions = [];
+    
+    // Split by version headers (## 版本)
+    // Example: ## 版本 1.0.3.2 (当前版本)
+    const sections = text.split(/^##\s+版本\s+/m).slice(1); // slice(1) to skip preamble
+    
+    for (const section of sections) {
+      const lines = section.trim().split('\n');
+      // First line contains version number, e.g. "1.0.3.2 (当前版本)"
+      const versionMatch = lines[0].match(/^([0-9.]+)/);
+      if (versionMatch) {
+        const version = versionMatch[1];
+        const changes = [];
+        // Subsequent lines starting with "- " are changes
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i].trim();
+          if (line.startsWith('- ')) {
+            changes.push(line.substring(2));
+          }
+        }
+        versions.push({ version, changes });
+      }
+    }
+    
+    return { versions };
+  }
+
   async function displayAppVersion() {
     const versionDisplayElement = document.getElementById("version-display");
     if (!versionDisplayElement) {
@@ -337,17 +420,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     try {
-      const changelogURL = chrome.runtime.getURL("Change log.json");
-      const response = await fetch(changelogURL);
-      if (response.ok) {
-        const changelogData = await response.json();
-        const latestEntry = changelogData?.versions?.[0];
-        if (
-          latestEntry?.version &&
-          compareVersions(latestEntry.version, resolvedVersion) >= 0
-        ) {
-          resolvedVersion = latestEntry.version;
-        }
+      const changelogData = await fetchAndParseChangelog();
+      const latestEntry = changelogData?.versions?.[0];
+      if (
+        latestEntry?.version &&
+        compareVersions(latestEntry.version, resolvedVersion) >= 0
+      ) {
+        resolvedVersion = latestEntry.version;
       }
     } catch (error) {
       console.warn("读取更新日志版本信息失败:", error);
@@ -369,12 +448,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   async function showChangelogModal() {
     try {
-      const changelogURL = chrome.runtime.getURL("Change log.json");
-      const response = await fetch(changelogURL);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const changelogData = await response.json();
+      const changelogData = await fetchAndParseChangelog();
 
       const modalOverlay = document.createElement("div");
       modalOverlay.id = "changelog-modal-overlay";
@@ -430,7 +504,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
       });
     } catch (error) {
-      console.error("无法加载或解析 Change log.json:", error);
+      console.error("无法加载或解析 CHANGELOG.md:", error);
       showToast(i18n.getMessage("changelog_load_error") || "无法加载更新日志。", "error");
     }
   }

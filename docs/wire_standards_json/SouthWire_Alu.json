@@ -1,0 +1,57 @@
+{
+  "Standard": "SouthWire Alu",
+  "Wires": [
+    {
+      "WireSize": "0.75",
+      "WallThickness": {
+        "thick": 2.5,
+        "thin": {
+          "A": 1.9,
+          "B": 1.9,
+          "C": 1.9
+        }
+      }
+    },
+    {
+      "WireSize": "1",
+      "WallThickness": {
+        "thick": 2.7,
+        "thin": {
+          "A": 2.1,
+          "B": 2.1,
+          "C": 2.1
+        }
+      }
+    },
+    {
+      "WireSize": "1.25",
+      "WallThickness": {
+        "thick": 2.95,
+        "thin": {
+          "A": 2.3,
+          "B": 2.3
+        }
+      }
+    },
+    {
+      "WireSize": "2",
+      "WallThickness": {
+        "thick": 3.3,
+        "thin": {
+          "A": 2.8,
+          "B": 2.8
+        }
+      }
+    },
+    {
+      "WireSize": "2.5",
+      "WallThickness": {
+        "thick": 3.6,
+        "thin": {
+          "A": 3.0,
+          "B": 3.0
+        }
+      }
+    }
+  ]
+}

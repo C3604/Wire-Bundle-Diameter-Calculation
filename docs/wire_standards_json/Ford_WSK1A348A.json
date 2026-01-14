@@ -1,0 +1,428 @@
+{
+  "Standard": "Ford WSK1A348A",
+  "Wires": [
+    {
+      "WireSize": "0.13",
+      "WallThickness": {
+        "thin": 1.05,
+        "ultra_thin": 0.95
+      }
+    },
+    {
+      "WireSize": "0.22",
+      "WallThickness": {
+        "thin": 1.2,
+        "ultra_thin": 1.05
+      }
+    },
+    {
+      "WireSize": "0.35",
+      "WallThickness": {
+        "thick": {
+          "A": 1.6,
+          "B": 1.6
+        },
+        "thin": {
+          "A": 1.4,
+          "B": 1.4
+        },
+        "ultra_thin": 1.2
+      }
+    },
+    {
+      "WireSize": "0.5",
+      "WallThickness": {
+        "thick": {
+          "B": 1.7,
+          "C": 1.7
+        },
+        "thin": {
+          "A": 1.7,
+          "B": 1.7,
+          "C": 1.7
+        },
+        "ultra_thin": 1.4
+      }
+    },
+    {
+      "WireSize": "0.75",
+      "WallThickness": {
+        "thin": {
+          "A": 1.9,
+          "B": 1.9,
+          "C": 1.9
+        },
+        "ultra_thin": 1.6
+      }
+    },
+    {
+      "WireSize": "1",
+      "WallThickness": {
+        "thin": {
+          "A": 2.1,
+          "B": [
+            {
+              "WireType": "",
+              "OD": 2.1
+            },
+            {
+              "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+              "OD": 6.0
+            },
+            {
+              "WireType": "FLR21X-B (XLPE T3 LH)",
+              "OD": 6.0
+            },
+            {
+              "WireType": "FLR2X-B (XLPE T3 HF)",
+              "OD": 6.0
+            },
+            {
+              "WireType": "FLR41X-B SN (Polyolefin T4)",
+              "OD": 6.0
+            },
+            {
+              "WireType": "FLR9Y-B (PP T3)",
+              "OD": 6.0
+            },
+            {
+              "WireType": "FLRY-B (PVC T2)",
+              "OD": 6.0
+            },
+            {
+              "WireType": "FLRYW (PVC T3)",
+              "OD": 6.0
+            }
+          ],
+          "C": 2.1
+        },
+        "ultra_thin": 1.75,
+        "thick": {
+          "B": 6.5,
+          "C": 6.5
+        }
+      }
+    },
+    {
+      "WireSize": "1.25",
+      "WallThickness": {
+        "thin": {
+          "A": 2.3,
+          "B": 2.3
+        }
+      }
+    },
+    {
+      "WireSize": "1.5",
+      "WallThickness": {
+        "thin": {
+          "A": 2.4,
+          "B": 2.4,
+          "C": 2.4
+        },
+        "ultra_thin": 2.1
+      }
+    },
+    {
+      "WireSize": "2",
+      "WallThickness": {
+        "thin": {
+          "A": 2.8,
+          "B": [
+            {
+              "WireType": "",
+              "OD": 2.8
+            },
+            {
+              "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+              "OD": 7.8
+            },
+            {
+              "WireType": "FLR21X-B (XLPE T3 LH)",
+              "OD": 7.8
+            },
+            {
+              "WireType": "FLR2X-B (XLPE T3 HF)",
+              "OD": 7.8
+            },
+            {
+              "WireType": "FLR9Y-B (PP T3)",
+              "OD": 7.8
+            },
+            {
+              "WireType": "FLRY-B (PVC T2)",
+              "OD": 7.8
+            },
+            {
+              "WireType": "FLRYW (PVC T3)",
+              "OD": 7.8
+            }
+          ],
+          "C": [
+            {
+              "WireType": "",
+              "OD": 2.8
+            },
+            {
+              "WireType": "FLR2G-C (Silicone T5)",
+              "OD": 7.8
+            }
+          ]
+        },
+        "thick": {
+          "B": 9.1,
+          "C": 9.1
+        }
+      }
+    },
+    {
+      "WireSize": "2.5",
+      "WallThickness": {
+        "thin": {
+          "A": 3.0,
+          "B": 3.0
+        },
+        "ultra_thin": 2.7
+      }
+    },
+    {
+      "WireSize": "3",
+      "WallThickness": {
+        "thin": {
+          "A": 3.4,
+          "B": 3.4,
+          "C": 3.4
+        },
+        "thick": {
+          "B": 10.9,
+          "C": 10.9
+        }
+      }
+    },
+    {
+      "WireSize": "4",
+      "WallThickness": {
+        "thin": {
+          "A": [
+            {
+              "WireType": "",
+              "OD": 3.7
+            },
+            {
+              "WireType": "FLR6Y-A (FEP T6)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLR91X-A (XLPE T4 HF)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLRY-A (PVC T2)",
+              "OD": 3.8
+            }
+          ],
+          "B": [
+            {
+              "WireType": "",
+              "OD": 3.7
+            },
+            {
+              "WireType": "FLR21X-B (XLPE T3 LH)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLR2X-B (XLPE T3 HF)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLR2X-B (XLPE T4 LH)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLR41X-B SN (Polyolefin T4)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLR7Y-B SN (ETFE T4)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLR91X-B (XLPE T4 HF)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLR9Y-B (PP T3)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLRY-B (PVC T2)",
+              "OD": 3.8
+            },
+            {
+              "WireType": "FLRYW (PVC T3)",
+              "OD": 3.8
+            }
+          ]
+        },
+        "thick": {
+          "B": 12.4,
+          "C": 12.4
+        }
+      }
+    },
+    {
+      "WireSize": "5",
+      "WallThickness": {
+        "thin": {
+          "A": 4.2,
+          "B": 4.2,
+          "C": 4.2
+        },
+        "thick": {
+          "B": 13.5,
+          "C": 13.5
+        }
+      }
+    },
+    {
+      "WireSize": "6",
+      "WallThickness": {
+        "thin": {
+          "A": 4.3,
+          "B": 4.3,
+          "C": 4.3
+        },
+        "thick": {
+          "B": 14.6,
+          "C": 14.6
+        }
+      }
+    },
+    {
+      "WireSize": "8",
+      "WallThickness": {
+        "thin": {
+          "A": 5.0,
+          "B": 5.0
+        }
+      }
+    },
+    {
+      "WireSize": "12",
+      "WallThickness": {
+        "thick": {
+          "B": [
+            {
+              "WireType": "",
+              "OD": 7.4
+            },
+            {
+              "WireType": "FLY (PVC T1)",
+              "OD": 19.7
+            },
+            {
+              "WireType": "FLY (PVC T2)",
+              "OD": 19.7
+            }
+          ],
+          "C": [
+            {
+              "WireType": "",
+              "OD": 7.4
+            },
+            {
+              "WireType": "FLALY-C (PVC T2 AL Pure 1370)",
+              "OD": 19.7
+            }
+          ]
+        },
+        "thin": {
+          "B": 6.5,
+          "C": 6.5
+        }
+      }
+    },
+    {
+      "WireSize": "16",
+      "WallThickness": {
+        "thick": {
+          "B": 8.3,
+          "C": 8.3
+        },
+        "thin": {
+          "B": 7.2,
+          "C": 7.2
+        }
+      }
+    },
+    {
+      "WireSize": "25",
+      "WallThickness": {
+        "thick": {
+          "B": 10.4,
+          "C": 10.4
+        },
+        "thin": {
+          "B": [
+            {
+              "WireType": "",
+              "OD": 8.7
+            },
+            {
+              "WireType": "FLR21X-B (XLPE T3 LH)",
+              "OD": 9.4
+            },
+            {
+              "WireType": "FLR2X-B (XLPE T3 HF)",
+              "OD": 9.4
+            },
+            {
+              "WireType": "FLR41X-B SN (Polyolefin T4)",
+              "OD": 9.4
+            },
+            {
+              "WireType": "FLR9Y-B (PP T3)",
+              "OD": 9.4
+            },
+            {
+              "WireType": "FLRY-B (PVC T2)",
+              "OD": 9.4
+            },
+            {
+              "WireType": "FLRYW (PVC T3)",
+              "OD": 9.4
+            }
+          ],
+          "C": 9.4
+        }
+      }
+    },
+    {
+      "WireSize": "35",
+      "WallThickness": {
+        "thick": {
+          "B": 11.6,
+          "C": 11.6
+        }
+      }
+    },
+    {
+      "WireSize": "7",
+      "WallThickness": {
+        "thick": {
+          "B": 15.5,
+          "C": 15.5
+        }
+      }
+    },
+    {
+      "WireSize": "95",
+      "WallThickness": {
+        "thick": {
+          "B": 18.0,
+          "C": 18.0
+        }
+      }
+    }
+  ]
+}

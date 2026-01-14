@@ -5,18 +5,38 @@ body {
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   background: #F8F9FA; /* 背景浅灰 */
-  min-height: 100vh;
+  min-height: 100dvh;
   color: #495057; /* 文字深灰 */
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, canvas, svg {
+  max-width: 100%;
+  height: auto;
 }
 
 .main-container {
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  height: 100dvh;
+  max-width: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  --sidebar-width: clamp(180px, 18vw, 220px);
+  --sidebar-collapsed-width: 72px;
+  --content-padding-y: clamp(12px, 2.2vw, 24px);
+  --content-padding-x: clamp(16px, 3vw, 32px);
 }
 
 .sidebar {
-  width: 220px;
+  width: var(--sidebar-width);
   background: #FFFFFF; /* 背景白 */
   display: flex;
   flex-direction: column;
@@ -29,7 +49,7 @@ body {
 }
 
 .sidebar.collapsed {
-  width: 72px;
+  width: var(--sidebar-collapsed-width);
   padding-top: 30px;
 }
 
@@ -137,7 +157,7 @@ div.sidebar-divider > #collapseBtn svg {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 24px 32px;
+  padding: var(--content-padding-y) var(--content-padding-x);
   overflow-y: auto;
   overflow-x: hidden;
   background: #F8F9FA; /* 背景浅灰 */
@@ -164,38 +184,103 @@ div.sidebar-divider > #collapseBtn svg {
   // Ensure bottom bar's z-index is lower than the sidebar
 } */
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .main-container {
     flex-direction: column;
   }
-  .sidebar {
+  .sidebar,
+  .sidebar.collapsed {
     flex-direction: row;
-    width: 100vw;
+    width: 100%;
     height: 64px;
     padding-top: 0;
     padding-left: 16px;
     padding-right: 16px;
     justify-content: flex-start;
+    align-items: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     overflow-x: auto;
+    overflow-y: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-sizing: border-box;
   }
   .sidebar button {
-    margin-bottom: 0;
-    margin-right: 8px;
+    margin: 0 8px 0 0;
     flex-shrink: 0;
     width: auto;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  .sidebar.collapsed button {
-    width: 48px;
+    min-width: 120px;
+    max-width: 160px;
     height: 48px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: normal;
+    align-self: center;
   }
+  .sidebar button .text {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .sidebar.collapsed button { width: 48px; height: 48px; }
+
+  .sidebar-footer {
+    margin: 0 0 0 auto;
+    padding: 0;
+    width: auto;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+  .footer-buttons {
+    margin: 0;
+    gap: 8px;
+  }
+  #btn-help { margin: 0; align-self: center; }
+  #btn-language { margin: 0; position: static; align-self: center; }
+  .sidebar .version-info { width: auto; text-align: right; margin: 0 0 0 8px; align-self: center; order: 2; }
+
   div.sidebar-divider > #collapseBtn { display: none; }
   .sidebar-divider { display: none; }
 
   .content {
-    padding: 16px;
+    padding: clamp(12px, 2vw, 16px);
+  }
+}
+
+/* 顶部模式下的图标/emoji统一尺寸与居中 */
+@media (max-width: 1100px) {
+  .sidebar button .emoji { width: 24px; height: 24px; font-size: 24px; line-height: 24px; margin-right: 8px; display: inline-flex; align-items: center; justify-content: center; }
+  #btn-help, #btn-language { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; align-self: center; }
+  #btn-help .emoji, #btn-language .emoji { display: inline-flex; align-items: center; justify-content: center; }
+  .sidebar.collapsed button { margin: 0 8px 0 0; padding: 0; border-radius: 8px; }
+  .sidebar.collapsed button .emoji { width: 24px; height: 24px; font-size: 24px; line-height: 24px; display: flex; align-items: center; justify-content: center; }
+}
+
+@media (max-width: 720px) {
+  .sidebar button {
+    width: 48px;
+    min-width: 48px;
+    max-width: 48px;
+    padding: 0;
+    justify-content: center;
+  }
+  .sidebar button .text {
+    display: none;
+  }
+  .sidebar button .emoji {
+    margin-right: 0;
+  }
+  .sidebar .version-info {
+    display: none;
+  }
+  #btn-help, #btn-language {
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -219,7 +304,7 @@ div.sidebar-divider > #collapseBtn svg {
   transition: opacity 0.3s ease, visibility 0.3s ease; /* 过渡效果 */
   opacity: 1;
   visibility: visible;
-  margin-bottom: 15px; /* 调整与侧边栏底部的间距 */
+  margin-bottom: 0; /* 调整与侧边栏底部的间距 - 由父容器控制 */
   /* margin-top: 5px; */ /* 可选：如果希望版本信息与帮助按钮有明确的顶部间距，但通常由帮助按钮的 margin-bottom 控制 */
 }
 
@@ -227,6 +312,11 @@ div.sidebar-divider > #collapseBtn svg {
   opacity: 0;         /* 收起时完全透明 */
   visibility: hidden; /* 收起时不可见且不参与布局 */
   pointer-events: none; /* 避免在隐藏时仍可交互 */
+}
+
+.sidebar.collapsed .footer-buttons {
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* 更新日志模态窗口样式 */
@@ -336,29 +426,43 @@ div.sidebar-divider > #collapseBtn svg {
   margin-bottom: 6px;
 }
 
+/* 侧边栏底部组 */
+.sidebar-footer {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.footer-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
 /* 帮助按钮的紧急化样式 */
 #btn-help {
   background-color: transparent;
   border: none;
   color: #555; /* 比其他按钮文字颜色稍浅一些 */
   padding: 0; /* 重置内边距，用 SVG 大小和按钮大小控制 */
-  margin-top: auto; /* 将按钮推向底部 */
-  margin-bottom: 8px; /* 与版本信息保持一些间距，略微调整 */
+  margin: 0; /* 移除原来的 margin */
   /* font-size: 1.1em; */ /* 移除 emoji 的字体大小控制 */
   opacity: 0.75; /* 进一步弱化 */
   cursor: pointer;
-  border-radius: 4px; /* 轻微圆角 */
+  border-radius: 8px; /* 统一与语言按钮 */
   width: 48px; /* 设置按钮宽度 */
   height: 48px; /* 设置按钮高度 */
   display: flex; /* 使用flex布局使 SVG 居中 */
   align-items: center; /* 垂直居中SVG */
   justify-content: center; /* 水平居中SVG */
-  /* text-align: center; */ /* display:flex 时不再需要 */
 }
 
-#btn-help svg { /* 直接为 SVG 元素设置大小 */
-  width: 28px; /* SVG 图标的宽度 */
-  height: 28px; /* SVG 图标的高度 */
+#btn-help .emoji {
+  
 }
 
 #btn-help:hover {
@@ -367,25 +471,21 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 /* 如果希望帮助按钮在侧边栏收起时也显示 emoji */
-.sidebar.collapsed #btn-help svg { /* SVG 在收起时的样式 */
-  /* display: inline; */ /* SVG 默认为 inline-block 或可用 flex 控制 */
-  width: 28px; /* 在收起状态下可以稍微大一点 */
-  height: 28px;
-  /* padding: 5px 0; */ /* 移除，按钮大小已固定 */
+.sidebar.collapsed #btn-help .emoji {
+  
 }
 
 .sidebar.collapsed #btn-help {
-  width: 36px; /* 调整收起时按钮的整体宽度 */
-  height: 36px; /* 调整收起时按钮的整体高度 */
-  /* padding: 8px 0; */ /* 移除，因为按钮使用固定宽高和flex居中 */
-  /* width: 100%; */ /* 不再占满宽度，而是固定大小 */
+  width: 48px; /* 与语言按钮保持一致 */
+  height: 48px; /* 与语言按钮保持一致 */
+  border-radius: 8px;
 }
 
 /* 语言切换按钮样式 */
 #btn-language {
   width: 48px;
   height: 48px;
-  margin-bottom: 20px;
+  margin: 0; /* 移除 margin-bottom */
   border: none;
   border-radius: 8px;
   background: transparent;
@@ -405,9 +505,8 @@ div.sidebar-divider > #collapseBtn svg {
   opacity: 1; /* Make it fully opaque on hover */
 }
 
-#btn-language svg {
-  width: 24px;
-  height: 24px;
+#btn-language .emoji {
+  
 }
 
 .sidebar.collapsed #btn-language {
@@ -810,6 +909,213 @@ div.sidebar-divider > #collapseBtn svg {
 #table3-header-table th:nth-child(2), #table3-body-table td:nth-child(2) { min-width: 80px; width: 55%; } /* 厚度(mm) */
 #table3-header-table th:nth-child(3), #table3-body-table td:nth-child(3) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
 
+/* 小屏优化：收敛列宽与模拟区占比 */
+@media (max-width: 576px) {
+  /* 标准导线 */
+  #table1-header-table th:nth-child(1), #table1-body-table td:nth-child(1) { min-width: 40px; width: 10%; }
+  #table1-header-table th:nth-child(2), #table1-body-table td:nth-child(2) { min-width: 64px; width: 22%; }
+  #table1-header-table th:nth-child(3), #table1-body-table td:nth-child(3) { min-width: 64px; width: 22%; }
+  #table1-header-table th:nth-child(4), #table1-body-table td:nth-child(4) { min-width: 60px; width: 20%; }
+  #table1-header-table th:nth-child(5), #table1-body-table td:nth-child(5) { min-width: 56px; width: 16%; }
+  #table1-header-table th:nth-child(6), #table1-body-table td:nth-child(6) { min-width: 40px; width: 10%; }
+
+  /* 特殊导线 */
+  #table2-header-table th:nth-child(1), #table2-body-table td:nth-child(1) { min-width: 40px; width: 15%; }
+  #table2-header-table th:nth-child(2), #table2-body-table td:nth-child(2) { min-width: 64px; width: 45%; }
+  #table2-header-table th:nth-child(3), #table2-body-table td:nth-child(3) { min-width: 56px; width: 25%; }
+  #table2-header-table th:nth-child(4), #table2-body-table td:nth-child(4) { min-width: 40px; width: 15%; }
+
+  /* 包覆层 */
+  #table3-header-table th:nth-child(1), #table3-body-table td:nth-child(1) { min-width: 40px; width: 25%; }
+  #table3-header-table th:nth-child(2), #table3-body-table td:nth-child(2) { min-width: 64px; width: 55%; }
+  #table3-header-table th:nth-child(3), #table3-body-table td:nth-child(3) { min-width: 40px; width: 20%; }
+
+  .calc-table input, .calc-table select { height: 44px; font-size: clamp(14px, 3.5vw, 16px); }
+  .drag-area-input, .drag-area-range { height: 44px; font-size: clamp(14px, 3.5vw, 16px); }
+}
+
+@media (max-width: 992px) {
+  .simulation-area { width: 100%; min-height: 240px; aspect-ratio: auto; }
+  .content { padding-bottom: 88px; }
+}
+
+@media (min-width: 1200px) {
+  .simulation-area { width: min(100%, 640px); margin-left: auto; margin-right: auto; }
+  .simulation-details { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: max-content; gap: 12px; }
+  .highlighted-result-area { grid-column: 1; }
+  .input-summary-container { grid-column: 1; }
+  .simulation-results-table { grid-column: 2; align-self: start; }
+  .simulation-details .group-result { grid-column: 2; align-self: start; }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .simulation-details { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: max-content; gap: 12px; }
+  .highlighted-result-area { grid-column: 1; }
+  .input-summary-container { grid-column: 1; }
+  .simulation-results-table { grid-column: 2; align-self: start; }
+  .simulation-details .group-result { grid-column: 2; align-self: start; }
+}
+
+/* Simulation Content Wrapper Styles (Moved before media queries) */
+.simulation-content-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  text-align: left;
+}
+.simulation-area {
+  background: #F8F9FA;
+  border-radius: 6px;
+  width: 50%; 
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: flex-end; 
+  padding: 8px;
+  border: 1px solid #EAECEF;
+  box-sizing: border-box;
+  overflow: auto; 
+  flex-shrink: 0;
+  position: relative; 
+}
+#simulation-canvas {
+  max-width: 100%;
+  max-height: 80%; 
+  display: block;
+  flex-shrink: 0; 
+}
+.simulation-details {
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.highlighted-result-area {
+  background-color: #EBF4FF;
+  border: 1px solid #B3D1F2;
+  border-radius: 6px;
+  padding: 10px 16px; 
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 4px; 
+  margin-top: 4px;
+}
+.highlight-value {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  color: #3A86FF;
+  line-height: 1.1; 
+}
+.precise-value {
+  font-size: 16px; 
+  color: #6C757D;
+  font-weight: 400;
+  margin-left: 6px; 
+  vertical-align: baseline;
+}
+#input-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+}
+#input-summary > div {
+  padding: 6px 0;
+  border-bottom: 1px dashed #EAECEF;
+  font-size: 13px;
+  color: #495057; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+#input-summary > div:last-child {
+  border-bottom: none;
+}
+#input-summary > div > span:first-child {
+  color: #3A86FF;
+  font-weight: 600;
+}
+#input-summary .input-summary-value {
+  margin-left: auto;
+  text-align: right;
+}
+.simulation-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.simulation-results-table th,
+.simulation-results-table td {
+  padding: 10px 8px; 
+  text-align: left; 
+  border-bottom: 1px dashed #EAECEF;
+  vertical-align: middle; 
+}
+.simulation-results-table th {
+  color: #495057;
+  font-weight: 600;
+  background-color: #F8F9FA;
+  border-bottom: 2px solid #E0E0E0;
+}
+.simulation-results-table th:nth-child(2),
+.simulation-results-table td:nth-child(2),
+.simulation-results-table th:nth-child(3),
+.simulation-results-table td:nth-child(3) {
+  text-align: right;
+  width: 30%; 
+}
+.simulation-results-table td:nth-child(2) span,
+.simulation-results-table td:nth-child(3) span {
+  color: #3A86FF;
+  font-weight: 600;
+}
+.simulation-results-table tr:last-child td {
+  border-bottom: none;
+}
+/* End of Simulation Content Wrapper Styles */
+
+
+/* 侧栏收窄规则移除（1750px 以下采用顶部横排） */
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .group-wire-standard,
+  .group-wire-special,
+  .group-wrap,
+  .group-tolerance,
+  .group-score,
+  .chart-container-wrapper { padding: 14px; }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .simulation-content-wrapper { display: grid; grid-template-columns: 3fr 5fr; gap: 12px; align-items: stretch; }
+  .simulation-area { width: auto; padding: 12px; box-sizing: border-box; aspect-ratio: auto; }
+  .simulation-details { margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; }
+}
+
+/* 576–768px：横排双列、等宽并齐，基线对齐 */
+@media (min-width: 576px) and (max-width: 768px) {
+  .simulation-content-wrapper { flex-direction: column; align-items: stretch; }
+  .simulation-area { width: 100%; margin: 0; padding: 12px; box-sizing: border-box; }
+  .simulation-details { width: 100%; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; }
+}
+
+/* <576px：竖排单列，满宽并齐 */
+@media (max-width: 576px) {
+  .simulation-content-wrapper { flex-direction: column; align-items: stretch; }
+  .simulation-area { width: 100%; margin: 0; padding: 12px; box-sizing: border-box; }
+  .simulation-details { width: 100%; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; }
+  .group-wire-standard,
+  .group-wire-special,
+  .group-wrap,
+  .group-tolerance,
+  .group-score,
+  .chart-container-wrapper { padding: 12px; }
+}
+
 #table1-header-wrapper,
 #table2-header-wrapper,
 #table3-header-wrapper {
@@ -910,16 +1216,16 @@ div.sidebar-divider > #collapseBtn svg {
   accent-color: #3A86FF; 
 }
 .main-container .calc-bottom-bar {
-  left: 220px;
-  width: calc(100% - 220px);
+  left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
 }
 .main-container.sidebar-collapsed .calc-bottom-bar {
-  left: 72px;
-  width: calc(100% - 72px);
+  left: var(--sidebar-collapsed-width);
+  width: calc(100% - var(--sidebar-collapsed-width));
 }
 .action-bar-btn {
   padding: 10px 28px;
-  font-size: 16px;
+  font-size: clamp(14px, 1.4vw, 16px);
   font-weight: 500;
   border-radius: 8px;
   border: 1px solid transparent; 
@@ -1009,7 +1315,7 @@ div.sidebar-divider > #collapseBtn svg {
 @media (max-width: 1100px) {
   .calc-layout {
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     min-width: 0;
     padding-bottom: 90px; 
   }
@@ -1017,9 +1323,10 @@ div.sidebar-divider > #collapseBtn svg {
     min-width: 0;
     max-width: 100%;
     width: 100%;
+    padding: 16px; /* 缩小卡片内边距以提升密度 */
   }
 }
-@media (max-width: 900px) { 
+@media (max-width: 1100px) { 
   .main-container .calc-bottom-bar,
   .main-container.sidebar-collapsed .calc-bottom-bar {
     left: 0;
@@ -1031,7 +1338,7 @@ div.sidebar-divider > #collapseBtn svg {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  font-size: 15px;
+  font-size: clamp(15px, 1.6vw, 18px);
   font-weight: 600;
   color: #343A40;
 }
@@ -1039,7 +1346,7 @@ div.sidebar-divider > #collapseBtn svg {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-  font-size: 15px;
+  font-size: clamp(15px, 1.6vw, 18px);
   font-weight: 600;
   color: #343A40;
 }
@@ -1063,124 +1370,7 @@ div.sidebar-divider > #collapseBtn svg {
 .chart-area-title { /* This is used in JS */
   margin-bottom: 0;
 }
-.simulation-content-wrapper {
-  display: flex;
-  align-items: flex-start; 
-  gap: 16px; 
-}
-.simulation-area {
-  background: #F8F9FA;
-  border-radius: 6px;
-  width: 50%; 
-  aspect-ratio: 1 / 1;
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: flex-end; 
-  padding: 8px;
-  border: 1px solid #EAECEF;
-  box-sizing: border-box;
-  overflow: auto; 
-  flex-shrink: 0;
-  position: relative; 
-}
-#simulation-canvas {
-  max-width: 100%;
-  max-height: 80%; 
-  display: block;
-  flex-shrink: 0; 
-}
-.simulation-details {
-  flex: 1;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px; 
-}
-.highlighted-result-area {
-  background-color: #EBF4FF;
-  border: 1px solid #B3D1F2;
-  border-radius: 6px;
-  padding: 10px 16px; 
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 4px; 
-  margin-top: 4px;
-}
-.highlight-value {
-  font-size: 32px; 
-  font-weight: 700;
-  color: #3A86FF;
-  line-height: 1.1; 
-}
-.precise-value {
-  font-size: 16px; 
-  color: #6C757D;
-  font-weight: 400;
-  margin-left: 6px; 
-  vertical-align: baseline;
-}
-#input-summary {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 10px 16px;
-  box-sizing: border-box;
-}
-#input-summary > div {
-  padding: 6px 0;
-  border-bottom: 1px dashed #EAECEF;
-  font-size: 13px;
-  color: #495057; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-}
-#input-summary > div:last-child {
-  border-bottom: none;
-}
-#input-summary > div > span:first-child {
-  color: #3A86FF;
-  font-weight: 600;
-}
-#input-summary .input-summary-value {
-  margin-left: auto;
-  text-align: right;
-}
-.simulation-results-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-.simulation-results-table th,
-.simulation-results-table td {
-  padding: 10px 8px; 
-  text-align: left; 
-  border-bottom: 1px dashed #EAECEF;
-  vertical-align: middle; 
-}
-.simulation-results-table th {
-  color: #495057;
-  font-weight: 600;
-  background-color: #F8F9FA;
-  border-bottom: 2px solid #E0E0E0;
-}
-.simulation-results-table th:nth-child(2),
-.simulation-results-table td:nth-child(2),
-.simulation-results-table th:nth-child(3),
-.simulation-results-table td:nth-child(3) {
-  text-align: right;
-  width: 30%; 
-}
-.simulation-results-table td:nth-child(2) span,
-.simulation-results-table td:nth-child(3) span {
-  color: #3A86FF;
-  font-weight: 600;
-}
-.simulation-results-table tr:last-child td {
-  border-bottom: none;
-}
+
 .results-chart-area {
   background: #F8F9FA; 
   border-radius: 6px;
@@ -1775,3 +1965,42 @@ input[type="number"] {
 .group-result.chart-container-wrapper {
   margin-bottom: 0;
 }/* Legend styles */ .simulation-legend-wrapper { max-height: 150px; overflow-y: auto; margin-top: 15px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px; background-color: #f8f9fa; } .simulation-legend-wrapper ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; } .simulation-legend-wrapper li { margin-right: 15px; margin-bottom: 8px; white-space: nowrap; display: flex; align-items: center; } .legend-color-box { display: inline-block; width: 12px; height: 12px; border: 1px solid #6c757d; border-radius: 2px; margin-right: 5px; flex-shrink: 0; } /* Scrollbar styling for legend */ .simulation-legend-wrapper::-webkit-scrollbar { width: 6px; height: 6px; } .simulation-legend-wrapper::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; } .simulation-legend-wrapper::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; } .simulation-legend-wrapper::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+.calc-layout {
+  flex-wrap: wrap;
+}
+
+.layout-left,
+.layout-right {
+  min-width: 0;
+}
+
+.calc-layout .layout-left {
+  flex: 1 1 360px;
+}
+
+.calc-layout .layout-right {
+  flex: 1 1 420px;
+}
+
+.layout-right .group-result.chart-container-wrapper {
+  width: 100%;
+  align-self: stretch;
+}
+
+#table1-body-wrapper {
+  max-height: min(32vh, 220px) !important;
+}
+
+#table2-body-wrapper,
+#table3-body-wrapper {
+  max-height: min(24vh, 200px) !important;
+}
+
+#actual-table-display-area {
+  max-height: min(60vh, 800px);
+}
+
+#history-table-body-wrapper {
+  max-height: min(60vh, 800px);
+}
