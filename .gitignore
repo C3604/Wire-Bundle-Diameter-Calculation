@@ -1,0 +1,17 @@
+*.tmp
+*.log
+*.cache
+*.bak
+*~
+Thumbs.db
+.DS_Store
+node_modules/
+dist/
+build/
+out/
+coverage/
+.cache/
+.parcel-cache/
+.vite/
+.next/
+*.orig
