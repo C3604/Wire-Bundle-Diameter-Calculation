@@ -79,8 +79,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function updateLanguageButton() {
     if (!btnLanguage) return;
     const currentLang = i18n.getCurrentLanguage();
-    const emoji = currentLang === "zh_CN" ? "🇨🇳" : "🇺🇸";
-    btnLanguage.innerHTML = `<span class="emoji">${emoji}</span>`;
+    const label = currentLang === "zh_CN" ? "EN" : "简中";
+    btnLanguage.textContent = label;
     btnLanguage.setAttribute("title", i18n.getMessage("language_switch"));
   }
 

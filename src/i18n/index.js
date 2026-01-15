@@ -104,7 +104,6 @@ class I18nManager {
     }
 
     try {
-      // 优先从新目录 language 加载；失败则回退到旧目录 _locales
       const makeUrl = (p) => {
         if (
           typeof chrome !== "undefined" &&
@@ -123,16 +122,7 @@ class I18nManager {
         return resp.json();
       };
 
-      let messages;
-      try {
-        messages = await tryFetch(`language/${language}/messages.json`);
-      } catch (e1) {
-        console.warn(
-          `language/${language}/messages.json not available, fallback to _locales`,
-          e1,
-        );
-        messages = await tryFetch(`_locales/${language}/messages.json`);
-      }
+      const messages = await tryFetch(`_locales/${language}/messages.json`);
 
       this.messages[language] = messages;
       console.log(

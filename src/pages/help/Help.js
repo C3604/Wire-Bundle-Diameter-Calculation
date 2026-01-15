@@ -784,7 +784,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   async function loadExternalHelpTranslations(language) {
-    const path = `language/${language}/help.json`;
+    const path = `_locales/${language}/help.json`;
     try {
       const resp = await fetch(makeUrl(path));
       if (!resp.ok) throw new Error(`fetch ${path} failed: ${resp.status}`);
