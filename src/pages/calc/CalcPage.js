@@ -4,18 +4,17 @@ import { runSingleSimulation } from "../../logic/simulationEngine.js";
 import { drawCirclesOnCanvas } from "../../components/simulationRenderer.js";
 import { renderSimulationHistoryChart } from "../../components/chartRenderer.js";
 import {
-  getStandardGauges,
-  getWireOdTable,
-} from "../../logic/simulationConstants.js"; // 导入动态数据获取函数
-import {
   getEffectiveStandardWires,
   getSimulationParameters,
 } from "../../logic/wireManager.js";
+import {
+  listAvailableStandards,
+  loadStandardByName,
+} from "../../storage/wireStandardLoader.js";
 import i18n from "../../i18n/index.js";
 import { showToast, showConfirm } from "../../components/feedback.js";
 import { collectAndValidateInputs } from "./inputCollector.js";
 import { getJSON, setJSON } from "../../services/storage.js";
-import { getWireTypeLabel, WIRE_TYPE_KEYS } from "../../utils/wireTypes.js";
 
 // 统一使用 utils/wireTypes 提供的本地化接口
 
@@ -52,9 +51,18 @@ export function renderCalcPage(container) {
           <div class="group-wire-standard">
             <div class="group-title">
               <div class="title-container"><span class="emoji">📏</span><span data-i18n="calc_group_standard_wire_title">标准导线</span></div>
-              <div class="group-actions">
-                <button class="calc-table-btn" id="add-row-1" data-i18n-title="calc_group_standard_wire_button_add_tooltip" title="增加一行标准导线输入"><span class="emoji">✨</span><span class="text" data-i18n="calc_group_standard_wire_button_add">增加</span></button>
-                <button class="calc-table-btn" id="reset-table-1" data-i18n-title="calc_group_standard_wire_button_reset_tooltip" title="重置标准导线表格内容为默认值"><span class="emoji">🔄</span><span class="text" data-i18n="calc_group_standard_wire_button_reset">重置</span></button>
+              <div class="group-actions calc-table">
+                <div class="actions-left">
+                  <label>
+                    <span data-i18n="calc_group_standard_wire_select_label">标准</span>
+                    <select id="wire-standard-select"></select>
+                  </label>
+                  <span id="wire-standard-loading" style="display:none;">加载中...</span>
+                </div>
+                <div class="actions-right">
+                  <button class="calc-table-btn" id="add-row-1" data-i18n-title="calc_group_standard_wire_button_add_tooltip" title="增加一行标准导线输入"><span class="emoji">✨</span><span class="text" data-i18n="calc_group_standard_wire_button_add">增加</span></button>
+                  <button class="calc-table-btn" id="reset-table-1" data-i18n-title="calc_group_standard_wire_button_reset_tooltip" title="重置标准导线表格内容为默认值"><span class="emoji">🔄</span><span class="text" data-i18n="calc_group_standard_wire_button_reset">重置</span></button>
+                </div>
               </div>
             </div>
             <div class="calc-table-content" id="table-content-1">
@@ -150,19 +158,6 @@ export function renderCalcPage(container) {
                 <input id="tolerance-input" type="text" value="110" class="drag-area-input" data-i18n-title="calc_input_tooltip_tolerance_input" title="输入制造公差百分比 (100-200)">
                 <span class="drag-area-unit">%</span>
               </div>
-            </div>
-          </div>
-          <!-- 计算次数区 -->
-          <div class="group-score">
-            <div class="group-title">
-              <div class="title-container"><span class="emoji">🧮</span><span data-i18n="calc_group_score_title">计算次数</span></div>
-              <div class="group-actions">
-                <button class="calc-table-btn" id="reset-score" data-i18n-title="calc_group_score_button_reset_tooltip" title="重置计算次数为默认值 (10)"><span class="emoji">🔄</span><span class="text" data-i18n="calc_group_score_button_reset">重置</span></button>
-              </div>
-            </div>
-            <div class="drag-area-content">
-              <input id="score-range" type="range" min="1" max="100" value="10" class="drag-area-range" data-i18n-title="calc_input_tooltip_score_range" title="拖动调整模拟计算次数 (1-100)">
-              <input id="score-input" type="text" value="10" class="drag-area-input" data-i18n-title="calc_input_tooltip_score_input" title="输入模拟计算次数 (1-100)">
             </div>
           </div>
         </div>
@@ -265,7 +260,6 @@ export function renderCalcPage(container) {
         specialRows: specialRows,
         wrapRows: wrapRows,
         tolerance: toleranceInput.value,
-        score: scoreInput.value,
         saveHistory: document.getElementById("save-history-checkbox").checked,
       };
       setJSON("calcPageState", state);
@@ -279,8 +273,6 @@ export function renderCalcPage(container) {
         wrapRows = state.wrapRows || wrapRows;
         toleranceInput.value = state.tolerance || "110";
         toleranceRange.value = state.tolerance || "110";
-        scoreInput.value = state.score || "10";
-        scoreRange.value = state.score || "10";
         document.getElementById("save-history-checkbox").checked =
           state.saveHistory || false;
 
@@ -425,7 +417,14 @@ export function renderCalcPage(container) {
       modal.appendChild(footer);
       overlay.appendChild(modal);
       overlay.addEventListener("click", (e) => {
-        if (e.target === overlay) document.body.removeChild(overlay);
+        if (e.target === overlay) {
+          document.body.removeChild(overlay);
+          if (dataUrl && dataUrl.startsWith("blob:")) {
+            try {
+              URL.revokeObjectURL(dataUrl);
+            } catch (_) {}
+          }
+        }
       });
 
       document.body.appendChild(overlay);
@@ -442,49 +441,17 @@ export function renderCalcPage(container) {
           showToast(i18n.getMessage("export_lib_not_loaded"), "error");
           return;
         }
-        // 以主窗口宽度 1920 的状态生成图片
-        const targetWindowWidth = 1920;
-        const targetWindowHeight = document.documentElement.clientHeight; // 保持当前高度即可
-
-        // 临时强制页面主要布局宽度为 1920，使各组件按 1920 宽度重新排版
-        const originalLayoutWidth = calcLayoutEl.style.width;
-        const originalLayoutMaxWidth = calcLayoutEl.style.maxWidth;
-        const originalLayoutMinWidth = calcLayoutEl.style.minWidth;
-        calcLayoutEl.style.width = `${targetWindowWidth}px`;
-        calcLayoutEl.style.maxWidth = `${targetWindowWidth}px`;
-        calcLayoutEl.style.minWidth = `${targetWindowWidth}px`;
-
-        // 如果历史折线图已创建，触发一次尺寸更新以匹配新的容器宽度
-        if (simulationHistoryChartInstance && typeof simulationHistoryChartInstance.resize === "function") {
-          simulationHistoryChartInstance.resize();
-        }
-
-        // 等待一次浏览器回流/重绘，确保布局和图表尺寸已更新
-        await new Promise((resolve) => requestAnimationFrame(() => resolve()));
-
-        const scale = Math.max(2, Math.floor(window.devicePixelRatio || 2));
-        let canvas;
-        try {
-          canvas = await window.html2canvas(rightEl, {
-            backgroundColor: "#ffffff",
-            scale,
-            windowWidth: targetWindowWidth,
-            windowHeight: targetWindowHeight,
-            useCORS: true,
-          });
-        } finally {
-          // 恢复原始布局宽度设置
-          calcLayoutEl.style.width = originalLayoutWidth || "";
-          calcLayoutEl.style.maxWidth = originalLayoutMaxWidth || "";
-          calcLayoutEl.style.minWidth = originalLayoutMinWidth || "";
-          // 再次提示图表恢复原尺寸（可选）
-          if (simulationHistoryChartInstance && typeof simulationHistoryChartInstance.resize === "function") {
-            simulationHistoryChartInstance.resize();
-          }
-        }
-        const dataUrl = canvas.toDataURL("image/png");
+        const scale = Math.min(1.5, Math.max(1, window.devicePixelRatio || 1));
+        const canvas = await window.html2canvas(rightEl, {
+          backgroundColor: "#ffffff",
+          scale,
+          useCORS: true,
+          scrollX: window.scrollX || 0,
+          scrollY: window.scrollY || 0,
+        });
         canvas.toBlob((blob) => {
-          openImagePreviewModal(dataUrl, blob || null);
+          const url = blob ? URL.createObjectURL(blob) : canvas.toDataURL("image/png");
+          openImagePreviewModal(url, blob || null);
         }, "image/png");
       } catch (e) {
         console.error("导出图片失败:", e);
@@ -503,30 +470,115 @@ export function renderCalcPage(container) {
     );
     const addRowBtn1 = calcLayoutEl.querySelector("#add-row-1");
     const resetBtn1 = calcLayoutEl.querySelector("#reset-table-1");
+    const standardSelectEl = calcLayoutEl.querySelector("#wire-standard-select");
+    const standardLoadingEl = calcLayoutEl.querySelector("#wire-standard-loading");
     let standardRows = [
-      { gauge: "0.35", type: "Thin", od: "", qty: "0" },
-      { gauge: "0.5", type: "Thin", od: "", qty: "0" },
+      { gauge: "0.35", type: "", od: "", qty: "0" },
+      { gauge: "0.5", type: "", od: "", qty: "0" },
     ];
     // let standardWireList = standardWiresData; // 移除静态列表初始化
 
     // 在这里获取最新的导线数据（标准库+自定义合并）
     let currentStandardWires = [];
     let currentWireOdTable = {};
+    let baseStandardData = []; // 当前选择的基础标准库
+    const SESSION_KEY_SELECTED_STANDARD = "wireStandard:selected";
 
     function updateWireDataSources() {
-      currentStandardWires = getEffectiveStandardWires();
+      currentStandardWires = getEffectiveStandardWires(baseStandardData);
       // 构建线规列表和OD表
       currentWireOdTable = {};
       currentStandardWires.forEach((item) => {
-        currentWireOdTable[String(item.gauge)] = {
-          Thin: item.thin,
-          Thick: item.thick,
-          "Ultra Thin": item.ultraThin,
-        };
+        const key = String(item.gauge);
+        const odMap = {};
+        // 优先使用原始类型字典
+        if (item.rawTypes && typeof item.rawTypes === "object") {
+          Object.keys(item.rawTypes).forEach((k) => {
+            const v = item.rawTypes[k];
+            const num = v == null ? null : Number(v);
+            odMap[k] = Number.isFinite(num) ? num : null;
+          });
+        } else {
+          // 兼容含 thin/thick/ultraThin 字段的结构
+          if (item.ultraThin !== undefined) {
+            const num = item.ultraThin == null ? null : Number(item.ultraThin);
+            odMap["ultraThin"] = Number.isFinite(num) ? num : null;
+          }
+          if (item.thin !== undefined) {
+            const num = item.thin == null ? null : Number(item.thin);
+            odMap["thin"] = Number.isFinite(num) ? num : null;
+          }
+          if (item.thick !== undefined) {
+            const num = item.thick == null ? null : Number(item.thick);
+            odMap["thick"] = Number.isFinite(num) ? num : null;
+          }
+        }
+        currentWireOdTable[key] = { od: odMap, _label: item.gaugeLabel || String(item.gauge) };
       });
     }
 
-    updateWireDataSources(); // 页面首次加载时获取
+    async function initStandardDropdown() {
+      try {
+        if (standardLoadingEl) standardLoadingEl.style.display = "inline";
+        const list = await listAvailableStandards();
+        // 填充下拉列表
+        if (standardSelectEl) {
+          standardSelectEl.innerHTML = "";
+          list.forEach((item, idx) => {
+            const opt = document.createElement("option");
+            opt.value = item.name;
+            opt.textContent = item.displayName || item.name;
+            standardSelectEl.appendChild(opt);
+          });
+          // 选择默认或会话保存值
+          let selected = sessionStorage.getItem(SESSION_KEY_SELECTED_STANDARD);
+          if (!selected && list.length > 0) selected = list[0].name;
+          if (selected) standardSelectEl.value = selected;
+        }
+        // 加载当前选择的标准
+        await applySelectedStandard();
+      } catch (e) {
+        console.error("初始化标准选择失败:", e);
+        showToast(i18n.getMessage("wire_standard_load_failed") || "标准加载失败，已回退默认", "error");
+        baseStandardData = []; // 触发回退
+        updateWireDataSources();
+      } finally {
+        if (standardLoadingEl) standardLoadingEl.style.display = "none";
+      }
+      // 绑定切换事件
+      if (standardSelectEl) {
+        standardSelectEl.addEventListener("change", async () => {
+          try {
+            if (standardLoadingEl) standardLoadingEl.style.display = "inline";
+            await applySelectedStandard();
+          } catch (e) {
+            console.error("切换标准失败:", e);
+            showToast(i18n.getMessage("wire_standard_switch_failed") || "标准切换失败，已回退默认", "error");
+            baseStandardData = [];
+            updateWireDataSources();
+            renderStandardTable(); // 重新渲染
+          } finally {
+            if (standardLoadingEl) standardLoadingEl.style.display = "none";
+          }
+        });
+      }
+    }
+
+    async function applySelectedStandard() {
+      const selectedName = standardSelectEl ? standardSelectEl.value : "";
+      if (selectedName) {
+        const loaded = await loadStandardByName(selectedName);
+        baseStandardData = Array.isArray(loaded.data) ? loaded.data : [];
+        sessionStorage.setItem(SESSION_KEY_SELECTED_STANDARD, selectedName);
+      } else {
+        baseStandardData = [];
+      }
+      updateWireDataSources();
+      renderStandardRows(); // 数据源更新后重渲染
+    }
+
+    updateWireDataSources();
+    initStandardDropdown();
 
     // --- 特殊导线表格逻辑变量 ---
     const table2Body = calcLayoutEl.querySelector(
@@ -597,10 +649,12 @@ export function renderCalcPage(container) {
       const wireData = currentWireOdTable[selectedGaugeStr]; // 使用新的OD表
 
       if (wireData) {
-        if (row.type === "Thin") row.od = wireData.Thin;
-        else if (row.type === "Thick") row.od = wireData.Thick;
-        else if (row.type === "Ultra Thin") row.od = wireData["Ultra Thin"];
-        else row.od = "";
+        const odMap = wireData.od || {};
+        if (row.type && odMap[row.type] != null) {
+          row.od = odMap[row.type];
+        } else {
+          row.od = "";
+        }
         if (row.od == null) row.od = "";
       } else {
         row.od = "";
@@ -621,8 +675,11 @@ export function renderCalcPage(container) {
         table1BodyWrapper.style.maxHeight = "";
       }
       table1Body.innerHTML = "";
-      // 获取所有线规（标准库+自定义）
-      const allGauges = currentStandardWires.map((w) => w.gauge);
+      // 获取所有线规（标准库+自定义），显示label，存值使用数值字符串
+      const allGaugeOptions = currentStandardWires.map((w) => ({
+        value: String(w.gauge),
+        label: w.gaugeLabel || String(w.gauge),
+      }));
       standardRows.forEach((row, idx) => {
         const tr = document.createElement("tr");
         // 序号
@@ -635,10 +692,10 @@ export function renderCalcPage(container) {
         const chooseLabel = i18n.getMessage("calc_select_placeholder_choose");
         selectGauge.innerHTML =
           `<option value="">${chooseLabel}</option>` +
-          allGauges
+          allGaugeOptions
             .map(
-              (gaugeValue) =>
-                `<option value="${gaugeValue}" ${String(row.gauge) === String(gaugeValue) ? "selected" : ""}>${gaugeValue}</option>`,
+              (opt) =>
+                `<option value="${opt.value}" ${String(row.gauge) === opt.value ? "selected" : ""}>${opt.label}</option>`,
             )
             .join("");
         selectGauge.value = row.gauge || "";
@@ -652,31 +709,12 @@ export function renderCalcPage(container) {
         // 类型
         const tdType = document.createElement("td");
         const selectType = document.createElement("select");
-        let availableTypes = [...WIRE_TYPE_KEYS];
+        let availableTypes = [];
         const selectedGaugeStr = String(row.gauge);
         const wireDataForGauge = currentWireOdTable[selectedGaugeStr];
         if (wireDataForGauge) {
-          availableTypes = availableTypes.filter((typeKey) => {
-            if (
-              typeKey === "Thin" &&
-              wireDataForGauge.Thin !== undefined &&
-              wireDataForGauge.Thin !== null
-            )
-              return true;
-            if (
-              typeKey === "Thick" &&
-              wireDataForGauge.Thick !== undefined &&
-              wireDataForGauge.Thick !== null
-            )
-              return true;
-            if (
-              typeKey === "Ultra Thin" &&
-              wireDataForGauge["Ultra Thin"] !== undefined &&
-              wireDataForGauge["Ultra Thin"] !== null
-            )
-              return true;
-            return false;
-          });
+          const odMap = wireDataForGauge.od || {};
+          availableTypes = Object.keys(odMap).filter((k) => odMap[k] != null);
         } else {
           availableTypes = [];
         }
@@ -687,7 +725,7 @@ export function renderCalcPage(container) {
         availableTypes.forEach((type) => {
           const opt = document.createElement("option");
           opt.value = type;
-          opt.textContent = getWireTypeLabel(type);
+          opt.textContent = type;
           if (row.type === type) opt.selected = true;
           selectType.appendChild(opt);
         });
@@ -932,17 +970,21 @@ export function renderCalcPage(container) {
     // 计算次数拖动条联动逻辑
     const scoreRange = calcLayoutEl.querySelector("#score-range");
     const scoreInput = calcLayoutEl.querySelector("#score-input");
-    scoreRange.oninput = function () {
-      scoreInput.value = this.value;
-    };
-    scoreInput.onblur = function () {
-      let val = parseInt(this.value, 10);
-      if (isNaN(val)) val = 1;
-      if (val < 1) val = 1;
-      if (val > 100) val = 100;
-      this.value = val;
-      scoreRange.value = val;
-    };
+    if (scoreRange) {
+      scoreRange.oninput = function () {
+        if (scoreInput) scoreInput.value = this.value;
+      };
+    }
+    if (scoreInput) {
+      scoreInput.onblur = function () {
+        let val = parseInt(this.value, 10);
+        if (isNaN(val)) val = 10;
+        if (val < 1) val = 1;
+        if (val > 100) val = 100;
+        this.value = val;
+        if (scoreRange) scoreRange.value = val;
+      };
+    }
 
     // 在每次渲染表格后调用
     const oldRenderStandardRows = renderStandardRows;
@@ -970,13 +1012,13 @@ export function renderCalcPage(container) {
         toleranceInput.value = "110";
       };
     }
-
     if (resetScoreBtn && scoreRange && scoreInput) {
       resetScoreBtn.onclick = () => {
         scoreRange.value = "10";
         scoreInput.value = "10";
       };
     }
+
 
     // 清除模拟结果和图表的函数
     function clearSimulationResults() {
@@ -1021,7 +1063,6 @@ export function renderCalcPage(container) {
     const btnPageResetAll = container.querySelector("#btn-page-reset-all");
     if (btnPageResetAll) {
       btnPageResetAll.onclick = async () => {
-        console.log("全部重置 button on page bottom bar clicked");
         const ok = await showConfirm(i18n.getMessage("calc_confirm_reset_all"));
         if (ok) {
           if (resetBtn1) resetBtn1.click();
@@ -1039,19 +1080,19 @@ export function renderCalcPage(container) {
     const btnPageCalculate = container.querySelector("#btn-page-calculate");
     if (btnPageCalculate) {
       btnPageCalculate.onclick = () => {
-        console.log("计算直径按钮点击");
         btnPageCalculate.disabled = true;
         btnPageCalculate.textContent = i18n.getMessage(
           "calc_bottom_bar_calculating",
         );
 
         // 统一收集并校验输入
+        const params = getSimulationParameters();
         const state = collectAndValidateInputs({
           standardRows,
           specialRows,
           wrapRows,
           toleranceValue: toleranceInput.value,
-          scoreValue: scoreInput.value,
+          scoreValue: params.SIMULATION_COUNT,
         });
         if (!state.ok) {
            showToast(i18n.getMessage("calc_message_no_valid_wires"), "warning");
@@ -1084,10 +1125,6 @@ export function renderCalcPage(container) {
           currentDiameterColorMap = []; // 重置颜色映射
 
           try {
-            console.log(
-              `开始 ${numSimulations} 次模拟, 总导线数: ${wireRadii.length}`,
-            );
-
             // 收集所有唯一导线直径用于颜色映射和图例
             const uniqueDiameters = new Set();
             const wireInfoForLegend = []; // 存储用于图例的导线信息 {diameter, type, originalValue}
@@ -1154,10 +1191,12 @@ export function renderCalcPage(container) {
                 displayValue = `${diameter.toFixed(3)} mm`;
               }
 
+              const color =
+                index < WIRE_COLORS.length ? WIRE_COLORS[index] : DEFAULT_WIRE_COLOR;
               currentDiameterColorMap.push({
-                diameter: diameter, // 用于颜色查找和绘图匹配
-                displayValue: displayValue, // 用于图例显示
-                color: WIRE_COLORS[index % WIRE_COLORS.length], // 循环使用颜色
+                diameter: diameter,
+                displayValue: displayValue,
+                color,
               });
             });
             // 如果唯一线径数量超过预定义颜色，可以考虑给超出的分配一个默认颜色，
@@ -1165,9 +1204,8 @@ export function renderCalcPage(container) {
             // 或者，可以修改上面的逻辑，当 index >= WIRE_COLORS.length 时，统一使用 DEFAULT_WIRE_COLOR。
             // 例如: color: index < WIRE_COLORS.length ? WIRE_COLORS[index] : DEFAULT_WIRE_COLOR
 
-            console.log("生成的颜色映射:", currentDiameterColorMap);
-
             const params = getSimulationParameters();
+            let anyNotConverged = false;
             for (let i = 0; i < numSimulations; i++) {
               // 注意：runSingleSimulation 需要半径数组
               const result = runSingleSimulation([...wireRadii], params);
@@ -1180,9 +1218,19 @@ export function renderCalcPage(container) {
                 if (i === numSimulations - 1) {
                   tempLastCirclesData = result.finalCircles; // 保存最后一次模拟的完整数据
                 }
+                if (result.converged === false) {
+                  anyNotConverged = true;
+                }
               } else {
                 console.warn(`模拟 ${i + 1} 返回无效或零半径结果:`, result);
               }
+            }
+            if (anyNotConverged) {
+              showToast(
+                i18n.getMessage("calc_message_simulation_not_converged") ||
+                  "部分模拟未收敛，建议提高次数或调整参数",
+                "warning",
+              );
             }
 
             if (simulationDiameters.length > 0) {
@@ -1278,6 +1326,67 @@ export function renderCalcPage(container) {
                 exportBtn.style.display = ""; // 恢复默认显示
                 exportBtn.disabled = false;
               }
+              // 保存历史记录（成功结果时）
+              const saveHistoryCheckbox = document.getElementById(
+                "save-history-checkbox",
+              );
+              if (saveHistoryCheckbox && saveHistoryCheckbox.checked) {
+                try {
+                  const historyEntry = {
+                    timestamp: Date.now(),
+                    standardWires: standardRows
+                      .filter((row) => {
+                        const qty = parseInt(String(row.qty).trim(), 10);
+                        const od = parseFloat(String(row.od).replace(",", "."));
+                        return !isNaN(qty) && qty > 0 && !isNaN(od) && od > 0;
+                      })
+                      .map((row) => ({
+                        gauge: row.gauge,
+                        type: row.type,
+                        od: parseFloat(String(row.od).replace(",", ".")),
+                        qty: parseInt(String(row.qty).trim(), 10),
+                      })),
+                    specialWires: specialRows
+                      .filter((row) => {
+                        const qty = parseInt(String(row.qty).trim(), 10);
+                        const od = parseFloat(String(row.od).replace(",", "."));
+                        return !isNaN(qty) && qty > 0 && !isNaN(od) && od > 0;
+                      })
+                      .map((row) => ({
+                        od: parseFloat(String(row.od).replace(",", ".")),
+                        qty: parseInt(String(row.qty).trim(), 10),
+                      })),
+                    wraps: wrapRows
+                      .filter((row) => {
+                        const thick = parseFloat(String(row.thick).replace(",", "."));
+                        return !isNaN(thick) && thick > 0;
+                      })
+                      .map((row) => ({
+                        thick: parseFloat(String(row.thick).replace(",", ".")),
+                      })),
+                    tolerance: parseInt(String(toleranceInput.value).trim(), 10),
+                    theoretical: { min: minSimOD, max: maxSimOD, avg: avgSimOD },
+                    final: {
+                      min: (minSimOD + 2 * totalWrappingThickness) * toleranceFactor,
+                      max: (maxSimOD + 2 * totalWrappingThickness) * toleranceFactor,
+                      avg: finalAvgODValue,
+                    },
+                  };
+                  let history = getJSON("calculationHistory", []);
+                  history.push(historyEntry);
+                  const MAX_HISTORY = 200;
+                  if (history.length > MAX_HISTORY) {
+                    history = history.slice(history.length - MAX_HISTORY);
+                  }
+                  setJSON("calculationHistory", history);
+                } catch (e) {
+                  console.error("保存历史记录失败:", e);
+                  showToast(
+                    i18n.getMessage("calc_message_save_history_error"),
+                    "error",
+                  );
+                }
+              }
             } else {
               showToast(i18n.getMessage("calc_message_no_valid_results"));
               // 移除重复的 Toast，仅保留错误级别提示
@@ -1286,79 +1395,9 @@ export function renderCalcPage(container) {
             }
             } catch (e) {
               console.error("计算过程中发生错误:", e);
-              showToast(i18n.getMessage("calc.message.calculation_error"), "error");
+              showToast(i18n.getMessage("calc_message_calculation_error"), "error");
               clearSimulationResults(); // 出错时也清理结果, including new details panel
             } finally {
-              // 保存历史记录逻辑
-              const saveHistoryCheckbox = document.getElementById(
-                "save-history-checkbox",
-              );
-              if (
-                saveHistoryCheckbox &&
-                saveHistoryCheckbox.checked &&
-                simulationDiameters.length > 0
-              ) {
-                try {
-                  const historyEntry = {
-                    timestamp: Date.now(),
-                    calculationTime: new Date().toLocaleString(),
-                    standardWires: standardRows
-                      .filter((row) => {
-                        const qty = parseInt(row.qty, 10);
-                        const od = parseFloat(row.od);
-                        return !isNaN(qty) && qty > 0 && !isNaN(od) && od > 0;
-                      })
-                      .map((row) => ({
-                        gauge: row.gauge,
-                        type: row.type,
-                        od: row.od,
-                        qty: row.qty,
-                      })),
-                    specialWires: specialRows
-                      .filter((row) => {
-                        const qty = parseInt(row.qty, 10);
-                        const od = parseFloat(row.od);
-                        return !isNaN(qty) && qty > 0 && !isNaN(od) && od > 0;
-                      })
-                      .map((row) => ({ od: row.od, qty: row.qty })),
-                    wraps: wrapRows
-                      .filter((row) => {
-                        const thick = parseFloat(row.thick);
-                        return !isNaN(thick) && thick > 0;
-                      })
-                      .map((row) => ({ thick: row.thick })),
-                    tolerance: toleranceInput.value,
-                    minTheoreticalDiameter: calcLayoutEl.querySelector(
-                      "#min-wire-theoretical",
-                    ).textContent,
-                    maxTheoreticalDiameter: calcLayoutEl.querySelector(
-                      "#max-wire-theoretical",
-                    ).textContent,
-                    avgTheoreticalDiameter: calcLayoutEl.querySelector(
-                      "#avg-wire-theoretical",
-                    ).textContent,
-                    minFinalDiameter:
-                      calcLayoutEl.querySelector("#min-wire").textContent,
-                    maxFinalDiameter:
-                      calcLayoutEl.querySelector("#max-wire").textContent,
-                    avgFinalDiameter:
-                      calcLayoutEl.querySelector("#avg-wire").textContent,
-                  };
-
-                  let history = getJSON("calculationHistory", []);
-                  history.push(historyEntry);
-                  // 为了防止历史记录过大，可以考虑限制长度，例如只保留最近N条
-                  // if (history.length > 50) { // 示例：最多保留50条
-                  //   history = history.slice(history.length - 50);
-                  // }
-                  setJSON("calculationHistory", history);
-                  console.log("历史记录已保存:", historyEntry);
-                } catch (e) {
-                  console.error("保存历史记录失败:", e);
-                  showToast(i18n.getMessage("calc.message.save_history_error"), "error");
-                }
-              }
-
               btnPageCalculate.disabled = false;
               btnPageCalculate.textContent = i18n.getMessage(
                 "calc_bottom_bar_calculate",
@@ -1400,7 +1439,11 @@ export function renderCalcPage(container) {
             el.type === "checkbox" || el.type === "range" || el.type === "text"
               ? "change"
               : "click";
-          el.addEventListener(eventType, saveState);
+          let timer;
+          el.addEventListener(eventType, () => {
+            clearTimeout(timer);
+            timer = setTimeout(saveState, 150);
+          });
         }
       });
 
