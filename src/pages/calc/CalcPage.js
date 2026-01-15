@@ -1206,6 +1206,8 @@ export function renderCalcPage(container) {
 
             const params = getSimulationParameters();
             let anyNotConverged = false;
+            let notConvergedCount = 0;
+            let tempLastSimResult = null;
             for (let i = 0; i < numSimulations; i++) {
               // 注意：runSingleSimulation 需要半径数组
               const result = runSingleSimulation([...wireRadii], params);
@@ -1216,10 +1218,12 @@ export function renderCalcPage(container) {
               ) {
                 simulationDiameters.push(result.containerRadius * 2); // 存储的是直径
                 if (i === numSimulations - 1) {
-                  tempLastCirclesData = result.finalCircles; // 保存最后一次模拟的完整数据
+                  tempLastCirclesData = result.finalCircles;
+                  tempLastSimResult = result;
                 }
                 if (result.converged === false) {
                   anyNotConverged = true;
+                  notConvergedCount++;
                 }
               } else {
                 console.warn(`模拟 ${i + 1} 返回无效或零半径结果:`, result);
@@ -1246,6 +1250,91 @@ export function renderCalcPage(container) {
               // Calculate final average diameter precisely
               const finalAvgODValue =
                 (avgSimOD + addedDiameterFromWrapping) * toleranceFactor;
+
+              const panelId = "convergence-panel";
+              const oldPanel = document.getElementById(panelId);
+              if (oldPanel) oldPanel.remove();
+              const panel = document.createElement("div");
+              panel.id = panelId;
+              panel.style.marginTop = "8px";
+              panel.style.padding = "8px";
+              panel.style.border = "1px solid #ddd";
+              panel.style.borderRadius = "6px";
+              panel.style.background = "#fff";
+              const successRate = Math.round(((numSimulations - notConvergedCount) / numSimulations) * 100);
+              let series = [];
+              let threshold = params.CONVERGENCE_THRESHOLD;
+              let iters = 0;
+              let convergedFlag = true;
+              let finalResid = 0;
+              if (tempLastSimResult && Array.isArray(tempLastSimResult.convergenceSeries)) {
+                series = tempLastSimResult.convergenceSeries.slice();
+                threshold = params.CONVERGENCE_THRESHOLD;
+                iters = tempLastSimResult.iterations || 0;
+                convergedFlag = !!tempLastSimResult.converged;
+                finalResid = tempLastSimResult.finalAvgPenetration || 0;
+              }
+              const width = 240;
+              const height = 48;
+              const maxY = Math.max(threshold * 1.2, ...series, 0.001);
+              const pts = series.map((v, idx) => {
+                const x = (idx / Math.max(series.length - 1, 1)) * (width - 8) + 4;
+                const y = height - (v / maxY) * (height - 8) - 4;
+                return `${x},${y}`;
+              }).join(" ");
+              const thresholdY = height - (threshold / maxY) * (height - 8) - 4;
+              const svg = `<svg width="${width}" height="${height}">
+                <polyline points="${pts}" fill="none" stroke="#2f7" stroke-width="2"/>
+                <line x1="4" y1="${thresholdY}" x2="${width-4}" y2="${thresholdY}" stroke="#f55" stroke-dasharray="4,3" stroke-width="1"/>
+              </svg>`;
+              const html = `
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div>${svg}</div>
+                  <div style="font-size:12px;line-height:18px;">
+                    <div>最终残差：${finalResid.toFixed(6)}</div>
+                    <div>是否收敛：${convergedFlag ? "是" : "否"}</div>
+                    <div>主循环迭代：${iters}</div>
+                    <div>批量成功率：${successRate}%</div>
+                  </div>
+                </div>
+              `;
+              panel.innerHTML = html;
+              const target = document.querySelector(".calc-right") || document.body;
+              target.appendChild(panel);
+              const accelSet = [1.2, 1.4];
+              const thrSet = [0.0012, 0.001];
+              const stepSet = [12, 15];
+              const combos = [];
+              for (let a of accelSet) {
+                for (let t of thrSet) {
+                  for (let s of stepSet) {
+                    combos.push({ a, t, s });
+                  }
+                }
+              }
+              let best = null;
+              for (let c of combos) {
+                let ok = 0;
+                let iterSum = 0;
+                for (let k = 0; k < 3; k++) {
+                  const p = { ...params, ACCELERATION: c.a, CONVERGENCE_THRESHOLD: c.t, MAX_ITERATIONS_PACKSTEP: c.s };
+                  const r = runSingleSimulation([...wireRadii], p);
+                  if (r && r.converged) ok++;
+                  iterSum += (r && typeof r.iterations === "number") ? r.iterations : 0;
+                }
+                const rate = ok / 3;
+                const avgIter = iterSum / 3;
+                if (!best || rate > best.rate || (rate === best.rate && avgIter < best.avgIter)) {
+                  best = { rate, avgIter, a: c.a, t: c.t, s: c.s };
+                }
+              }
+              if (best) {
+                const line = document.createElement("div");
+                line.style.marginTop = "6px";
+                line.style.fontSize = "12px";
+                line.textContent = `建议参数：ACCEL=${best.a.toFixed(2)} 阈值=${best.t.toFixed(4)} 步迭代=${best.s}，预计成功率=${Math.round(best.rate*100)}% 平均主迭代=${Math.round(best.avgIter)}`;
+                panel.appendChild(line);
+              }
 
               // Calculate display values
               const finalAvgODTextTable = !isNaN(finalAvgODValue)

@@ -1358,6 +1358,47 @@ div.sidebar-divider > #collapseBtn svg {
   display: flex;
   gap: 8px; /* 在按钮之间添加一些间距 */
 }
+.group-actions.calc-table {
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.group-actions .actions-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.group-actions .actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.group-actions .calc-table-btn {
+  margin-left: 8px;
+}
+.group-actions [data-i18n="calc_group_standard_wire_select_label"] {
+  display: none;
+}
+@media (max-width: 768px) {
+  .group-actions.calc-table {
+    gap: 8px;
+  }
+  .group-actions .actions-right {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+.group-title .title-container {
+  min-width: 160px;
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .group-title .title-container {
+    min-width: 130px;
+  }
+}
 .chart-container-wrapper {
   background: #FFFFFF; 
   border-radius: 8px;

@@ -3,6 +3,14 @@
     "message": "Wire Bundle Diameter Calculator",
     "description": "Extension name"
   },
+  "config_simulation_params_params_sim_count_title": {
+    "message": "Simulation Count",
+    "description": "Config page simulation count title"
+  },
+  "config_simulation_params_params_sim_count_description": {
+    "message": "Number of simulations per calculation. Higher values yield more stable averages but increase time. Default is 10.",
+    "description": "Config page simulation count description"
+  },
   "extDescription": {
     "message": "A wire bundle diameter estimation tool based on 2D circular packing, supporting multiple wire specifications, wrapping layers, visualization and configuration management.",
     "description": "Extension description"
@@ -62,6 +70,18 @@
   "calc_group_standard_wire_title": {
     "message": "Standard Wires",
     "description": "Standard wires section title"
+  },
+  "calc_group_standard_wire_select_label": {
+    "message": "Standard",
+    "description": "Label for standard selection dropdown"
+  },
+  "wire_standard_load_failed": {
+    "message": "Failed to load standard, fallback to default",
+    "description": "Standard loading failure message"
+  },
+  "wire_standard_switch_failed": {
+    "message": "Failed to switch standard, fallback to default",
+    "description": "Standard switch failure message"
   },
   "calc_group_standard_wire_button_add": {
     "message": "Add",
@@ -270,6 +290,14 @@
   "calc_message_save_history_error": {
     "message": "Error saving history record. Local storage may be full or disabled.",
     "description": "Save history error message"
+  },
+  "calc_message_simulation_not_converged": {
+    "message": "Some simulations did not fully converge. Consider increasing count or adjusting parameters.",
+    "description": "Simulation not converged warning"
+  },
+  "history_text_none": {
+    "message": "None",
+    "description": "Placeholder text when no items are present in history list"
   },
   "changelog_title": {
     "message": "Changelog",

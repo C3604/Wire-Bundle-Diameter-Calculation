@@ -292,6 +292,19 @@ code {
     color: #D6336C; /* A pinkish color for code text, adjust if needed */
     font-size: 0.9em;
 }
+pre {
+    background-color: #F8F9FA;
+    border: 1px solid #DEE2E6;
+    border-radius: 6px;
+    padding: 12px;
+    overflow: auto;
+    margin: 16px 0;
+}
+pre code {
+    background: transparent;
+    color: #343a40;
+    font-size: 0.95em;
+}
 
 img {
     max-width: 100%;

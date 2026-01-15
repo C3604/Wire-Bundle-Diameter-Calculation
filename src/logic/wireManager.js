@@ -1,4 +1,5 @@
 import { standardWiresData } from "../storage/standardWires.js";
+import { getJSON } from "../services/storage.js";
 
 // 定义本地存储中使用的键
 const STORAGE_KEYS = {
@@ -13,30 +14,21 @@ const STORAGE_KEYS = {
  * @returns {Array} 用户电线库数组，如果不存在或解析失败则返回空数组
  */
 function getCustomWireLibraries() {
-  const customWiresString = localStorage.getItem(STORAGE_KEYS.CUSTOM_LIBRARIES);
-  if (customWiresString) {
-    try {
-      const customWires = JSON.parse(customWiresString);
-      if (Array.isArray(customWires)) {
-        return customWires;
-      }
-    } catch (error) {
-      console.error("从localStorage解析自定义电线库失败:", error);
-    }
-  }
-  return [];
+  const arr = getJSON(STORAGE_KEYS.CUSTOM_LIBRARIES, []);
+  return Array.isArray(arr) ? arr : [];
 }
 
 // 已由 pages/config/wiresStore.js 统一提供写入接口，移除此未使用导出
 
 /**
- * 获取合并后的有效电线标准库（标准库 + 用户自定义库）
- * 这是提供给计算页面等外部模块使用的主要函数
+ * 获取合并后的有效电线标准库（基础标准库 + 用户自定义库）
+ * @param {Array} baseStandard 可选，外部加载的基础标准库；不传则使用内置 standardWiresData
  * @returns {Array} 合并并排序后的电线规格数组
  */
-export function getEffectiveStandardWires() {
+export function getEffectiveStandardWires(baseStandard) {
+  const base = Array.isArray(baseStandard) && baseStandard.length > 0 ? baseStandard : standardWiresData;
   const standardMap = new Map(
-    standardWiresData.map((wire) => [String(wire.gauge).trim(), { ...wire }]),
+    base.map((wire) => [String(wire.gauge).trim(), { ...wire }]),
   );
 
   const customWires = getCustomWireLibraries();
@@ -58,12 +50,13 @@ export function getEffectiveStandardWires() {
 const DEFAULT_SIMULATION_PARAMETERS = {
   PI: 3.1415926535,
   SNG_R2_TO_R1: 1.01,
-  ACCELERATION: 1.7,
+  ACCELERATION: 1.6,
   WEIGHT_FACTOR: 2.0,
-  CONVERGENCE_THRESHOLD: 0.001,
+  CONVERGENCE_THRESHOLD: 0.0012,
   MAX_ITERATIONS_RUNPACKING: 500,
   MAX_ITERATIONS_PACKSTEP: 15,
   CONTAINER_ADJUST_FACTOR: 0.05,
+  SIMULATION_COUNT: 10,
 };
 
 /**

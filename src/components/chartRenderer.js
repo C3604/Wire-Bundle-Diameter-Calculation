@@ -39,7 +39,17 @@ export function renderSimulationHistoryChart(
   }
 
   if (currentChartInstance) {
-    currentChartInstance.destroy();
+    if (!diameters || diameters.length === 0) {
+      const chartCtx = chartCanvas.getContext("2d");
+      chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+      return null;
+    }
+    currentChartInstance.data.labels = diameters.map(
+      (_, index) => `模拟 ${index + 1}`,
+    );
+    currentChartInstance.data.datasets[0].data = diameters;
+    currentChartInstance.update();
+    return currentChartInstance;
   }
 
   if (!diameters || diameters.length === 0) {

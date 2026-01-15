@@ -4,6 +4,7 @@ import { renderCalcPage } from "./calc/CalcPage.js";
 import { renderHistoryPage } from "./history/HistoryPage.js";
 import { renderConfigPage } from "./config/ConfigPage.js";
 import i18n from "../i18n/index.js";
+import { bindOverlayClose } from "../utils/domUtils.js";
 import { showToast } from "../components/feedback.js";
 import globalKeyManager from "./common/globalKeyManager.js";
 
@@ -13,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   // 初始化i18n
   try {
     await i18n.init();
-    console.log("I18n initialized successfully");
   } catch (error) {
     console.error("Failed to initialize i18n:", error);
   }
@@ -178,7 +178,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       oldStyles.remove();
     }
 
-    console.log("Popup.js: Switching to page:", pageId);
+    if (currentPageId) {
+      globalKeyManager.unregister(currentPageId);
+    }
     currentPageId = pageId;
     globalKeyManager.setCurrentPage(pageId);
     if (!mainContent) {
@@ -326,7 +328,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 监听语言切换事件
   document.addEventListener("languageChanged", function (event) {
-    console.log("Language changed event received:", event.detail);
     // 更新页面中的静态文本
     i18n.updatePageTexts();
     updateLanguageButton(); // 更新图标和提示
@@ -498,10 +499,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         modalOverlay.classList.add("visible");
       });
 
-      modalOverlay.addEventListener("click", (event) => {
-        if (event.target === modalOverlay) {
-          modalOverlay.remove();
-        }
+      bindOverlayClose(modalOverlay, () => {
+        modalOverlay.remove();
       });
     } catch (error) {
       console.error("无法加载或解析 CHANGELOG.md:", error);
@@ -517,22 +516,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // --- 计算操作的函数 ---
   function performCalculation() {
-    console.log(
-      "Popup.js: performCalculation Fired. Current Page:",
-      currentPageId,
-    );
     // 确保只在计算页面实际触发按钮点击
     if (currentPageId === "calc") {
       const calcButtonOnPage = mainContent.querySelector("#btn-page-calculate");
       if (calcButtonOnPage && !calcButtonOnPage.disabled) {
-        console.log(
-          "Popup.js: Clicking #btn-page-calculate from performCalculation",
-        );
         calcButtonOnPage.click();
       } else {
-        console.warn(
-          "Popup.js: #btn-page-calculate not found or is disabled on current page when performCalculation was called.",
-        );
+        // 按键触发但按钮不可用或未在计算页，不进行任何操作
       }
     }
   }

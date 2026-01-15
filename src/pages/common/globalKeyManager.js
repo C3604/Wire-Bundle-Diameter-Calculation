@@ -10,11 +10,8 @@ const globalKeyManager = (function () {
     if (!target) return false;
     const tag = (target.tagName || "").toUpperCase();
     if (tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA") return true;
-    // contenteditable
-    if (typeof target.isContentEditable === "boolean" && target.isContentEditable) return true;
-    // inputs inside shadow DOM
     try {
-      const editable = target.closest && target.closest("input, select, textarea, [contenteditable=true], [contenteditable=''], [contenteditable]");
+      const editable = target.closest && target.closest("input, select, textarea");
       return !!editable;
     } catch (_) {
       return false;
@@ -23,7 +20,7 @@ const globalKeyManager = (function () {
 
   function onKeydown(event) {
     if (event.key !== "Enter") return;
-    if (shouldIgnoreEventTarget(document.activeElement)) return;
+    if (shouldIgnoreEventTarget(event.target)) return;
     const handler = handlers.get(currentPageId);
     if (typeof handler === "function") {
       const shouldPrevent = !!handler(event);

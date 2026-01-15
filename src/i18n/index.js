@@ -34,7 +34,6 @@ class I18nManager {
       await this.loadMessages(this.currentLanguage);
 
       this.initialized = true;
-      console.log("I18n initialized with language:", this.currentLanguage);
     } catch (error) {
       console.error("Failed to initialize I18n:", error);
       // 降级到默认语言
@@ -125,11 +124,6 @@ class I18nManager {
       const messages = await tryFetch(`_locales/${language}/messages.json`);
 
       this.messages[language] = messages;
-      console.log(
-        `Loaded messages for ${language}:`,
-        Object.keys(messages || {}).length,
-        "keys",
-      );
     } catch (error) {
       console.error(`Failed to load messages for ${language}:`, error);
       throw error;
@@ -161,8 +155,6 @@ class I18nManager {
 
       // 保存语言偏好
       await this.saveLanguagePreference(newLanguage);
-
-      console.log(`Language switched from ${oldLanguage} to ${newLanguage}`);
 
       // 触发语言切换事件
       this.dispatchLanguageChangeEvent(oldLanguage, newLanguage);
@@ -409,9 +401,6 @@ class I18nManager {
   }
 }
 
-// 创建全局实例
 const i18n = new I18nManager();
-
-// 导出实例和类
-export { i18n, I18nManager };
+export { i18n };
 export default i18n;

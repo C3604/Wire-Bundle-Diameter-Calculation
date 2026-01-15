@@ -15,7 +15,7 @@ import {
  * @param {Array<Object>} circles - 圆形对象数组 {x, y, r, ...}
  * @returns {number} 平均穿透范数。
  */
-export function calculateContactNorm(circles) {
+export function calculateContactNorm(circles, gridData) {
   const nCircles = circles.length;
   if (nCircles < 2) return 0;
   const innerContainerRadius = circles[1]?.r ?? 0; // 内层容器半径
@@ -30,8 +30,10 @@ export function calculateContactNorm(circles) {
     }
   }
 
-  // 构建空间网格用于邻域加速
-  const { grid, cellSize } = buildSpatialGrid(circles);
+  const { grid, cellSize } =
+    gridData && gridData.grid && gridData.cellSize
+      ? gridData
+      : buildSpatialGrid(circles);
 
   for (let i = 2; i < nCircles; i++) {
     // 从第三个圆开始计算（前两个是外层和内层容器）
@@ -121,14 +123,22 @@ export function calculateContactNorm(circles) {
  * @param {number} PI - 圆周率
  * @param {number} WEIGHT_FACTOR - 质量权重因子
  */
-export function packStep(circles, acceleration, PI, WEIGHT_FACTOR) {
+export function packStep(circles, acceleration, PI, WEIGHT_FACTOR, gridData) {
   const nCircles = circles.length;
   if (nCircles < 2 || !circles[1]) return; // 至少需要内外容器和电线圆
 
   const innerContainerRadius = circles[1].r; // 内层容器半径
 
-  // 构建空间网格用于邻域加速
-  const { grid, cellSize } = buildSpatialGrid(circles);
+  const { grid, cellSize } =
+    gridData && gridData.grid && gridData.cellSize
+      ? gridData
+      : buildSpatialGrid(circles);
+
+  const masses = new Array(nCircles);
+  for (let i = 2; i < nCircles; i++) {
+    const c = circles[i];
+    masses[i] = c && c.r > 0 ? Math.pow(c.r, WEIGHT_FACTOR) : 0;
+  }
 
   for (let i = 2; i < nCircles; i++) {
     // 遍历所有电线圆
@@ -187,8 +197,8 @@ export function packStep(circles, acceleration, PI, WEIGHT_FACTOR) {
             // 发生重叠且不完全重合
             const overlap = totalRadius - dist;
 
-            const mass_i = Math.pow(circle_i.r, WEIGHT_FACTOR);
-            const mass_j = Math.pow(circle_j.r, WEIGHT_FACTOR);
+            const mass_i = masses[i];
+            const mass_j = masses[j];
             const totalMass = mass_i + mass_j;
 
             const ratio_i = totalMass > 0 ? mass_j / totalMass : 0.5;
@@ -241,6 +251,10 @@ export function runPackingSimulation(circles, params) {
   let avgPenetration = 1.0;
   let lastAvgPenetration = 0.0;
   let iterations = 0;
+  let accelerationLocal = ACCELERATION;
+  let containerAdjustLocal = CONTAINER_ADJUST_FACTOR;
+  const convergenceSeries = [];
+  const innerExitReasons = [];
 
   while (
     avgPenetration > CONVERGENCE_THRESHOLD &&
@@ -248,15 +262,19 @@ export function runPackingSimulation(circles, params) {
   ) {
     // 如果平均穿透仍然较大，适当增大内层容器半径
     if (avgPenetration > CONVERGENCE_THRESHOLD * 5) {
-      circles[1].r *=
-        1 + CONTAINER_ADJUST_FACTOR * Math.min(avgPenetration, 0.3);
+      const severity = Math.min(avgPenetration / (CONVERGENCE_THRESHOLD * 5), 2);
+      containerAdjustLocal = Math.min(Math.max(CONTAINER_ADJUST_FACTOR * (1 + 0.5 * severity), 0.04), 0.08);
+      circles[1].r *= 1 + containerAdjustLocal * Math.min(avgPenetration, 0.3);
+    } else {
+      containerAdjustLocal = CONTAINER_ADJUST_FACTOR;
     }
     circles[0].r = circles[1].r * SNG_R2_TO_R1; // 外层容器半径随内层容器半径调整
 
     for (let i = 0; i < MAX_ITERATIONS_PACKSTEP; i++) {
-      packStep(circles, ACCELERATION, PI, WEIGHT_FACTOR); // 执行一步堆叠
+      const gridData = buildSpatialGrid(circles);
+      packStep(circles, accelerationLocal, PI, WEIGHT_FACTOR, gridData);
       lastAvgPenetration = avgPenetration;
-      avgPenetration = calculateContactNorm(circles); // 计算新的接触范数
+      avgPenetration = calculateContactNorm(circles, gridData);
 
       // 如果达到收敛阈值，或变化量足够小，则认为内部循环收敛
       if (
@@ -264,18 +282,38 @@ export function runPackingSimulation(circles, params) {
         Math.abs(avgPenetration - lastAvgPenetration) <
           CONVERGENCE_THRESHOLD / 50
       ) {
-        break; // 跳出内部循环
+        innerExitReasons.push(
+          avgPenetration < CONVERGENCE_THRESHOLD ? "threshold" : "delta"
+        );
+        break;
+      }
+      if (i === MAX_ITERATIONS_PACKSTEP - 1) {
+        innerExitReasons.push("max");
       }
     }
     iterations++;
+    convergenceSeries.push(avgPenetration);
+    if (iterations > 1) {
+      const rise = avgPenetration > lastAvgPenetration * 1.05;
+      const slow = Math.abs(avgPenetration - lastAvgPenetration) < CONVERGENCE_THRESHOLD / 100;
+      if (rise) {
+        accelerationLocal = Math.max(1.0, Math.min(1.8, accelerationLocal * 0.9));
+      } else if (slow) {
+        accelerationLocal = Math.max(1.0, Math.min(1.8, accelerationLocal * 1.05));
+      }
+    }
   }
 
-  if (iterations >= MAX_ITERATIONS_RUNPACKING) {
-    console.warn(
-      `模拟达到最大迭代次数 (${MAX_ITERATIONS_RUNPACKING}) 未完全收敛。平均穿透: ${avgPenetration}`,
-    );
-  }
-  return { finalCircles: circles, containerRadius: circles[1].r };
+  const converged = avgPenetration <= CONVERGENCE_THRESHOLD;
+  return {
+    finalCircles: circles,
+    containerRadius: circles[1].r,
+    converged,
+    iterations,
+    finalAvgPenetration: avgPenetration,
+    convergenceSeries,
+    innerExitReasons,
+  };
 }
 
 /**
@@ -343,6 +381,8 @@ export function runSingleSimulation(wireRadii, params) {
   return {
     finalCircles: result.finalCircles,
     containerRadius: result.containerRadius,
+    converged: result.converged,
+    iterations: result.iterations,
   };
 }
 

@@ -148,11 +148,26 @@ export function renderConfigPage(container) {
             </div>
           </div>
           <div class="simulation-params-content">
+            <div class="param-group">
+              <div class="param-header">
+                <div class="param-title" data-i18n="config_simulation_params_params_sim_count_title">计算次数</div>
+                <button class="param-reset-btn" data-param="sim-count" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
+              </div>
+              <div class="param-description" data-i18n="config_simulation_params_params_sim_count_description">
+                每次点击“开始计算”执行的模拟次数。较大的次数可以得到更稳定的平均值，但会增加计算耗时。默认值10。
+              </div>
+              <div class="drag-area-content">
+                <input type="range" id="sim-count-range" class="drag-area-range" min="1" max="100" step="1" value="10">
+                <div class="input-with-unit-wrapper">
+                  <input type="text" id="sim-count-input" class="drag-area-input" value="10">
+                </div>
+              </div>
+            </div>
             <!-- PI 参数配置 -->
             <div class="param-group">
               <div class="param-header">
                 <div class="param-title" data-i18n="config_simulation_params_params_pi_title">π (PI)</div>
-                <button class="param-reset-btn" data-param="pi" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
+                <button class="param-reset-btn" data-param="pi" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
               <div class="param-description" data-i18n="config_simulation_params_params_pi_description">
                 圆周率常数，用于计算圆形面积和周长。通常使用3.1415926，除非有特殊需求，建议保持默认值。
@@ -169,7 +184,7 @@ export function renderConfigPage(container) {
             <div class="param-group">
               <div class="param-header">
                 <div class="param-title" data-i18n="config_simulation_params_params_r2r1_title">容器半径比 (R2/R1)</div>
-                <button class="param-reset-btn" data-param="r2r1" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
+                <button class="param-reset-btn" data-param="r2r1" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
               <div class="param-description" data-i18n="config_simulation_params_params_r2r1_description">
                 外部容器半径与内部填充区域半径的比率。值越大，预留空间越多，但可能影响填充效率。默认值1.01通常能平衡空间利用和计算效率。
@@ -186,7 +201,7 @@ export function renderConfigPage(container) {
             <div class="param-group">
               <div class="param-header">
                 <div class="param-title" data-i18n="config_simulation_params_params_acceleration_title">加速系数</div>
-                <button class="param-reset-btn" data-param="accel" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
+                <button class="param-reset-btn" data-param="accel" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
               <div class="param-description" data-i18n="config_simulation_params_params_acceleration_description">
                 圆形每步互相推开的强度系数。较大的值可以加快收敛速度，但可能导致不稳定；较小的值收敛更稳定但计算较慢。默认值1.7在速度和稳定性之间取得平衡。
@@ -203,7 +218,7 @@ export function renderConfigPage(container) {
             <div class="param-group">
               <div class="param-header">
                 <div class="param-title" data-i18n="config_simulation_params_params_weight_factor_title">质量因子</div>
-                <button class="param-reset-btn" data-param="weight" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
+                <button class="param-reset-btn" data-param="weight" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
               <div class="param-description" data-i18n="config_simulation_params_params_weight_factor_description">
                 质量计算的指数(r^WF)，影响大圆推小圆的程度。较大的值会使大直径导线的影响更显著，较小的值则使各导线影响更均匀。默认值2.0适用于大多数情况。
@@ -220,15 +235,15 @@ export function renderConfigPage(container) {
             <div class="param-group">
               <div class="param-header">
                 <div class="param-title" data-i18n="config_simulation_params_params_convergence_threshold_title">收敛阈值</div>
-                <button class="param-reset-btn" data-param="conv" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
+                <button class="param-reset-btn" data-param="conv" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
               <div class="param-description" data-i18n="config_simulation_params_params_convergence_threshold_description">
                 收敛判定阈值，表示平均穿透深度与半径的比值。值越小要求精度越高但计算时间更长，值越大计算更快但精度较低。默认值0.001在精度和速度间取得良好平衡。
               </div>
               <div class="drag-area-content">
-                <input type="range" id="conv-range" class="drag-area-range" min="0.0001" max="0.01" step="0.0001" value="0.001">
+                <input type="range" id="conv-range" class="drag-area-range" min="0.0001" max="0.01" step="0.0001" value="0.0012">
                 <div class="input-with-unit-wrapper">
-                  <input type="text" id="conv-input" class="drag-area-input" value="0.001">
+                  <input type="text" id="conv-input" class="drag-area-input" value="0.0012">
                 </div>
               </div>
             </div>
@@ -237,7 +252,7 @@ export function renderConfigPage(container) {
             <div class="param-group">
               <div class="param-header">
                 <div class="param-title" data-i18n="config_simulation_params_params_max_iterations_run_title">主循环最大迭代次数</div>
-                <button class="param-reset-btn" data-param="max-iter-run" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
+                <button class="param-reset-btn" data-param="max-iter-run" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
               <div class="param-description" data-i18n="config_simulation_params_params_max_iterations_run_description">
                 主填充循环的安全中断迭代次数。如果超过此次数仍未收敛，将终止计算。较大的值可以处理更复杂的情况，但可能增加计算时间。默认值500适用于大多数情况。
@@ -254,7 +269,7 @@ export function renderConfigPage(container) {
             <div class="param-group">
               <div class="param-header">
                 <div class="param-title" data-i18n="config_simulation_params_params_max_iterations_step_title">单步最大迭代次数</div>
-                <button class="param-reset-btn" data-param="max-iter-step" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
+                <button class="param-reset-btn" data-param="max-iter-step" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
               <div class="param-description" data-i18n="config_simulation_params_params_max_iterations_step_description">
                 每个主循环步骤中，在调整容器大小之前的最大迭代次数。较大的值可以提高每步的精度，但会增加计算时间。默认值15通常能满足精度要求。
@@ -271,7 +286,7 @@ export function renderConfigPage(container) {
             <div class="param-group">
               <div class="param-header">
                 <div class="param-title" data-i18n="config_simulation_params_params_container_adjust_title">容器调整系数</div>
-                <button class="param-reset-btn" data-param="container-adjust" data-i18n-title="config.simulation_params.reset_button_title" title="恢复此参数为默认值">🔄</button>
+                <button class="param-reset-btn" data-param="container-adjust" data-i18n-title="config_simulation_params_reset_button_title" title="恢复此参数为默认值">🔄</button>
               </div>
               <div class="param-description" data-i18n="config_simulation_params_params_container_adjust_description">
                 根据穿透情况调整容器大小的幅度。较大的值调整更激进可能导致不稳定，较小的值调整更平缓但收敛较慢。默认值0.05提供了稳定性和收敛速度的良好平衡。
@@ -1183,10 +1198,11 @@ const PARAM_MAPPING = {
   r2r1: "SNG_R2_TO_R1",
   accel: "ACCELERATION",
   weight: "WEIGHT_FACTOR",
-  conv: "STOP_THRESHOLD",
-  "max-iter-run": "MAX_STEPS",
-  "max-iter-step": "MAX_ITER_STEP",
+  conv: "CONVERGENCE_THRESHOLD",
+  "max-iter-run": "MAX_ITERATIONS_RUNPACKING",
+  "max-iter-step": "MAX_ITERATIONS_PACKSTEP",
   "container-adjust": "CONTAINER_ADJUST_FACTOR",
+  "sim-count": "SIMULATION_COUNT",
 };
 
 // 加载当前模拟参数并更新UI
@@ -1218,8 +1234,7 @@ function saveSimulationParams() {
     if (inputEl) {
       const value = parseFloat(inputEl.value);
       if (!isNaN(value)) {
-        // MAX_STEPS 和 MAX_ITER_STEP 需要是整数
-        if (logicName === "MAX_STEPS" || logicName === "MAX_ITER_STEP") {
+        if (logicName === "MAX_ITERATIONS_RUNPACKING" || logicName === "MAX_ITERATIONS_PACKSTEP" || logicName === "SIMULATION_COUNT") {
           paramsToSave[logicName] = parseInt(value, 10);
         } else {
           paramsToSave[logicName] = value;
@@ -1343,6 +1358,15 @@ function attachEventListenersToTable() {
       max: 0.2,
       step: 0.01,
       precision: 2,
+    },
+    {
+      name: "sim-count",
+      title: "计算次数",
+      defaultValue: 10,
+      min: 1,
+      max: 100,
+      step: 1,
+      precision: 0,
     },
   ];
 

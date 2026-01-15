@@ -3,6 +3,14 @@
     "message": "线束直径计算工具",
     "description": "扩展名称"
   },
+  "config_simulation_params_params_sim_count_title": {
+    "message": "计算次数",
+    "description": "配置页计算次数标题"
+  },
+  "config_simulation_params_params_sim_count_description": {
+    "message": "每次点击“开始计算”执行的模拟次数。较大的次数可以得到更稳定的平均值，但会增加计算耗时。默认值10。",
+    "description": "配置页计算次数描述"
+  },
   "extDescription": {
     "message": "基于二维圆形填充的线束直径估算工具，支持多规格导线、包裹物层、可视化与配置管理。",
     "description": "扩展描述"
@@ -62,6 +70,18 @@
   "calc_group_standard_wire_title": {
     "message": "标准导线",
     "description": "标准导线区域标题"
+  },
+  "calc_group_standard_wire_select_label": {
+    "message": "标准",
+    "description": "标准导线下拉选择标签"
+  },
+  "wire_standard_load_failed": {
+    "message": "标准加载失败，已回退默认",
+    "description": "标准加载失败提示"
+  },
+  "wire_standard_switch_failed": {
+    "message": "标准切换失败，已回退默认",
+    "description": "标准切换失败提示"
   },
   "calc_group_standard_wire_button_add": {
     "message": "增加",
@@ -302,6 +322,14 @@
   "calc_message_save_history_error": {
     "message": "保存历史记录时出错。",
     "description": "保存历史记录失败时的错误提示"
+  },
+  "calc_message_simulation_not_converged": {
+    "message": "部分模拟未完全收敛，建议提高次数或调整参数。",
+    "description": "模拟未收敛提示"
+  },
+  "history_text_none": {
+    "message": "无",
+    "description": "历史列表中无条目占位文本"
   },
   "changelog_title": {
     "message": "更新日志",

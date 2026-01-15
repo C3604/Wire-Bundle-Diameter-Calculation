@@ -317,7 +317,7 @@
                 <h2 data-i18n-key="section4_title">4. 查看与管理计算历史 (<code>历史</code> 页面)</h2>
                 <div data-i18n-key="section4_content">
                     <p>每次当你在"计算"页面启用了"保存历史记录"并执行计算后，该次计算的完整快照都会被保存在这里。</p>
-                    <img src="./assets/img3.svg" alt="历史页面示意图">
+                    <img src="./assets/img3.jpg" alt="历史页面示意图">
                     <h5>主要功能:</h5>
                     <ul>
                         <li><strong>历史记录列表</strong>:
@@ -339,7 +339,7 @@
                 <h2 data-i18n-key="section5_title">5. 插件配置 (<code>配置</code> 页面)</h2>
                 <div data-i18n-key="section5_content">
                     <p>在这里，你可以自定义插件的行为和参数，以更好地适应你的工作流程。</p>
-                    <img src="./assets/img4.svg" alt="配置页面示意图">
+                    <img src="./assets/img4.jpg" alt="配置页面示意图">
                     <h5>主要配置项:</h5>
                     <ul>
                         <li><strong>标准导线规格管理</strong>:
@@ -373,7 +373,73 @@
                 <div data-i18n-key="section6_content">
                     <p>在主界面侧边栏的底部，你会看到当前插件的版本号，例如 <code>版本: 1.0.2.2</code>。</p>
                     <p><strong>点击这个版本号</strong>，会弹出一个窗口，显示详细的更新日志 (Changelog)。这可以帮助你了解每个版本新增了哪些功能或修复了哪些问题。</p>
-                    <img src="./assets/img5.svg" alt="更新日志示意图">
+                    <img src="./assets/img5.jpg" alt="更新日志示意图">
+                </div>
+            </section>
+            
+            <section id="section7">
+                <h2 data-i18n-key="section7_title">7. 语言与国际化</h2>
+                <div data-i18n-key="section7_content">
+                    <p>插件支持中英文双语显示，界面文案来源于 <code>_locales/{lang}/messages.json</code> 与 <code>_locales/{lang}/help.json</code>。</p>
+                    <h5>如何切换语言:</h5>
+                    <ul>
+                        <li>在主界面右下角点击语言按钮，选择 <code>中文</code> 或 <code>English</code>。</li>
+                        <li>切换后会自动刷新当前页的文案。</li>
+                    </ul>
+                    <img src="./assets/img6.jpg" alt="语言切换示意图">
+                    
+                    <h5>术语对齐:</h5>
+                    <p>关键技术术语在“术语表”章节中提供中英对照，建议在团队内统一使用。</p>
+                </div>
+            </section>
+
+            <section id="section8">
+                <h2 data-i18n-key="section8_title">8. 结果查看与分享（导出图片）</h2>
+                <div data-i18n-key="section8_content">
+                    <p>你可以将计算结果页面的可视化内容导出为图片，以便分享或存档。</p>
+                    <h5>操作流程:</h5>
+                    <ol>
+                        <li>在“计算”页面完成参数设置并执行计算。</li>
+                        <li>在结果区域点击“导出图片”按钮（如有）。</li>
+                        <li>选择保存位置后，即可得到一张包含截面模拟图与关键数值的图片。</li>
+                    </ol>
+                    <img src="./assets/img7.jpg" alt="导出图片流程示意图">
+                    <h5>小贴士:</h5>
+                    <ul>
+                        <li>请确保需要的信息处于可见区域，保存出的图片更清晰。</li>
+                        <li>若图片不够清楚，可尝试放大窗口或重新导出。</li>
+                    </ul>
+                    
+                </div>
+            </section>
+
+            <section id="section9">
+                <h2 data-i18n-key="section9_title">9. 常见问题（FAQ）</h2>
+                <div data-i18n-key="section9_content">
+                    <h5>1) 安装后没有显示主界面？</h5>
+                    <p>请在 Edge 地址栏输入 <code>edge://extensions/</code>，开启“开发者模式”，并确保已加载包含 <code>manifest.json</code> 的插件目录。若界面异常，点击“刷新”。</p>
+                    <h5>2) 计算按钮无反应或 Enter 键不触发？</h5>
+                    <p>请检查参数是否完整；尝试在输入框外点击一次再按 Enter。若仍无效，请刷新扩展窗口。</p>
+                    <h5>3) 截图导出模糊或空白？</h5>
+                    <p>请确保结果区域在可视范围内；关闭浏览器的“简化界面/高对比度”模式后重试；必要时调整窗口尺寸。</p>
+                    <h5>4) 配置导入失败？</h5>
+                    <p>请确认导入的 <code>.json</code> 文件结构与版本兼容；如从旧版本迁移，建议先“恢复默认设置”，再逐步导入。</p>
+                    <h5>5) 搜索无结果或只命中标题？</h5>
+                    <p>请尝试使用更短关键词（如“导线”、“公差”）；新增内容会在刷新后纳入搜索索引。</p>
+                </div>
+            </section>
+
+            <section id="section10">
+                <h2 data-i18n-key="section10_title">10. 术语表</h2>
+                <div data-i18n-key="section10_content">
+                    <ul>
+                        <li><strong>Wire（导线）</strong>: 单根电缆，包含导体与绝缘层。</li>
+                        <li><strong>Bundle（线束）</strong>: 多根导线的集合，可能包含包裹物。</li>
+                        <li><strong>Insulation（绝缘层）</strong>: 导线外部的绝缘材料，影响外径。</li>
+                        <li><strong>Tolerance（制造公差）</strong>: 由于工艺造成的尺寸浮动，按百分比放大计算结果。</li>
+                        
+                        <li><strong>Legend（图例）</strong>: 图表中颜色与数据类别的对应说明。</li>
+                    </ul>
                 </div>
             </section>
         </main>

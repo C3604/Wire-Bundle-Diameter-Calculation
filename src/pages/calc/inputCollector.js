@@ -24,16 +24,16 @@ export function collectAndValidateInputs({
   // 收集导线半径
   const wireRadii = [];
   (standardRows || []).forEach((row) => {
-    const qty = parseInt(row.qty, 10);
-    const od = parseFloat(row.od);
+    const qty = parseInt(String(row.qty).trim(), 10);
+    const od = parseFloat(String(row.od).replace(",", "."));
     if (!isNaN(qty) && qty > 0 && !isNaN(od) && od > 0) {
       const radius = od / 2;
       for (let i = 0; i < qty; i++) wireRadii.push(radius);
     }
   });
   (specialRows || []).forEach((row) => {
-    const qty = parseInt(row.qty, 10);
-    const od = parseFloat(row.od);
+    const qty = parseInt(String(row.qty).trim(), 10);
+    const od = parseFloat(String(row.od).replace(",", "."));
     if (!isNaN(qty) && qty > 0 && !isNaN(od) && od > 0) {
       const radius = od / 2;
       for (let i = 0; i < qty; i++) wireRadii.push(radius);
@@ -55,32 +55,45 @@ export function collectAndValidateInputs({
   // 包裹层总厚度（只统计正数）
   let totalWrappingThickness = 0;
   (wrapRows || []).forEach((row) => {
-    const thick = parseFloat(row.thick);
+    const thick = parseFloat(String(row.thick).replace(",", "."));
     if (!isNaN(thick) && thick > 0) totalWrappingThickness += thick;
   });
 
   // 容差（100-200）
-  let toleranceVal = parseInt(toleranceValue, 10);
+    let toleranceVal = parseInt(String(toleranceValue).trim(), 10);
   let toleranceFactor;
-  if (isNaN(toleranceVal) || toleranceVal < 100 || toleranceVal > 200) {
-    warnings.push(
+    if (isNaN(toleranceVal) || toleranceVal < 100 || toleranceVal > 200) {
+      warnings.push(
       i18n.getMessage("calc_message_invalid_tolerance") ||
-        "Invalid tolerance; using fallback 110%",
-    );
-    toleranceVal = 110;
-  }
+        "Invalid tolerance",
+      );
+      return {
+        ok: false,
+        wireRadii,
+        totalWrappingThickness,
+        numSimulations: 0,
+        toleranceFactor: 0,
+        warnings,
+      };
+    }
   toleranceFactor = toleranceVal / 100;
 
   // 计算次数（1-100）
-  let scoreVal = parseInt(scoreValue, 10);
+    let scoreVal = parseInt(String(scoreValue).trim(), 10);
   let numSimulations;
-  if (isNaN(scoreVal) || scoreVal < 1 || scoreVal > 100) {
-    warnings.push(
-      i18n.getMessage("calc_message_invalid_score") ||
-        "Invalid simulation count; using fallback 10",
-    );
-    scoreVal = 10;
-  }
+    if (isNaN(scoreVal) || scoreVal < 1 || scoreVal > 100) {
+      warnings.push(
+      i18n.getMessage("calc_message_invalid_score") || "Invalid simulation count",
+      );
+      return {
+        ok: false,
+        wireRadii,
+        totalWrappingThickness,
+        numSimulations: 0,
+        toleranceFactor,
+        warnings,
+      };
+    }
   numSimulations = scoreVal;
 
   return {

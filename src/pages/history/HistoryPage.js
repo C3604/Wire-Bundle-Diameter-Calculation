@@ -80,17 +80,30 @@ export function renderHistoryPage(container) {
               const formatWrapsLines = (wraps) => wraps.map((w) => `${w.thick}`);
 
               // 安全构造每个单元格，避免在 innerHTML 中插入未转义的用户数据
+              const tryStripMm = (s) =>
+                typeof s === "string" ? s.replace(" mm", "") : "";
+              const fmtNum = (n) =>
+                typeof n === "number" && isFinite(n) ? n.toFixed(3) : "";
+              const timeStr = entry.timestamp
+                ? new Date(entry.timestamp).toLocaleString()
+                : entry.calculationTime || "";
               const cells = [
                 String(history.length - index),
-                entry.calculationTime,
+                timeStr,
                 "__STANDARD_WIRES__",
                 "__SPECIAL_WIRES__",
                 "__WRAPS__",
-                `${entry.tolerance}%`,
-                entry.maxTheoreticalDiameter.replace(" mm", ""),
-                entry.minTheoreticalDiameter.replace(" mm", ""),
-                entry.avgTheoreticalDiameter.replace(" mm", ""),
-                entry.avgFinalDiameter.replace(" mm", ""),
+                entry.tolerance != null ? `${entry.tolerance}%` : "",
+                entry.theoretical
+                  ? fmtNum(entry.theoretical.max)
+                  : tryStripMm(entry.maxTheoreticalDiameter),
+                entry.theoretical
+                  ? fmtNum(entry.theoretical.min)
+                  : tryStripMm(entry.minTheoreticalDiameter),
+                entry.theoretical
+                  ? fmtNum(entry.theoretical.avg)
+                  : tryStripMm(entry.avgTheoreticalDiameter),
+                entry.final ? fmtNum(entry.final.avg) : tryStripMm(entry.avgFinalDiameter),
               ];
 
               cells.forEach((value, cellIdx) => {
@@ -175,7 +188,6 @@ export function renderHistoryPage(container) {
 
   if (clearHistoryBtn) {
     clearHistoryBtn.onclick = async () => {
-      console.log("清除历史记录按钮被点击");
       const ok = await showConfirm(i18n.getMessage("history_confirm_clear"));
       if (ok) {
         try {
@@ -192,7 +204,6 @@ export function renderHistoryPage(container) {
 
   if (exportCsvBtn) {
     exportCsvBtn.onclick = () => {
-      console.log("导出CSV按钮被点击");
       try {
         const history = getJSON("calculationHistory", []);
         if (history.length === 0) {
@@ -235,15 +246,15 @@ export function renderHistoryPage(container) {
           .forEach((entry, index) => {
             const row = [
               history.length - index, // 序号
-              entry.calculationTime,
+              new Date(entry.timestamp).toLocaleString(),
               formatWiresForCSV(entry.standardWires),
               formatWiresForCSV(entry.specialWires),
               formatWrapsForCSV(entry.wraps),
               `${entry.tolerance}%`,
-              entry.maxTheoreticalDiameter.replace(" mm", ""),
-              entry.minTheoreticalDiameter.replace(" mm", ""),
-              entry.avgTheoreticalDiameter.replace(" mm", ""),
-              entry.avgFinalDiameter.replace(" mm", ""),
+              (entry.theoretical && entry.theoretical.max != null) ? entry.theoretical.max.toFixed(3) : "",
+              (entry.theoretical && entry.theoretical.min != null) ? entry.theoretical.min.toFixed(3) : "",
+              (entry.theoretical && entry.theoretical.avg != null) ? entry.theoretical.avg.toFixed(3) : "",
+              (entry.final && entry.final.avg != null) ? entry.final.avg.toFixed(3) : "",
             ];
             // 规范CSV字段转义：若包含逗号、分号、换行或引号，则用双引号包裹并将内部引号翻倍
             const escapeCsvField = (v) => {
