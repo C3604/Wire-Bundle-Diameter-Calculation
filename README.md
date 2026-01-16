@@ -1,6 +1,6 @@
 # 线束直径计算工具 (Wire Bundle Diameter Calculator)
 
-[![Edge Add-on](https://img.shields.io/badge/Edge%20Add--on-v1.0.3.2-blue)](https://microsoftedge.microsoft.com/addons/detail/%E7%BA%BF%E6%9D%9F%E7%9B%B4%E5%BE%84%E8%AE%A1%E7%AE%97%E5%B7%A5%E5%85%B7/dcinhgdofeolfogjefdocphbnmdicopj)
+[![Edge Add-on](https://img.shields.io/badge/Edge%20Add--on-v1.0.3.5-blue)](https://microsoftedge.microsoft.com/addons/detail/%E7%BA%BF%E6%9D%9F%E7%9B%B4%E5%BE%84%E8%AE%A1%E7%AE%97%E5%B7%A5%E5%85%B7/dcinhgdofeolfogjefdocphbnmdicopj)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ## 项目概述
@@ -145,6 +145,7 @@ src/
 - 字段映射：线规→`WireSize`，类型→`WallThickness`，直径→`Specs["Cable Outside Diameter"]`。
 - 检索采用索引级联选择（byWireSize/byWallThickness/byWireType/byConductorDesign），详情参考 mspec.README。
 - 旧数据源（`src/storage/WireStandard`、`src/storage/standardWires.js`、`src/storage/wireStandardLoader.js`）已移除。
+- 多源合并与缓存：标准库可按需合并多个源，索引重建后缓存至本地（默认 24h TTL），加载失败自动回退并提示。
 
 ## 技术架构
 
@@ -159,6 +160,12 @@ src/
 - **Service Worker**：后台脚本处理
 - **Content Scripts**：页面内容注入
 - **Popup Interface**：主用户界面
+
+## 页面导览
+- **计算页**：输入标准/特殊导线与包裹物参数，运行模拟并生成截面图、历史折线图与统计信息。
+- **历史页**：查看历史记录、导出 CSV、清理条目；数据源为本地存储 `calculationHistory`。
+- **配置页**：维护自定义导线库、设置并保存模拟参数、恢复默认值，与标准库合并展示。
+- **查询页**：按 WireSize/WallThickness/WireType/ConductorDesign 多维筛选展示标准数据，支持多源合并与表头对齐。
 
 ### 算法核心
 - **圆形填充算法**：基于物理模拟的导线排列
@@ -183,6 +190,66 @@ src/
 ---
 
 **感谢使用线束直径计算工具！** 希望这个工具能为你的工程设计工作带来便利。
+
+# 推送到 GitHub（Windows）
+
+## 前置准备
+- 在 GitHub 创建远程仓库（例如：`https://github.com/<你的账户>/Wire-Bundle-Diameter-Calculation`）。
+- 确保已安装 Git，并在 PowerShell 中可用。
+
+## 初始化与首次推送
+
+```powershell
+# 初始化本地仓库（如果尚未初始化）
+git init
+
+# 可选：设置用户信息（全局）
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+
+# 将默认分支命名为 main
+git branch -M main
+
+# 添加远程仓库（替换为你的地址）
+git remote add origin https://github.com/<你的账户>/Wire-Bundle-Diameter-Calculation.git
+
+# 添加并提交文件
+git add .
+git commit -m "feat: 初始化项目与文档"
+
+# 推送到远程 main 分支并设置跟踪
+git push -u origin main
+```
+
+## 后续更新与发布
+
+```powershell
+# 记录变更
+git add .
+git commit -m "docs: 更新 README 与 AGENTS 指南"
+git push
+
+# 打标签（版本号与 manifest.json 保持一致）
+git tag v1.0.3.5
+git push origin v1.0.3.5
+```
+
+## Release 与打包（可选）
+- 使用 `build.bat` 生成 ZIP 包（遵循 `.buildignore` 过滤），便于发布或分发。
+- 在 GitHub 创建 Release，附加打包 ZIP，版本号命名与标签/manifest 对齐。
+- 确保 [.gitignore](./.gitignore) 与 [.gitattributes](./.gitattributes) 已正确配置行尾与二进制文件策略。
+
+## 依赖加载与故障排查
+- 第三方库通过 UMD 方式在 [popup.html](./popup.html) 注入：`src/vendor/chart.umd.js`、`src/vendor/html2canvas.min.js`。
+- 若图表或导出异常：
+  - 检查 UMD 文件是否存在与路径是否正确；
+  - 确认页面已加载对应脚本；
+  - 参考组件实现：`src/components/chartRenderer.js`、`src/components/simulationRenderer.js`。
+
+## 国际化使用
+- 语言切换入口位于侧边栏；偏好存储于 `chrome.storage.local`。
+- 文案主要来源 `_locales/{lang}/messages.json`；帮助文档补充 `_locales/{lang}/help.json`。
+- 修改 UI 文案时请同步维护 `_locales` 双语键，避免缺失。
 
 # 手动打包脚本（选择性打包）
 
