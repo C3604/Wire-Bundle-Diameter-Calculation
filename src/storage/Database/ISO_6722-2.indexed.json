@@ -1,0 +1,2108 @@
+{
+  "meta": {
+    "source": "ISO 6722-2",
+    "generatedAt": "2026-01-16T09:30:24.994770+00:00",
+    "specKeys": [
+      "Conductor Diameter",
+      "Strand Diameter",
+      "Insulation Thickness",
+      "Cable Outside Diameter",
+      "Mass Length",
+      "Resistance Length"
+    ],
+    "recordCount": 67,
+    "idStrategy": "sha1(WireSize+WallThickness+WireType+ConductorDesign+Specs)"
+  },
+  "variants": [
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.3,
+        "Strand Diameter": 0.3,
+        "Cable Outside Diameter": 2.5,
+        "Resistance Length": 41.2
+      },
+      "id": "v_0861cc93c407"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 6101)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.38,
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 43.6,
+        "Conductor Diameter": 1.3
+      },
+      "id": "v_8b55d7aa3431"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-C (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Strand Diameter": 0.23,
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 43.6,
+        "Conductor Diameter": 1.3
+      },
+      "id": "v_4a922cb2beb3"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.5,
+        "Strand Diameter": 0.29,
+        "Cable Outside Diameter": 2.7,
+        "Resistance Length": 30.8
+      },
+      "id": "v_0ba3e2f96708"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 6101)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.43,
+        "Cable Outside Diameter": 2.1,
+        "Resistance Length": 32.7,
+        "Conductor Diameter": 1.5
+      },
+      "id": "v_e0b22e6feda7"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-C (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Conductor Diameter": 1.5,
+        "Strand Diameter": 0.27,
+        "Cable Outside Diameter": 2.1,
+        "Resistance Length": 32.7
+      },
+      "id": "v_9e22230c6154"
+    },
+    {
+      "WireSize": 1.25,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.7,
+        "Strand Diameter": 0.32,
+        "Cable Outside Diameter": 2.95,
+        "Resistance Length": 24.8
+      },
+      "id": "v_10b6281c59d7"
+    },
+    {
+      "WireSize": 1.25,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 1.7,
+        "Strand Diameter": 0.3,
+        "Cable Outside Diameter": 2.3,
+        "Resistance Length": 26.3
+      },
+      "id": "v_1b297f4311ee"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.8,
+        "Strand Diameter": 0.35,
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 21.2
+      },
+      "id": "v_012070c139f4"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 6101)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.32,
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 22.4,
+        "Conductor Diameter": 1.8
+      },
+      "id": "v_ecaf2ec00055"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 1.8,
+        "Strand Diameter": 0.32,
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 22.4
+      },
+      "id": "v_4d86cc6f57d6"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 1.8,
+        "Strand Diameter": 0.32,
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 21.2
+      },
+      "id": "v_5bb8c609661e"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.8,
+        "Strand Diameter": 0.35,
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 21.2
+      },
+      "id": "v_3276503eba9b"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.0,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 3.3,
+        "Resistance Length": 15.7
+      },
+      "id": "v_2d32c3d5bb9f"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 2.0,
+        "Strand Diameter": 0.37,
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 16.6
+      },
+      "id": "v_f38de26cff16"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 2.0,
+        "Strand Diameter": 0.37,
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 15.7
+      },
+      "id": "v_1ab440e46072"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.0,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 15.7
+      },
+      "id": "v_01c3775f0051"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.2,
+        "Cable Outside Diameter": 3.6,
+        "Resistance Length": 12.7
+      },
+      "id": "v_137f1da7e05c"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 2.2,
+        "Strand Diameter": 0.43,
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 13.4
+      },
+      "id": "v_941e3b0ae447"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.43,
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 12.7,
+        "Conductor Diameter": 2.2
+      },
+      "id": "v_1995d8200051"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.2,
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 12.7
+      },
+      "id": "v_37aec904e473"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.4,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.1,
+        "Resistance Length": 10.2
+      },
+      "id": "v_48fba8df2a08"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.46,
+        "Cable Outside Diameter": 3.4,
+        "Resistance Length": 10.2,
+        "Conductor Diameter": 2.4
+      },
+      "id": "v_94a9390d2edd"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.4,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 3.4,
+        "Resistance Length": 10.2
+      },
+      "id": "v_4633b844f258"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-C (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Strand Diameter": 0.33,
+        "Cable Outside Diameter": 3.4,
+        "Resistance Length": 10.2,
+        "Conductor Diameter": 2.4
+      },
+      "id": "v_07c4000be251"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.8,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.4,
+        "Resistance Length": 7.85
+      },
+      "id": "v_f7365691c034"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.38,
+        "Cable Outside Diameter": 3.7,
+        "Resistance Length": 7.85,
+        "Conductor Diameter": 2.8
+      },
+      "id": "v_725bbeae1e1b"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.8,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 3.7,
+        "Resistance Length": 7.85
+      },
+      "id": "v_606534589fe3"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 3.1,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.9,
+        "Resistance Length": 6.57
+      },
+      "id": "v_3c8953b1ad32"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.41,
+        "Cable Outside Diameter": 4.2,
+        "Resistance Length": 6.57,
+        "Conductor Diameter": 3.1
+      },
+      "id": "v_dc95b9fa99e5"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 3.1,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.2,
+        "Resistance Length": 6.57
+      },
+      "id": "v_138c34d36296"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 3.4,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 5.0,
+        "Resistance Length": 5.23
+      },
+      "id": "v_791aa3d3ec6f"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.46,
+        "Cable Outside Diameter": 4.3,
+        "Resistance Length": 5.23,
+        "Conductor Diameter": 3.4
+      },
+      "id": "v_d2cb134b77e3"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 3.4,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.3,
+        "Resistance Length": 5.23
+      },
+      "id": "v_a63f34b4f101"
+    },
+    {
+      "WireSize": 8.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 4.3,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 5.9,
+        "Resistance Length": 3.97
+      },
+      "id": "v_0c114e2be745"
+    },
+    {
+      "WireSize": 8.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 5.0,
+        "Resistance Length": 3.97,
+        "Conductor Diameter": 4.3
+      },
+      "id": "v_b063650082cf"
+    },
+    {
+      "WireSize": 8.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 4.3,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 5.0,
+        "Resistance Length": 3.97
+      },
+      "id": "v_389e2cabfbb2"
+    },
+    {
+      "WireSize": 10.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 4.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 6.5,
+        "Resistance Length": 3.03
+      },
+      "id": "v_069a4b13b755"
+    },
+    {
+      "WireSize": 10.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 4.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 6.0,
+        "Resistance Length": 3.03
+      },
+      "id": "v_1667a03a978c"
+    },
+    {
+      "WireSize": 12.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 5.4,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 7.4,
+        "Resistance Length": 2.53
+      },
+      "id": "v_a392a119475d"
+    },
+    {
+      "WireSize": 12.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 5.4,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 6.5,
+        "Resistance Length": 2.53
+      },
+      "id": "v_9e3b03d1b148"
+    },
+    {
+      "WireSize": 16.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 5.8,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 8.3,
+        "Resistance Length": 1.93
+      },
+      "id": "v_fbbfeea5d856"
+    },
+    {
+      "WireSize": 16.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 5.8,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 7.2,
+        "Resistance Length": 1.93
+      },
+      "id": "v_ef5539c33d1f"
+    },
+    {
+      "WireSize": 20.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 6.9,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 9.1,
+        "Resistance Length": 1.59
+      },
+      "id": "v_acaa0d311b47"
+    },
+    {
+      "WireSize": 20.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 6.9,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 7.8,
+        "Resistance Length": 1.59
+      },
+      "id": "v_ca6cef1c7fae"
+    },
+    {
+      "WireSize": 25.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 7.2,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 10.4,
+        "Resistance Length": 1.24
+      },
+      "id": "v_4f311cfa5ae3"
+    },
+    {
+      "WireSize": 25.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 7.2,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 8.7,
+        "Resistance Length": 1.24
+      },
+      "id": "v_06eaaea127b8"
+    },
+    {
+      "WireSize": 30.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 8.3,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 10.9,
+        "Resistance Length": 1.08
+      },
+      "id": "v_7f036218304e"
+    },
+    {
+      "WireSize": 30.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 8.3,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 9.6,
+        "Resistance Length": 1.08
+      },
+      "id": "v_980139dc590a"
+    },
+    {
+      "WireSize": 35.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 8.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 11.6,
+        "Resistance Length": 0.878
+      },
+      "id": "v_0a5a6b34c70c"
+    },
+    {
+      "WireSize": 35.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 8.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 10.4,
+        "Resistance Length": 0.878
+      },
+      "id": "v_00a92fbab769"
+    },
+    {
+      "WireSize": 40.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 9.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 12.4,
+        "Resistance Length": 0.788
+      },
+      "id": "v_171acb59d8a1"
+    },
+    {
+      "WireSize": 40.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 9.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 11.1,
+        "Resistance Length": 0.788
+      },
+      "id": "v_2a305c05ddbd"
+    },
+    {
+      "WireSize": 50.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 10.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 13.5,
+        "Resistance Length": 0.613
+      },
+      "id": "v_9053aa0107c0"
+    },
+    {
+      "WireSize": 50.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 10.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 12.2,
+        "Resistance Length": 0.613
+      },
+      "id": "v_182004c9248f"
+    },
+    {
+      "WireSize": 60.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 11.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 14.6,
+        "Resistance Length": 0.525
+      },
+      "id": "v_1c63e7ba6093"
+    },
+    {
+      "WireSize": 60.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 11.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 13.3,
+        "Resistance Length": 0.525
+      },
+      "id": "v_d144f34e2bdd"
+    },
+    {
+      "WireSize": 70.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 12.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 15.5,
+        "Resistance Length": 0.432
+      },
+      "id": "v_e6d7e9d8d851"
+    },
+    {
+      "WireSize": 70.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 12.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 14.4,
+        "Resistance Length": 0.432
+      },
+      "id": "v_8f6fbbe5e442"
+    },
+    {
+      "WireSize": 85.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 13.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 16.8,
+        "Resistance Length": 0.365
+      },
+      "id": "v_e15920f0b3b5"
+    },
+    {
+      "WireSize": 85.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 13.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 15.8,
+        "Resistance Length": 0.365
+      },
+      "id": "v_7faa141e0f60"
+    },
+    {
+      "WireSize": 95.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 14.8,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 18.0,
+        "Resistance Length": 0.327
+      },
+      "id": "v_0032125eb788"
+    },
+    {
+      "WireSize": 95.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 14.8,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 16.7,
+        "Resistance Length": 0.327
+      },
+      "id": "v_c17edfeeaae2"
+    },
+    {
+      "WireSize": 120.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 16.5,
+        "Strand Diameter": 0.72,
+        "Cable Outside Diameter": 19.7,
+        "Resistance Length": 0.255
+      },
+      "id": "v_984b3d0e14d7"
+    },
+    {
+      "WireSize": 120.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-C (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Conductor Diameter": 16.5,
+        "Cable Outside Diameter": 19.7,
+        "Resistance Length": 0.255
+      },
+      "id": "v_55881c210d71"
+    },
+    {
+      "WireSize": 160.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 19.0,
+        "Strand Diameter": 0.72,
+        "Cable Outside Diameter": 22.5,
+        "Resistance Length": 0.195
+      },
+      "id": "v_5292d386384d"
+    },
+    {
+      "WireSize": 160.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-C (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Conductor Diameter": 19.0,
+        "Cable Outside Diameter": 22.5,
+        "Resistance Length": 0.195
+      },
+      "id": "v_6b2fcfed20bd"
+    }
+  ],
+  "variantsMap": {
+    "v_0861cc93c407": {
+      "WireSize": 0.75,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.3,
+        "Strand Diameter": 0.3,
+        "Cable Outside Diameter": 2.5,
+        "Resistance Length": 41.2
+      },
+      "id": "v_0861cc93c407"
+    },
+    "v_8b55d7aa3431": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 6101)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.38,
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 43.6,
+        "Conductor Diameter": 1.3
+      },
+      "id": "v_8b55d7aa3431"
+    },
+    "v_4a922cb2beb3": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-C (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Strand Diameter": 0.23,
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 43.6,
+        "Conductor Diameter": 1.3
+      },
+      "id": "v_4a922cb2beb3"
+    },
+    "v_0ba3e2f96708": {
+      "WireSize": 1.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.5,
+        "Strand Diameter": 0.29,
+        "Cable Outside Diameter": 2.7,
+        "Resistance Length": 30.8
+      },
+      "id": "v_0ba3e2f96708"
+    },
+    "v_e0b22e6feda7": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 6101)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.43,
+        "Cable Outside Diameter": 2.1,
+        "Resistance Length": 32.7,
+        "Conductor Diameter": 1.5
+      },
+      "id": "v_e0b22e6feda7"
+    },
+    "v_9e22230c6154": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-C (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Conductor Diameter": 1.5,
+        "Strand Diameter": 0.27,
+        "Cable Outside Diameter": 2.1,
+        "Resistance Length": 32.7
+      },
+      "id": "v_9e22230c6154"
+    },
+    "v_10b6281c59d7": {
+      "WireSize": 1.25,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.7,
+        "Strand Diameter": 0.32,
+        "Cable Outside Diameter": 2.95,
+        "Resistance Length": 24.8
+      },
+      "id": "v_10b6281c59d7"
+    },
+    "v_1b297f4311ee": {
+      "WireSize": 1.25,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 1.7,
+        "Strand Diameter": 0.3,
+        "Cable Outside Diameter": 2.3,
+        "Resistance Length": 26.3
+      },
+      "id": "v_1b297f4311ee"
+    },
+    "v_012070c139f4": {
+      "WireSize": 1.5,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.8,
+        "Strand Diameter": 0.35,
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 21.2
+      },
+      "id": "v_012070c139f4"
+    },
+    "v_ecaf2ec00055": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 6101)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.32,
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 22.4,
+        "Conductor Diameter": 1.8
+      },
+      "id": "v_ecaf2ec00055"
+    },
+    "v_4d86cc6f57d6": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 1.8,
+        "Strand Diameter": 0.32,
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 22.4
+      },
+      "id": "v_4d86cc6f57d6"
+    },
+    "v_5bb8c609661e": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 1.8,
+        "Strand Diameter": 0.32,
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 21.2
+      },
+      "id": "v_5bb8c609661e"
+    },
+    "v_3276503eba9b": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 1.8,
+        "Strand Diameter": 0.35,
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 21.2
+      },
+      "id": "v_3276503eba9b"
+    },
+    "v_2d32c3d5bb9f": {
+      "WireSize": 2.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.0,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 3.3,
+        "Resistance Length": 15.7
+      },
+      "id": "v_2d32c3d5bb9f"
+    },
+    "v_f38de26cff16": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 2.0,
+        "Strand Diameter": 0.37,
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 16.6
+      },
+      "id": "v_f38de26cff16"
+    },
+    "v_1ab440e46072": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 2.0,
+        "Strand Diameter": 0.37,
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 15.7
+      },
+      "id": "v_1ab440e46072"
+    },
+    "v_01c3775f0051": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.0,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 15.7
+      },
+      "id": "v_01c3775f0051"
+    },
+    "v_137f1da7e05c": {
+      "WireSize": 2.5,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.2,
+        "Cable Outside Diameter": 3.6,
+        "Resistance Length": 12.7
+      },
+      "id": "v_137f1da7e05c"
+    },
+    "v_941e3b0ae447": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Alloy 8176)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Conductor Diameter": 2.2,
+        "Strand Diameter": 0.43,
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 13.4
+      },
+      "id": "v_941e3b0ae447"
+    },
+    "v_1995d8200051": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.43,
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 12.7,
+        "Conductor Diameter": 2.2
+      },
+      "id": "v_1995d8200051"
+    },
+    "v_37aec904e473": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.2,
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 12.7
+      },
+      "id": "v_37aec904e473"
+    },
+    "v_48fba8df2a08": {
+      "WireSize": 3.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.4,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.1,
+        "Resistance Length": 10.2
+      },
+      "id": "v_48fba8df2a08"
+    },
+    "v_94a9390d2edd": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.46,
+        "Cable Outside Diameter": 3.4,
+        "Resistance Length": 10.2,
+        "Conductor Diameter": 2.4
+      },
+      "id": "v_94a9390d2edd"
+    },
+    "v_4633b844f258": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.4,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 3.4,
+        "Resistance Length": 10.2
+      },
+      "id": "v_4633b844f258"
+    },
+    "v_07c4000be251": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-C (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Strand Diameter": 0.33,
+        "Cable Outside Diameter": 3.4,
+        "Resistance Length": 10.2,
+        "Conductor Diameter": 2.4
+      },
+      "id": "v_07c4000be251"
+    },
+    "v_f7365691c034": {
+      "WireSize": 4.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.8,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.4,
+        "Resistance Length": 7.85
+      },
+      "id": "v_f7365691c034"
+    },
+    "v_725bbeae1e1b": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.38,
+        "Cable Outside Diameter": 3.7,
+        "Resistance Length": 7.85,
+        "Conductor Diameter": 2.8
+      },
+      "id": "v_725bbeae1e1b"
+    },
+    "v_606534589fe3": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 2.8,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 3.7,
+        "Resistance Length": 7.85
+      },
+      "id": "v_606534589fe3"
+    },
+    "v_3c8953b1ad32": {
+      "WireSize": 5.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 3.1,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.9,
+        "Resistance Length": 6.57
+      },
+      "id": "v_3c8953b1ad32"
+    },
+    "v_dc95b9fa99e5": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.41,
+        "Cable Outside Diameter": 4.2,
+        "Resistance Length": 6.57,
+        "Conductor Diameter": 3.1
+      },
+      "id": "v_dc95b9fa99e5"
+    },
+    "v_138c34d36296": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 3.1,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.2,
+        "Resistance Length": 6.57
+      },
+      "id": "v_138c34d36296"
+    },
+    "v_791aa3d3ec6f": {
+      "WireSize": 6.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 3.4,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 5.0,
+        "Resistance Length": 5.23
+      },
+      "id": "v_791aa3d3ec6f"
+    },
+    "v_d2cb134b77e3": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Strand Diameter": 0.46,
+        "Cable Outside Diameter": 4.3,
+        "Resistance Length": 5.23,
+        "Conductor Diameter": 3.4
+      },
+      "id": "v_d2cb134b77e3"
+    },
+    "v_a63f34b4f101": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 3.4,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 4.3,
+        "Resistance Length": 5.23
+      },
+      "id": "v_a63f34b4f101"
+    },
+    "v_0c114e2be745": {
+      "WireSize": 8.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 4.3,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 5.9,
+        "Resistance Length": 3.97
+      },
+      "id": "v_0c114e2be745"
+    },
+    "v_b063650082cf": {
+      "WireSize": 8.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-A (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 5.0,
+        "Resistance Length": 3.97,
+        "Conductor Diameter": 4.3
+      },
+      "id": "v_b063650082cf"
+    },
+    "v_389e2cabfbb2": {
+      "WireSize": 8.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 4.3,
+        "Strand Diameter": 0.42,
+        "Cable Outside Diameter": 5.0,
+        "Resistance Length": 3.97
+      },
+      "id": "v_389e2cabfbb2"
+    },
+    "v_069a4b13b755": {
+      "WireSize": 10.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 4.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 6.5,
+        "Resistance Length": 3.03
+      },
+      "id": "v_069a4b13b755"
+    },
+    "v_1667a03a978c": {
+      "WireSize": 10.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 4.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 6.0,
+        "Resistance Length": 3.03
+      },
+      "id": "v_1667a03a978c"
+    },
+    "v_a392a119475d": {
+      "WireSize": 12.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 5.4,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 7.4,
+        "Resistance Length": 2.53
+      },
+      "id": "v_a392a119475d"
+    },
+    "v_9e3b03d1b148": {
+      "WireSize": 12.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 5.4,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 6.5,
+        "Resistance Length": 2.53
+      },
+      "id": "v_9e3b03d1b148"
+    },
+    "v_fbbfeea5d856": {
+      "WireSize": 16.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 5.8,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 8.3,
+        "Resistance Length": 1.93
+      },
+      "id": "v_fbbfeea5d856"
+    },
+    "v_ef5539c33d1f": {
+      "WireSize": 16.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 5.8,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 7.2,
+        "Resistance Length": 1.93
+      },
+      "id": "v_ef5539c33d1f"
+    },
+    "v_acaa0d311b47": {
+      "WireSize": 20.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 6.9,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 9.1,
+        "Resistance Length": 1.59
+      },
+      "id": "v_acaa0d311b47"
+    },
+    "v_ca6cef1c7fae": {
+      "WireSize": 20.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 6.9,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 7.8,
+        "Resistance Length": 1.59
+      },
+      "id": "v_ca6cef1c7fae"
+    },
+    "v_4f311cfa5ae3": {
+      "WireSize": 25.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 7.2,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 10.4,
+        "Resistance Length": 1.24
+      },
+      "id": "v_4f311cfa5ae3"
+    },
+    "v_06eaaea127b8": {
+      "WireSize": 25.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 7.2,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 8.7,
+        "Resistance Length": 1.24
+      },
+      "id": "v_06eaaea127b8"
+    },
+    "v_7f036218304e": {
+      "WireSize": 30.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 8.3,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 10.9,
+        "Resistance Length": 1.08
+      },
+      "id": "v_7f036218304e"
+    },
+    "v_980139dc590a": {
+      "WireSize": 30.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 8.3,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 9.6,
+        "Resistance Length": 1.08
+      },
+      "id": "v_980139dc590a"
+    },
+    "v_0a5a6b34c70c": {
+      "WireSize": 35.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 8.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 11.6,
+        "Resistance Length": 0.878
+      },
+      "id": "v_0a5a6b34c70c"
+    },
+    "v_00a92fbab769": {
+      "WireSize": 35.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 8.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 10.4,
+        "Resistance Length": 0.878
+      },
+      "id": "v_00a92fbab769"
+    },
+    "v_171acb59d8a1": {
+      "WireSize": 40.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 9.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 12.4,
+        "Resistance Length": 0.788
+      },
+      "id": "v_171acb59d8a1"
+    },
+    "v_2a305c05ddbd": {
+      "WireSize": 40.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 9.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 11.1,
+        "Resistance Length": 0.788
+      },
+      "id": "v_2a305c05ddbd"
+    },
+    "v_9053aa0107c0": {
+      "WireSize": 50.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 10.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 13.5,
+        "Resistance Length": 0.613
+      },
+      "id": "v_9053aa0107c0"
+    },
+    "v_182004c9248f": {
+      "WireSize": 50.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 10.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 12.2,
+        "Resistance Length": 0.613
+      },
+      "id": "v_182004c9248f"
+    },
+    "v_1c63e7ba6093": {
+      "WireSize": 60.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 11.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 14.6,
+        "Resistance Length": 0.525
+      },
+      "id": "v_1c63e7ba6093"
+    },
+    "v_d144f34e2bdd": {
+      "WireSize": 60.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 11.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 13.3,
+        "Resistance Length": 0.525
+      },
+      "id": "v_d144f34e2bdd"
+    },
+    "v_e6d7e9d8d851": {
+      "WireSize": 70.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 12.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 15.5,
+        "Resistance Length": 0.432
+      },
+      "id": "v_e6d7e9d8d851"
+    },
+    "v_8f6fbbe5e442": {
+      "WireSize": 70.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 12.5,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 14.4,
+        "Resistance Length": 0.432
+      },
+      "id": "v_8f6fbbe5e442"
+    },
+    "v_e15920f0b3b5": {
+      "WireSize": 85.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 13.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 16.8,
+        "Resistance Length": 0.365
+      },
+      "id": "v_e15920f0b3b5"
+    },
+    "v_7faa141e0f60": {
+      "WireSize": 85.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 13.6,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 15.8,
+        "Resistance Length": 0.365
+      },
+      "id": "v_7faa141e0f60"
+    },
+    "v_0032125eb788": {
+      "WireSize": 95.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 14.8,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 18.0,
+        "Resistance Length": 0.327
+      },
+      "id": "v_0032125eb788"
+    },
+    "v_c17edfeeaae2": {
+      "WireSize": 95.0,
+      "WallThickness": "Thin",
+      "WireType": "FLALRY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 14.8,
+        "Strand Diameter": 0.52,
+        "Cable Outside Diameter": 16.7,
+        "Resistance Length": 0.327
+      },
+      "id": "v_c17edfeeaae2"
+    },
+    "v_984b3d0e14d7": {
+      "WireSize": 120.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 16.5,
+        "Strand Diameter": 0.72,
+        "Cable Outside Diameter": 19.7,
+        "Resistance Length": 0.255
+      },
+      "id": "v_984b3d0e14d7"
+    },
+    "v_55881c210d71": {
+      "WireSize": 120.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-C (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Conductor Diameter": 16.5,
+        "Cable Outside Diameter": 19.7,
+        "Resistance Length": 0.255
+      },
+      "id": "v_55881c210d71"
+    },
+    "v_5292d386384d": {
+      "WireSize": 160.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-B (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Conductor Diameter": 19.0,
+        "Strand Diameter": 0.72,
+        "Cable Outside Diameter": 22.5,
+        "Resistance Length": 0.195
+      },
+      "id": "v_5292d386384d"
+    },
+    "v_6b2fcfed20bd": {
+      "WireSize": 160.0,
+      "WallThickness": "Thick",
+      "WireType": "FLALY-C (PVC T2 AL Pure 1370)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Conductor Diameter": 19.0,
+        "Cable Outside Diameter": 22.5,
+        "Resistance Length": 0.195
+      },
+      "id": "v_6b2fcfed20bd"
+    }
+  },
+  "indexes": {
+    "byWireSize": {
+      "0.75": [
+        "v_0861cc93c407",
+        "v_8b55d7aa3431",
+        "v_4a922cb2beb3"
+      ],
+      "1.0": [
+        "v_0ba3e2f96708",
+        "v_e0b22e6feda7",
+        "v_9e22230c6154"
+      ],
+      "1.25": [
+        "v_10b6281c59d7",
+        "v_1b297f4311ee"
+      ],
+      "1.5": [
+        "v_012070c139f4",
+        "v_ecaf2ec00055",
+        "v_4d86cc6f57d6",
+        "v_5bb8c609661e",
+        "v_3276503eba9b"
+      ],
+      "2.0": [
+        "v_2d32c3d5bb9f",
+        "v_f38de26cff16",
+        "v_1ab440e46072",
+        "v_01c3775f0051"
+      ],
+      "2.5": [
+        "v_137f1da7e05c",
+        "v_941e3b0ae447",
+        "v_1995d8200051",
+        "v_37aec904e473"
+      ],
+      "3.0": [
+        "v_48fba8df2a08",
+        "v_94a9390d2edd",
+        "v_4633b844f258",
+        "v_07c4000be251"
+      ],
+      "4.0": [
+        "v_f7365691c034",
+        "v_725bbeae1e1b",
+        "v_606534589fe3"
+      ],
+      "5.0": [
+        "v_3c8953b1ad32",
+        "v_dc95b9fa99e5",
+        "v_138c34d36296"
+      ],
+      "6.0": [
+        "v_791aa3d3ec6f",
+        "v_d2cb134b77e3",
+        "v_a63f34b4f101"
+      ],
+      "8.0": [
+        "v_0c114e2be745",
+        "v_b063650082cf",
+        "v_389e2cabfbb2"
+      ],
+      "10.0": [
+        "v_069a4b13b755",
+        "v_1667a03a978c"
+      ],
+      "12.0": [
+        "v_a392a119475d",
+        "v_9e3b03d1b148"
+      ],
+      "16.0": [
+        "v_fbbfeea5d856",
+        "v_ef5539c33d1f"
+      ],
+      "20.0": [
+        "v_acaa0d311b47",
+        "v_ca6cef1c7fae"
+      ],
+      "25.0": [
+        "v_4f311cfa5ae3",
+        "v_06eaaea127b8"
+      ],
+      "30.0": [
+        "v_7f036218304e",
+        "v_980139dc590a"
+      ],
+      "35.0": [
+        "v_0a5a6b34c70c",
+        "v_00a92fbab769"
+      ],
+      "40.0": [
+        "v_171acb59d8a1",
+        "v_2a305c05ddbd"
+      ],
+      "50.0": [
+        "v_9053aa0107c0",
+        "v_182004c9248f"
+      ],
+      "60.0": [
+        "v_1c63e7ba6093",
+        "v_d144f34e2bdd"
+      ],
+      "70.0": [
+        "v_e6d7e9d8d851",
+        "v_8f6fbbe5e442"
+      ],
+      "85.0": [
+        "v_e15920f0b3b5",
+        "v_7faa141e0f60"
+      ],
+      "95.0": [
+        "v_0032125eb788",
+        "v_c17edfeeaae2"
+      ],
+      "120.0": [
+        "v_984b3d0e14d7",
+        "v_55881c210d71"
+      ],
+      "160.0": [
+        "v_5292d386384d",
+        "v_6b2fcfed20bd"
+      ]
+    },
+    "byWallThickness": {
+      "Thick": [
+        "v_0861cc93c407",
+        "v_0ba3e2f96708",
+        "v_10b6281c59d7",
+        "v_012070c139f4",
+        "v_2d32c3d5bb9f",
+        "v_137f1da7e05c",
+        "v_48fba8df2a08",
+        "v_f7365691c034",
+        "v_3c8953b1ad32",
+        "v_791aa3d3ec6f",
+        "v_0c114e2be745",
+        "v_069a4b13b755",
+        "v_a392a119475d",
+        "v_fbbfeea5d856",
+        "v_acaa0d311b47",
+        "v_4f311cfa5ae3",
+        "v_7f036218304e",
+        "v_0a5a6b34c70c",
+        "v_171acb59d8a1",
+        "v_9053aa0107c0",
+        "v_1c63e7ba6093",
+        "v_e6d7e9d8d851",
+        "v_e15920f0b3b5",
+        "v_0032125eb788",
+        "v_984b3d0e14d7",
+        "v_55881c210d71",
+        "v_5292d386384d",
+        "v_6b2fcfed20bd"
+      ],
+      "Thin": [
+        "v_8b55d7aa3431",
+        "v_4a922cb2beb3",
+        "v_e0b22e6feda7",
+        "v_9e22230c6154",
+        "v_1b297f4311ee",
+        "v_ecaf2ec00055",
+        "v_4d86cc6f57d6",
+        "v_5bb8c609661e",
+        "v_3276503eba9b",
+        "v_f38de26cff16",
+        "v_1ab440e46072",
+        "v_01c3775f0051",
+        "v_941e3b0ae447",
+        "v_1995d8200051",
+        "v_37aec904e473",
+        "v_94a9390d2edd",
+        "v_4633b844f258",
+        "v_07c4000be251",
+        "v_725bbeae1e1b",
+        "v_606534589fe3",
+        "v_dc95b9fa99e5",
+        "v_138c34d36296",
+        "v_d2cb134b77e3",
+        "v_a63f34b4f101",
+        "v_b063650082cf",
+        "v_389e2cabfbb2",
+        "v_1667a03a978c",
+        "v_9e3b03d1b148",
+        "v_ef5539c33d1f",
+        "v_ca6cef1c7fae",
+        "v_06eaaea127b8",
+        "v_980139dc590a",
+        "v_00a92fbab769",
+        "v_2a305c05ddbd",
+        "v_182004c9248f",
+        "v_d144f34e2bdd",
+        "v_8f6fbbe5e442",
+        "v_7faa141e0f60",
+        "v_c17edfeeaae2"
+      ]
+    },
+    "byWireType": {
+      "FLALY-B (PVC T2 AL Pure 1370)": [
+        "v_0861cc93c407",
+        "v_0ba3e2f96708",
+        "v_10b6281c59d7",
+        "v_012070c139f4",
+        "v_2d32c3d5bb9f",
+        "v_137f1da7e05c",
+        "v_48fba8df2a08",
+        "v_f7365691c034",
+        "v_3c8953b1ad32",
+        "v_791aa3d3ec6f",
+        "v_0c114e2be745",
+        "v_069a4b13b755",
+        "v_a392a119475d",
+        "v_fbbfeea5d856",
+        "v_acaa0d311b47",
+        "v_4f311cfa5ae3",
+        "v_7f036218304e",
+        "v_0a5a6b34c70c",
+        "v_171acb59d8a1",
+        "v_9053aa0107c0",
+        "v_1c63e7ba6093",
+        "v_e6d7e9d8d851",
+        "v_e15920f0b3b5",
+        "v_0032125eb788",
+        "v_984b3d0e14d7",
+        "v_5292d386384d"
+      ],
+      "FLALRY-A (PVC T2 AL Alloy 6101)": [
+        "v_8b55d7aa3431",
+        "v_e0b22e6feda7",
+        "v_ecaf2ec00055"
+      ],
+      "FLALRY-C (PVC T2 AL Alloy 8176)": [
+        "v_4a922cb2beb3",
+        "v_9e22230c6154"
+      ],
+      "FLALRY-A (PVC T2 AL Alloy 8176)": [
+        "v_1b297f4311ee",
+        "v_4d86cc6f57d6",
+        "v_f38de26cff16",
+        "v_941e3b0ae447"
+      ],
+      "FLALRY-A (PVC T2 AL Pure 1370)": [
+        "v_5bb8c609661e",
+        "v_1ab440e46072",
+        "v_1995d8200051",
+        "v_94a9390d2edd",
+        "v_725bbeae1e1b",
+        "v_dc95b9fa99e5",
+        "v_d2cb134b77e3",
+        "v_b063650082cf"
+      ],
+      "FLALRY-B (PVC T2 AL Pure 1370)": [
+        "v_3276503eba9b",
+        "v_01c3775f0051",
+        "v_37aec904e473",
+        "v_4633b844f258",
+        "v_606534589fe3",
+        "v_138c34d36296",
+        "v_a63f34b4f101",
+        "v_389e2cabfbb2",
+        "v_1667a03a978c",
+        "v_9e3b03d1b148",
+        "v_ef5539c33d1f",
+        "v_ca6cef1c7fae",
+        "v_06eaaea127b8",
+        "v_980139dc590a",
+        "v_00a92fbab769",
+        "v_2a305c05ddbd",
+        "v_182004c9248f",
+        "v_d144f34e2bdd",
+        "v_8f6fbbe5e442",
+        "v_7faa141e0f60",
+        "v_c17edfeeaae2"
+      ],
+      "FLALRY-C (PVC T2 AL Pure 1370)": [
+        "v_07c4000be251"
+      ],
+      "FLALY-C (PVC T2 AL Pure 1370)": [
+        "v_55881c210d71",
+        "v_6b2fcfed20bd"
+      ]
+    },
+    "byConductorDesign": {
+      "B": [
+        "v_0861cc93c407",
+        "v_0ba3e2f96708",
+        "v_10b6281c59d7",
+        "v_012070c139f4",
+        "v_3276503eba9b",
+        "v_2d32c3d5bb9f",
+        "v_01c3775f0051",
+        "v_137f1da7e05c",
+        "v_37aec904e473",
+        "v_48fba8df2a08",
+        "v_4633b844f258",
+        "v_f7365691c034",
+        "v_606534589fe3",
+        "v_3c8953b1ad32",
+        "v_138c34d36296",
+        "v_791aa3d3ec6f",
+        "v_a63f34b4f101",
+        "v_0c114e2be745",
+        "v_389e2cabfbb2",
+        "v_069a4b13b755",
+        "v_1667a03a978c",
+        "v_a392a119475d",
+        "v_9e3b03d1b148",
+        "v_fbbfeea5d856",
+        "v_ef5539c33d1f",
+        "v_acaa0d311b47",
+        "v_ca6cef1c7fae",
+        "v_4f311cfa5ae3",
+        "v_06eaaea127b8",
+        "v_7f036218304e",
+        "v_980139dc590a",
+        "v_0a5a6b34c70c",
+        "v_00a92fbab769",
+        "v_171acb59d8a1",
+        "v_2a305c05ddbd",
+        "v_9053aa0107c0",
+        "v_182004c9248f",
+        "v_1c63e7ba6093",
+        "v_d144f34e2bdd",
+        "v_e6d7e9d8d851",
+        "v_8f6fbbe5e442",
+        "v_e15920f0b3b5",
+        "v_7faa141e0f60",
+        "v_0032125eb788",
+        "v_c17edfeeaae2",
+        "v_984b3d0e14d7",
+        "v_5292d386384d"
+      ],
+      "A": [
+        "v_8b55d7aa3431",
+        "v_e0b22e6feda7",
+        "v_1b297f4311ee",
+        "v_ecaf2ec00055",
+        "v_4d86cc6f57d6",
+        "v_5bb8c609661e",
+        "v_f38de26cff16",
+        "v_1ab440e46072",
+        "v_941e3b0ae447",
+        "v_1995d8200051",
+        "v_94a9390d2edd",
+        "v_725bbeae1e1b",
+        "v_dc95b9fa99e5",
+        "v_d2cb134b77e3",
+        "v_b063650082cf"
+      ],
+      "C": [
+        "v_4a922cb2beb3",
+        "v_9e22230c6154",
+        "v_07c4000be251",
+        "v_55881c210d71",
+        "v_6b2fcfed20bd"
+      ]
+    }
+  }
+}

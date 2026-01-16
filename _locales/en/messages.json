@@ -35,6 +35,10 @@
     "message": "Settings",
     "description": "Settings button text"
   },
+  "sidebar_button_query": {
+    "message": "Query",
+    "description": "Query button text"
+  },
   "sidebar_button_help": {
     "message": "Help",
     "description": "Help button text"
@@ -100,7 +104,7 @@
     "description": "Gauge column header"
   },
   "calc_group_standard_wire_table_header_type": {
-    "message": "Type",
+    "message": "WallThickness",
     "description": "Type column header"
   },
   "calc_group_standard_wire_table_header_diameter": {
@@ -802,5 +806,159 @@
   "calc_select_placeholder_choose": {
     "message": "Please choose",
     "description": "Generic select placeholder text"
+  }
+  ,
+  "query_page_title": {
+    "message": "Wire Query",
+    "description": "Query page title"
+  },
+  "query_button_reset": {
+    "message": "Reset Filters",
+    "description": "Query page reset button"
+  },
+  "query_label_standard": {
+    "message": "Wire Standard",
+    "description": "Database standard select label"
+  },
+  "query_label_wiresize": {
+    "message": "Gauge",
+    "description": "WireSize label"
+  },
+  "query_label_wallthickness": {
+    "message": "WallThickness",
+    "description": "WallThickness label"
+  },
+  "query_label_wiretype": {
+    "message": "WireType",
+    "description": "WireType label"
+  },
+  "query_label_conductordesign": {
+    "message": "ConductorDesign",
+    "description": "ConductorDesign label"
+  },
+  "query_result_title": {
+    "message": "Results",
+    "description": "Query results title"
+  },
+  "query_header_param": {
+    "message": "Parameter",
+    "description": "Results table parameter column"
+  },
+  "query_header_value": {
+    "message": "Value",
+    "description": "Results table value column"
+  },
+  "query_empty_hint": {
+    "message": "No matching records. Please adjust filters.",
+    "description": "Empty result hint"
+  },
+  "query_multi_hint": {
+    "message": "Multiple matches. Using the first; refine filters to narrow down.",
+    "description": "Multiple results hint"
+  },
+  "query_load_error": {
+    "message": "Failed to load query data",
+    "description": "Query data load error"
+  },
+  "query_th_wiresize": {
+    "message": "Gauge(mm²)",
+    "description": "Result header WireSize"
+  },
+  "query_th_wallthickness": {
+    "message": "WallThickness",
+    "description": "Result header WallThickness"
+  },
+  "query_th_wiretype": {
+    "message": "WireType",
+    "description": "Result header WireType"
+  },
+  "query_th_conductordesign": {
+    "message": "ConductorDesign",
+    "description": "Result header ConductorDesign"
+  },
+  "query_th_strand_diameter": {
+    "message": "Strand Diameter(mm)",
+    "description": "Result header Strand Diameter"
+  },
+  "query_th_cable_od": {
+    "message": "Cable Outside Diameter(mm)",
+    "description": "Result header Cable OD"
+  },
+  "query_th_resistance_length": {
+    "message": "Resistance/Length(mΩ/m)",
+    "description": "Result header Resistance Length"
+  },
+  "query_th_mass_length": {
+    "message": "Mass/Length(g/m)",
+    "description": "Result header Mass Length"
+  },
+  "query_th_conductor_diameter": {
+    "message": "Conductor Diameter(mm)",
+    "description": "Result header Conductor Diameter"
+  },
+  "query_th_insulation_thickness": {
+    "message": "Insulation Thickness(mm)",
+    "description": "Result header Insulation Thickness"
+  },
+  "query_th_mass_per_length": {
+    "message": "Mass/Length(g/m)",
+    "description": "Result header Mass/Length"
+  },
+  "query_th_resistance_per_length": {
+    "message": "Resistance/Length(mΩ/m)",
+    "description": "Result header Resistance/Length"
+  },
+  "mspec_load_fallback": {
+    "message": "Data source load failed, using local cache",
+    "description": "Service fallback when remote mspec fails"
+  },
+  "common_loading": {
+    "message": "Loading...",
+    "description": "Generic loading text for in-page indicators"
+  }
+  ,
+  "common_add": {
+    "message": "Add",
+    "description": "Generic add action"
+  },
+  "common_reset": {
+    "message": "Reset",
+    "description": "Generic reset action"
+  },
+  "common_delete": {
+    "message": "Delete",
+    "description": "Generic delete action"
+  },
+  "common_save": {
+    "message": "Save",
+    "description": "Generic save action"
+  },
+  "common_export": {
+    "message": "Export",
+    "description": "Generic export action"
+  },
+  "common_index": {
+    "message": "No.",
+    "description": "Generic table index header"
+  },
+  "common_operations": {
+    "message": "Operations",
+    "description": "Generic operations header"
+  },
+  "common_gauge": {
+    "message": "Gauge(mm²)",
+    "description": "Generic gauge header"
+  },
+  "common_type": {
+    "message": "Type",
+    "description": "Generic type header"
+  },
+  "common_diameter_mm": {
+    "message": "Diameter(mm)",
+    "description": "Generic diameter header"
+  },
+  "common_qty": {
+    "message": "Quantity",
+    "description": "Generic quantity header"
   }
 }

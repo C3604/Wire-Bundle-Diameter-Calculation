@@ -3,6 +3,7 @@
 import { renderCalcPage } from "./calc/CalcPage.js";
 import { renderHistoryPage } from "./history/HistoryPage.js";
 import { renderConfigPage } from "./config/ConfigPage.js";
+import { renderQueryPage } from "./query/QueryPage.js";
 import i18n from "../i18n/index.js";
 import { bindOverlayClose } from "../utils/domUtils.js";
 import { showToast } from "../components/feedback.js";
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const btnConfig = document.getElementById("btn-config");
   const btnHelp = document.getElementById("btn-help");
   const btnLanguage = document.getElementById("btn-language");
+  const btnQuery = document.getElementById("btn-query");
 
   let currentPageId = null; // 用于追踪当前活动页面
 
@@ -197,12 +199,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       renderHistoryPage(mainContent);
     } else if (pageId === "config") {
       renderConfigPage(mainContent);
+    } else if (pageId === "query") {
+      renderQueryPage(mainContent);
     }
   }
 
   if (btnCalc) btnCalc.onclick = () => showPage("calc");
   if (btnHistory) btnHistory.onclick = () => showPage("history");
   if (btnConfig) btnConfig.onclick = () => showPage("config");
+  if (btnQuery) btnQuery.onclick = () => showPage("query");
 
   // 语言切换按钮事件
   if (btnLanguage) {

@@ -104,8 +104,8 @@ export function renderConfigPage(container) {
           <div class="group-title">
             <div class="title-container"><span class="emoji">⚙️</span><span data-i18n="config_standard_wires_title">自定义标准导线</span></div>
             <div class="group-actions">
-              <button class="calc-table-btn" id="add-new-wire-btn-cfg"><span class="emoji">✨</span><span class="text" data-i18n="config_standard_wires_button_add_new">新增</span></button>
-              <button class="calc-table-btn" id="save-config-btn-cfg"><span class="emoji">💾</span><span class="text" data-i18n="config_standard_wires_button_save">保存</span></button>
+              <button class="calc-table-btn" id="add-new-wire-btn-cfg"><span class="emoji">✨</span><span class="text" data-i18n="common_add">新增</span></button>
+              <button class="calc-table-btn" id="save-config-btn-cfg"><span class="emoji">💾</span><span class="text" data-i18n="common_save">保存</span></button>
               <button class="calc-table-btn btn-danger" id="restore-defaults-btn-cfg"><span class="emoji">🔄</span><span class="text" data-i18n="config_standard_wires_button_restore_defaults">恢复默认</span></button>
             </div>
           </div>
@@ -114,8 +114,8 @@ export function renderConfigPage(container) {
               <table id="main-data-table-config" class="main-data-table calc-table calc-table-fixed">
                 <thead>
                   <tr>
-                    <th data-i18n="config_standard_wires_table_header_number">序号</th>
-                    <th data-i18n="config_standard_wires_table_header_gauge">线规 (mm²)</th>
+                    <th data-i18n="common_index">序号</th>
+                    <th data-i18n="common_gauge">线规 (mm²)</th>
                     <th data-i18n="config_standard_wires_table_header_thin">Thin</th>
                     <th data-i18n="config_standard_wires_table_header_thick">Thick</th>
                     <th data-i18n="config_standard_wires_table_header_ultra_thin">UltraThin</th>

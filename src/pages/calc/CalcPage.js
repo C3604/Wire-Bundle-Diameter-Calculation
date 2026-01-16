@@ -57,11 +57,11 @@ export function renderCalcPage(container) {
                     <span data-i18n="calc_group_standard_wire_select_label">标准</span>
                     <select id="wire-standard-select"></select>
                   </label>
-                  <span id="wire-standard-loading" style="display:none;">加载中...</span>
+                  <span id="wire-standard-loading" style="display:none;" data-i18n="common_loading">加载中...</span>
                 </div>
                 <div class="actions-right">
-                  <button class="calc-table-btn" id="add-row-1" data-i18n-title="calc_group_standard_wire_button_add_tooltip" title="增加一行标准导线输入"><span class="emoji">✨</span><span class="text" data-i18n="calc_group_standard_wire_button_add">增加</span></button>
-                  <button class="calc-table-btn" id="reset-table-1" data-i18n-title="calc_group_standard_wire_button_reset_tooltip" title="重置标准导线表格内容为默认值"><span class="emoji">🔄</span><span class="text" data-i18n="calc_group_standard_wire_button_reset">重置</span></button>
+                  <button class="calc-table-btn" id="add-row-1" data-i18n-title="calc_group_standard_wire_button_add_tooltip" title="增加一行标准导线输入"><span class="emoji">✨</span><span class="text" data-i18n="common_add">增加</span></button>
+                  <button class="calc-table-btn" id="reset-table-1" data-i18n-title="calc_group_standard_wire_button_reset_tooltip" title="重置标准导线表格内容为默认值"><span class="emoji">🔄</span><span class="text" data-i18n="common_reset">重置</span></button>
                 </div>
               </div>
             </div>
@@ -70,12 +70,12 @@ export function renderCalcPage(container) {
                 <table id="main-data-table-standard" class="main-data-table calc-table calc-table-fixed">
                   <thead>
                     <tr>
-                      <th data-i18n="calc_group_standard_wire_table_header_index">序号</th>
-                      <th data-i18n="calc_group_standard_wire_table_header_gauge">线规</th>
-                      <th data-i18n="calc_group_standard_wire_table_header_type">类型</th>
-                      <th data-i18n="calc_group_standard_wire_table_header_diameter">直径</th>
-                      <th data-i18n="calc_group_standard_wire_table_header_count">数量</th>
-                      <th data-i18n="calc_group_standard_wire_table_header_delete">删除</th>
+                      <th data-i18n="common_index">序号</th>
+                      <th data-i18n="common_gauge">线规</th>
+                      <th data-i18n="common_type">类型</th>
+                      <th data-i18n="common_diameter_mm">直径</th>
+                      <th data-i18n="common_qty">数量</th>
+                      <th data-i18n="common_delete">删除</th>
                     </tr>
                   </thead>
                 </table>
@@ -92,8 +92,8 @@ export function renderCalcPage(container) {
             <div class="group-title">
               <div class="title-container"><span class="emoji">🔗</span><span data-i18n="calc_group_special_wire_title">特殊导线</span></div>
               <div class="group-actions">
-                <button class="calc-table-btn" id="add-row-2" data-i18n-title="calc_group_special_wire_button_add_tooltip" title="增加一行特殊导线输入"><span class="emoji">✨</span><span class="text" data-i18n="calc_group_special_wire_button_add">增加</span></button>
-                <button class="calc-table-btn" id="reset-table-2" data-i18n-title="calc_group_special_wire_button_reset_tooltip" title="重置特殊导线表格内容为默认值"><span class="emoji">🔄</span><span class="text" data-i18n="calc_group_special_wire_button_reset">重置</span></button>
+                <button class="calc-table-btn" id="add-row-2" data-i18n-title="calc_group_special_wire_button_add_tooltip" title="增加一行特殊导线输入"><span class="emoji">✨</span><span class="text" data-i18n="common_add">增加</span></button>
+                <button class="calc-table-btn" id="reset-table-2" data-i18n-title="calc_group_special_wire_button_reset_tooltip" title="重置特殊导线表格内容为默认值"><span class="emoji">🔄</span><span class="text" data-i18n="common_reset">重置</span></button>
               </div>
             </div>
             <div class="calc-table-content" id="table-content-2">
@@ -101,10 +101,10 @@ export function renderCalcPage(container) {
                 <table id="main-data-table-special" class="main-data-table calc-table calc-table-fixed">
                   <thead>
                     <tr>
-                      <th data-i18n="calc_group_special_wire_table_header_index">序号</th>
-                      <th data-i18n="calc_group_special_wire_table_header_diameter">直径(mm)</th>
-                      <th data-i18n="calc_group_special_wire_table_header_count">数量</th>
-                      <th data-i18n="calc_group_special_wire_table_header_delete">删除</th>
+                      <th data-i18n="common_index">序号</th>
+                      <th data-i18n="common_diameter_mm">直径(mm)</th>
+                      <th data-i18n="common_qty">数量</th>
+                      <th data-i18n="common_delete">删除</th>
                     </tr>
                   </thead>
                 </table>
@@ -121,8 +121,8 @@ export function renderCalcPage(container) {
             <div class="group-title">
               <div class="title-container"><span class="emoji">🛡️</span><span data-i18n="calc_group_wrap_title">包裹物</span></div>
               <div class="group-actions">
-                <button class="calc-table-btn" id="add-row-3" data-i18n-title="calc_group_wrap_button_add_tooltip" title="增加一层包裹物"><span class="emoji">✨</span><span class="text" data-i18n="calc_group_wrap_button_add">增加</span></button>
-                <button class="calc-table-btn" id="reset-table-3" data-i18n-title="calc_group_wrap_button_reset_tooltip" title="重置包裹物表格内容为默认值"><span class="emoji">🔄</span><span class="text" data-i18n="calc_group_wrap_button_reset">重置</span></button>
+                <button class="calc-table-btn" id="add-row-3" data-i18n-title="calc_group_wrap_button_add_tooltip" title="增加一层包裹物"><span class="emoji">✨</span><span class="text" data-i18n="common_add">增加</span></button>
+                <button class="calc-table-btn" id="reset-table-3" data-i18n-title="calc_group_wrap_button_reset_tooltip" title="重置包裹物表格内容为默认值"><span class="emoji">🔄</span><span class="text" data-i18n="common_reset">重置</span></button>
               </div>
             </div>
             <div class="calc-table-content" id="table-content-3">

@@ -1,0 +1,4850 @@
+{
+  "meta": {
+    "source": "PSA 9641879499",
+    "generatedAt": "2026-01-16T09:30:26.819227+00:00",
+    "specKeys": [
+      "Conductor Diameter",
+      "Strand Diameter",
+      "Insulation Thickness",
+      "Cable Outside Diameter",
+      "Mass Length",
+      "Resistance Length"
+    ],
+    "recordCount": 184,
+    "idStrategy": "sha1(WireSize+WallThickness+WireType+ConductorDesign+Specs)"
+  },
+  "variants": [
+    {
+      "WireSize": 0.22,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.25,
+        "Resistance Length": 84.4
+      },
+      "id": "v_d5a49b859261"
+    },
+    {
+      "WireSize": 0.22,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.25
+      },
+      "id": "v_22a6b043adf9"
+    },
+    {
+      "WireSize": 0.22,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.25,
+        "Resistance Length": 84.4
+      },
+      "id": "v_ca74aee55e42"
+    },
+    {
+      "WireSize": 0.22,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.25,
+        "Resistance Length": 84.4
+      },
+      "id": "v_b36354324367"
+    },
+    {
+      "WireSize": 0.22,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.2,
+        "Resistance Length": 84.4
+      },
+      "id": "v_ed10cc1a7da8"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_77eda1b66b95"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_e23a4fc1c5e6"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_14519ef9ee0d"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_fcc92ed13fb6"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_43eb348b09d7"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_420d10d22c7d"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-A (TPE-S T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_ed539b34526b"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4
+      },
+      "id": "v_8839d6a4e503"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_8e0581bb9e92"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_371b05ed977f"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4
+      },
+      "id": "v_a67ed34394ee"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4
+      },
+      "id": "v_cd9c95c378c1"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_0b61d2d221a3"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_2f5ed8969466"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_95638d3f5b8d"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_02d4154241b5"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_2e1d4303fabb"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_2a0da8e4a259"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_02b25a7e4aba"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.35,
+        "Resistance Length": 55.9
+      },
+      "id": "v_234522c5f5b9"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.35,
+        "Resistance Length": 55.9
+      },
+      "id": "v_269e011538a3"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_2330354519a9"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_a271aecf3744"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_55b0e3fedca8"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_00cce113bf2a"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_a5c625d5e4c8"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_51449e550518"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_b765af9e3f99"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-A (TPE-S T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_dc6b53c6b4e6"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7
+      },
+      "id": "v_1138c717a9d2"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_7c5f677b70f2"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_66ebd9256791"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7
+      },
+      "id": "v_38e0973038c8"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7
+      },
+      "id": "v_578af3fe99e3"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_a12f3ccc9ea8"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_6dcdc38acc5a"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_4edf68e3e563"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_4fad1dad1b38"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_8ac16d97a332"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_a772b6f6c3ba"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_c64a3ab5e566"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.6,
+        "Resistance Length": 37.1
+      },
+      "id": "v_baa5b1acf4aa"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.6,
+        "Resistance Length": 37.1
+      },
+      "id": "v_d588290ede68"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_3dcfac5b1449"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_e87306928bf9"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_1a926a18ed29"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_abff7ebca32c"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_9ce99d519e53"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_b9e05894c1e5"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_d522ad11b061"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9
+      },
+      "id": "v_e3da7797dfc9"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_7f59d33b7b27"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_d325c0fa00ab"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9
+      },
+      "id": "v_2ef8f29b4bf5"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9
+      },
+      "id": "v_ff0387ea9bc6"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_aa66a80d6f55"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_09b56124d829"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_d8f2db0c9e89"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_30566f9beb71"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_624c78638b68"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_caaeeb217e93"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_8bc7f3a61e11"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.8,
+        "Resistance Length": 24.7
+      },
+      "id": "v_6778fe820eef"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.8,
+        "Resistance Length": 24.7
+      },
+      "id": "v_46d10407ff1a"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_4084b1d8b047"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_ec9359d5cf4e"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_838eb9b257ab"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_bf4eb41d8e97"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_a35b8b11f51b"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_738489f8bfa9"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-B (TPE-S T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_fe9446c6aeb0"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15
+      },
+      "id": "v_5f9edc6e7d70"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_7631e924df2d"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_801b3e4a6ce5"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15
+      },
+      "id": "v_19c0c9664d76"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15
+      },
+      "id": "v_23eda09ad244"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_655b2d9a068f"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_8a4b9f276d49"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_b128df7c7fbc"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_c66c7d833741"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_f14969d4999f"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_72d42e8023a6"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_b5586506288d"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.96,
+        "Resistance Length": 19.5
+      },
+      "id": "v_d32d7e23ad88"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.96,
+        "Resistance Length": 19.5
+      },
+      "id": "v_3142eb52b765"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_011cbfebc61c"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_3aaf85cf729f"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_4b64c9ca4d09"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_a44e00f36db5"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_e710dcd3d02a"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_b3fce4efcb0b"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_cd7d5b9d42de"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-B (TPE-S T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_8764247ec155"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4
+      },
+      "id": "v_d180698f8173"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_625bf59b5369"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_791de9c8f54f"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4
+      },
+      "id": "v_845dd7c7d369"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4
+      },
+      "id": "v_569f1e7ff755"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_848cf8aa923b"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_773a1db177e4"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_85df33396c40"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_2d9be4b96d6d"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_2b4a36291d3f"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_0ad1cf59377f"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_903929439a82"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.25,
+        "Resistance Length": 12.7
+      },
+      "id": "v_2080b06feac0"
+    },
+    {
+      "WireSize": 1.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.25,
+        "Resistance Length": 12.7
+      },
+      "id": "v_122b54a7fefa"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_7de1a3f285a4"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_5cfa3c0f088b"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_fcfb698bf6a0"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_239c03cc21ef"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_2ad0eed085d0"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_554c78ec1178"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_d007efca6c6f"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_d346e8c4acd2"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_f8205ae77612"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_866f17e0be3b"
+    },
+    {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_50d2f017d9f5"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_5e822ecb2dec"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_0aa6d1eddc30"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_a15a80db348a"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_202883d139e4"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_b33783fe8d41"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_d03a82070525"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-B (TPE-S T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_b794354f4dae"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0
+      },
+      "id": "v_038306e7d009"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_a5b8034a0cca"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_81f3e34e0ad6"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0
+      },
+      "id": "v_b89140fc537c"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0
+      },
+      "id": "v_493738b4dcb2"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_896dca3c0e4d"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_37bc02488642"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_f297f09ebb95"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_dcfc9fda8edb"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_495e9db26f27"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_f78fd00e9e6e"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_246c00067a32"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.9,
+        "Resistance Length": 7.6
+      },
+      "id": "v_cb9e731470d8"
+    },
+    {
+      "WireSize": 2.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.9,
+        "Resistance Length": 7.6
+      },
+      "id": "v_95ed740928b3"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_f003a2d636b2"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_116e86d34a58"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_bf30bc3f9019"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_314a6191f6fb"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_654aa307720d"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_f273591e86ee"
+    },
+    {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_b50f0f6ce0b5"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_a71be9989c64"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_3fde3258901b"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_38c692fa1907"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9
+      },
+      "id": "v_2d6e96d6c85e"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_1b7700201407"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9
+      },
+      "id": "v_74d4e9d5f9e5"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_8df24a1f2275"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_9bcb64cae03b"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_2cca03c90832"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_82e367cfbb3c"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_bd179593f1e3"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_21be8189b387"
+    },
+    {
+      "WireSize": 4.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.7,
+        "Resistance Length": 4.95
+      },
+      "id": "v_9c57aa1a8e68"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_679e8487c447"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_90587a45cf4e"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_cd386fc77a0d"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_d96b77c2ab02"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_0ccf43b15859"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_a08ac5b4e34b"
+    },
+    {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_6ec37cb87de4"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR11Y-C (PUR T2)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_fcbf3770102d"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_2b13b024b0eb"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_a8006d43e147"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_86917f3bd22d"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5
+      },
+      "id": "v_bd30fb55e837"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5
+      },
+      "id": "v_b78d72121c9e"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_14af0c53beba"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_1f9c84bb4a95"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_242098740378"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_5d67ec767cae"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_56b833d05a0d"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_2e2e0966e399"
+    },
+    {
+      "WireSize": 6.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 4.3,
+        "Resistance Length": 3.14
+      },
+      "id": "v_95876a2d993b"
+    }
+  ],
+  "variantsMap": {
+    "v_d5a49b859261": {
+      "WireSize": 0.22,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.25,
+        "Resistance Length": 84.4
+      },
+      "id": "v_d5a49b859261"
+    },
+    "v_22a6b043adf9": {
+      "WireSize": 0.22,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.25
+      },
+      "id": "v_22a6b043adf9"
+    },
+    "v_ca74aee55e42": {
+      "WireSize": 0.22,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.25,
+        "Resistance Length": 84.4
+      },
+      "id": "v_ca74aee55e42"
+    },
+    "v_b36354324367": {
+      "WireSize": 0.22,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.25,
+        "Resistance Length": 84.4
+      },
+      "id": "v_b36354324367"
+    },
+    "v_ed10cc1a7da8": {
+      "WireSize": 0.22,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.2,
+        "Resistance Length": 84.4
+      },
+      "id": "v_ed10cc1a7da8"
+    },
+    "v_77eda1b66b95": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_77eda1b66b95"
+    },
+    "v_e23a4fc1c5e6": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_e23a4fc1c5e6"
+    },
+    "v_14519ef9ee0d": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_14519ef9ee0d"
+    },
+    "v_fcc92ed13fb6": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_fcc92ed13fb6"
+    },
+    "v_43eb348b09d7": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_43eb348b09d7"
+    },
+    "v_420d10d22c7d": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_420d10d22c7d"
+    },
+    "v_ed539b34526b": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-A (TPE-S T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_ed539b34526b"
+    },
+    "v_8839d6a4e503": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4
+      },
+      "id": "v_8839d6a4e503"
+    },
+    "v_8e0581bb9e92": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_8e0581bb9e92"
+    },
+    "v_371b05ed977f": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_371b05ed977f"
+    },
+    "v_a67ed34394ee": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4
+      },
+      "id": "v_a67ed34394ee"
+    },
+    "v_cd9c95c378c1": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4
+      },
+      "id": "v_cd9c95c378c1"
+    },
+    "v_0b61d2d221a3": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_0b61d2d221a3"
+    },
+    "v_2f5ed8969466": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_2f5ed8969466"
+    },
+    "v_95638d3f5b8d": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_95638d3f5b8d"
+    },
+    "v_02d4154241b5": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_02d4154241b5"
+    },
+    "v_2e1d4303fabb": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_2e1d4303fabb"
+    },
+    "v_2a0da8e4a259": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_2a0da8e4a259"
+    },
+    "v_02b25a7e4aba": {
+      "WireSize": 0.35,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.4,
+        "Resistance Length": 55.9
+      },
+      "id": "v_02b25a7e4aba"
+    },
+    "v_234522c5f5b9": {
+      "WireSize": 0.35,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.35,
+        "Resistance Length": 55.9
+      },
+      "id": "v_234522c5f5b9"
+    },
+    "v_269e011538a3": {
+      "WireSize": 0.35,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.35,
+        "Resistance Length": 55.9
+      },
+      "id": "v_269e011538a3"
+    },
+    "v_2330354519a9": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_2330354519a9"
+    },
+    "v_a271aecf3744": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_a271aecf3744"
+    },
+    "v_55b0e3fedca8": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_55b0e3fedca8"
+    },
+    "v_00cce113bf2a": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_00cce113bf2a"
+    },
+    "v_a5c625d5e4c8": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_a5c625d5e4c8"
+    },
+    "v_51449e550518": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_51449e550518"
+    },
+    "v_b765af9e3f99": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_b765af9e3f99"
+    },
+    "v_dc6b53c6b4e6": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-A (TPE-S T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_dc6b53c6b4e6"
+    },
+    "v_1138c717a9d2": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7
+      },
+      "id": "v_1138c717a9d2"
+    },
+    "v_7c5f677b70f2": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_7c5f677b70f2"
+    },
+    "v_66ebd9256791": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_66ebd9256791"
+    },
+    "v_38e0973038c8": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7
+      },
+      "id": "v_38e0973038c8"
+    },
+    "v_578af3fe99e3": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7
+      },
+      "id": "v_578af3fe99e3"
+    },
+    "v_a12f3ccc9ea8": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_a12f3ccc9ea8"
+    },
+    "v_6dcdc38acc5a": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_6dcdc38acc5a"
+    },
+    "v_4edf68e3e563": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_4edf68e3e563"
+    },
+    "v_4fad1dad1b38": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_4fad1dad1b38"
+    },
+    "v_8ac16d97a332": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_8ac16d97a332"
+    },
+    "v_a772b6f6c3ba": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_a772b6f6c3ba"
+    },
+    "v_c64a3ab5e566": {
+      "WireSize": 0.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.7,
+        "Resistance Length": 37.1
+      },
+      "id": "v_c64a3ab5e566"
+    },
+    "v_baa5b1acf4aa": {
+      "WireSize": 0.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.6,
+        "Resistance Length": 37.1
+      },
+      "id": "v_baa5b1acf4aa"
+    },
+    "v_d588290ede68": {
+      "WireSize": 0.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.6,
+        "Resistance Length": 37.1
+      },
+      "id": "v_d588290ede68"
+    },
+    "v_3dcfac5b1449": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_3dcfac5b1449"
+    },
+    "v_e87306928bf9": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_e87306928bf9"
+    },
+    "v_1a926a18ed29": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_1a926a18ed29"
+    },
+    "v_abff7ebca32c": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_abff7ebca32c"
+    },
+    "v_9ce99d519e53": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_9ce99d519e53"
+    },
+    "v_b9e05894c1e5": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_b9e05894c1e5"
+    },
+    "v_d522ad11b061": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_d522ad11b061"
+    },
+    "v_e3da7797dfc9": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9
+      },
+      "id": "v_e3da7797dfc9"
+    },
+    "v_7f59d33b7b27": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_7f59d33b7b27"
+    },
+    "v_d325c0fa00ab": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_d325c0fa00ab"
+    },
+    "v_2ef8f29b4bf5": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9
+      },
+      "id": "v_2ef8f29b4bf5"
+    },
+    "v_ff0387ea9bc6": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9
+      },
+      "id": "v_ff0387ea9bc6"
+    },
+    "v_aa66a80d6f55": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_aa66a80d6f55"
+    },
+    "v_09b56124d829": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_09b56124d829"
+    },
+    "v_d8f2db0c9e89": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_d8f2db0c9e89"
+    },
+    "v_30566f9beb71": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_30566f9beb71"
+    },
+    "v_624c78638b68": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_624c78638b68"
+    },
+    "v_caaeeb217e93": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_caaeeb217e93"
+    },
+    "v_8bc7f3a61e11": {
+      "WireSize": 0.75,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 1.9,
+        "Resistance Length": 24.7
+      },
+      "id": "v_8bc7f3a61e11"
+    },
+    "v_6778fe820eef": {
+      "WireSize": 0.75,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.8,
+        "Resistance Length": 24.7
+      },
+      "id": "v_6778fe820eef"
+    },
+    "v_46d10407ff1a": {
+      "WireSize": 0.75,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.8,
+        "Resistance Length": 24.7
+      },
+      "id": "v_46d10407ff1a"
+    },
+    "v_4084b1d8b047": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_4084b1d8b047"
+    },
+    "v_ec9359d5cf4e": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_ec9359d5cf4e"
+    },
+    "v_838eb9b257ab": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_838eb9b257ab"
+    },
+    "v_bf4eb41d8e97": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_bf4eb41d8e97"
+    },
+    "v_a35b8b11f51b": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_a35b8b11f51b"
+    },
+    "v_738489f8bfa9": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_738489f8bfa9"
+    },
+    "v_fe9446c6aeb0": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-B (TPE-S T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_fe9446c6aeb0"
+    },
+    "v_5f9edc6e7d70": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15
+      },
+      "id": "v_5f9edc6e7d70"
+    },
+    "v_7631e924df2d": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_7631e924df2d"
+    },
+    "v_801b3e4a6ce5": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_801b3e4a6ce5"
+    },
+    "v_19c0c9664d76": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15
+      },
+      "id": "v_19c0c9664d76"
+    },
+    "v_23eda09ad244": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15
+      },
+      "id": "v_23eda09ad244"
+    },
+    "v_655b2d9a068f": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_655b2d9a068f"
+    },
+    "v_8a4b9f276d49": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_8a4b9f276d49"
+    },
+    "v_b128df7c7fbc": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_b128df7c7fbc"
+    },
+    "v_c66c7d833741": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_c66c7d833741"
+    },
+    "v_f14969d4999f": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_f14969d4999f"
+    },
+    "v_72d42e8023a6": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_72d42e8023a6"
+    },
+    "v_b5586506288d": {
+      "WireSize": 1.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.15,
+        "Resistance Length": 19.5
+      },
+      "id": "v_b5586506288d"
+    },
+    "v_d32d7e23ad88": {
+      "WireSize": 1.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.96,
+        "Resistance Length": 19.5
+      },
+      "id": "v_d32d7e23ad88"
+    },
+    "v_3142eb52b765": {
+      "WireSize": 1.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 1.96,
+        "Resistance Length": 19.5
+      },
+      "id": "v_3142eb52b765"
+    },
+    "v_011cbfebc61c": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_011cbfebc61c"
+    },
+    "v_3aaf85cf729f": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_3aaf85cf729f"
+    },
+    "v_4b64c9ca4d09": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_4b64c9ca4d09"
+    },
+    "v_a44e00f36db5": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_a44e00f36db5"
+    },
+    "v_e710dcd3d02a": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_e710dcd3d02a"
+    },
+    "v_b3fce4efcb0b": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_b3fce4efcb0b"
+    },
+    "v_cd7d5b9d42de": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_cd7d5b9d42de"
+    },
+    "v_8764247ec155": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-B (TPE-S T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_8764247ec155"
+    },
+    "v_d180698f8173": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4
+      },
+      "id": "v_d180698f8173"
+    },
+    "v_625bf59b5369": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_625bf59b5369"
+    },
+    "v_791de9c8f54f": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_791de9c8f54f"
+    },
+    "v_845dd7c7d369": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4
+      },
+      "id": "v_845dd7c7d369"
+    },
+    "v_569f1e7ff755": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4
+      },
+      "id": "v_569f1e7ff755"
+    },
+    "v_848cf8aa923b": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_848cf8aa923b"
+    },
+    "v_773a1db177e4": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_773a1db177e4"
+    },
+    "v_85df33396c40": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_85df33396c40"
+    },
+    "v_2d9be4b96d6d": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_2d9be4b96d6d"
+    },
+    "v_2b4a36291d3f": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_2b4a36291d3f"
+    },
+    "v_0ad1cf59377f": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_0ad1cf59377f"
+    },
+    "v_903929439a82": {
+      "WireSize": 1.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.4,
+        "Resistance Length": 12.7
+      },
+      "id": "v_903929439a82"
+    },
+    "v_2080b06feac0": {
+      "WireSize": 1.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.25,
+        "Resistance Length": 12.7
+      },
+      "id": "v_2080b06feac0"
+    },
+    "v_122b54a7fefa": {
+      "WireSize": 1.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.25,
+        "Resistance Length": 12.7
+      },
+      "id": "v_122b54a7fefa"
+    },
+    "v_7de1a3f285a4": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_7de1a3f285a4"
+    },
+    "v_5cfa3c0f088b": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_5cfa3c0f088b"
+    },
+    "v_fcfb698bf6a0": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_fcfb698bf6a0"
+    },
+    "v_239c03cc21ef": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_239c03cc21ef"
+    },
+    "v_2ad0eed085d0": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_2ad0eed085d0"
+    },
+    "v_554c78ec1178": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_554c78ec1178"
+    },
+    "v_d007efca6c6f": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_d007efca6c6f"
+    },
+    "v_d346e8c4acd2": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_d346e8c4acd2"
+    },
+    "v_f8205ae77612": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_f8205ae77612"
+    },
+    "v_866f17e0be3b": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_866f17e0be3b"
+    },
+    "v_50d2f017d9f5": {
+      "WireSize": 2.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 2.8,
+        "Resistance Length": 10.0
+      },
+      "id": "v_50d2f017d9f5"
+    },
+    "v_5e822ecb2dec": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-A (XLPE T3 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_5e822ecb2dec"
+    },
+    "v_0aa6d1eddc30": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_0aa6d1eddc30"
+    },
+    "v_a15a80db348a": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T3 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_a15a80db348a"
+    },
+    "v_202883d139e4": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-A (XLPE T4 LH)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_202883d139e4"
+    },
+    "v_b33783fe8d41": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_b33783fe8d41"
+    },
+    "v_d03a82070525": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_d03a82070525"
+    },
+    "v_b794354f4dae": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR31-B (TPE-S T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_b794354f4dae"
+    },
+    "v_038306e7d009": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0
+      },
+      "id": "v_038306e7d009"
+    },
+    "v_a5b8034a0cca": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_a5b8034a0cca"
+    },
+    "v_81f3e34e0ad6": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_81f3e34e0ad6"
+    },
+    "v_b89140fc537c": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-A SN (ETFE T4)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0
+      },
+      "id": "v_b89140fc537c"
+    },
+    "v_493738b4dcb2": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0
+      },
+      "id": "v_493738b4dcb2"
+    },
+    "v_896dca3c0e4d": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_896dca3c0e4d"
+    },
+    "v_37bc02488642": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_37bc02488642"
+    },
+    "v_f297f09ebb95": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-A (PP T3)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_f297f09ebb95"
+    },
+    "v_dcfc9fda8edb": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_dcfc9fda8edb"
+    },
+    "v_495e9db26f27": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_495e9db26f27"
+    },
+    "v_f78fd00e9e6e": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_f78fd00e9e6e"
+    },
+    "v_246c00067a32": {
+      "WireSize": 2.5,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.0,
+        "Resistance Length": 7.6
+      },
+      "id": "v_246c00067a32"
+    },
+    "v_cb9e731470d8": {
+      "WireSize": 2.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU142Y (PPE T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.9,
+        "Resistance Length": 7.6
+      },
+      "id": "v_cb9e731470d8"
+    },
+    "v_95ed740928b3": {
+      "WireSize": 2.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 2.9,
+        "Resistance Length": 7.6
+      },
+      "id": "v_95ed740928b3"
+    },
+    "v_f003a2d636b2": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_f003a2d636b2"
+    },
+    "v_116e86d34a58": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_116e86d34a58"
+    },
+    "v_bf30bc3f9019": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_bf30bc3f9019"
+    },
+    "v_314a6191f6fb": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_314a6191f6fb"
+    },
+    "v_654aa307720d": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_654aa307720d"
+    },
+    "v_f273591e86ee": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_f273591e86ee"
+    },
+    "v_b50f0f6ce0b5": {
+      "WireSize": 3.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.45,
+        "Resistance Length": 6.06
+      },
+      "id": "v_b50f0f6ce0b5"
+    },
+    "v_a71be9989c64": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_a71be9989c64"
+    },
+    "v_3fde3258901b": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_3fde3258901b"
+    },
+    "v_38c692fa1907": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_38c692fa1907"
+    },
+    "v_2d6e96d6c85e": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9
+      },
+      "id": "v_2d6e96d6c85e"
+    },
+    "v_1b7700201407": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR6Y-A (FEP T6)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_1b7700201407"
+    },
+    "v_74d4e9d5f9e5": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9
+      },
+      "id": "v_74d4e9d5f9e5"
+    },
+    "v_8df24a1f2275": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_8df24a1f2275"
+    },
+    "v_9bcb64cae03b": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_9bcb64cae03b"
+    },
+    "v_2cca03c90832": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_2cca03c90832"
+    },
+    "v_82e367cfbb3c": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_82e367cfbb3c"
+    },
+    "v_bd179593f1e3": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_bd179593f1e3"
+    },
+    "v_21be8189b387": {
+      "WireSize": 4.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 3.9,
+        "Resistance Length": 4.95
+      },
+      "id": "v_21be8189b387"
+    },
+    "v_9c57aa1a8e68": {
+      "WireSize": 4.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 3.7,
+        "Resistance Length": 4.95
+      },
+      "id": "v_9c57aa1a8e68"
+    },
+    "v_679e8487c447": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2G-C (Silicone T5)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_679e8487c447"
+    },
+    "v_90587a45cf4e": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_90587a45cf4e"
+    },
+    "v_cd386fc77a0d": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_cd386fc77a0d"
+    },
+    "v_d96b77c2ab02": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_d96b77c2ab02"
+    },
+    "v_0ccf43b15859": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_0ccf43b15859"
+    },
+    "v_a08ac5b4e34b": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_a08ac5b4e34b"
+    },
+    "v_6ec37cb87de4": {
+      "WireSize": 5.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.0,
+        "Resistance Length": 3.94
+      },
+      "id": "v_6ec37cb87de4"
+    },
+    "v_fcbf3770102d": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR11Y-C (PUR T2)",
+      "ConductorDesign": "C",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_fcbf3770102d"
+    },
+    "v_2b13b024b0eb": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR21X-B (XLPE T3 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_2b13b024b0eb"
+    },
+    "v_a8006d43e147": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T3 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_a8006d43e147"
+    },
+    "v_86917f3bd22d": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR2X-B (XLPE T4 LH)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_86917f3bd22d"
+    },
+    "v_bd30fb55e837": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR41X-B SN (Polyolefin T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5
+      },
+      "id": "v_bd30fb55e837"
+    },
+    "v_b78d72121c9e": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR7Y-B SN (ETFE T4)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5
+      },
+      "id": "v_b78d72121c9e"
+    },
+    "v_14af0c53beba": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-A (XLPE T4 HF)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_14af0c53beba"
+    },
+    "v_1f9c84bb4a95": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR91X-B (XLPE T4 HF)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_1f9c84bb4a95"
+    },
+    "v_242098740378": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLR9Y-B (PP T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_242098740378"
+    },
+    "v_5d67ec767cae": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-A (PVC T2)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_5d67ec767cae"
+    },
+    "v_56b833d05a0d": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRY-B (PVC T2)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_56b833d05a0d"
+    },
+    "v_2e2e0966e399": {
+      "WireSize": 6.0,
+      "WallThickness": "Thin",
+      "WireType": "FLRYW (PVC T3)",
+      "ConductorDesign": "B",
+      "Specs": {
+        "Cable Outside Diameter": 4.5,
+        "Resistance Length": 3.14
+      },
+      "id": "v_2e2e0966e399"
+    },
+    "v_95876a2d993b": {
+      "WireSize": 6.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "FLU7Y-A (ETFE T5)",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Cable Outside Diameter": 4.3,
+        "Resistance Length": 3.14
+      },
+      "id": "v_95876a2d993b"
+    }
+  },
+  "indexes": {
+    "byWireSize": {
+      "0.22": [
+        "v_d5a49b859261",
+        "v_22a6b043adf9",
+        "v_ca74aee55e42",
+        "v_b36354324367",
+        "v_ed10cc1a7da8"
+      ],
+      "0.35": [
+        "v_77eda1b66b95",
+        "v_e23a4fc1c5e6",
+        "v_14519ef9ee0d",
+        "v_fcc92ed13fb6",
+        "v_43eb348b09d7",
+        "v_420d10d22c7d",
+        "v_ed539b34526b",
+        "v_8839d6a4e503",
+        "v_8e0581bb9e92",
+        "v_371b05ed977f",
+        "v_a67ed34394ee",
+        "v_cd9c95c378c1",
+        "v_0b61d2d221a3",
+        "v_2f5ed8969466",
+        "v_95638d3f5b8d",
+        "v_02d4154241b5",
+        "v_2e1d4303fabb",
+        "v_2a0da8e4a259",
+        "v_02b25a7e4aba",
+        "v_234522c5f5b9",
+        "v_269e011538a3"
+      ],
+      "0.5": [
+        "v_2330354519a9",
+        "v_a271aecf3744",
+        "v_55b0e3fedca8",
+        "v_00cce113bf2a",
+        "v_a5c625d5e4c8",
+        "v_51449e550518",
+        "v_b765af9e3f99",
+        "v_dc6b53c6b4e6",
+        "v_1138c717a9d2",
+        "v_7c5f677b70f2",
+        "v_66ebd9256791",
+        "v_38e0973038c8",
+        "v_578af3fe99e3",
+        "v_a12f3ccc9ea8",
+        "v_6dcdc38acc5a",
+        "v_4edf68e3e563",
+        "v_4fad1dad1b38",
+        "v_8ac16d97a332",
+        "v_a772b6f6c3ba",
+        "v_c64a3ab5e566",
+        "v_baa5b1acf4aa",
+        "v_d588290ede68"
+      ],
+      "0.75": [
+        "v_3dcfac5b1449",
+        "v_e87306928bf9",
+        "v_1a926a18ed29",
+        "v_abff7ebca32c",
+        "v_9ce99d519e53",
+        "v_b9e05894c1e5",
+        "v_d522ad11b061",
+        "v_e3da7797dfc9",
+        "v_7f59d33b7b27",
+        "v_d325c0fa00ab",
+        "v_2ef8f29b4bf5",
+        "v_ff0387ea9bc6",
+        "v_aa66a80d6f55",
+        "v_09b56124d829",
+        "v_d8f2db0c9e89",
+        "v_30566f9beb71",
+        "v_624c78638b68",
+        "v_caaeeb217e93",
+        "v_8bc7f3a61e11",
+        "v_6778fe820eef",
+        "v_46d10407ff1a"
+      ],
+      "1.0": [
+        "v_4084b1d8b047",
+        "v_ec9359d5cf4e",
+        "v_838eb9b257ab",
+        "v_bf4eb41d8e97",
+        "v_a35b8b11f51b",
+        "v_738489f8bfa9",
+        "v_fe9446c6aeb0",
+        "v_5f9edc6e7d70",
+        "v_7631e924df2d",
+        "v_801b3e4a6ce5",
+        "v_19c0c9664d76",
+        "v_23eda09ad244",
+        "v_655b2d9a068f",
+        "v_8a4b9f276d49",
+        "v_b128df7c7fbc",
+        "v_c66c7d833741",
+        "v_f14969d4999f",
+        "v_72d42e8023a6",
+        "v_b5586506288d",
+        "v_d32d7e23ad88",
+        "v_3142eb52b765"
+      ],
+      "1.5": [
+        "v_011cbfebc61c",
+        "v_3aaf85cf729f",
+        "v_4b64c9ca4d09",
+        "v_a44e00f36db5",
+        "v_e710dcd3d02a",
+        "v_b3fce4efcb0b",
+        "v_cd7d5b9d42de",
+        "v_8764247ec155",
+        "v_d180698f8173",
+        "v_625bf59b5369",
+        "v_791de9c8f54f",
+        "v_845dd7c7d369",
+        "v_569f1e7ff755",
+        "v_848cf8aa923b",
+        "v_773a1db177e4",
+        "v_85df33396c40",
+        "v_2d9be4b96d6d",
+        "v_2b4a36291d3f",
+        "v_0ad1cf59377f",
+        "v_903929439a82",
+        "v_2080b06feac0",
+        "v_122b54a7fefa"
+      ],
+      "2.0": [
+        "v_7de1a3f285a4",
+        "v_5cfa3c0f088b",
+        "v_fcfb698bf6a0",
+        "v_239c03cc21ef",
+        "v_2ad0eed085d0",
+        "v_554c78ec1178",
+        "v_d007efca6c6f",
+        "v_d346e8c4acd2",
+        "v_f8205ae77612",
+        "v_866f17e0be3b",
+        "v_50d2f017d9f5"
+      ],
+      "2.5": [
+        "v_5e822ecb2dec",
+        "v_0aa6d1eddc30",
+        "v_a15a80db348a",
+        "v_202883d139e4",
+        "v_b33783fe8d41",
+        "v_d03a82070525",
+        "v_b794354f4dae",
+        "v_038306e7d009",
+        "v_a5b8034a0cca",
+        "v_81f3e34e0ad6",
+        "v_b89140fc537c",
+        "v_493738b4dcb2",
+        "v_896dca3c0e4d",
+        "v_37bc02488642",
+        "v_f297f09ebb95",
+        "v_dcfc9fda8edb",
+        "v_495e9db26f27",
+        "v_f78fd00e9e6e",
+        "v_246c00067a32",
+        "v_cb9e731470d8",
+        "v_95ed740928b3"
+      ],
+      "3.0": [
+        "v_f003a2d636b2",
+        "v_116e86d34a58",
+        "v_bf30bc3f9019",
+        "v_314a6191f6fb",
+        "v_654aa307720d",
+        "v_f273591e86ee",
+        "v_b50f0f6ce0b5"
+      ],
+      "4.0": [
+        "v_a71be9989c64",
+        "v_3fde3258901b",
+        "v_38c692fa1907",
+        "v_2d6e96d6c85e",
+        "v_1b7700201407",
+        "v_74d4e9d5f9e5",
+        "v_8df24a1f2275",
+        "v_9bcb64cae03b",
+        "v_2cca03c90832",
+        "v_82e367cfbb3c",
+        "v_bd179593f1e3",
+        "v_21be8189b387",
+        "v_9c57aa1a8e68"
+      ],
+      "5.0": [
+        "v_679e8487c447",
+        "v_90587a45cf4e",
+        "v_cd386fc77a0d",
+        "v_d96b77c2ab02",
+        "v_0ccf43b15859",
+        "v_a08ac5b4e34b",
+        "v_6ec37cb87de4"
+      ],
+      "6.0": [
+        "v_fcbf3770102d",
+        "v_2b13b024b0eb",
+        "v_a8006d43e147",
+        "v_86917f3bd22d",
+        "v_bd30fb55e837",
+        "v_b78d72121c9e",
+        "v_14af0c53beba",
+        "v_1f9c84bb4a95",
+        "v_242098740378",
+        "v_5d67ec767cae",
+        "v_56b833d05a0d",
+        "v_2e2e0966e399",
+        "v_95876a2d993b"
+      ]
+    },
+    "byWallThickness": {
+      "Thin": [
+        "v_d5a49b859261",
+        "v_22a6b043adf9",
+        "v_ca74aee55e42",
+        "v_b36354324367",
+        "v_77eda1b66b95",
+        "v_e23a4fc1c5e6",
+        "v_14519ef9ee0d",
+        "v_fcc92ed13fb6",
+        "v_43eb348b09d7",
+        "v_420d10d22c7d",
+        "v_ed539b34526b",
+        "v_8839d6a4e503",
+        "v_8e0581bb9e92",
+        "v_371b05ed977f",
+        "v_a67ed34394ee",
+        "v_cd9c95c378c1",
+        "v_0b61d2d221a3",
+        "v_2f5ed8969466",
+        "v_95638d3f5b8d",
+        "v_02d4154241b5",
+        "v_2e1d4303fabb",
+        "v_2a0da8e4a259",
+        "v_02b25a7e4aba",
+        "v_2330354519a9",
+        "v_a271aecf3744",
+        "v_55b0e3fedca8",
+        "v_00cce113bf2a",
+        "v_a5c625d5e4c8",
+        "v_51449e550518",
+        "v_b765af9e3f99",
+        "v_dc6b53c6b4e6",
+        "v_1138c717a9d2",
+        "v_7c5f677b70f2",
+        "v_66ebd9256791",
+        "v_38e0973038c8",
+        "v_578af3fe99e3",
+        "v_a12f3ccc9ea8",
+        "v_6dcdc38acc5a",
+        "v_4edf68e3e563",
+        "v_4fad1dad1b38",
+        "v_8ac16d97a332",
+        "v_a772b6f6c3ba",
+        "v_c64a3ab5e566",
+        "v_3dcfac5b1449",
+        "v_e87306928bf9",
+        "v_1a926a18ed29",
+        "v_abff7ebca32c",
+        "v_9ce99d519e53",
+        "v_b9e05894c1e5",
+        "v_d522ad11b061",
+        "v_e3da7797dfc9",
+        "v_7f59d33b7b27",
+        "v_d325c0fa00ab",
+        "v_2ef8f29b4bf5",
+        "v_ff0387ea9bc6",
+        "v_aa66a80d6f55",
+        "v_09b56124d829",
+        "v_d8f2db0c9e89",
+        "v_30566f9beb71",
+        "v_624c78638b68",
+        "v_caaeeb217e93",
+        "v_8bc7f3a61e11",
+        "v_4084b1d8b047",
+        "v_ec9359d5cf4e",
+        "v_838eb9b257ab",
+        "v_bf4eb41d8e97",
+        "v_a35b8b11f51b",
+        "v_738489f8bfa9",
+        "v_fe9446c6aeb0",
+        "v_5f9edc6e7d70",
+        "v_7631e924df2d",
+        "v_801b3e4a6ce5",
+        "v_19c0c9664d76",
+        "v_23eda09ad244",
+        "v_655b2d9a068f",
+        "v_8a4b9f276d49",
+        "v_b128df7c7fbc",
+        "v_c66c7d833741",
+        "v_f14969d4999f",
+        "v_72d42e8023a6",
+        "v_b5586506288d",
+        "v_011cbfebc61c",
+        "v_3aaf85cf729f",
+        "v_4b64c9ca4d09",
+        "v_a44e00f36db5",
+        "v_e710dcd3d02a",
+        "v_b3fce4efcb0b",
+        "v_cd7d5b9d42de",
+        "v_8764247ec155",
+        "v_d180698f8173",
+        "v_625bf59b5369",
+        "v_791de9c8f54f",
+        "v_845dd7c7d369",
+        "v_569f1e7ff755",
+        "v_848cf8aa923b",
+        "v_773a1db177e4",
+        "v_85df33396c40",
+        "v_2d9be4b96d6d",
+        "v_2b4a36291d3f",
+        "v_0ad1cf59377f",
+        "v_903929439a82",
+        "v_7de1a3f285a4",
+        "v_5cfa3c0f088b",
+        "v_fcfb698bf6a0",
+        "v_239c03cc21ef",
+        "v_2ad0eed085d0",
+        "v_554c78ec1178",
+        "v_d007efca6c6f",
+        "v_d346e8c4acd2",
+        "v_f8205ae77612",
+        "v_866f17e0be3b",
+        "v_50d2f017d9f5",
+        "v_5e822ecb2dec",
+        "v_0aa6d1eddc30",
+        "v_a15a80db348a",
+        "v_202883d139e4",
+        "v_b33783fe8d41",
+        "v_d03a82070525",
+        "v_b794354f4dae",
+        "v_038306e7d009",
+        "v_a5b8034a0cca",
+        "v_81f3e34e0ad6",
+        "v_b89140fc537c",
+        "v_493738b4dcb2",
+        "v_896dca3c0e4d",
+        "v_37bc02488642",
+        "v_f297f09ebb95",
+        "v_dcfc9fda8edb",
+        "v_495e9db26f27",
+        "v_f78fd00e9e6e",
+        "v_246c00067a32",
+        "v_f003a2d636b2",
+        "v_116e86d34a58",
+        "v_bf30bc3f9019",
+        "v_314a6191f6fb",
+        "v_654aa307720d",
+        "v_f273591e86ee",
+        "v_b50f0f6ce0b5",
+        "v_a71be9989c64",
+        "v_3fde3258901b",
+        "v_38c692fa1907",
+        "v_2d6e96d6c85e",
+        "v_1b7700201407",
+        "v_74d4e9d5f9e5",
+        "v_8df24a1f2275",
+        "v_9bcb64cae03b",
+        "v_2cca03c90832",
+        "v_82e367cfbb3c",
+        "v_bd179593f1e3",
+        "v_21be8189b387",
+        "v_679e8487c447",
+        "v_90587a45cf4e",
+        "v_cd386fc77a0d",
+        "v_d96b77c2ab02",
+        "v_0ccf43b15859",
+        "v_a08ac5b4e34b",
+        "v_6ec37cb87de4",
+        "v_fcbf3770102d",
+        "v_2b13b024b0eb",
+        "v_a8006d43e147",
+        "v_86917f3bd22d",
+        "v_bd30fb55e837",
+        "v_b78d72121c9e",
+        "v_14af0c53beba",
+        "v_1f9c84bb4a95",
+        "v_242098740378",
+        "v_5d67ec767cae",
+        "v_56b833d05a0d",
+        "v_2e2e0966e399"
+      ],
+      "Ultra Thin": [
+        "v_ed10cc1a7da8",
+        "v_234522c5f5b9",
+        "v_269e011538a3",
+        "v_baa5b1acf4aa",
+        "v_d588290ede68",
+        "v_6778fe820eef",
+        "v_46d10407ff1a",
+        "v_d32d7e23ad88",
+        "v_3142eb52b765",
+        "v_2080b06feac0",
+        "v_122b54a7fefa",
+        "v_cb9e731470d8",
+        "v_95ed740928b3",
+        "v_9c57aa1a8e68",
+        "v_95876a2d993b"
+      ]
+    },
+    "byWireType": {
+      "FLR2X-A (XLPE T3 HF)": [
+        "v_d5a49b859261",
+        "v_14519ef9ee0d",
+        "v_00cce113bf2a",
+        "v_abff7ebca32c",
+        "v_838eb9b257ab",
+        "v_a44e00f36db5",
+        "v_fcfb698bf6a0",
+        "v_a15a80db348a"
+      ],
+      "FLR7Y-A SN (ETFE T4)": [
+        "v_22a6b043adf9",
+        "v_a67ed34394ee",
+        "v_38e0973038c8",
+        "v_2ef8f29b4bf5",
+        "v_19c0c9664d76",
+        "v_845dd7c7d369",
+        "v_b89140fc537c"
+      ],
+      "FLR9Y-A (PP T3)": [
+        "v_ca74aee55e42",
+        "v_95638d3f5b8d",
+        "v_4edf68e3e563",
+        "v_d8f2db0c9e89",
+        "v_b128df7c7fbc",
+        "v_85df33396c40",
+        "v_d007efca6c6f",
+        "v_f297f09ebb95"
+      ],
+      "FLRY-A (PVC T2)": [
+        "v_b36354324367",
+        "v_2e1d4303fabb",
+        "v_8ac16d97a332",
+        "v_624c78638b68",
+        "v_f14969d4999f",
+        "v_2b4a36291d3f",
+        "v_f8205ae77612",
+        "v_495e9db26f27",
+        "v_654aa307720d",
+        "v_82e367cfbb3c",
+        "v_0ccf43b15859",
+        "v_5d67ec767cae"
+      ],
+      "FLU7Y-A (ETFE T5)": [
+        "v_ed10cc1a7da8",
+        "v_269e011538a3",
+        "v_d588290ede68",
+        "v_46d10407ff1a",
+        "v_3142eb52b765",
+        "v_122b54a7fefa",
+        "v_95ed740928b3",
+        "v_9c57aa1a8e68",
+        "v_95876a2d993b"
+      ],
+      "FLR21X-A (XLPE T3 LH)": [
+        "v_77eda1b66b95",
+        "v_2330354519a9",
+        "v_3dcfac5b1449",
+        "v_4084b1d8b047",
+        "v_011cbfebc61c",
+        "v_7de1a3f285a4",
+        "v_5e822ecb2dec"
+      ],
+      "FLR21X-B (XLPE T3 LH)": [
+        "v_e23a4fc1c5e6",
+        "v_a271aecf3744",
+        "v_e87306928bf9",
+        "v_ec9359d5cf4e",
+        "v_3aaf85cf729f",
+        "v_0aa6d1eddc30",
+        "v_a71be9989c64",
+        "v_2b13b024b0eb"
+      ],
+      "FLR2X-A (XLPE T4 LH)": [
+        "v_fcc92ed13fb6",
+        "v_a5c625d5e4c8",
+        "v_9ce99d519e53",
+        "v_bf4eb41d8e97",
+        "v_e710dcd3d02a",
+        "v_239c03cc21ef",
+        "v_202883d139e4"
+      ],
+      "FLR2X-B (XLPE T3 HF)": [
+        "v_43eb348b09d7",
+        "v_51449e550518",
+        "v_b9e05894c1e5",
+        "v_a35b8b11f51b",
+        "v_b3fce4efcb0b",
+        "v_2ad0eed085d0",
+        "v_b33783fe8d41",
+        "v_116e86d34a58",
+        "v_3fde3258901b",
+        "v_90587a45cf4e",
+        "v_a8006d43e147"
+      ],
+      "FLR2X-B (XLPE T4 LH)": [
+        "v_420d10d22c7d",
+        "v_b765af9e3f99",
+        "v_d522ad11b061",
+        "v_738489f8bfa9",
+        "v_cd7d5b9d42de",
+        "v_554c78ec1178",
+        "v_d03a82070525",
+        "v_bf30bc3f9019",
+        "v_38c692fa1907",
+        "v_cd386fc77a0d",
+        "v_86917f3bd22d"
+      ],
+      "FLR31-A (TPE-S T3)": [
+        "v_ed539b34526b",
+        "v_dc6b53c6b4e6"
+      ],
+      "FLR41X-B SN (Polyolefin T4)": [
+        "v_8839d6a4e503",
+        "v_1138c717a9d2",
+        "v_e3da7797dfc9",
+        "v_5f9edc6e7d70",
+        "v_d180698f8173",
+        "v_038306e7d009",
+        "v_2d6e96d6c85e",
+        "v_bd30fb55e837"
+      ],
+      "FLR6Y-A (FEP T6)": [
+        "v_8e0581bb9e92",
+        "v_7c5f677b70f2",
+        "v_7f59d33b7b27",
+        "v_7631e924df2d",
+        "v_625bf59b5369",
+        "v_a5b8034a0cca",
+        "v_1b7700201407"
+      ],
+      "FLR7Y-A (ETFE T4)": [
+        "v_371b05ed977f",
+        "v_66ebd9256791",
+        "v_d325c0fa00ab",
+        "v_801b3e4a6ce5",
+        "v_791de9c8f54f",
+        "v_81f3e34e0ad6"
+      ],
+      "FLR7Y-B SN (ETFE T4)": [
+        "v_cd9c95c378c1",
+        "v_578af3fe99e3",
+        "v_ff0387ea9bc6",
+        "v_23eda09ad244",
+        "v_569f1e7ff755",
+        "v_493738b4dcb2",
+        "v_74d4e9d5f9e5",
+        "v_b78d72121c9e"
+      ],
+      "FLR91X-A (XLPE T4 HF)": [
+        "v_0b61d2d221a3",
+        "v_a12f3ccc9ea8",
+        "v_aa66a80d6f55",
+        "v_655b2d9a068f",
+        "v_848cf8aa923b",
+        "v_896dca3c0e4d",
+        "v_8df24a1f2275",
+        "v_14af0c53beba"
+      ],
+      "FLR91X-B (XLPE T4 HF)": [
+        "v_2f5ed8969466",
+        "v_6dcdc38acc5a",
+        "v_09b56124d829",
+        "v_8a4b9f276d49",
+        "v_773a1db177e4",
+        "v_37bc02488642",
+        "v_9bcb64cae03b",
+        "v_1f9c84bb4a95"
+      ],
+      "FLR9Y-B (PP T3)": [
+        "v_02d4154241b5",
+        "v_4fad1dad1b38",
+        "v_30566f9beb71",
+        "v_c66c7d833741",
+        "v_2d9be4b96d6d",
+        "v_d346e8c4acd2",
+        "v_dcfc9fda8edb",
+        "v_314a6191f6fb",
+        "v_2cca03c90832",
+        "v_d96b77c2ab02",
+        "v_242098740378"
+      ],
+      "FLRY-B (PVC T2)": [
+        "v_2a0da8e4a259",
+        "v_a772b6f6c3ba",
+        "v_caaeeb217e93",
+        "v_72d42e8023a6",
+        "v_0ad1cf59377f",
+        "v_866f17e0be3b",
+        "v_f78fd00e9e6e",
+        "v_f273591e86ee",
+        "v_bd179593f1e3",
+        "v_a08ac5b4e34b",
+        "v_56b833d05a0d"
+      ],
+      "FLRYW (PVC T3)": [
+        "v_02b25a7e4aba",
+        "v_c64a3ab5e566",
+        "v_8bc7f3a61e11",
+        "v_b5586506288d",
+        "v_903929439a82",
+        "v_50d2f017d9f5",
+        "v_246c00067a32",
+        "v_b50f0f6ce0b5",
+        "v_21be8189b387",
+        "v_6ec37cb87de4",
+        "v_2e2e0966e399"
+      ],
+      "FLU142Y (PPE T2)": [
+        "v_234522c5f5b9",
+        "v_baa5b1acf4aa",
+        "v_6778fe820eef",
+        "v_d32d7e23ad88",
+        "v_2080b06feac0",
+        "v_cb9e731470d8"
+      ],
+      "FLR2G-C (Silicone T5)": [
+        "v_55b0e3fedca8",
+        "v_1a926a18ed29",
+        "v_4b64c9ca4d09",
+        "v_5cfa3c0f088b",
+        "v_f003a2d636b2",
+        "v_679e8487c447"
+      ],
+      "FLR31-B (TPE-S T3)": [
+        "v_fe9446c6aeb0",
+        "v_8764247ec155",
+        "v_b794354f4dae"
+      ],
+      "FLR11Y-C (PUR T2)": [
+        "v_fcbf3770102d"
+      ]
+    },
+    "byConductorDesign": {
+      "A": [
+        "v_d5a49b859261",
+        "v_22a6b043adf9",
+        "v_ca74aee55e42",
+        "v_b36354324367",
+        "v_ed10cc1a7da8",
+        "v_77eda1b66b95",
+        "v_14519ef9ee0d",
+        "v_fcc92ed13fb6",
+        "v_ed539b34526b",
+        "v_8e0581bb9e92",
+        "v_371b05ed977f",
+        "v_a67ed34394ee",
+        "v_0b61d2d221a3",
+        "v_95638d3f5b8d",
+        "v_2e1d4303fabb",
+        "v_234522c5f5b9",
+        "v_269e011538a3",
+        "v_2330354519a9",
+        "v_00cce113bf2a",
+        "v_a5c625d5e4c8",
+        "v_dc6b53c6b4e6",
+        "v_7c5f677b70f2",
+        "v_66ebd9256791",
+        "v_38e0973038c8",
+        "v_a12f3ccc9ea8",
+        "v_4edf68e3e563",
+        "v_8ac16d97a332",
+        "v_baa5b1acf4aa",
+        "v_d588290ede68",
+        "v_3dcfac5b1449",
+        "v_abff7ebca32c",
+        "v_9ce99d519e53",
+        "v_7f59d33b7b27",
+        "v_d325c0fa00ab",
+        "v_2ef8f29b4bf5",
+        "v_aa66a80d6f55",
+        "v_d8f2db0c9e89",
+        "v_624c78638b68",
+        "v_6778fe820eef",
+        "v_46d10407ff1a",
+        "v_4084b1d8b047",
+        "v_838eb9b257ab",
+        "v_bf4eb41d8e97",
+        "v_7631e924df2d",
+        "v_801b3e4a6ce5",
+        "v_19c0c9664d76",
+        "v_655b2d9a068f",
+        "v_b128df7c7fbc",
+        "v_f14969d4999f",
+        "v_d32d7e23ad88",
+        "v_3142eb52b765",
+        "v_011cbfebc61c",
+        "v_a44e00f36db5",
+        "v_e710dcd3d02a",
+        "v_625bf59b5369",
+        "v_791de9c8f54f",
+        "v_845dd7c7d369",
+        "v_848cf8aa923b",
+        "v_85df33396c40",
+        "v_2b4a36291d3f",
+        "v_2080b06feac0",
+        "v_122b54a7fefa",
+        "v_7de1a3f285a4",
+        "v_fcfb698bf6a0",
+        "v_239c03cc21ef",
+        "v_d007efca6c6f",
+        "v_f8205ae77612",
+        "v_5e822ecb2dec",
+        "v_a15a80db348a",
+        "v_202883d139e4",
+        "v_a5b8034a0cca",
+        "v_81f3e34e0ad6",
+        "v_b89140fc537c",
+        "v_896dca3c0e4d",
+        "v_f297f09ebb95",
+        "v_495e9db26f27",
+        "v_cb9e731470d8",
+        "v_95ed740928b3",
+        "v_654aa307720d",
+        "v_1b7700201407",
+        "v_8df24a1f2275",
+        "v_82e367cfbb3c",
+        "v_9c57aa1a8e68",
+        "v_0ccf43b15859",
+        "v_14af0c53beba",
+        "v_5d67ec767cae",
+        "v_95876a2d993b"
+      ],
+      "B": [
+        "v_e23a4fc1c5e6",
+        "v_43eb348b09d7",
+        "v_420d10d22c7d",
+        "v_8839d6a4e503",
+        "v_cd9c95c378c1",
+        "v_2f5ed8969466",
+        "v_02d4154241b5",
+        "v_2a0da8e4a259",
+        "v_02b25a7e4aba",
+        "v_a271aecf3744",
+        "v_51449e550518",
+        "v_b765af9e3f99",
+        "v_1138c717a9d2",
+        "v_578af3fe99e3",
+        "v_6dcdc38acc5a",
+        "v_4fad1dad1b38",
+        "v_a772b6f6c3ba",
+        "v_c64a3ab5e566",
+        "v_e87306928bf9",
+        "v_b9e05894c1e5",
+        "v_d522ad11b061",
+        "v_e3da7797dfc9",
+        "v_ff0387ea9bc6",
+        "v_09b56124d829",
+        "v_30566f9beb71",
+        "v_caaeeb217e93",
+        "v_8bc7f3a61e11",
+        "v_ec9359d5cf4e",
+        "v_a35b8b11f51b",
+        "v_738489f8bfa9",
+        "v_fe9446c6aeb0",
+        "v_5f9edc6e7d70",
+        "v_23eda09ad244",
+        "v_8a4b9f276d49",
+        "v_c66c7d833741",
+        "v_72d42e8023a6",
+        "v_b5586506288d",
+        "v_3aaf85cf729f",
+        "v_b3fce4efcb0b",
+        "v_cd7d5b9d42de",
+        "v_8764247ec155",
+        "v_d180698f8173",
+        "v_569f1e7ff755",
+        "v_773a1db177e4",
+        "v_2d9be4b96d6d",
+        "v_0ad1cf59377f",
+        "v_903929439a82",
+        "v_2ad0eed085d0",
+        "v_554c78ec1178",
+        "v_d346e8c4acd2",
+        "v_866f17e0be3b",
+        "v_50d2f017d9f5",
+        "v_0aa6d1eddc30",
+        "v_b33783fe8d41",
+        "v_d03a82070525",
+        "v_b794354f4dae",
+        "v_038306e7d009",
+        "v_493738b4dcb2",
+        "v_37bc02488642",
+        "v_dcfc9fda8edb",
+        "v_f78fd00e9e6e",
+        "v_246c00067a32",
+        "v_116e86d34a58",
+        "v_bf30bc3f9019",
+        "v_314a6191f6fb",
+        "v_f273591e86ee",
+        "v_b50f0f6ce0b5",
+        "v_a71be9989c64",
+        "v_3fde3258901b",
+        "v_38c692fa1907",
+        "v_2d6e96d6c85e",
+        "v_74d4e9d5f9e5",
+        "v_9bcb64cae03b",
+        "v_2cca03c90832",
+        "v_bd179593f1e3",
+        "v_21be8189b387",
+        "v_90587a45cf4e",
+        "v_cd386fc77a0d",
+        "v_d96b77c2ab02",
+        "v_a08ac5b4e34b",
+        "v_6ec37cb87de4",
+        "v_2b13b024b0eb",
+        "v_a8006d43e147",
+        "v_86917f3bd22d",
+        "v_bd30fb55e837",
+        "v_b78d72121c9e",
+        "v_1f9c84bb4a95",
+        "v_242098740378",
+        "v_56b833d05a0d",
+        "v_2e2e0966e399"
+      ],
+      "C": [
+        "v_55b0e3fedca8",
+        "v_1a926a18ed29",
+        "v_4b64c9ca4d09",
+        "v_5cfa3c0f088b",
+        "v_f003a2d636b2",
+        "v_679e8487c447",
+        "v_fcbf3770102d"
+      ]
+    }
+  }
+}

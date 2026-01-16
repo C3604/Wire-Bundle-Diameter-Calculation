@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "source": "Japanese UTW",
+    "generatedAt": "2026-01-16T09:30:27.528237+00:00",
+    "specKeys": [
+      "Conductor Diameter",
+      "Strand Diameter",
+      "Insulation Thickness",
+      "Cable Outside Diameter",
+      "Mass Length",
+      "Resistance Length"
+    ],
+    "recordCount": 7,
+    "idStrategy": "sha1(WireSize+WallThickness+WireType+ConductorDesign+Specs)"
+  },
+  "variants": [
+    {
+      "WireSize": 0.13,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 169.66
+      },
+      "id": "v_8da5d27f88f0"
+    },
+    {
+      "WireSize": 0.22,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 84.8
+      },
+      "id": "v_27444545fa2f"
+    },
+    {
+      "WireSize": 0.35,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 54.4
+      },
+      "id": "v_dae3e421cc05"
+    },
+    {
+      "WireSize": 0.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 37.1
+      },
+      "id": "v_53190df624de"
+    },
+    {
+      "WireSize": 0.75,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 24.7
+      },
+      "id": "v_cc0d5890fb47"
+    },
+    {
+      "WireSize": 1.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 18.5
+      },
+      "id": "v_8881d4eb6812"
+    },
+    {
+      "WireSize": 1.25,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 14.9
+      },
+      "id": "v_75d5dfeb1702"
+    }
+  ],
+  "variantsMap": {
+    "v_8da5d27f88f0": {
+      "WireSize": 0.13,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 169.66
+      },
+      "id": "v_8da5d27f88f0"
+    },
+    "v_27444545fa2f": {
+      "WireSize": 0.22,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 84.8
+      },
+      "id": "v_27444545fa2f"
+    },
+    "v_dae3e421cc05": {
+      "WireSize": 0.35,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 54.4
+      },
+      "id": "v_dae3e421cc05"
+    },
+    "v_53190df624de": {
+      "WireSize": 0.5,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 37.1
+      },
+      "id": "v_53190df624de"
+    },
+    "v_cc0d5890fb47": {
+      "WireSize": 0.75,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 24.7
+      },
+      "id": "v_cc0d5890fb47"
+    },
+    "v_8881d4eb6812": {
+      "WireSize": 1.0,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 18.5
+      },
+      "id": "v_8881d4eb6812"
+    },
+    "v_75d5dfeb1702": {
+      "WireSize": 1.25,
+      "WallThickness": "Ultra Thin",
+      "WireType": "Generic UTW",
+      "ConductorDesign": "A",
+      "Specs": {
+        "Resistance Length": 14.9
+      },
+      "id": "v_75d5dfeb1702"
+    }
+  },
+  "indexes": {
+    "byWireSize": {
+      "0.13": [
+        "v_8da5d27f88f0"
+      ],
+      "0.22": [
+        "v_27444545fa2f"
+      ],
+      "0.35": [
+        "v_dae3e421cc05"
+      ],
+      "0.5": [
+        "v_53190df624de"
+      ],
+      "0.75": [
+        "v_cc0d5890fb47"
+      ],
+      "1.0": [
+        "v_8881d4eb6812"
+      ],
+      "1.25": [
+        "v_75d5dfeb1702"
+      ]
+    },
+    "byWallThickness": {
+      "Ultra Thin": [
+        "v_8da5d27f88f0",
+        "v_27444545fa2f",
+        "v_dae3e421cc05",
+        "v_53190df624de",
+        "v_cc0d5890fb47",
+        "v_8881d4eb6812",
+        "v_75d5dfeb1702"
+      ]
+    },
+    "byWireType": {
+      "Generic UTW": [
+        "v_8da5d27f88f0",
+        "v_27444545fa2f",
+        "v_dae3e421cc05",
+        "v_53190df624de",
+        "v_cc0d5890fb47",
+        "v_8881d4eb6812",
+        "v_75d5dfeb1702"
+      ]
+    },
+    "byConductorDesign": {
+      "A": [
+        "v_8da5d27f88f0",
+        "v_27444545fa2f",
+        "v_dae3e421cc05",
+        "v_53190df624de",
+        "v_cc0d5890fb47",
+        "v_8881d4eb6812",
+        "v_75d5dfeb1702"
+      ]
+    }
+  }
+}

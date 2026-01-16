@@ -17,7 +17,7 @@ export function renderHistoryPage(container) {
           <div class="group-title">
             <div class="title-container"><span class="emoji">📄</span><span data-i18n="history_title">历史记录列表</span></div>
             <div class="group-actions">
-              <button class="calc-table-btn" id="export-csv-btn"><span class="emoji">📤</span><span class="text" data-i18n="history_button_export">导出CSV</span></button>
+              <button class="calc-table-btn" id="export-csv-btn"><span class="emoji">📤</span><span class="text" data-i18n="common_export">导出</span></button>
               <button class="calc-table-btn btn-danger" id="clear-history-btn"><span class="emoji">🗑️</span><span class="text" data-i18n="history_button_clear">清除历史</span></button>
             </div>
           </div>

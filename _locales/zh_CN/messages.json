@@ -35,6 +35,10 @@
     "message": "配置",
     "description": "配置按钮文本"
   },
+  "sidebar_button_query": {
+    "message": "查询",
+    "description": "查询按钮文本"
+  },
   "sidebar_button_help": {
     "message": "帮助",
     "description": "帮助按钮文本"
@@ -108,7 +112,7 @@
     "description": "线规列标题"
   },
   "calc_group_standard_wire_table_header_type": {
-    "message": "类型",
+    "message": "壁厚类型",
     "description": "类型列标题"
   },
   "calc_group_standard_wire_table_header_diameter": {
@@ -364,8 +368,8 @@
     "description": "特殊导线列标题"
   },
   "history_table_header_wrapping": {
-    "message": "包覆物",
-    "description": "包覆物列标题"
+    "message": "包裹物",
+    "description": "包裹物列标题"
   },
   "history_table_header_tolerance": {
     "message": "制造公差",
@@ -452,15 +456,15 @@
     "description": "表格线规列"
   },
   "config_standard_wires_table_header_thin": {
-    "message": "Thin",
+    "message": "薄壁",
     "description": "表格Thin列"
   },
   "config_standard_wires_table_header_thick": {
-    "message": "Thick",
+    "message": "厚壁",
     "description": "表格Thick列"
   },
   "config_standard_wires_table_header_ultra_thin": {
-    "message": "UltraThin",
+    "message": "超薄壁",
     "description": "表格UltraThin列"
   },
   "config_standard_wires_table_header_operations": {
@@ -716,7 +720,7 @@
     "description": "CSV文件中的特殊导线列表头"
   },
   "history_csv_header_wrapping": {
-    "message": "包覆物",
+    "message": "包裹物",
     "description": "CSV文件中的包覆物列表头"
   },
   "history_csv_header_tolerance": {
@@ -760,15 +764,15 @@
     "description": "配置页面线规输入框"
   },
   "config_input_placeholder_thin": {
-    "message": "请输入Thin值",
+    "message": "请输入薄壁值",
     "description": "配置页面Thin值输入框"
   },
   "config_input_placeholder_thick": {
-    "message": "请输入Thick值",
+    "message": "请输入厚壁值",
     "description": "配置页面Thick值输入框"
   },
   "config_input_placeholder_ultrathin": {
-    "message": "请输入UltraThin值",
+    "message": "请输入超薄壁值",
     "description": "配置页面UltraThin值输入框"
   },
   "calc_input_tooltip_tolerance_range": {
@@ -802,5 +806,159 @@
   "calc_select_placeholder_choose": {
     "message": "请选择",
     "description": "下拉框"
+  }
+  ,
+  "query_page_title": {
+    "message": "导线查询",
+    "description": "查询页面标题"
+  },
+  "query_button_reset": {
+    "message": "重置条件",
+    "description": "查询页重置按钮"
+  },
+  "query_label_standard": {
+    "message": "导线标准",
+    "description": "数据库标准选择标签"
+  },
+  "query_label_wiresize": {
+    "message": "线规",
+    "description": "WireSize标签"
+  },
+  "query_label_wallthickness": {
+    "message": "壁厚类型",
+    "description": "WallThickness标签"
+  },
+  "query_label_wiretype": {
+    "message": "导线型号",
+    "description": "WireType标签"
+  },
+  "query_label_conductordesign": {
+    "message": "结构代号",
+    "description": "ConductorDesign标签"
+  },
+  "query_result_title": {
+    "message": "查询结果",
+    "description": "查询结果标题"
+  },
+  "query_header_param": {
+    "message": "参数",
+    "description": "结果表参数列"
+  },
+  "query_header_value": {
+    "message": "数值",
+    "description": "结果表数值列"
+  },
+  "query_empty_hint": {
+    "message": "没有匹配的记录，请调整筛选条件。",
+    "description": "空结果提示"
+  },
+  "query_multi_hint": {
+    "message": "存在多条匹配记录，已取第一条；可继续细化筛选。",
+    "description": "多结果提示"
+  },
+  "query_load_error": {
+    "message": "查询数据加载失败",
+    "description": "查询数据加载错误"
+  },
+  "query_th_wiresize": {
+    "message": "线规(mm²)",
+    "description": "结果表头 WireSize"
+  },
+  "query_th_wallthickness": {
+    "message": "壁厚类型",
+    "description": "结果表头 WallThickness"
+  },
+  "query_th_wiretype": {
+    "message": "导线型号",
+    "description": "结果表头 WireType"
+  },
+  "query_th_conductordesign": {
+    "message": "结构代号",
+    "description": "结果表头 ConductorDesign"
+  },
+  "query_th_strand_diameter": {
+    "message": "单芯直径(mm)",
+    "description": "结果表头 Strand Diameter"
+  },
+  "query_th_cable_od": {
+    "message": "导线外径(mm)",
+    "description": "结果表头 Cable Outside Diameter"
+  },
+  "query_th_resistance_length": {
+    "message": "电阻率(mΩ/m)",
+    "description": "结果表头 Resistance Length"
+  },
+  "query_th_mass_length": {
+    "message": "重量率(g/m)",
+    "description": "结果表头 Mass Length"
+  },
+  "query_th_conductor_diameter": {
+    "message": "导体直径(mm)",
+    "description": "结果表头 Conductor Diameter"
+  },
+  "query_th_insulation_thickness": {
+    "message": "绝缘层厚度(mm)",
+    "description": "结果表头 Insulation Thickness"
+  },
+  "query_th_mass_per_length": {
+    "message": "重量率(g/m)",
+    "description": "结果表头 Mass/Length"
+  },
+  "query_th_resistance_per_length": {
+    "message": "电阻率(mΩ/m)",
+    "description": "结果表头 Resistance/Length"
+  },
+  "mspec_load_fallback": {
+    "message": "数据源加载失败，已使用本地缓存",
+    "description": "远程 mspec 加载失败时的服务端回退提示"
+  },
+  "common_loading": {
+    "message": "加载中...",
+    "description": "通用加载提示文本"
+  }
+  ,
+  "common_add": {
+    "message": "增加",
+    "description": "通用增加操作"
+  },
+  "common_reset": {
+    "message": "重置",
+    "description": "通用重置操作"
+  },
+  "common_delete": {
+    "message": "删除",
+    "description": "通用删除操作"
+  },
+  "common_save": {
+    "message": "保存",
+    "description": "通用保存操作"
+  },
+  "common_export": {
+    "message": "导出",
+    "description": "通用导出操作"
+  },
+  "common_index": {
+    "message": "序号",
+    "description": "通用表格序号列"
+  },
+  "common_operations": {
+    "message": "操作",
+    "description": "通用表格操作列"
+  },
+  "common_gauge": {
+    "message": "线规 (mm²)",
+    "description": "通用线规列表头"
+  },
+  "common_type": {
+    "message": "类型",
+    "description": "通用类型列表头"
+  },
+  "common_diameter_mm": {
+    "message": "直径(mm)",
+    "description": "通用直径列表头"
+  },
+  "common_qty": {
+    "message": "数量",
+    "description": "通用数量列表头"
   }
 }
