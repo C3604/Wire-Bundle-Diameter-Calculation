@@ -1,4 +1,3 @@
-import { standardWiresData } from "../storage/standardWires.js";
 import { getJSON } from "../services/storage.js";
 
 // 定义本地存储中使用的键
@@ -26,7 +25,7 @@ function getCustomWireLibraries() {
  * @returns {Array} 合并并排序后的电线规格数组
  */
 export function getEffectiveStandardWires(baseStandard) {
-  const base = Array.isArray(baseStandard) && baseStandard.length > 0 ? baseStandard : standardWiresData;
+  const base = Array.isArray(baseStandard) && baseStandard.length > 0 ? baseStandard : [];
   const standardMap = new Map(
     base.map((wire) => [String(wire.gauge).trim(), { ...wire }]),
   );
@@ -44,6 +43,27 @@ export function getEffectiveStandardWires(baseStandard) {
   );
 }
 
+export function buildGaugeOptionsWithCustomFirst(mspecWireSizes) {
+  const base = Array.isArray(mspecWireSizes) ? mspecWireSizes.map((v) => String(v)) : [];
+  const custom = getCustomWireLibraries()
+    .map((w) => String(w.gauge).trim())
+    .filter((g) => g !== "");
+  const seen = new Set();
+  const result = [];
+  custom.forEach((g) => {
+    if (!seen.has(g)) {
+      seen.add(g);
+      result.push(g);
+    }
+  });
+  base.forEach((g) => {
+    if (!seen.has(g)) {
+      seen.add(g);
+      result.push(g);
+    }
+  });
+  return result;
+}
 // --- 模拟参数管理 ---
 
 // 默认模拟参数（已与 ref/simulation.js 和 simulationConfig.json 对齐）

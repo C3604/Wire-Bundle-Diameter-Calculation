@@ -44,6 +44,13 @@ class MSpecService {
     this._allIds = null;
     this._url = "src/storage/Database/Aptiv_M-Spec.indexed.json";
     this._sources = null;
+    this._wsKeyById = {};
+    this._canonicalKeys = {
+      byWireSize: new Set(),
+      byWallThickness: new Set(),
+      byWireType: new Set(),
+      byConductorDesign: new Set(),
+    };
   }
 
   setSource(nameOrPath) {
@@ -101,7 +108,36 @@ class MSpecService {
       );
       // 合并 variantsMap 与重建 indexes
       const variantsMap = {};
+      // 先清空 canonicalKeys
+      this._canonicalKeys.byWireSize.clear();
+      this._canonicalKeys.byWallThickness.clear();
+      this._canonicalKeys.byWireType.clear();
+      this._canonicalKeys.byConductorDesign.clear();
+      // 清空反向映射
+      this._wsKeyById = {};
       results.forEach((db, idx) => {
+        // 收集原始索引键，保留数据源格式
+        if (db && db.indexes) {
+          try {
+            const iw = db.indexes.byWireSize || {};
+            const iwt = db.indexes.byWallThickness || {};
+            const ity = db.indexes.byWireType || {};
+            const icd = db.indexes.byConductorDesign || {};
+            Object.keys(iw).forEach((k) => this._canonicalKeys.byWireSize.add(String(k)));
+            Object.keys(iwt).forEach((k) => this._canonicalKeys.byWallThickness.add(String(k)));
+            Object.keys(ity).forEach((k) => this._canonicalKeys.byWireType.add(String(k)));
+            Object.keys(icd).forEach((k) => this._canonicalKeys.byConductorDesign.add(String(k)));
+            // 构建 WireSize 反向映射：合并后的 id -> 源索引键
+            Object.entries(iw).forEach(([key, idList]) => {
+              if (Array.isArray(idList)) {
+                idList.forEach((rawId) => {
+                  const mergedId = `${urls[idx]}::${rawId}`;
+                  this._wsKeyById[mergedId] = String(key);
+                });
+              }
+            });
+          } catch (_) {}
+        }
         if (Array.isArray(db.variants)) {
           db.variants.forEach((v) => {
             if (!v || !v.id) return;
@@ -180,6 +216,13 @@ class MSpecService {
     return this._db?.variantsMap?.[id] || null;
   }
 
+  getWireSizeKeyForId(id) {
+    const k = this._wsKeyById?.[id];
+    if (k != null) return String(k);
+    const v = this.getVariant(id);
+    return v && v.WireSize != null ? String(v.WireSize) : "";
+  }
+
   resolveIds(selections = {}) {
     const idx = this.getIndexes();
     let ids = this.getAllIds();
@@ -188,11 +231,13 @@ class MSpecService {
     const ty = selections.wireType;
     const cd = selections.conductorDesign;
     if (Array.isArray(ws) && ws.length) {
-      const lists = ws.map((v) => idx.byWireSize?.[v] || []);
+      const canonicalWs = ws.map((v) => this.ensureWireSizeKey(v));
+      const lists = canonicalWs.map((v) => idx.byWireSize?.[v] || []);
       ids = intersectIds(ids, unionIds(lists));
     }
     if (Array.isArray(wt) && wt.length) {
-      const lists = wt.map((v) => idx.byWallThickness?.[v] || []);
+      const canonicalWt = wt.map((v) => this.ensureWallThicknessKey(v));
+      const lists = canonicalWt.map((v) => idx.byWallThickness?.[v] || []);
       ids = intersectIds(ids, unionIds(lists));
     }
     if (Array.isArray(ty) && ty.length) {
@@ -206,27 +251,62 @@ class MSpecService {
     return ids;
   }
 
+  resolveMaxOD(selections = {}) {
+    const ids = this.resolveIds(selections);
+    const vmap = this._db?.variantsMap || {};
+    let maxOd = null;
+    const items = [];
+    for (const id of ids) {
+      const v = vmap[id];
+      if (!v) continue;
+      const od = v.Specs && v.Specs["Cable Outside Diameter"];
+      const num = od == null ? NaN : Number(od);
+      if (Number.isFinite(num)) {
+        items.push({ id, od: num });
+        if (maxOd == null || num > maxOd) maxOd = num;
+      } else {
+        items.push({ id, od: null });
+      }
+    }
+    return { maxOd, ids, items };
+  }
+
   buildOptions(selections = {}) {
     const selWs = Array.isArray(selections.wireSize) ? selections.wireSize : [];
     const vmap = this._db?.variantsMap || {};
     const allIds = this.getAllIds();
-    const wireSizes = uniqSorted(allIds.map((id) => String(vmap[id]?.WireSize)));
+    const canonicalWireSizes = Array.from(this._canonicalKeys.byWireSize);
+    const wireSizes =
+      canonicalWireSizes.length > 0
+        ? uniqSorted(canonicalWireSizes)
+        : uniqSorted(Object.keys(this.getIndexes().byWireSize || {}));
     const idx = this.getIndexes();
     let idsForWall = allIds;
     if (selWs.length) {
-      const lists = selWs.map((v) => idx.byWireSize?.[v] || []);
+      const lists = selWs
+        .map((v) => this.ensureWireSizeKey(v))
+        .map((v) => idx.byWireSize?.[v] || []);
       idsForWall = unionIds(lists);
     }
-    const wallThicknesses = uniqSorted(idsForWall.map((id) => vmap[id]?.WallThickness));
+    const rawWalls = idsForWall.map((id) => vmap[id]?.WallThickness).filter((v) => v != null && v !== "");
+    const wallThicknesses = uniqSorted(
+      rawWalls
+        .map((v) => this.ensureWallThicknessKey(v))
+        .filter((v) => v != null && v !== ""),
+    );
     let idsForType = allIds;
     if (selWs.length) {
-      const lists = selWs.map((v) => idx.byWireSize?.[v] || []);
+      const lists = selWs
+        .map((v) => this.ensureWireSizeKey(v))
+        .map((v) => idx.byWireSize?.[v] || []);
       idsForType = unionIds(lists);
     }
     const wireTypes = uniqSorted(idsForType.map((id) => vmap[id]?.WireType));
     let idsForDesign = allIds;
     if (selWs.length) {
-      const lists = selWs.map((v) => idx.byWireSize?.[v] || []);
+      const lists = selWs
+        .map((v) => this.ensureWireSizeKey(v))
+        .map((v) => idx.byWireSize?.[v] || []);
       idsForDesign = unionIds(lists);
     }
     const conductorDesigns = uniqSorted(idsForDesign.map((id) => vmap[id]?.ConductorDesign));
@@ -236,6 +316,45 @@ class MSpecService {
       wireTypes,
       conductorDesigns,
     };
+  }
+
+  ensureWireSizeKey(value) {
+    const valStr = String(value);
+    const num = Number.parseFloat(valStr);
+    if (!Number.isFinite(num)) return valStr;
+    // 精确匹配原始键
+    if (this._canonicalKeys.byWireSize.has(valStr)) return valStr;
+    // 数值等价匹配（如 "1" -> "1.0"）
+    for (const k of this._canonicalKeys.byWireSize) {
+      const kn = Number.parseFloat(k);
+      if (Number.isFinite(kn) && kn === num) return k;
+    }
+    // 回退：尝试 idx 键集中寻找数值等价
+    const idxKeys = Object.keys(this.getIndexes().byWireSize || {});
+    for (const k of idxKeys) {
+      const kn = Number.parseFloat(k);
+      if (Number.isFinite(kn) && kn === num) return k;
+    }
+    return valStr;
+  }
+
+  ensureWallThicknessKey(value) {
+    const v0 = String(value || "");
+    const v1 = v0.trim();
+    const lower = v1.toLowerCase();
+    let normalized = v1;
+    if (lower === "thin") normalized = "Thin";
+    else if (lower === "thick") normalized = "Thick";
+    else if (lower === "ultrathin" || lower === "ultra thin") normalized = "Ultra Thin";
+    if (this._canonicalKeys.byWallThickness.has(normalized)) return normalized;
+    for (const k of this._canonicalKeys.byWallThickness) {
+      const kk = String(k).trim();
+      if (kk.toLowerCase() === lower) return k;
+      const kl = kk.toLowerCase().replace(/\s+/g, "");
+      const nl = normalized.toLowerCase().replace(/\s+/g, "");
+      if (kl === nl) return k;
+    }
+    return normalized;
   }
 
   getSpecsForSelection(selections = {}) {

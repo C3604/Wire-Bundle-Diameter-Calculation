@@ -687,6 +687,14 @@
     "message": "错误：序号 {index} (线规 {gauge}) 的 {type} 外径值无效或为负数。",
     "description": "自定义导线表格中存在无效OD值时的错误信息。"
   },
+  "config_standard_wires_message_missing_required_od": {
+    "message": "提示：序号 {index} (线规 {gauge}) 未填写任何类型的直径值，已在保存时忽略。",
+    "description": "至少填写一个类型直径值的提示信息。"
+  },
+  "config_standard_wires_message_row_ignored": {
+    "message": "提示：序号 {index} 的条目因必填项缺失已忽略。",
+    "description": "保存时忽略缺失必填项条目的提示。"
+  },
   "config_import_invalid_format": {
     "message": "配置文件格式无效。",
     "description": "导入配置时格式无效的错误信息"

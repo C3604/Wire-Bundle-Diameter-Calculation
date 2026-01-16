@@ -1,4 +1,3 @@
-import { standardWiresData } from "../../storage/standardWires.js";
 import {
   getEffectiveStandardWires,
   getSimulationParameters,
@@ -6,6 +5,7 @@ import {
   restoreDefaultSimulationParameters,
   getDefaultSimulationParameters,
 } from "../../logic/wireManager.js";
+import mspecService from "../../services/mspecService.js";
 import i18n from "../../i18n/index.js";
 import { showToast, showConfirm } from "../../components/feedback.js";
 import { getJSON, setJSON, remove } from "../../services/storage.js";
@@ -18,23 +18,44 @@ let initialDataSnapshot = [];
 // 用于存储当前重复的线规值 (存储的是 gauge 字符串)
 let duplicateGaugeValues = new Set();
 
-// 初始化标准线规映射和datalist
-const standardGaugeMap = {};
-standardWiresData.forEach((item) => {
-  standardGaugeMap[parseFloat(item.gauge).toFixed(2)] = item;
-});
-const standardGaugeList = standardWiresData.map((item) =>
-  parseFloat(item.gauge).toFixed(2),
-);
-if (!document.getElementById("gauge-list")) {
-  let datalist = document.createElement("datalist");
-  datalist.id = "gauge-list";
-  standardGaugeList.forEach((g) => {
-    let opt = document.createElement("option");
-    opt.value = g;
-    datalist.appendChild(opt);
-  });
-  document.body.appendChild(datalist);
+async function listDatabaseStandards() {
+  try {
+    const readmeUrl =
+      typeof chrome !== "undefined" &&
+      chrome.runtime &&
+      typeof chrome.runtime.getURL === "function"
+        ? chrome.runtime.getURL("src/storage/Database/mspec.README.md")
+        : "src/storage/Database/mspec.README.md";
+    const resp = await fetch(readmeUrl);
+    if (!resp.ok) throw new Error("readme not found");
+    const text = await resp.text();
+    const re = /([A-Za-z0-9_\\-]+)\\.indexed\\.json/g;
+    const names = new Set();
+    let m;
+    while ((m = re.exec(text)) !== null) {
+      names.add(m[1]);
+    }
+    const arr = Array.from(names);
+    if (arr.length) return arr.sort();
+    throw new Error("no names");
+  } catch (_) {
+    return [
+      "Aptiv_M-Spec",
+      "FCA_MS90034_36",
+      "Fiat_91107",
+      "Ford_WSK1A348A2",
+      "GMW_15626",
+      "ISO_6722-1",
+      "ISO_6722-2",
+      "Japanese_UTW",
+      "LV_112",
+      "LV_112_old_AL_gauges",
+      "PSA_9641879499",
+      "Renault_3605009L",
+      "Renault_3605009P",
+      "SouthWire_Alu",
+    ];
+  }
 }
 
 // 配置页统一使用 wireManager 与 wiresStore 作为数据来源与存储层
@@ -68,23 +89,9 @@ function updateDuplicateGaugeState() {
 
 // 只保存与标准库不同或新增的自定义条目
 function getUserCustomWires() {
-  const stdMap = {};
-  standardWiresData.forEach((item) => {
-    const key = String(item.gauge).trim();
-    if (key) stdMap[key] = { ...item };
-  });
-
   return currentDisplayData.filter((item) => {
     const key = String(item.gauge).trim();
-    if (!key) return false; // 忽略空的 gauge
-    const std = stdMap[key];
-    // 如果标准库中不存在，或者任一外径值不同，则视为自定义
-    return (
-      !std ||
-      std.thin !== item.thin ||
-      std.thick !== item.thick ||
-      std.ultraThin !== item.ultraThin
-    );
+    return key !== "";
   });
 }
 
@@ -310,6 +317,25 @@ export function renderConfigPage(container) {
       <button class="action-bar-btn" id="export-config-btn-cfg"><span class="emoji">📤</span><span class="text" data-i18n="config_standard_wires_button_export">导出配置</span></button>
     </div>
   `;
+
+  (async () => {
+    try {
+      const names = await listDatabaseStandards();
+      mspecService.setSources(names);
+      await mspecService.load();
+      const wireSizes = mspecService.buildOptions().wireSizes || [];
+      if (!document.getElementById("gauge-list")) {
+        const datalist = document.createElement("datalist");
+        datalist.id = "gauge-list";
+        wireSizes.forEach((g) => {
+          const opt = document.createElement("option");
+          opt.value = String(g);
+          datalist.appendChild(opt);
+        });
+        document.body.appendChild(datalist);
+      }
+    } catch (e) {}
+  })();
 
   // 更新样式
   const styleSheet = document.createElement("style");
@@ -1010,7 +1036,7 @@ export function renderConfigPage(container) {
               ),
               "error"
             );
-            isValid = false;
+            wire[type] = null;
           } else {
             wire[type] = parseFloat(odNum.toFixed(2)); // 格式化有效的OD值
           }
@@ -1021,16 +1047,27 @@ export function renderConfigPage(container) {
       if (!isValid) break;
     }
 
-    if (!isValid) {
-      // 此时错误信息已通过alert提示用户
-      // 由于当前的校验错误（正数、OD有效性）没有特定的UI高亮，
-      // 无需再次调用 renderTable()。
-      return; // 终止保存
+    const validList = [];
+    for (let i = 0; i < dataToSave.length; i++) {
+      const w = dataToSave[i];
+      const displayIndex = i + 1;
+      const hasAnyOd =
+        (typeof w.thin === "number" && w.thin > 0) ||
+        (typeof w.thick === "number" && w.thick > 0) ||
+        (typeof w.ultraThin === "number" && w.ultraThin > 0);
+      if (!hasAnyOd) {
+        showToast(
+          i18n.getMessage("config_standard_wires_message_missing_required_od", { index: displayIndex, gauge: w.gauge }),
+          "warning"
+        );
+      } else {
+        validList.push(w);
+      }
     }
 
     // 7. 最终的重复项检查 (作为dataToSave的保障措施)
     const finalGaugeSet = new Set();
-    for (const wire of dataToSave) {
+    for (const wire of validList) {
       const gaugeKey = String(wire.gauge).trim();
       if (finalGaugeSet.has(gaugeKey)) {
         showToast(i18n.getMessage("config_standard_wires_message_internal_error", { gauge: wire.gauge }), "error");
@@ -1041,17 +1078,14 @@ export function renderConfigPage(container) {
     }
 
     if (!isValid) {
-      // 如果最终的保障性重复检查失败
       return;
     }
 
     // 8. 保存到存储层
     try {
       // 只保存与标准库不同或新增的自定义条目
-      saveUserCustomWires(
-        getUserCustomWires(),
-      );
-      currentDisplayData = deepClone(getUserCustomWires()); // 保存后只显示自定义内容
+      saveUserCustomWires(validList);
+      currentDisplayData = deepClone(validList); // 保存后只显示自定义内容
       initialDataSnapshot = deepClone(currentDisplayData);
       showToast(i18n.getMessage("config_standard_wires_message_saved"), "success");
       updateDuplicateGaugeState();

@@ -139,6 +139,13 @@ src/
 - **配置存储**：保存用户偏好和标准设置
 - **数据导出**：支持CSV和图片格式导出
 
+## 数据源说明
+- 计算页与查询页的“导线标准”统一读取 `src/storage/Database` 目录下的 indexed JSON（如 `Aptiv_M-Spec.indexed.json`）。
+- 标准列表通过解析 [mspec.README.md](./src/storage/Database/mspec.README.md) 自动生成，避免硬编码。
+- 字段映射：线规→`WireSize`，类型→`WallThickness`，直径→`Specs["Cable Outside Diameter"]`。
+- 检索采用索引级联选择（byWireSize/byWallThickness/byWireType/byConductorDesign），详情参考 mspec.README。
+- 旧数据源（`src/storage/WireStandard`、`src/storage/standardWires.js`、`src/storage/wireStandardLoader.js`）已移除。
+
 ## 技术架构
 
 ### 前端技术
@@ -222,4 +229,3 @@ build.bat --output C:\dist --clean
 **日志与错误处理**
 - 日志文件：logs/build-YYYYMMDD-HHMMSS.log
 - 失败场景：缺少 manifest.json、版本解析失败、压缩失败等；脚本返回非零退出码
-

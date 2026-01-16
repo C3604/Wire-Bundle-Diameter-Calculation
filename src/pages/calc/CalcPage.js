@@ -6,15 +6,14 @@ import { renderSimulationHistoryChart } from "../../components/chartRenderer.js"
 import {
   getEffectiveStandardWires,
   getSimulationParameters,
+  buildGaugeOptionsWithCustomFirst,
 } from "../../logic/wireManager.js";
-import {
-  listAvailableStandards,
-  loadStandardByName,
-} from "../../storage/wireStandardLoader.js";
+import mspecService from "../../services/mspecService.js";
 import i18n from "../../i18n/index.js";
 import { showToast, showConfirm } from "../../components/feedback.js";
 import { collectAndValidateInputs } from "./inputCollector.js";
 import { getJSON, setJSON } from "../../services/storage.js";
+import { recordMultiMatch } from "../../services/auditLogger.js";
 
 // 统一使用 utils/wireTypes 提供的本地化接口
 
@@ -481,8 +480,48 @@ export function renderCalcPage(container) {
     // 在这里获取最新的导线数据（标准库+自定义合并）
     let currentStandardWires = [];
     let currentWireOdTable = {};
-    let baseStandardData = []; // 当前选择的基础标准库
+    let baseStandardData = [];
     const SESSION_KEY_SELECTED_STANDARD = "wireStandard:selected";
+
+    async function listDatabaseStandards() {
+      try {
+        const readmeUrl =
+          typeof chrome !== "undefined" &&
+          chrome.runtime &&
+          typeof chrome.runtime.getURL === "function"
+            ? chrome.runtime.getURL("src/storage/Database/mspec.README.md")
+            : "src/storage/Database/mspec.README.md";
+        const resp = await fetch(readmeUrl);
+        if (!resp.ok) throw new Error("readme not found");
+        const text = await resp.text();
+        const re = /([A-Za-z0-9_\\-]+)\\.indexed\\.json/g;
+        const names = new Set();
+        let m;
+        while ((m = re.exec(text)) !== null) {
+          names.add(m[1]);
+        }
+        const arr = Array.from(names);
+        if (arr.length) return arr.sort();
+        throw new Error("no names");
+      } catch (_) {
+        return [
+          "Aptiv_M-Spec",
+          "FCA_MS90034_36",
+          "Fiat_91107",
+          "Ford_WSK1A348A2",
+          "GMW_15626",
+          "ISO_6722-1",
+          "ISO_6722-2",
+          "Japanese_UTW",
+          "LV_112",
+          "LV_112_old_AL_gauges",
+          "PSA_9641879499",
+          "Renault_3605009L",
+          "Renault_3605009P",
+          "SouthWire_Alu",
+        ];
+      }
+    }
 
     function updateWireDataSources() {
       currentStandardWires = getEffectiveStandardWires(baseStandardData);
@@ -520,27 +559,25 @@ export function renderCalcPage(container) {
     async function initStandardDropdown() {
       try {
         if (standardLoadingEl) standardLoadingEl.style.display = "inline";
-        const list = await listAvailableStandards();
-        // 填充下拉列表
+        const list = await listDatabaseStandards();
         if (standardSelectEl) {
           standardSelectEl.innerHTML = "";
-          list.forEach((item, idx) => {
+          list.forEach((name, idx) => {
             const opt = document.createElement("option");
-            opt.value = item.name;
-            opt.textContent = item.displayName || item.name;
+            opt.value = name;
+            opt.textContent = name;
             standardSelectEl.appendChild(opt);
           });
           // 选择默认或会话保存值
           let selected = sessionStorage.getItem(SESSION_KEY_SELECTED_STANDARD);
-          if (!selected && list.length > 0) selected = list[0].name;
+          if (!selected && list.length > 0) selected = list[0];
           if (selected) standardSelectEl.value = selected;
         }
-        // 加载当前选择的标准
         await applySelectedStandard();
       } catch (e) {
         console.error("初始化标准选择失败:", e);
         showToast(i18n.getMessage("wire_standard_load_failed") || "标准加载失败，已回退默认", "error");
-        baseStandardData = []; // 触发回退
+        baseStandardData = [];
         updateWireDataSources();
       } finally {
         if (standardLoadingEl) standardLoadingEl.style.display = "none";
@@ -567,14 +604,33 @@ export function renderCalcPage(container) {
     async function applySelectedStandard() {
       const selectedName = standardSelectEl ? standardSelectEl.value : "";
       if (selectedName) {
-        const loaded = await loadStandardByName(selectedName);
-        baseStandardData = Array.isArray(loaded.data) ? loaded.data : [];
+        mspecService.setSource(selectedName);
+        await mspecService.load();
+        baseStandardData = [];
         sessionStorage.setItem(SESSION_KEY_SELECTED_STANDARD, selectedName);
       } else {
         baseStandardData = [];
       }
-      updateWireDataSources();
-      renderStandardRows(); // 数据源更新后重渲染
+      const optsAll = mspecService.buildOptions();
+      const wireSizes = Array.isArray(optsAll.wireSizes) ? optsAll.wireSizes : [];
+      const mergedWireSizes = buildGaugeOptionsWithCustomFirst(wireSizes);
+      const firstWire = mergedWireSizes[0] || "";
+      standardRows = standardRows.map((row) => {
+        const curGauge = String(row.gauge || "");
+        const nextGauge = mergedWireSizes.includes(curGauge) ? curGauge : firstWire;
+        const optsForGauge = nextGauge
+          ? mspecService.buildOptions({ wireSize: [nextGauge] })
+          : { wallThicknesses: [] };
+        const types = Array.isArray(optsForGauge.wallThicknesses)
+          ? optsForGauge.wallThicknesses.map((v) => String(v))
+          : [];
+        const curType = String(row.type || "");
+        const nextType = types.includes(curType) ? curType : (types[0] || "");
+        const nextRow = { ...row, gauge: nextGauge, type: nextType };
+        updateOD(nextRow);
+        return nextRow;
+      });
+      renderStandardRows();
     }
 
     updateWireDataSources();
@@ -645,25 +701,55 @@ export function renderCalcPage(container) {
 
     // 匹配直径 - 不再触发UI更新
     function updateOD(row) {
-      const selectedGaugeStr = String(row.gauge);
-      const wireData = currentWireOdTable[selectedGaugeStr]; // 使用新的OD表
-
-      if (wireData) {
-        const odMap = wireData.od || {};
-        if (row.type && odMap[row.type] != null) {
-          row.od = odMap[row.type];
-        } else {
-          row.od = "";
-        }
-        if (row.od == null) row.od = "";
-      } else {
+      const selectedGaugeStr = String(row.gauge || "");
+      const selectedType = String(row.type || "");
+      if (!selectedGaugeStr || !selectedType) {
         row.od = "";
+        return;
       }
+      const result = mspecService.resolveMaxOD({
+        wireSize: [selectedGaugeStr],
+        wallThickness: [selectedType],
+      });
+      if ((result.ids || []).length > 1) {
+        console.debug(
+          "Multiple matches, choose max Cable Outside Diameter",
+          selectedGaugeStr,
+          selectedType,
+          result.ids.length,
+          result.maxOd,
+        );
+        recordMultiMatch({
+          wireSize: selectedGaugeStr,
+          wallThickness: selectedType,
+          count: result.ids.length,
+          maxOd: result.maxOd,
+          items: Array.isArray(result.items) ? result.items : [],
+        });
+      }
+      if (result.maxOd != null) {
+        row.od = result.maxOd;
+        return;
+      }
+      const odEntry = currentWireOdTable[selectedGaugeStr];
+      if (odEntry && odEntry.od) {
+        const mapKey = (() => {
+          const l = selectedType.toLowerCase().replace(/\s+/g, "");
+          if (l === "thin") return "thin";
+          if (l === "thick") return "thick";
+          if (l === "ultrathin") return "ultraThin";
+          return selectedType;
+        })();
+        const val = odEntry.od[mapKey];
+        const num = val == null ? NaN : Number(val);
+        row.od = Number.isFinite(num) && num > 0 ? num : "";
+        return;
+      }
+      row.od = "";
     }
 
     // 渲染标准导线表格
     function renderStandardRows() {
-      updateWireDataSources(); // 每次渲染标准行时，都获取最新的导线数据
 
       const table1BodyWrapper = calcLayoutEl.querySelector(
         "#table1-body-wrapper",
@@ -675,10 +761,11 @@ export function renderCalcPage(container) {
         table1BodyWrapper.style.maxHeight = "";
       }
       table1Body.innerHTML = "";
-      // 获取所有线规（标准库+自定义），显示label，存值使用数值字符串
-      const allGaugeOptions = currentStandardWires.map((w) => ({
-        value: String(w.gauge),
-        label: w.gaugeLabel || String(w.gauge),
+      const optsAll = mspecService.buildOptions();
+      const mergedWireSizes = buildGaugeOptionsWithCustomFirst(optsAll.wireSizes || []);
+      const allGaugeOptions = mergedWireSizes.map((v) => ({
+        value: String(v),
+        label: String(v),
       }));
       standardRows.forEach((row, idx) => {
         const tr = document.createElement("tr");
@@ -710,18 +797,30 @@ export function renderCalcPage(container) {
         const tdType = document.createElement("td");
         const selectType = document.createElement("select");
         let availableTypes = [];
-        const selectedGaugeStr = String(row.gauge);
-        const wireDataForGauge = currentWireOdTable[selectedGaugeStr];
-        if (wireDataForGauge) {
-          const odMap = wireDataForGauge.od || {};
-          availableTypes = Object.keys(odMap).filter((k) => odMap[k] != null);
-        } else {
-          availableTypes = [];
+        const selectedGaugeStr = String(row.gauge || "");
+        const optsForGauge = selectedGaugeStr
+          ? mspecService.buildOptions({ wireSize: [selectedGaugeStr] })
+          : { wallThicknesses: [] };
+        availableTypes = (optsForGauge.wallThicknesses || []).map((v) => String(v));
+        const noTypesFromService = availableTypes.length === 0;
+        if (noTypesFromService) {
+          const odMap = (currentWireOdTable[selectedGaugeStr] || {}).od || {};
+          const keys = Object.keys(odMap);
+          const mapped = keys.map((k) => {
+            const lower = String(k).toLowerCase();
+            if (lower === "thin") return "Thin";
+            if (lower === "thick") return "Thick";
+            if (lower === "ultrathin") return "Ultra Thin";
+            return String(k);
+          });
+          availableTypes = mapped.filter((v) => v != null && v !== "");
         }
         if (!availableTypes.includes(row.type)) {
           row.type = availableTypes[0] || "";
           updateOD(row);
         }
+        const chooseTypeLabel = i18n.getMessage("calc_select_placeholder_choose");
+        selectType.innerHTML = `<option value="">${chooseTypeLabel}</option>`;
         availableTypes.forEach((type) => {
           const opt = document.createElement("option");
           opt.value = type;
@@ -749,6 +848,10 @@ export function renderCalcPage(container) {
         inputQty.placeholder = i18n.getMessage("calc_input_placeholder_qty");
         inputQty.maxLength = 4;
         inputQty.className = "input-qty";
+        if (availableTypes.length === 0) {
+          inputQty.disabled = true;
+          tdOD.textContent = "";
+        }
         inputQty.oninput = (e) => {
           row.qty = e.target.value;
           updateInputSummary();

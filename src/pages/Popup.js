@@ -179,10 +179,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (oldStyles) {
       oldStyles.remove();
     }
-
-    if (currentPageId) {
-      globalKeyManager.unregister(currentPageId);
-    }
     currentPageId = pageId;
     globalKeyManager.setCurrentPage(pageId);
     if (!mainContent) {

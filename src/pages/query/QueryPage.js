@@ -173,7 +173,7 @@ export function renderQueryPage(container) {
         const tr = document.createElement("tr");
         const specs = v.Specs || {};
         const cells = [
-          v.WireSize != null ? String(v.WireSize) : "",
+          mspecService.getWireSizeKeyForId(id),
           v.WallThickness || "",
           v.WireType || "",
           v.ConductorDesign || "",

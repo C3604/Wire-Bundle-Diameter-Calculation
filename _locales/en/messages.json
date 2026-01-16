@@ -655,6 +655,14 @@
     "message": "Error: Row {index} (Gauge {gauge}) has an invalid or negative OD value for {type}.",
     "description": "Error message for an invalid OD value in the custom wires table."
   },
+  "config_standard_wires_message_missing_required_od": {
+    "message": "Notice: Row {index} (Gauge {gauge}) has no OD values entered; it will be ignored on save.",
+    "description": "Prompt requiring at least one OD value."
+  },
+  "config_standard_wires_message_row_ignored": {
+    "message": "Notice: Row {index} was ignored due to missing required fields.",
+    "description": "Prompt when ignoring a row with missing required fields."
+  },
   "config_import_invalid_format": {
     "message": "Invalid configuration file format.",
     "description": "Error message for invalid configuration file format during import"
