@@ -18,18 +18,26 @@
 
 ## 测试指南
 - 当前未包含自动化测试或测试框架。
-- 如新增测试，请在 PR 中说明运行方式与命名规则，并保持新增文件集中管理（建议新建 `tests\`）。
+- 如新增测试，请在 PR 中说明运行方式与命名规则，并保持新增文件集中管理（建议新建 `tests\`），测试文件以 `test-*.js` 命名。
+- 测试数据在使用完毕后应及时清除，避免对后续测试或生产环境产生影响。
 
 ## 提交与 Pull Request
 - 历史提交既有 `feat:`/`refactor:` 前缀，也有简短描述式提交（如 `fix bug ...`）。建议使用“可选类型前缀 + 简短目的”的格式。
 - 版本或行为变更时，同步更新 `manifest.json` 与 `Change log.json`。
 - PR 请说明改动范围、影响页面，并对 UI 变化附截图。
+- 更新日志（`CHANGELOG.md`）仅记录与用户操作、体验、UI、功能相关的变更；代码实现层面的调整不在该文档中描述。
 
 ## 仓库清理与忽略规则
 - 临时/缓存/日志文件不纳入版本控制：`*.tmp`、`*.log`、`*.cache`、`*.bak`、`*~`、`Thumbs.db`、`.DS_Store`
 - 常见构建产物与缓存目录忽略：`node_modules/`、`dist/`、`build/`、`out/`、`coverage/`、`.cache/`、`.parcel-cache/`、`.vite/`、`.next/`
+- IDE/编辑器目录忽略：`.vscode/`、`.idea/`、`*.code-workspace`
+- Windows 桌面索引：`desktop.ini`
+- 其他常见缓存：`.eslintcache`、`.tsbuildinfo`、`.nyc_output/`、`.turbo/`、`.pnpm-store/`
+- 环境/敏感配置：`.env`、`.env.*`、`.envrc`、`*.pem`
+- 扩展打包产物：`release/`、`packages/`、`*.crx`、`*.xpi`
 - 清理策略：移除未使用的导入/导出与未被引用的符号，保留对核心功能的最小必要实现
 - 版本号变更仅在存在行为差异时进行；纯粹的清理与忽略规则完善可不提升版本，但需在变更说明中记录
 ## 配置与国际化
 - 权限最小化，新增 `permissions` 需要在 PR 中说明用途。
 - 文案修改需同步`_locales\` 中的对应键，避免缺失。
+- 行尾与 Git 属性策略：文本文件统一使用 LF；Windows 脚本（`*.bat`/`*.cmd`/`*.ps1`）保留 CRLF；常见图片/字体/压缩包等标记为二进制以避免误差异与自动转换（详见 `.gitattributes`）。

@@ -1,19 +1,38 @@
-# Normalize line endings: commit LF, checkout LF on all text files
+# 行尾与属性规范（跨平台一致性）
+# - 文本文件统一使用 LF，避免 Win/Mac 差异
+# - Windows 批处理/脚本保留 CRLF，兼容系统调用
 * text=auto eol=lf
-
-# Allow Windows scripts to use CRLF if needed
 *.bat text eol=crlf
 *.cmd text eol=crlf
 *.ps1 text eol=crlf
 
-# Common binary assets
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.ico binary
-*.pdf binary
-*.zip binary
-*.ttf binary
-*.woff binary
+# 前端常见文本类型（显式标注，增强可读性）
+*.js   text eol=lf
+*.ts   text eol=lf
+*.jsx  text eol=lf
+*.tsx  text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css  text eol=lf
+*.md   text eol=lf
+*.svg  text eol=lf
+
+# 二进制资产（禁止文本化处理与差异计算）
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.bmp   binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+*.ttf   binary
+*.otf   binary
+*.woff  binary
 *.woff2 binary
+*.mp4   binary
+*.mov   binary
+*.webm  binary
+*.mp3   binary
+*.wav   binary

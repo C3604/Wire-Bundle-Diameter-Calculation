@@ -176,3 +176,50 @@ src/
 ---
 
 **感谢使用线束直径计算工具！** 希望这个工具能为你的工程设计工作带来便利。
+
+# 手动打包脚本（选择性打包）
+
+**作用**
+- 将项目核心运行文件按 .buildignore 规则进行过滤打包为 ZIP，便于上线或分发；不依赖第三方构建工具。
+
+**包含范围**
+- 必备：manifest.json、popup.html
+- 代码与资源：src/**、icons/**、_locales/**
+- 运行时静态：src/pages/help/assets/**、src/storage/**
+
+**脚本位置**
+- 批处理入口：[build.bat](./build.bat)
+- 核心逻辑（PowerShell）：[build-core.ps1](./build-core.ps1)
+- 忽略规则模板：[.buildignore](./.buildignore)
+
+**参数说明**
+- --version 指定版本号（覆盖 manifest.json）
+- --output 指定输出目录（默认 ./release）
+- --clean 打包前清理临时目录与同名旧包
+
+**使用示例（Windows）**
+
+```powershell
+# 默认打包到 ./release，版本号读取 manifest.json
+build.bat
+
+# 指定版本
+build.bat --version 10.3.4
+
+# 指定输出目录并清理
+build.bat --output C:\dist --clean
+```
+
+**命名与版本来源**
+- 压缩包命名：项目名称_v[版本号]_[YYYYMMDD].zip
+- 项目名称优先取 manifest.name；如为 __MSG_xxx__ 形式则使用仓库文件夹名
+- 版本号优先取 --version，否则读取 [manifest.json](./manifest.json) 的 version
+
+**忽略规则**
+- .buildignore 语法类似 .gitignore，支持注释、通配符、目录模式与反排除(!)
+- 常见排除：IDE目录、构建产物、测试/示例、临时与系统文件、环境配置、扩展产物等
+
+**日志与错误处理**
+- 日志文件：logs/build-YYYYMMDD-HHMMSS.log
+- 失败场景：缺少 manifest.json、版本解析失败、压缩失败等；脚本返回非零退出码
+

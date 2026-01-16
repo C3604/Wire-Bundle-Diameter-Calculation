@@ -1,17 +1,51 @@
+# 通用临时文件与日志
 *.tmp
 *.log
 *.cache
 *.bak
 *~
+*.orig
+debug.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 操作系统与桌面
 Thumbs.db
 .DS_Store
+desktop.ini
+
+# IDE/编辑器
+.vscode/
+.idea/
+*.code-workspace
+
+# Node 与工具缓存
 node_modules/
-dist/
-build/
-out/
-coverage/
 .cache/
 .parcel-cache/
 .vite/
 .next/
-*.orig
+.eslintcache
+.tsbuildinfo
+.nyc_output/
+.turbo/
+.pnpm-store/
+
+# 构建/测试产物
+dist/
+build/
+out/
+coverage/
+
+# 环境变量与敏感配置
+.env
+.env.*
+.envrc
+*.pem
+
+# 浏览器扩展打包产物
+release/
+packages/
+*.crx
+*.xpi
