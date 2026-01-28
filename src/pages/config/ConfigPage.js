@@ -135,7 +135,7 @@ export function renderConfigPage(container) {
               <table id="main-data-table-config-body" class="main-data-table calc-table calc-table-fixed">
                 <tbody>
                   <tr>
-                    <td colspan="6" style="text-align:center;padding:20px;" data-i18n="config_standard_wires_table_loading">正在加载配置...</td>
+                    <td colspan="6" class="u-text-center u-p-20" data-i18n="config_standard_wires_table_loading">正在加载配置...</td>
                   </tr>
                 </tbody>
               </table>

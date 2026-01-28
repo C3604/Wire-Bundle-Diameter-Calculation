@@ -42,7 +42,7 @@ export function renderQueryPage(container) {
                 </label>
               </div>
             </div>
-            <div id="query-loading" style="display:none;margin-top:6px;" data-i18n="common_loading">加载中...</div>
+            <div id="query-loading" class="u-hidden" style="margin-top:6px;" data-i18n="common_loading">加载中...</div>
           </div>
         </div>
         <div class="calc-divider"></div>
@@ -65,12 +65,12 @@ export function renderQueryPage(container) {
               </thead>
             </table>
           </div>
-          <div id="query-table-body-wrapper" style="max-height:600px;overflow-y:auto">
+          <div id="query-table-body-wrapper" class="u-scroll-y-auto u-max-h-600">
             <table id="main-data-table-query-body" class="main-data-table calc-table calc-table-fixed">
               <tbody></tbody>
             </table>
           </div>
-          <div id="query-empty" style="display:none;margin-top:8px;color:#888;" data-i18n="query_empty_hint">没有匹配的记录，请调整筛选条件。</div>
+          <div id="query-empty" class="u-hidden" style="margin-top:8px;color:#888;" data-i18n="query_empty_hint">没有匹配的记录，请调整筛选条件。</div>
         </div>
       </div>
     </div>

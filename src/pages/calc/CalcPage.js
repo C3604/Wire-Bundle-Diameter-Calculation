@@ -56,7 +56,7 @@ export function renderCalcPage(container) {
                     <span data-i18n="calc_group_standard_wire_select_label">标准</span>
                     <select id="wire-standard-select"></select>
                   </label>
-                  <span id="wire-standard-loading" style="display:none;" data-i18n="common_loading">加载中...</span>
+                  <span id="wire-standard-loading" class="u-hidden" data-i18n="common_loading">加载中...</span>
                 </div>
                 <div class="actions-right">
                   <button class="calc-table-btn" id="add-row-1" data-i18n-title="calc_group_standard_wire_button_add_tooltip" title="增加一行标准导线输入"><span class="emoji">✨</span><span class="text" data-i18n="common_add">增加</span></button>
@@ -79,7 +79,7 @@ export function renderCalcPage(container) {
                   </thead>
                 </table>
               </div>
-              <div id="table1-body-wrapper" style="max-height:220px;overflow-y:auto">
+              <div id="table1-body-wrapper" class="u-scroll-y-auto u-max-h-220">
                 <table id="main-data-table-standard-body" class="main-data-table calc-table calc-table-fixed">
                   <tbody></tbody>
                 </table>
@@ -108,7 +108,7 @@ export function renderCalcPage(container) {
                   </thead>
                 </table>
               </div>
-              <div id="table2-body-wrapper" style="max-height:164px;overflow-y:auto">
+              <div id="table2-body-wrapper" class="u-scroll-y-auto u-max-h-164">
                 <table id="main-data-table-special-body" class="main-data-table calc-table calc-table-fixed">
                   <tbody></tbody>
                 </table>
@@ -136,7 +136,7 @@ export function renderCalcPage(container) {
                   </thead>
                 </table>
               </div>
-              <div id="table3-body-wrapper" style="max-height:164px;overflow-y:auto">
+              <div id="table3-body-wrapper" class="u-scroll-y-auto u-max-h-164">
                 <table id="main-data-table-wrap-body" class="main-data-table calc-table calc-table-fixed">
                   <tbody></tbody>
                 </table>
@@ -1391,7 +1391,7 @@ export function renderCalcPage(container) {
                 <line x1="4" y1="${thresholdY}" x2="${width-4}" y2="${thresholdY}" stroke="#f55" stroke-dasharray="4,3" stroke-width="1"/>
               </svg>`;
               const html = `
-                <div style="display:flex;align-items:center;gap:12px;">
+                <div class="u-flex-center" style="gap:12px;">
                   <div>${svg}</div>
                   <div style="font-size:12px;line-height:18px;">
                     <div>最终残差：${finalResid.toFixed(6)}</div>

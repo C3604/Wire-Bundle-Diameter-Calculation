@@ -40,7 +40,7 @@ export function renderHistoryPage(container) {
                 </thead>
               </table>
             </div>
-            <div id="history-table-body-wrapper" style="max-height:800px;overflow-y:auto">
+            <div id="history-table-body-wrapper" class="u-scroll-y-auto u-max-h-800">
               <table id="main-data-table-history-body" class="main-data-table calc-table calc-table-fixed">
                 <tbody></tbody>
               </table>

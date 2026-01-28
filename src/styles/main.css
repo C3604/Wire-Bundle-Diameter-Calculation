@@ -20,6 +20,57 @@ img, canvas, svg {
   height: auto;
 }
 
+.u-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.u-inline-flex-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.u-rounded-8 {
+  border-radius: 8px;
+}
+.u-panel-12 {
+  padding: 12px;
+  box-sizing: border-box;
+}
+.u-emoji-24-center {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  line-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.u-hidden {
+  display: none;
+}
+.u-scroll-y-auto {
+  overflow-y: auto;
+}
+.u-max-h-164 {
+  max-height: 164px;
+}
+.u-max-h-220 {
+  max-height: 220px;
+}
+.u-max-h-600 {
+  max-height: 600px;
+}
+.u-max-h-800 {
+  max-height: 800px;
+}
+.u-text-center {
+  text-align: center;
+}
+.u-p-20 {
+  padding: 20px;
+}
+
 .main-container {
   display: flex;
   width: 100%;
@@ -444,7 +495,7 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 /* 帮助按钮的紧急化样式 */
-#btn-help {
+#btn-help, .btn-help {
   background-color: transparent;
   border: none;
   color: #555; /* 比其他按钮文字颜色稍浅一些 */
@@ -461,28 +512,28 @@ div.sidebar-divider > #collapseBtn svg {
   justify-content: center; /* 水平居中SVG */
 }
 
-#btn-help .emoji {
+#btn-help .emoji, .btn-help .emoji {
   
 }
 
-#btn-help:hover {
+#btn-help:hover, .btn-help:hover {
   background-color: rgba(0, 0, 0, 0.05); /* 轻微的悬停效果 */
   opacity: 1;
 }
 
 /* 如果希望帮助按钮在侧边栏收起时也显示 emoji */
-.sidebar.collapsed #btn-help .emoji {
+.sidebar.collapsed #btn-help .emoji, .sidebar.collapsed .btn-help .emoji {
   
 }
 
-.sidebar.collapsed #btn-help {
+.sidebar.collapsed #btn-help, .sidebar.collapsed .btn-help {
   width: 48px; /* 与语言按钮保持一致 */
   height: 48px; /* 与语言按钮保持一致 */
   border-radius: 8px;
 }
 
 /* 语言切换按钮样式 */
-#btn-language {
+#btn-language, .btn-language {
   width: 48px;
   height: 48px;
   margin: 0; /* 移除 margin-bottom */
@@ -499,17 +550,17 @@ div.sidebar-divider > #collapseBtn svg {
   transition: background 0.2s, color 0.2s, opacity 0.2s;
 }
 
-#btn-language:hover {
+#btn-language:hover, .btn-language:hover {
   background: #F8F9FA;
   color: #3A86FF;
   opacity: 1; /* Make it fully opaque on hover */
 }
 
-#btn-language .emoji {
+#btn-language .emoji, .btn-language .emoji {
   
 }
 
-.sidebar.collapsed #btn-language {
+.sidebar.collapsed #btn-language, .sidebar.collapsed .btn-language {
   width: 48px;
   height: 48px;
 }
@@ -661,25 +712,6 @@ div.sidebar-divider > #collapseBtn svg {
   display: flex;
   gap: 8px;
 }
-/* .calc-table-btn 被定义在 HistoryPage.css 和 main.css (通用按钮) 中，这里注释掉以避免直接冲突 */
-/* 如果需要 CalcPage 特有的 calc-table-btn 样式，请取消注释并调整或确保其特殊性更高 */
-/*
-.calc-table-btn {
-  padding: 4px 16px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #CED4DA;
-  background: #FFFFFF;
-  color: #495057;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-.calc-table-btn:hover {
-  background: #EBF4FF;
-  border-color: #3A86FF;
-  color: #3A86FF;
-}
-*/
 #reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover {
   background: #FEEAEA;
   border-color: #D00000;
@@ -954,25 +986,6 @@ div.sidebar-divider > #collapseBtn svg {
   display: flex;
   gap: 8px;
 }
-/* .calc-table-btn 被定义在 HistoryPage.css 和 main.css (通用按钮) 中，这里注释掉以避免直接冲突 */
-/* 如果需要 CalcPage 特有的 calc-table-btn 样式，请取消注释并调整或确保其特殊性更高 */
-/*
-.calc-table-btn {
-  padding: 4px 16px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #CED4DA;
-  background: #FFFFFF;
-  color: #495057;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-.calc-table-btn:hover {
-  background: #EBF4FF;
-  border-color: #3A86FF;
-  color: #3A86FF;
-}
-*/
 #reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover {
   background: #FEEAEA;
   border-color: #D00000;
@@ -1682,27 +1695,6 @@ div.sidebar-divider > #collapseBtn svg {
   gap: 12px; /* 重新显式声明 gap */
 }
 
-/* 通用按钮样式 (参考 CalcPage) */
-/* .calc-table-btn 已在计算页相关样式中定义，此处不重复 */
-/* If specific overrides for HistoryPage are needed for .calc-table-btn, they should be more specific */
-/*
-.calc-table-btn {
-  padding: 8px 20px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #CED4DA;
-  background: #FFFFFF;
-  color: #495057;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-
-.calc-table-btn:hover {
-  background: #EBF4FF;
-  border-color: #3A86FF;
-  color: #3A86FF;
-}
-*/
 .calc-table-btn.btn-danger:hover { /* "清除历史"按钮的特殊悬停效果 */
   background: #FEEAEA;
   border-color: #D00000;
@@ -1786,7 +1778,7 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 如果需要，可以添加针对历史记录页面中特定元素的更精细样式 */
 
-.calc-table-btn { /* 通用表格/操作按钮样式 */
+.calc-table-btn, .calc-table__btn {
   padding: 6px 16px; /* 调整内边距使其更一致 */
   font-size: 14px;
   border-radius: 8px; /* 统一增加圆角 */
@@ -1798,20 +1790,20 @@ div.sidebar-divider > #collapseBtn svg {
   box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 微微阴影 */
 }
 
-.calc-table-btn:hover { /* 通用悬停效果 */
+.calc-table-btn:hover, .calc-table__btn:hover {
   border-color: #ADB5BD; /* 边框变深 */
   background-color: #F8F9FA; /* 背景变浅灰 */
   box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* 悬停时阴影加深 */
   transform: translateY(-1px); /* 悬停时轻微上移 */
 }
 
-.calc-table-btn:active {
+.calc-table-btn:active, .calc-table__btn:active {
   background-color: #E9ECEF; /* 点击时背景更淡 */
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   transform: translateY(0); /* 点击时回到原位 */
 }
 
-.calc-table-btn:disabled {
+.calc-table-btn:disabled, .calc-table__btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
@@ -1820,7 +1812,7 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 取消红色悬停动画，改为柔和效果 */
 #reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover,
-.calc-table-btn.btn-danger:hover {
+.calc-table-btn.btn-danger:hover, .calc-table__btn--danger:hover {
   background: #FFF5F5; /* 微微背景变化 */
   border-color: #DC3545; /* 边框保持危险色 */
   color: #DC3545;       /* 文字保持危险色 */
@@ -1828,7 +1820,7 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 #reset-table-1:active, #reset-table-2:active, #reset-table-3:active,
-.calc-table-btn.btn-danger:active {
+.calc-table-btn.btn-danger:active, .calc-table__btn--danger:active {
   background: #f8d7da;
   border-color: #DC3545;
   color: #DC3545;
@@ -1836,7 +1828,7 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 #reset-table-1:disabled, #reset-table-2:disabled, #reset-table-3:disabled,
-.calc-table-btn.btn-danger:disabled {
+.calc-table-btn.btn-danger:disabled, .calc-table__btn--danger:disabled {
   background: #FFFFFF;
   border-color: #DC3545;
   color: #DC3545;

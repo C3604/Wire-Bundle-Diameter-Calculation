@@ -2,7 +2,7 @@ import { getJSON, setJSON } from "./storage.js";
 import { showToast } from "../components/feedback.js";
 import i18n from "../i18n/index.js";
 
-const CACHE_PREFIX = "mspec_cache:";
+const CACHE_PREFIX = "mspec_cache_v2:";
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 
 function makeUrl(p) {
@@ -93,6 +93,14 @@ class MSpecService {
       this._db = cached.data;
       this._loaded = true;
       this._prepare();
+      // Restore canonical keys from cached indexes
+      if (this._db && this._db.indexes) {
+        const idx = this._db.indexes;
+        if (idx.byWireSize) Object.keys(idx.byWireSize).forEach(k => this._canonicalKeys.byWireSize.add(k));
+        if (idx.byWallThickness) Object.keys(idx.byWallThickness).forEach(k => this._canonicalKeys.byWallThickness.add(k));
+        if (idx.byWireType) Object.keys(idx.byWireType).forEach(k => this._canonicalKeys.byWireType.add(k));
+        if (idx.byConductorDesign) Object.keys(idx.byConductorDesign).forEach(k => this._canonicalKeys.byConductorDesign.add(k));
+      }
       return this._db;
     }
 
@@ -161,7 +169,8 @@ class MSpecService {
       };
       Object.values(variantsMap).forEach((v) => {
         const id = v.id;
-        const ws = String(v.WireSize);
+        let ws = this.getWireSizeKeyForId(id);
+        if (!ws && v.WireSize != null) ws = String(v.WireSize);
         const wt = v.WallThickness;
         const ty = v.WireType;
         const cd = v.ConductorDesign;
