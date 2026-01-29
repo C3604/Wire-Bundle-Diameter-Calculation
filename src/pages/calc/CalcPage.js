@@ -1233,8 +1233,8 @@ export function renderCalcPage(container) {
             const wireInfoForLegend = []; // 存储用于图例的导线信息 {diameter, type, originalValue}
 
             standardRows.forEach((row) => {
-              const qty = parseInt(row.qty, 10);
-              const od = parseFloat(row.od);
+              const qty = parseInt(String(row.qty).trim(), 10);
+              const od = parseFloat(String(row.od).replace(",", "."));
               if (!isNaN(qty) && qty > 0 && !isNaN(od) && od > 0) {
                 uniqueDiameters.add(od);
                 if (row.gauge) {
@@ -1255,8 +1255,8 @@ export function renderCalcPage(container) {
               }
             });
             specialRows.forEach((row) => {
-              const qty = parseInt(row.qty, 10);
-              const od = parseFloat(row.od);
+              const qty = parseInt(String(row.qty).trim(), 10);
+              const od = parseFloat(String(row.od).replace(",", "."));
               if (!isNaN(qty) && qty > 0 && !isNaN(od) && od > 0) {
                 uniqueDiameters.add(od);
                 wireInfoForLegend.push({
