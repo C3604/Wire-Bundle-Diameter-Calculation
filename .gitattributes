@@ -27,6 +27,8 @@
 *.ico   binary
 *.pdf   binary
 *.zip   binary
+*.crx   binary
+*.xpi   binary
 *.ttf   binary
 *.otf   binary
 *.woff  binary

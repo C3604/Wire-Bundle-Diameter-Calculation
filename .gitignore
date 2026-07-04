@@ -19,24 +19,20 @@ desktop.ini
 .vscode/
 .idea/
 *.code-workspace
+.claude/
+.claude/worktrees/
 
-# Node 与工具缓存
+# 本地工具与缓存
 node_modules/
 .cache/
-.parcel-cache/
-.vite/
-.next/
 .eslintcache
-.tsbuildinfo
-.nyc_output/
-.turbo/
-.pnpm-store/
 
 # 构建/测试产物
 dist/
 build/
 out/
 coverage/
+logs/
 
 # 环境变量与敏感配置
 .env
@@ -46,6 +42,5 @@ coverage/
 
 # 浏览器扩展打包产物
 release/
-packages/
 *.crx
 *.xpi
