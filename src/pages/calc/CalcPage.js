@@ -74,7 +74,7 @@ export function destroyCalcPageSession() {
   }
   // Phase 2：清理 canvas resize 观察器与 debounce 定时器，防止泄漏
   if (s.resizeObserver && typeof s.resizeObserver.disconnect === "function") {
-    try { s.resizeObserver.disconnect(); } catch (_) {}
+    try { s.resizeObserver.disconnect(); } catch (_) { }
     s.resizeObserver = null;
   }
   if (s.resizeDebounceTimer) {
@@ -82,7 +82,7 @@ export function destroyCalcPageSession() {
     s.resizeDebounceTimer = null;
   }
   if (typeof s.windowResizeHandler === "function") {
-    try { window.removeEventListener("resize", s.windowResizeHandler); } catch (_) {}
+    try { window.removeEventListener("resize", s.windowResizeHandler); } catch (_) { }
     s.windowResizeHandler = null;
   }
   currentCalcSession = null;
@@ -121,7 +121,7 @@ export function renderCalcPage(container) {
                     <span data-i18n="calc_group_standard_wire_select_label">标准</span>
                     <select id="wire-standard-select"></select>
                   </label>
-                  <span id="wire-standard-loading" class="u-hidden" data-i18n="common_loading">加载中...</span>
+                  <span id="wire-standard-loading" class="u-hidden query-status" data-i18n="common_loading">加载中...</span>
                 </div>
                 <div class="actions-right">
                   <button class="calc-table-btn" id="add-row-1" data-i18n-title="calc_group_standard_wire_button_add_tooltip" title="增加一行标准导线输入"><span class="emoji">✨</span><span class="text" data-i18n="common_add">增加</span></button>
@@ -237,14 +237,15 @@ export function renderCalcPage(container) {
             <div class="simulation-content-wrapper">
               <div class="simulation-area">
                 <canvas id="simulation-canvas" width="300" height="300"></canvas>
-                <div class="simulation-legend-wrapper" id="simulation-legend-wrapper">
+                <div class="simulation-legend-wrapper is-empty" id="simulation-legend-wrapper">
                   <ul id="legend-items-list"></ul>
                 </div>
               </div>
               <div class="simulation-details">
                 <!-- 高亮平均直径 -->
-                <div class="highlighted-result-area">
-                  <span id="highlighted-avg-diameter" class="highlight-value" data-i18n-title="calc_result_highlight_tooltip" title="向上取整的最终平均直径，括号内为包含包裹物和公差的实际计算值 (保留两位小数)">--</span>
+                <div class="highlighted-result-area result-highlight-card">
+                  <span class="result-metric-label" data-i18n="calc_result_diameter">线束直径</span>
+                  <span id="highlighted-avg-diameter" class="highlight-value result-metric-value" data-i18n-title="calc_result_highlight_tooltip" title="向上取整的最终平均直径，括号内为包含包裹物和公差的实际计算值 (保留两位小数)">--</span>
                 </div>
                 <!-- 输入统计区 -->
                 <div class="group-stats input-summary-container detail-separator-top">
@@ -259,7 +260,7 @@ export function renderCalcPage(container) {
                 <div class="group-result section-title detail-separator-top">
                 <!-- <div class="title-container"><span class="emoji">📈</span><span data-i18n="calc_group_result_title">直径计算详情</span></div>-->
                 </div>
-                <table class="simulation-results-table">
+                <table class="simulation-results-table result-details-card">
                   <thead>
                     <tr>
                       <th data-i18n="calc_result_details_header_param">参数</th>
@@ -285,13 +286,14 @@ export function renderCalcPage(container) {
                     </tr>
                   </tbody>
                 </table>
+                <div id="result-status-panel" class="result-status-panel"></div>
               </div>
             </div>
           </div>
           <!-- 计算结果区 -->
           <div class="group-result chart-container-wrapper">
             <div class="group-title chart-area-title"><div class="title-container"><span class="emoji">📊</span><span data-i18n="calc_results_chart_title">计算结果</span></div></div>
-            <div class="results-chart-area" id="results-history-chart-container">
+            <div class="results-chart-area is-empty" id="results-history-chart-container">
               <canvas id="results-history-chart"></canvas>
             </div>
           </div>
@@ -342,7 +344,7 @@ export function renderCalcPage(container) {
             i18n.getMessage("state_save_failed") || "计算页状态保存失败",
             "warning",
           );
-        } catch (_) {}
+        } catch (_) { }
       }
     }
 
@@ -536,7 +538,7 @@ export function renderCalcPage(container) {
           if (dataUrl && dataUrl.startsWith("blob:")) {
             try {
               URL.revokeObjectURL(dataUrl);
-            } catch (_) {}
+            } catch (_) { }
           }
         }
       });
@@ -591,6 +593,29 @@ export function renderCalcPage(container) {
     const resetBtn1 = calcLayoutEl.querySelector("#reset-table-1");
     const standardSelectEl = calcLayoutEl.querySelector("#wire-standard-select");
     const standardLoadingEl = calcLayoutEl.querySelector("#wire-standard-loading");
+    const resultsChartArea = calcLayoutEl.querySelector("#results-history-chart-container");
+    const highlightedAvgEl = calcLayoutEl.querySelector("#highlighted-avg-diameter");
+    const resultStatusPanel = calcLayoutEl.querySelector("#result-status-panel");
+    const localizedUiText = {
+      emptyChart:
+        i18n.currentLanguage === "en"
+          ? "Run a calculation to view the result distribution."
+          : "完成一次计算后，这里会显示结果分布。",
+      loadingChart:
+        i18n.currentLanguage === "en"
+          ? "Generating result chart..."
+          : "正在生成结果图表...",
+    };
+
+    function setResultsChartState(state) {
+      if (!resultsChartArea) return;
+      resultsChartArea.classList.toggle("is-empty", state === "empty");
+      resultsChartArea.classList.toggle("is-loading", state === "loading");
+      resultsChartArea.dataset.emptyText = localizedUiText.emptyChart;
+      resultsChartArea.dataset.loadingText = localizedUiText.loadingChart;
+    }
+
+    setResultsChartState("empty");
     let standardRows = [
       { gauge: "0.35", type: "", od: "", qty: "0" },
       { gauge: "0.5", type: "", od: "", qty: "0" },
@@ -607,8 +632,8 @@ export function renderCalcPage(container) {
       try {
         const readmeUrl =
           typeof chrome !== "undefined" &&
-          chrome.runtime &&
-          typeof chrome.runtime.getURL === "function"
+            chrome.runtime &&
+            typeof chrome.runtime.getURL === "function"
             ? chrome.runtime.getURL("src/storage/Database/mspec.README.md")
             : "src/storage/Database/mspec.README.md";
         const resp = await fetch(readmeUrl);
@@ -1009,6 +1034,7 @@ export function renderCalcPage(container) {
         tr.appendChild(tdType);
         // 直径
         const tdOD = document.createElement("td");
+        tdOD.className = "readonly-cell";
         tdOD.textContent = row.od || "";
         tr.appendChild(tdOD);
         // 数量
@@ -1035,6 +1061,7 @@ export function renderCalcPage(container) {
         const tdDel = document.createElement("td");
         const btnDel = document.createElement("button");
         btnDel.textContent = "❌";
+        btnDel.className = "btn-icon btn-danger";
         btnDel.title = "删除此行";
         btnDel.onclick = () => {
           standardRows.splice(idx, 1);
@@ -1129,6 +1156,7 @@ export function renderCalcPage(container) {
         const tdDel = document.createElement("td");
         const btnDel = document.createElement("button");
         btnDel.textContent = "❌";
+        btnDel.className = "btn-icon btn-danger";
         btnDel.title = "删除此行";
         btnDel.onclick = () => {
           specialRows.splice(idx, 1);
@@ -1204,6 +1232,7 @@ export function renderCalcPage(container) {
         const tdDel = document.createElement("td");
         const btnDel = document.createElement("button");
         btnDel.textContent = "❌";
+        btnDel.className = "btn-icon btn-danger";
         btnDel.title = "删除此行";
         btnDel.onclick = () => {
           wrapRows.splice(idx, 1);
@@ -1306,6 +1335,8 @@ export function renderCalcPage(container) {
 
     // 清除模拟结果和图表的函数
     function clearSimulationResults() {
+      const oldPanel = calcLayoutEl.querySelector("#convergence-panel");
+      if (oldPanel) oldPanel.remove();
       // 清除画布
       const canvasEl = calcLayoutEl.querySelector("#simulation-canvas");
       if (canvasEl) {
@@ -1321,10 +1352,11 @@ export function renderCalcPage(container) {
       calcLayoutEl.querySelector("#max-wire-theoretical").textContent = "--";
       calcLayoutEl.querySelector("#avg-wire-theoretical").textContent = "--";
       // Clear highlighted value (reset innerHTML)
-      const highlightedAvgEl = calcLayoutEl.querySelector(
-        "#highlighted-avg-diameter",
-      );
       if (highlightedAvgEl) highlightedAvgEl.innerHTML = "--";
+      if (resultStatusPanel) {
+        resultStatusPanel.innerHTML = "";
+        resultStatusPanel.classList.remove("has-content");
+      }
       // 清除历史图表
       if (simulationHistoryChartInstance) {
         simulationHistoryChartInstance.destroy();
@@ -1333,6 +1365,7 @@ export function renderCalcPage(container) {
       lastSimulationCircles = null; // 重置最后一次模拟数据
       currentDiameterColorMap = []; // 清除颜色映射
       renderLegend([]); // 清空图例显示
+      setResultsChartState("empty");
       // 清理时禁用并隐藏导出按钮
       if (exportBtn) {
         exportBtn.style.display = "none";
@@ -1353,13 +1386,7 @@ export function renderCalcPage(container) {
         if (resetBtn2) resetBtn2.click();
         if (resetBtn3) resetBtn3.click();
         if (resetToleranceBtn) resetToleranceBtn.click();
-        // #score-* 已从模板移除，无需清理
-        const maxEl = calcLayoutEl.querySelector("#max-wire");
-        const minEl = calcLayoutEl.querySelector("#min-wire");
-        const avgEl = calcLayoutEl.querySelector("#avg-wire");
-        if (maxEl) maxEl.textContent = "";
-        if (minEl) minEl.textContent = "";
-        if (avgEl) avgEl.textContent = "";
+        clearSimulationResults();
         scheduleSaveState();
       };
     }
@@ -1382,34 +1409,36 @@ export function renderCalcPage(container) {
           scoreValue: params.SIMULATION_COUNT,
         });
         if (!state.ok) {
-           // 优先展示 collector 内的具体 warnings（如 qty 超限、tolerance 无效）；
-           // 只有当 warnings 为空时才回退到通用「无有效导线」提示。
-           if (state.warnings && state.warnings.length) {
-             state.warnings.forEach((msg) => showToast(msg, "warning"));
-           } else {
-             showToast(i18n.getMessage("calc_message_no_valid_wires"), "warning");
-           }
-           btnPageCalculate.disabled = false;
-           btnPageCalculate.textContent = i18n.getMessage(
-             "calc_bottom_bar_calculate",
-           );
-           return;
-         }
-         if (state.warnings && state.warnings.length) {
-           state.warnings.forEach((msg) => showToast(msg, "warning"));
-         }
-         const {
-           wireRadii,
-           totalWrappingThickness,
-           numSimulations,
-           toleranceFactor,
-         } = state;
- 
-         // 清除旧结果和画布/图表
-         clearSimulationResults();
+          // 优先展示 collector 内的具体 warnings（如 qty 超限、tolerance 无效）；
+          // 只有当 warnings 为空时才回退到通用「无有效导线」提示。
+          if (state.warnings && state.warnings.length) {
+            state.warnings.forEach((msg) => showToast(msg, "warning"));
+          } else {
+            showToast(i18n.getMessage("calc_message_no_valid_wires"), "warning");
+          }
+          btnPageCalculate.disabled = false;
+          btnPageCalculate.textContent = i18n.getMessage(
+            "calc_bottom_bar_calculate",
+          );
+          return;
+        }
+        if (state.warnings && state.warnings.length) {
+          state.warnings.forEach((msg) => showToast(msg, "warning"));
+        }
+        const {
+          wireRadii,
+          totalWrappingThickness,
+          numSimulations,
+          toleranceFactor,
+        } = state;
+
+        // 清除旧结果和画布/图表
+        clearSimulationResults();
+        setResultsChartState("loading");
         calcLayoutEl.querySelector("#min-wire").textContent = "计算中";
         calcLayoutEl.querySelector("#max-wire").textContent = "计算中";
         calcLayoutEl.querySelector("#avg-wire").textContent = "计算中";
+        if (highlightedAvgEl) highlightedAvgEl.textContent = "计算中";
 
         // 使用 setTimeout 异步执行，防止UI阻塞
         setTimeout(() => {
@@ -1527,7 +1556,7 @@ export function renderCalcPage(container) {
             if (anyNotConverged) {
               showToast(
                 i18n.getMessage("calc_message_simulation_not_converged") ||
-                  "部分模拟未收敛，建议提高次数或调整参数",
+                "部分模拟未收敛，建议提高次数或调整参数",
                 "warning",
               );
             }
@@ -1546,17 +1575,6 @@ export function renderCalcPage(container) {
               const finalAvgODValue =
                 (avgSimOD + addedDiameterFromWrapping) * toleranceFactor;
 
-              const panelId = "convergence-panel";
-              // 仅在当前计算页作用域内清理旧面板，避免污染其它页面/残留 DOM
-              const oldPanel = calcLayoutEl.querySelector(`#${panelId}`);
-              if (oldPanel) oldPanel.remove();
-              const panel = document.createElement("div");
-              panel.id = panelId;
-              panel.style.marginTop = "8px";
-              panel.style.padding = "8px";
-              panel.style.border = "1px solid #ddd";
-              panel.style.borderRadius = "6px";
-              panel.style.background = "#fff";
               const successRate = Math.round(((numSimulations - notConvergedCount) / numSimulations) * 100);
               let series = [];
               let threshold = params.CONVERGENCE_THRESHOLD;
@@ -1581,23 +1599,23 @@ export function renderCalcPage(container) {
               const thresholdY = height - (threshold / maxY) * (height - 8) - 4;
               const svg = `<svg width="${width}" height="${height}">
                 <polyline points="${pts}" fill="none" stroke="#2f7" stroke-width="2"/>
-                <line x1="4" y1="${thresholdY}" x2="${width-4}" y2="${thresholdY}" stroke="#f55" stroke-dasharray="4,3" stroke-width="1"/>
+                <line x1="4" y1="${thresholdY}" x2="${width - 4}" y2="${thresholdY}" stroke="#f55" stroke-dasharray="4,3" stroke-width="1"/>
               </svg>`;
               const html = `
-                <div class="u-flex-center" style="gap:12px;">
+                <div class="result-status-meta">
                   <div>${svg}</div>
-                  <div style="font-size:12px;line-height:18px;">
-                    <div>最终残差：${finalResid.toFixed(6)}</div>
-                    <div>是否收敛：${convergedFlag ? "是" : "否"}</div>
-                    <div>主循环迭代：${iters}</div>
-                    <div>批量成功率：${successRate}%</div>
+                  <div class="result-status-text">
+                    <div><strong>最终残差：</strong>${finalResid.toFixed(6)}</div>
+                    <div><strong>是否收敛：</strong>${convergedFlag ? "是" : "否"}</div>
+                    <div><strong>主循环迭代：</strong>${iters}</div>
+                    <div><strong>批量成功率：</strong>${successRate}%</div>
                   </div>
                 </div>
               `;
-              panel.innerHTML = html;
-              // 挂载到当前计算页右侧结果区（.layout-right）；绝不 fallback 到 document.body
-              const target = calcLayoutEl.querySelector(".layout-right") || calcLayoutEl;
-              target.appendChild(panel);
+              if (resultStatusPanel) {
+                resultStatusPanel.innerHTML = html;
+                resultStatusPanel.classList.add("has-content");
+              }
               const accelSet = [1.2, 1.4];
               const thrSet = [0.0012, 0.001];
               const stepSet = [12, 15];
@@ -1627,10 +1645,11 @@ export function renderCalcPage(container) {
               }
               if (best) {
                 const line = document.createElement("div");
-                line.style.marginTop = "6px";
-                line.style.fontSize = "12px";
-                line.textContent = `建议参数：ACCEL=${best.a.toFixed(2)} 阈值=${best.t.toFixed(4)} 步迭代=${best.s}，预计成功率=${Math.round(best.rate*100)}% 平均主迭代=${Math.round(best.avgIter)}`;
-                panel.appendChild(line);
+                line.className = "result-status-text";
+                line.textContent = `建议参数：ACCEL=${best.a.toFixed(2)} 阈值=${best.t.toFixed(4)} 步迭代=${best.s}，预计成功率=${Math.round(best.rate * 100)}% 平均主迭代=${Math.round(best.avgIter)}`;
+                if (resultStatusPanel) {
+                  resultStatusPanel.appendChild(line);
+                }
               }
 
               // Calculate display values
@@ -1674,9 +1693,6 @@ export function renderCalcPage(container) {
                 finalAvgODText;
 
               // Update Highlighted final average value using innerHTML
-              const highlightedAvgEl = calcLayoutEl.querySelector(
-                "#highlighted-avg-diameter",
-              );
               if (highlightedAvgEl) {
                 highlightedAvgEl.innerHTML = finalAvgODHighlightHTML;
                 highlightedAvgEl.setAttribute(
@@ -1707,6 +1723,7 @@ export function renderCalcPage(container) {
               );
 
               renderLegend(currentDiameterColorMap); // 渲染图例
+              setResultsChartState("ready");
               // 生成有效结果后，显示并启用导出按钮
               if (exportBtn) {
                 exportBtn.style.display = ""; // 恢复默认显示
@@ -1782,8 +1799,8 @@ export function renderCalcPage(container) {
                     );
                     showToast(
                       i18n.getMessage("calc_message_history_save_failed") ||
-                        i18n.getMessage("calc_message_save_history_error") ||
-                        "历史记录保存失败（存储空间不足）",
+                      i18n.getMessage("calc_message_save_history_error") ||
+                      "历史记录保存失败（存储空间不足）",
                       "warning",
                     );
                   }
@@ -1801,96 +1818,96 @@ export function renderCalcPage(container) {
               showToast(i18n.getMessage("calc_message_no_valid_results"), "error");
               clearSimulationResults(); // 清理结果显示, including new details panel
             }
-            } catch (e) {
-              console.error("计算过程中发生错误:", e);
-              if (isSessionActive(session)) {
-                showToast(i18n.getMessage("calc_message_calculation_error"), "error");
-                clearSimulationResults(); // 出错时也清理结果, including new details panel
-              }
-            } finally {
-              // 只有会话仍活动且按钮仍在 DOM 中才恢复；否则说明用户已切页
-              if (isSessionActive(session) && btnPageCalculate.isConnected) {
-                btnPageCalculate.disabled = false;
-                btnPageCalculate.textContent = i18n.getMessage(
-                  "calc_bottom_bar_calculate",
-                );
-              }
+          } catch (e) {
+            console.error("计算过程中发生错误:", e);
+            if (isSessionActive(session)) {
+              showToast(i18n.getMessage("calc_message_calculation_error"), "error");
+              clearSimulationResults(); // 出错时也清理结果, including new details panel
             }
-          }, 50); // 50ms延迟，给UI渲染留出时间
-        };
-      }
-
-      // --- 初始化执行 ---
-      // 1. 加载状态到内存
-      loadAndApplyState();
-
-      // 2. 根据加载的数据更新OD值
-      standardRows.forEach((row) => updateOD(row));
-
-      // 3. 执行首次渲染
-      renderStandardRows();
-      renderSpecialRows();
-      renderWrapRows();
-
-      // 4. 绑定事件监听（限定在计算页容器内查询，避免污染其它页面 DOM；
-      //    保留原 debounced 兜底，与 scheduleSaveState 叠加为双保险）
-      // 注意：#save-history-checkbox 位于 .calc-bottom-bar，是 .layout-calc 的兄弟；
-      //       必须用 container.querySelector 才能定位到，不能用 calcLayoutEl。
-      [
-        "#add-row-1",
-        "#reset-table-1",
-        "#add-row-2",
-        "#reset-table-2",
-        "#add-row-3",
-        "#reset-table-3",
-        "#reset-tolerance",
-        "#tolerance-input",
-        "#save-history-checkbox",
-      ].forEach((selector) => {
-        const el = container.querySelector(selector);
-        if (el) {
-          const eventType =
-            el.type === "checkbox" || el.type === "range" || el.type === "text"
-              ? "change"
-              : "click";
-          el.addEventListener(eventType, () => {
-            scheduleSaveState();
-          });
-        }
-      });
-
-      // 导出图片按钮绑定
-      if (exportBtn) {
-        exportBtn.addEventListener("click", exportRightAreaAsImage);
-      }
-
-      // 5. 更新i18n文本
-      i18n.updatePageTexts();
-
-      // 6. Phase 2：canvas 尺寸自适应
-      //    - ResizeObserver 监视 canvas 元素本身，容器变化即 debounced 重绘
-      //    - window resize 兜底（老浏览器 / 特殊场景）
-      //    - destroy 时由 destroyCalcPageSession 统一 disconnect / removeEventListener
-      const canvasEl = calcLayoutEl.querySelector("#simulation-canvas");
-      const scheduleRedraw = () => {
-        if (!isSessionActive(session)) return;
-        if (session.resizeDebounceTimer) clearTimeout(session.resizeDebounceTimer);
-        session.resizeDebounceTimer = setTimeout(() => {
-          session.resizeDebounceTimer = null;
-          redrawLastSimulation();
-        }, 120);
+          } finally {
+            // 只有会话仍活动且按钮仍在 DOM 中才恢复；否则说明用户已切页
+            if (isSessionActive(session) && btnPageCalculate.isConnected) {
+              btnPageCalculate.disabled = false;
+              btnPageCalculate.textContent = i18n.getMessage(
+                "calc_bottom_bar_calculate",
+              );
+            }
+          }
+        }, 50); // 50ms延迟，给UI渲染留出时间
       };
-      if (canvasEl && typeof ResizeObserver !== "undefined") {
-        try {
-          session.resizeObserver = new ResizeObserver(scheduleRedraw);
-          session.resizeObserver.observe(canvasEl);
-        } catch (e) {
-          console.warn("ResizeObserver 挂载失败:", e);
-        }
+    }
+
+    // --- 初始化执行 ---
+    // 1. 加载状态到内存
+    loadAndApplyState();
+
+    // 2. 根据加载的数据更新OD值
+    standardRows.forEach((row) => updateOD(row));
+
+    // 3. 执行首次渲染
+    renderStandardRows();
+    renderSpecialRows();
+    renderWrapRows();
+
+    // 4. 绑定事件监听（限定在计算页容器内查询，避免污染其它页面 DOM；
+    //    保留原 debounced 兜底，与 scheduleSaveState 叠加为双保险）
+    // 注意：#save-history-checkbox 位于 .calc-bottom-bar，是 .layout-calc 的兄弟；
+    //       必须用 container.querySelector 才能定位到，不能用 calcLayoutEl。
+    [
+      "#add-row-1",
+      "#reset-table-1",
+      "#add-row-2",
+      "#reset-table-2",
+      "#add-row-3",
+      "#reset-table-3",
+      "#reset-tolerance",
+      "#tolerance-input",
+      "#save-history-checkbox",
+    ].forEach((selector) => {
+      const el = container.querySelector(selector);
+      if (el) {
+        const eventType =
+          el.type === "checkbox" || el.type === "range" || el.type === "text"
+            ? "change"
+            : "click";
+        el.addEventListener(eventType, () => {
+          scheduleSaveState();
+        });
       }
-      session.windowResizeHandler = scheduleRedraw;
-      window.addEventListener("resize", session.windowResizeHandler);
-    }, 0);
+    });
+
+    // 导出图片按钮绑定
+    if (exportBtn) {
+      exportBtn.addEventListener("click", exportRightAreaAsImage);
+    }
+
+    // 5. 更新i18n文本
+    i18n.updatePageTexts();
+
+    // 6. Phase 2：canvas 尺寸自适应
+    //    - ResizeObserver 监视 canvas 元素本身，容器变化即 debounced 重绘
+    //    - window resize 兜底（老浏览器 / 特殊场景）
+    //    - destroy 时由 destroyCalcPageSession 统一 disconnect / removeEventListener
+    const canvasEl = calcLayoutEl.querySelector("#simulation-canvas");
+    const scheduleRedraw = () => {
+      if (!isSessionActive(session)) return;
+      if (session.resizeDebounceTimer) clearTimeout(session.resizeDebounceTimer);
+      session.resizeDebounceTimer = setTimeout(() => {
+        session.resizeDebounceTimer = null;
+        redrawLastSimulation();
+      }, 120);
+    };
+    if (canvasEl && typeof ResizeObserver !== "undefined") {
+      try {
+        session.resizeObserver = new ResizeObserver(scheduleRedraw);
+        session.resizeObserver.observe(canvasEl);
+      } catch (e) {
+        console.warn("ResizeObserver 挂载失败:", e);
+      }
+    }
+    session.windowResizeHandler = scheduleRedraw;
+    window.addEventListener("resize", session.windowResizeHandler);
+  }, 0);
 }
 
 // 新增：渲染图例函数
@@ -1907,10 +1924,12 @@ function renderLegend(diameterColorMap) {
 
   if (!diameterColorMap || diameterColorMap.length === 0) {
     legendWrapper.style.display = "none"; // 如果没有图例项则隐藏整个区域
+    legendWrapper.classList.add("is-empty");
     return;
   }
 
   legendWrapper.style.display = "block"; // 显示图例区域
+  legendWrapper.classList.remove("is-empty");
 
   diameterColorMap.forEach((item) => {
     const listItem = document.createElement("li");

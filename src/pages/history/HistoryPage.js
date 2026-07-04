@@ -152,6 +152,7 @@ export function renderHistoryPage(container) {
           tdEmpty.colSpan = 10;
           tdEmpty.style.textAlign = "center";
           tdEmpty.style.padding = "20px";
+          tdEmpty.dataset.emptyState = "true";
           tdEmpty.textContent = i18n.getMessage("history_message_no_records");
           trEmpty.appendChild(tdEmpty);
           historyTableBody.innerHTML = "";
@@ -165,6 +166,7 @@ export function renderHistoryPage(container) {
         tdErr.colSpan = 10;
         tdErr.style.textAlign = "center";
         tdErr.style.padding = "20px";
+        tdErr.dataset.emptyState = "true";
         tdErr.textContent = i18n.getMessage("history_message_load_error");
         trErr.appendChild(tdErr);
         historyTableBody.appendChild(trErr);

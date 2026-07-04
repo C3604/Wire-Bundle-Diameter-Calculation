@@ -42,7 +42,7 @@ export function renderQueryPage(container) {
                 </label>
               </div>
             </div>
-            <div id="query-loading" class="u-hidden" style="margin-top:6px;" data-i18n="common_loading">加载中...</div>
+            <div id="query-loading" class="u-hidden query-status" data-i18n="common_loading">加载中...</div>
           </div>
         </div>
         <div class="calc-divider"></div>
@@ -70,7 +70,7 @@ export function renderQueryPage(container) {
               <tbody></tbody>
             </table>
           </div>
-          <div id="query-empty" class="u-hidden" style="margin-top:8px;color:#888;" data-i18n="query_empty_hint">没有匹配的记录，请调整筛选条件。</div>
+          <div id="query-empty" class="u-hidden empty-state" data-i18n="query_empty_hint">没有匹配的记录，请调整筛选条件。</div>
         </div>
       </div>
     </div>
@@ -108,21 +108,21 @@ export function renderQueryPage(container) {
         selectedArr.length === 0
           ? chooseLabel
           : selectedArr.length <= 3
-          ? selectedArr.join(", ")
-          : i18n.getMessage("version_display", { version: selectedArr.length }) || `${selectedArr.length}`;
+            ? selectedArr.join(", ")
+            : i18n.getMessage("version_display", { version: selectedArr.length }) || `${selectedArr.length}`;
       rootEl.innerHTML = `
         <button type="button" class="multi-select-toggle">${summary}</button>
         <div class="multi-select-panel">
           ${values
-            .map(
-              (v) => `
+          .map(
+            (v) => `
             <label class="multi-option">
               <input type="checkbox" value="${v}" ${selectedSet.has(String(v)) ? "checked" : ""}/>
               <span class="text">${v}</span>
             </label>
           `,
-            )
-            .join("")}
+          )
+          .join("")}
         </div>
       `;
       const toggle = rootEl.querySelector(".multi-select-toggle");
@@ -265,21 +265,21 @@ export function renderQueryPage(container) {
           arr.length === 0
             ? names[0] || ""
             : arr.length <= 3
-            ? arr.join(", ")
-            : `${arr.length}`;
+              ? arr.join(", ")
+              : `${arr.length}`;
         dbStandardEl.innerHTML = `
           <button type="button" class="multi-select-toggle">${summary}</button>
           <div class="multi-select-panel">
             ${names
-              .map(
-                (n) => `
+            .map(
+              (n) => `
               <label class="multi-option">
                 <input type="checkbox" value="${n}" ${selectedStandards.has(n) ? "checked" : ""}/>
                 <span class="text">${n}</span>
               </label>
             `,
-              )
-              .join("")}
+            )
+            .join("")}
           </div>
         `;
         const toggle = dbStandardEl.querySelector(".multi-select-toggle");
@@ -299,7 +299,7 @@ export function renderQueryPage(container) {
             else selectedStandards.delete(val);
             if (selectedStandards.size === 0) selectedStandards.add(names[0] || "Aptiv_M-Spec");
             renderStandardMulti();
-            elLoading.style.display = "inline";
+            elLoading.style.display = "block";
             try {
               mspecService.setSources(Array.from(selectedStandards));
               await mspecService.load();

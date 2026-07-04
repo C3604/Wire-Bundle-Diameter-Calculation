@@ -1,21 +1,69 @@
 /* 主样式文件（基于 Adobe Color Trends UI/UX 灵感） */
 
+:root {
+  --color-bg: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F8F9FA;
+  --color-primary: #3A86FF;
+  --color-primary-soft: #EBF4FF;
+  --color-primary-border: #B3D1F2;
+  --color-text: #343A40;
+  --color-text-muted: #6C757D;
+  --color-border: #E0E0E0;
+  --color-border-soft: #EAECEF;
+  --color-success: #2ECC71;
+  --color-warning: #F39C12;
+  --color-danger: #E74C3C;
+  --color-danger-soft: #FFF1F0;
+  --color-info: #3A86FF;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.14);
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 220ms ease;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  background: #F8F9FA; /* 背景浅灰 */
+  background: #F8F9FA;
+  /* 背景浅灰 */
   min-height: 100dvh;
-  color: #495057; /* 文字深灰 */
+  color: #495057;
+  /* 文字深灰 */
   overflow-x: hidden;
   line-height: 1.5;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-img, canvas, svg {
+img,
+canvas,
+svg {
   max-width: 100%;
   height: auto;
 }
@@ -25,18 +73,22 @@ img, canvas, svg {
   align-items: center;
   justify-content: center;
 }
+
 .u-inline-flex-center {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
+
 .u-rounded-8 {
   border-radius: 8px;
 }
+
 .u-panel-12 {
   padding: 12px;
   box-sizing: border-box;
 }
+
 .u-emoji-24-center {
   width: 24px;
   height: 24px;
@@ -46,27 +98,35 @@ img, canvas, svg {
   align-items: center;
   justify-content: center;
 }
+
 .u-hidden {
   display: none;
 }
+
 .u-scroll-y-auto {
   overflow-y: auto;
 }
+
 .u-max-h-164 {
   max-height: 164px;
 }
+
 .u-max-h-220 {
   max-height: 220px;
 }
+
 .u-max-h-600 {
   max-height: 600px;
 }
+
 .u-max-h-800 {
   max-height: 800px;
 }
+
 .u-text-center {
   text-align: center;
 }
+
 .u-p-20 {
   padding: 20px;
 }
@@ -88,12 +148,14 @@ img, canvas, svg {
 
 .sidebar {
   width: var(--sidebar-width);
-  background: #FFFFFF; /* 背景白 */
+  background: #FFFFFF;
+  /* 背景白 */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07); /* Enhanced shadow for floating effect */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+  /* Enhanced shadow for floating effect */
   transition: width 0.3s ease;
   position: relative;
   z-index: 20;
@@ -104,7 +166,7 @@ img, canvas, svg {
   padding-top: 30px;
 }
 
-div.sidebar-divider > #collapseBtn {
+div.sidebar-divider>#collapseBtn {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -113,7 +175,8 @@ div.sidebar-divider > #collapseBtn {
   height: 36px;
   background-color: transparent;
   border: none;
-  color: #868E96; /* Initial color for the SVG */
+  color: #868E96;
+  /* Initial color for the SVG */
   font-size: 18px;
   cursor: pointer;
   display: flex;
@@ -121,8 +184,10 @@ div.sidebar-divider > #collapseBtn {
   justify-content: center;
   box-shadow: none;
   z-index: 25;
-  opacity: 1; /* Visible by default */
-  visibility: visible; /* Interactive by default */
+  opacity: 1;
+  /* Visible by default */
+  visibility: visible;
+  /* Interactive by default */
   transition: color 0.2s, transform 0.2s ease-out, text-shadow 0.2s ease-out, opacity 0.2s ease-out, visibility 0.2s ease-out;
 }
 
@@ -130,36 +195,41 @@ div.sidebar-divider > #collapseBtn {
 /* .sidebar:hover + .sidebar-divider > #collapseBtn { } */
 
 /* Hover effects specifically for the button (when it is visible and hovered) */
-div.sidebar-divider > #collapseBtn:hover {
+div.sidebar-divider>#collapseBtn:hover {
   color: #3A86FF;
 }
 
 /* New class for rotating the icon */
-div.sidebar-divider > #collapseBtn.rotate-icon {
+div.sidebar-divider>#collapseBtn.rotate-icon {
   /* Apply base centering and then rotate. Add hover scale if needed or handle combined transforms */
   transform: translate(-50%, -50%) rotate(180deg);
 }
 
-div.sidebar-divider > #collapseBtn.rotate-icon:hover {
+div.sidebar-divider>#collapseBtn.rotate-icon:hover {
   /* Ensure hover scale is also applied when rotated */
   transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
 }
 
 /* Styles for the SVG element inside the button */
-div.sidebar-divider > #collapseBtn svg {
-  width: 16px;  /* Adjust size as needed */
-  height: 16px; /* Adjust size as needed */
-  display: block; /* Prevents extra space if any */
+div.sidebar-divider>#collapseBtn svg {
+  width: 16px;
+  /* Adjust size as needed */
+  height: 16px;
+  /* Adjust size as needed */
+  display: block;
+  /* Prevents extra space if any */
 }
 
 .sidebar button {
   width: 170px;
   height: 48px;
-  margin-bottom: 20px; /* 调整间距 */
+  margin-bottom: 20px;
+  /* 调整间距 */
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: #495057; /* 文字深灰 */
+  color: #495057;
+  /* 文字深灰 */
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 1px;
@@ -173,8 +243,10 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 .sidebar button.active {
-  background: #EBF4FF; /* 浅蓝背景 (主色蓝的浅色变体) */
-  color: #3A86FF; /* 主色蓝 */
+  background: #EBF4FF;
+  /* 浅蓝背景 (主色蓝的浅色变体) */
+  color: #3A86FF;
+  /* 主色蓝 */
   font-weight: 600;
 }
 
@@ -192,16 +264,20 @@ div.sidebar-divider > #collapseBtn svg {
   justify-content: center;
   padding-left: 0;
 }
+
 .sidebar.collapsed button .emoji {
   margin-right: 0;
 }
+
 .sidebar.collapsed button span.text {
   display: none;
 }
 
 .sidebar button:not(.active):hover {
-  background: #F8F9FA; /* 背景浅灰 */
-  color: #3A86FF; /* 主色蓝 */
+  background: #F8F9FA;
+  /* 背景浅灰 */
+  color: #3A86FF;
+  /* 主色蓝 */
 }
 
 .content {
@@ -211,9 +287,12 @@ div.sidebar-divider > #collapseBtn svg {
   padding: var(--content-padding-y) var(--content-padding-x);
   overflow-y: auto;
   overflow-x: hidden;
-  background: #F8F9FA; /* 背景浅灰 */
-  position: relative; /* Establish a stacking context */
-  z-index: 1; /* Lower than sidebar's z-index */
+  background: #F8F9FA;
+  /* 背景浅灰 */
+  position: relative;
+  /* Establish a stacking context */
+  z-index: 1;
+  /* Lower than sidebar's z-index */
 }
 
 /* 移除旧的面板样式，这些应由具体页面控制 */
@@ -221,10 +300,12 @@ div.sidebar-divider > #collapseBtn svg {
 
 .sidebar-divider {
   width: 1px;
-  background: #CED4DA; /* 边框浅灰 */
+  background: #CED4DA;
+  /* 边框浅灰 */
   cursor: col-resize;
   position: relative;
-  z-index: 22; /* Increased z-index to be above sidebar (20) */
+  z-index: 22;
+  /* Increased z-index to be above sidebar (20) */
 }
 
 /* 移除旧的 mini-collapse-btn */
@@ -239,6 +320,7 @@ div.sidebar-divider > #collapseBtn svg {
   .main-container {
     flex-direction: column;
   }
+
   .sidebar,
   .sidebar.collapsed {
     flex-direction: row;
@@ -257,6 +339,7 @@ div.sidebar-divider > #collapseBtn svg {
     z-index: 100;
     box-sizing: border-box;
   }
+
   .sidebar button {
     margin: 0 8px 0 0;
     flex-shrink: 0;
@@ -271,13 +354,18 @@ div.sidebar-divider > #collapseBtn svg {
     line-height: normal;
     align-self: center;
   }
+
   .sidebar button .text {
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .sidebar.collapsed button { width: 48px; height: 48px; }
+
+  .sidebar.collapsed button {
+    width: 48px;
+    height: 48px;
+  }
 
   .sidebar-footer {
     margin: 0 0 0 auto;
@@ -287,16 +375,38 @@ div.sidebar-divider > #collapseBtn svg {
     gap: 8px;
     align-items: center;
   }
+
   .footer-buttons {
     margin: 0;
     gap: 8px;
   }
-  #btn-help { margin: 0; align-self: center; }
-  #btn-language { margin: 0; position: static; align-self: center; }
-  .sidebar .version-info { width: auto; text-align: right; margin: 0 0 0 8px; align-self: center; order: 2; }
 
-  div.sidebar-divider > #collapseBtn { display: none; }
-  .sidebar-divider { display: none; }
+  #btn-help {
+    margin: 0;
+    align-self: center;
+  }
+
+  #btn-language {
+    margin: 0;
+    position: static;
+    align-self: center;
+  }
+
+  .sidebar .version-info {
+    width: auto;
+    text-align: right;
+    margin: 0 0 0 8px;
+    align-self: center;
+    order: 2;
+  }
+
+  div.sidebar-divider>#collapseBtn {
+    display: none;
+  }
+
+  .sidebar-divider {
+    display: none;
+  }
 
   .content {
     padding: clamp(12px, 2vw, 16px);
@@ -305,11 +415,50 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 顶部模式下的图标/emoji统一尺寸与居中 */
 @media (max-width: 1100px) {
-  .sidebar button .emoji { width: 24px; height: 24px; font-size: 24px; line-height: 24px; margin-right: 8px; display: inline-flex; align-items: center; justify-content: center; }
-  #btn-help, #btn-language { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; align-self: center; }
-  #btn-help .emoji, #btn-language .emoji { display: inline-flex; align-items: center; justify-content: center; }
-  .sidebar.collapsed button { margin: 0 8px 0 0; padding: 0; border-radius: 8px; }
-  .sidebar.collapsed button .emoji { width: 24px; height: 24px; font-size: 24px; line-height: 24px; display: flex; align-items: center; justify-content: center; }
+  .sidebar button .emoji {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #btn-help,
+  #btn-language {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    align-self: center;
+  }
+
+  #btn-help .emoji,
+  #btn-language .emoji {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar.collapsed button {
+    margin: 0 8px 0 0;
+    padding: 0;
+    border-radius: 8px;
+  }
+
+  .sidebar.collapsed button .emoji {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 720px) {
@@ -320,16 +469,21 @@ div.sidebar-divider > #collapseBtn svg {
     padding: 0;
     justify-content: center;
   }
+
   .sidebar button .text {
     display: none;
   }
+
   .sidebar button .emoji {
     margin-right: 0;
   }
+
   .sidebar .version-info {
     display: none;
   }
-  #btn-help, #btn-language {
+
+  #btn-help,
+  #btn-language {
     width: 44px;
     height: 44px;
   }
@@ -339,30 +493,44 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 版本信息样式 */
 .version-info {
-  /* position: absolute; */ /* 移除绝对定位 */
-  /* bottom: 15px; */       /* 移除 bottom 定位 */
+  /* position: absolute; */
+  /* 移除绝对定位 */
+  /* bottom: 15px; */
+  /* 移除 bottom 定位 */
   /* left: 0; */
   /* right: 0; */
-  width: 100%; /* 使其宽度适应侧边栏，便于文本居中 */
+  width: 100%;
+  /* 使其宽度适应侧边栏，便于文本居中 */
   text-align: center;
   font-size: 12px;
-  color: #868E96; /* 与折叠按钮颜色一致，或使用较浅的灰色 */
-  padding: 0 10px;    /* 左右内边距，防止文字紧贴边缘 */
+  color: #868E96;
+  /* 与折叠按钮颜色一致，或使用较浅的灰色 */
+  padding: 0 10px;
+  /* 左右内边距，防止文字紧贴边缘 */
   box-sizing: border-box;
-  white-space: nowrap; /* 防止文字换行 */
-  overflow: hidden;    /* 超出部分隐藏 */
-  text-overflow: ellipsis; /* 超出部分显示省略号 */
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* 过渡效果 */
+  white-space: nowrap;
+  /* 防止文字换行 */
+  overflow: hidden;
+  /* 超出部分隐藏 */
+  text-overflow: ellipsis;
+  /* 超出部分显示省略号 */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  /* 过渡效果 */
   opacity: 1;
   visibility: visible;
-  margin-bottom: 0; /* 调整与侧边栏底部的间距 - 由父容器控制 */
-  /* margin-top: 5px; */ /* 可选：如果希望版本信息与帮助按钮有明确的顶部间距，但通常由帮助按钮的 margin-bottom 控制 */
+  margin-bottom: 0;
+  /* 调整与侧边栏底部的间距 - 由父容器控制 */
+  /* margin-top: 5px; */
+  /* 可选：如果希望版本信息与帮助按钮有明确的顶部间距，但通常由帮助按钮的 margin-bottom 控制 */
 }
 
 .sidebar.collapsed .version-info {
-  opacity: 0;         /* 收起时完全透明 */
-  visibility: hidden; /* 收起时不可见且不参与布局 */
-  pointer-events: none; /* 避免在隐藏时仍可交互 */
+  opacity: 0;
+  /* 收起时完全透明 */
+  visibility: hidden;
+  /* 收起时不可见且不参与布局 */
+  pointer-events: none;
+  /* 避免在隐藏时仍可交互 */
 }
 
 .sidebar.collapsed .footer-buttons {
@@ -372,16 +540,19 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 更新日志模态窗口样式 */
 .changelog-modal-overlay {
-  position: fixed; /* 固定定位，覆盖整个视口 */
+  position: fixed;
+  /* 固定定位，覆盖整个视口 */
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* 半透明黑色背景 */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* 半透明黑色背景 */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* 确保在最上层 */
+  z-index: 1000;
+  /* 确保在最上层 */
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
@@ -400,9 +571,12 @@ div.sidebar-divider > #collapseBtn svg {
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   width: 80%;
-  max-width: 600px; /* 最大宽度 */
-  max-height: 80vh; /* 最大高度，内容超出则滚动 */
-  overflow-y: auto; /* 内容超出时垂直滚动 */
+  max-width: 600px;
+  /* 最大宽度 */
+  max-height: 80vh;
+  /* 最大高度，内容超出则滚动 */
+  overflow-y: auto;
+  /* 内容超出时垂直滚动 */
   position: relative;
   transform: scale(0.95);
   transition: transform 0.3s ease;
@@ -434,9 +608,12 @@ div.sidebar-divider > #collapseBtn svg {
 .changelog-modal-content h2 {
   margin-top: 0;
   margin-bottom: 20px;
-  color: #495057; /* Unified color */
-  font-size: 20px; /* Adjusted font size for consistency */
-  font-weight: 600; /* Unified font weight */
+  color: #495057;
+  /* Unified color */
+  font-size: 20px;
+  /* Adjusted font size for consistency */
+  font-weight: 600;
+  /* Unified font weight */
   text-align: center;
 }
 
@@ -447,7 +624,8 @@ div.sidebar-divider > #collapseBtn svg {
 .changelog-version-entry {
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #E9ECEF; /* 分隔线 */
+  border-bottom: 1px solid #E9ECEF;
+  /* 分隔线 */
 }
 
 .changelog-version-entry:last-child {
@@ -465,7 +643,8 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 .changelog-version-entry ul {
-  list-style-type: disc; /* 使用实心圆点 */
+  list-style-type: disc;
+  /* 使用实心圆点 */
   padding-left: 25px;
   margin: 0;
   color: #6C757D;
@@ -495,53 +674,72 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 /* 帮助按钮的紧急化样式 */
-#btn-help, .btn-help {
+#btn-help,
+.btn-help {
   background-color: transparent;
   border: none;
-  color: #555; /* 比其他按钮文字颜色稍浅一些 */
-  padding: 0; /* 重置内边距，用 SVG 大小和按钮大小控制 */
-  margin: 0; /* 移除原来的 margin */
-  /* font-size: 1.1em; */ /* 移除 emoji 的字体大小控制 */
-  opacity: 0.75; /* 进一步弱化 */
+  color: #555;
+  /* 比其他按钮文字颜色稍浅一些 */
+  padding: 0;
+  /* 重置内边距，用 SVG 大小和按钮大小控制 */
+  margin: 0;
+  /* 移除原来的 margin */
+  /* font-size: 1.1em; */
+  /* 移除 emoji 的字体大小控制 */
+  opacity: 0.75;
+  /* 进一步弱化 */
   cursor: pointer;
-  border-radius: 8px; /* 统一与语言按钮 */
-  width: 48px; /* 设置按钮宽度 */
-  height: 48px; /* 设置按钮高度 */
-  display: flex; /* 使用flex布局使 SVG 居中 */
-  align-items: center; /* 垂直居中SVG */
-  justify-content: center; /* 水平居中SVG */
+  border-radius: 8px;
+  /* 统一与语言按钮 */
+  width: 48px;
+  /* 设置按钮宽度 */
+  height: 48px;
+  /* 设置按钮高度 */
+  display: flex;
+  /* 使用flex布局使 SVG 居中 */
+  align-items: center;
+  /* 垂直居中SVG */
+  justify-content: center;
+  /* 水平居中SVG */
 }
 
-#btn-help .emoji, .btn-help .emoji {
-  
-}
+#btn-help .emoji,
+.btn-help .emoji {}
 
-#btn-help:hover, .btn-help:hover {
-  background-color: rgba(0, 0, 0, 0.05); /* 轻微的悬停效果 */
+#btn-help:hover,
+.btn-help:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  /* 轻微的悬停效果 */
   opacity: 1;
 }
 
 /* 如果希望帮助按钮在侧边栏收起时也显示 emoji */
-.sidebar.collapsed #btn-help .emoji, .sidebar.collapsed .btn-help .emoji {
-  
-}
+.sidebar.collapsed #btn-help .emoji,
+.sidebar.collapsed .btn-help .emoji {}
 
-.sidebar.collapsed #btn-help, .sidebar.collapsed .btn-help {
-  width: 48px; /* 与语言按钮保持一致 */
-  height: 48px; /* 与语言按钮保持一致 */
+.sidebar.collapsed #btn-help,
+.sidebar.collapsed .btn-help {
+  width: 48px;
+  /* 与语言按钮保持一致 */
+  height: 48px;
+  /* 与语言按钮保持一致 */
   border-radius: 8px;
 }
 
 /* 语言切换按钮样式 */
-#btn-language, .btn-language {
+#btn-language,
+.btn-language {
   width: 48px;
   height: 48px;
-  margin: 0; /* 移除 margin-bottom */
+  margin: 0;
+  /* 移除 margin-bottom */
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: #555; /* Changed to match #btn-help color */
-  opacity: 0.75; /* Added to match #btn-help opacity */
+  color: #555;
+  /* Changed to match #btn-help color */
+  opacity: 0.75;
+  /* Added to match #btn-help opacity */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -550,17 +748,19 @@ div.sidebar-divider > #collapseBtn svg {
   transition: background 0.2s, color 0.2s, opacity 0.2s;
 }
 
-#btn-language:hover, .btn-language:hover {
+#btn-language:hover,
+.btn-language:hover {
   background: #F8F9FA;
   color: #3A86FF;
-  opacity: 1; /* Make it fully opaque on hover */
+  opacity: 1;
+  /* Make it fully opaque on hover */
 }
 
-#btn-language .emoji, .btn-language .emoji {
-  
-}
+#btn-language .emoji,
+.btn-language .emoji {}
 
-.sidebar.collapsed #btn-language, .sidebar.collapsed .btn-language {
+.sidebar.collapsed #btn-language,
+.sidebar.collapsed .btn-language {
   width: 48px;
   height: 48px;
 }
@@ -571,39 +771,51 @@ div.sidebar-divider > #collapseBtn svg {
 .config-page-layout {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* 各区块之间的间距 */
-  padding: 0; /* 修改：与 calc-layout 一致，依赖父级 .content 的 padding */
+  gap: 20px;
+  /* 各区块之间的间距 */
+  padding: 0;
+  /* 修改：与 calc-layout 一致，依赖父级 .content 的 padding */
 }
 
 .config-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* 在小屏幕上换行 */
-  gap: 10px; /* 标题和按钮组之间的间距 */
+  flex-wrap: wrap;
+  /* 在小屏幕上换行 */
+  gap: 10px;
+  /* 标题和按钮组之间的间距 */
 }
 
 .config-title {
   margin: 0;
   font-size: 1.5em;
   color: #333;
-  font-weight: 600; /* 新增：与 history-title 统一 */
-  line-height: 1.4; /* 新增：与 history-title 统一 */
+  font-weight: 600;
+  /* 新增：与 history-title 统一 */
+  line-height: 1.4;
+  /* 新增：与 history-title 统一 */
 }
 
 .config-actions {
   display: flex;
-  justify-content: flex-end; /* 修改：使按钮组靠右 */
-  align-items: center; /* 新增：与 section-title 对齐 */
-  margin-bottom: 12px; /* 新增：与 section-title 对齐 */
-  gap: 10px; /* 重新显式声明 gap */
+  justify-content: flex-end;
+  /* 修改：使按钮组靠右 */
+  align-items: center;
+  /* 新增：与 section-title 对齐 */
+  margin-bottom: 12px;
+  /* 新增：与 section-title 对齐 */
+  gap: 10px;
+  /* 重新显式声明 gap */
 }
 
 .config-table-container {
   overflow-x: auto;
   border-radius: 8px;
-  background: #F8F9FA; /* 修改：参考 calc-table-group */
-  padding: 16px 18px; /* 修改：参考 calc-table-group */
+  background: #F8F9FA;
+  /* 修改：参考 calc-table-group */
+  padding: 16px 18px;
+  /* 修改：参考 calc-table-group */
 }
 
 /* .config-table th, (这些将被 .calc-table th, td 统一)
@@ -624,17 +836,20 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 如果希望聚焦时的错误状态也保持错误样式，可以添加 */
 .config-table input.config-input.input-error:focus {
-  border-color: red !important; 
-  background-color: #ffe0e0 !important; 
-  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important; /* 聚焦时阴影更明显一些 */
+  border-color: red !important;
+  background-color: #ffe0e0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important;
+  /* 聚焦时阴影更明显一些 */
   color: #d8000c !important;
 }
 
 .config-table-container {
   overflow-x: auto;
   border-radius: 8px;
-  background: #F8F9FA; /* 修改：参考 calc-table-group */
-  padding: 16px 18px; /* 修改：参考 calc-table-group */
+  background: #F8F9FA;
+  /* 修改：参考 calc-table-group */
+  padding: 16px 18px;
+  /* 修改：参考 calc-table-group */
 }
 
 /* .config-table th, (这些将被 .calc-table th, td 统一)
@@ -655,17 +870,21 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 如果希望聚焦时的错误状态也保持错误样式，可以添加 */
 .config-table input.config-input.input-error:focus {
-  border-color: red !important; 
-  background-color: #ffe0e0 !important; 
-  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important; /* 聚焦时阴影更明显一些 */
+  border-color: red !important;
+  background-color: #ffe0e0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important;
+  /* 聚焦时阴影更明显一些 */
   color: #d8000c !important;
 }
 
 /* 小号删除按钮样式，如果全局 calc-table-btn btn-danger btn-small 不够具体 */
 .config-table .btn-small {
-    padding: 3px 6px; /* 进一步减小按钮内边距 */
-    font-size: 0.9em; /* 减小字体大小 */
-    line-height: 1.2; /* 调整行高以适应新的padding和font-size */
+  padding: 3px 6px;
+  /* 进一步减小按钮内边距 */
+  font-size: 0.9em;
+  /* 减小字体大小 */
+  line-height: 1.2;
+  /* 调整行高以适应新的padding和font-size */
 }
 
 
@@ -678,13 +897,17 @@ div.sidebar-divider > #collapseBtn svg {
   gap: 24px;
   padding: 0;
   min-width: 0;
-  flex-wrap: wrap;           /* 中等宽度允许换行 */
+  flex-wrap: wrap;
+  /* 中等宽度允许换行 */
   background: transparent;
   border-radius: 0;
   box-shadow: none;
-  padding-bottom: 90px;      /* 给 fixed .calc-bottom-bar (72px) 让位 */
+  padding-bottom: 90px;
+  /* 给 fixed .calc-bottom-bar (72px) 让位 */
 }
-.layout-left, .layout-right {
+
+.layout-left,
+.layout-right {
   background: #FFFFFF;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -692,44 +915,58 @@ div.sidebar-divider > #collapseBtn svg {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-width: 0;              /* 防止内部 min-content 撑爆父容器 */
+  min-width: 0;
+  /* 防止内部 min-content 撑爆父容器 */
 }
+
 /* 桌面双栏 4:6；不再用 !important，去除 min-width 硬约束（改由断点控制） */
 .layout-left {
   flex: 4 1 clamp(280px, 40%, 480px);
   max-width: 100%;
 }
+
 .layout-right {
   flex: 6 1 clamp(320px, 60%, 720px);
   max-width: 100%;
 }
+
 .calc-table-group {
   margin-bottom: 0;
   padding: 16px 18px;
   border-bottom: none;
   background: #F8F9FA;
-  border-radius: 8px; /* 统一圆角 */
+  border-radius: 8px;
+  /* 统一圆角 */
 }
+
 .calc-table-btns {
   display: flex;
   gap: 8px;
 }
-#reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover {
+
+#reset-table-1:hover,
+#reset-table-2:hover,
+#reset-table-3:hover {
   background: #FEEAEA;
   border-color: #D00000;
   color: #D00000;
 }
+
 .calc-table-content {
   margin-bottom: 0;
 }
+
 .calc-table {
-  width: 100%; /* 默认让表格宽度占满其容器 */
+  width: 100%;
+  /* 默认让表格宽度占满其容器 */
   border-collapse: collapse;
   font-size: 14px;
   color: #495057;
   /* table-layout: fixed; -- 移除全局 fixed，由具体表格按需设置 (如 .calc-table-fixed) */
 }
-.calc-table input, .calc-table select {
+
+.calc-table input,
+.calc-table select {
   width: 95%;
   min-width: 40px;
   height: 30px;
@@ -742,6 +979,7 @@ div.sidebar-divider > #collapseBtn svg {
   color: #495057;
   transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
+
 .calc-table select {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23495057' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -751,10 +989,14 @@ div.sidebar-divider > #collapseBtn svg {
   appearance: none;
   padding-right: 1.5rem;
 }
-.calc-table input:hover, .calc-table select:hover {
+
+.calc-table input:hover,
+.calc-table select:hover {
   border-color: #ADB5BD;
 }
-.calc-table input:focus, .calc-table select:focus {
+
+.calc-table input:focus,
+.calc-table select:focus {
   outline: none;
   border-color: #3A86FF;
   box-shadow: 0 0 0 0.15rem rgba(58, 134, 255, 0.25);
@@ -772,6 +1014,7 @@ div.sidebar-divider > #collapseBtn svg {
   gap: 12px;
   align-items: flex-end;
 }
+
 .standard-selector {
   display: flex;
   align-items: flex-end;
@@ -779,11 +1022,13 @@ div.sidebar-divider > #collapseBtn svg {
   margin-left: 16px;
   flex: 1 1 360px;
 }
+
 .standard-selector label {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
+
 .standard-selector select {
   min-width: 160px;
   height: 30px;
@@ -796,45 +1041,56 @@ div.sidebar-divider > #collapseBtn svg {
   background: #fff;
   transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
+
 .standard-selector select:hover {
   border-color: #ADB5BD;
 }
+
 .standard-selector select:focus {
   outline: none;
   border-color: #3A86FF;
   box-shadow: 0 0 0 0.15rem rgba(58, 134, 255, 0.25);
 }
+
 .standard-selector .multi-select {
   width: 100%;
   min-width: 360px;
 }
+
 .standard-selector .multi-select-panel {
   width: 100%;
 }
+
 @media (max-width: 520px) {
   .standard-selector {
     flex: 1 1 100%;
     margin-left: 0;
   }
+
   .standard-selector .multi-select {
     min-width: 100%;
   }
 }
+
 .query-filters-row .filter-item {
   flex: 1 1 220px;
   min-width: 180px;
 }
+
 .query-filters-row label {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
+
 .query-filters-row select {
   width: 100%;
 }
+
 .multi-select {
   position: relative;
 }
+
 .multi-select-toggle {
   width: 100%;
   height: 30px;
@@ -848,10 +1104,12 @@ div.sidebar-divider > #collapseBtn svg {
   transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
   text-align: left;
 }
+
 .multi-select.open .multi-select-toggle {
   border-color: #3A86FF;
-  box-shadow: 0 0 0 0.15rem rgba(58,134,255,.25);
+  box-shadow: 0 0 0 0.15rem rgba(58, 134, 255, .25);
 }
+
 .multi-select-panel {
   position: absolute;
   left: 0;
@@ -860,57 +1118,74 @@ div.sidebar-divider > #collapseBtn svg {
   background: #fff;
   border: 1px solid #E0E0E0;
   border-radius: 6px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   max-height: 240px;
   overflow-y: auto;
   display: none;
   z-index: 1000;
 }
+
 .multi-select.open .multi-select-panel {
   display: block;
 }
+
 .multi-option {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 8px 10px;
 }
+
 .query-filters-row .multi-select-panel .multi-option {
   flex-direction: row;
 }
+
 .multi-option input[type="checkbox"] {
   width: 14px;
   height: 14px;
   flex: 0 0 auto;
 }
+
 .multi-option .text {
   flex: 1 1 auto;
 }
+
 .multi-option:hover {
   background: #F8F9FA;
 }
+
 .standard-selector .multi-select-panel {
   text-align: left;
 }
+
 .standard-selector .multi-select-panel .multi-option {
   flex-direction: row;
   align-items: center;
 }
-.calc-table th, 
+
+.calc-table th,
 .calc-table td {
-  padding: 8px 10px; /* 统一内边距 */
-  border: 1px solid #E0E0E0; /* 统一边框颜色 */
-  vertical-align: middle; /* 统一垂直居中 */
+  padding: 8px 10px;
+  /* 统一内边距 */
+  border: 1px solid #E0E0E0;
+  /* 统一边框颜色 */
+  vertical-align: middle;
+  /* 统一垂直居中 */
 }
+
 .calc-table th {
   background: #F8F9FA;
   font-weight: 600;
   color: #495057;
-  text-align: center; /* 表头文字默认居中 */
-  white-space: nowrap; /* 表头默认不换行 */
+  text-align: center;
+  /* 表头文字默认居中 */
+  white-space: nowrap;
+  /* 表头默认不换行 */
 }
+
 .calc-table td {
-  text-align: center; /* 表格数据默认居中 (原为 left) */
+  text-align: center;
+  /* 表格数据默认居中 (原为 left) */
   /* white-space: normal; -- 默认允许换行，特定列可设为 nowrap */
 }
 
@@ -923,17 +1198,22 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 用于高亮错误输入框的样式 */
 .config-table input.config-input.input-error {
-  border-color: red !important; /* 强制红色边框 */
-  background-color: #ffe0e0 !important; /* 浅红色背景底色 */
-  box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.35) !important; /* 可选：更明显的红色阴影 */
-  color: #d8000c; /* 可选：将文字颜色也变深红，以确保对比度 */
+  border-color: red !important;
+  /* 强制红色边框 */
+  background-color: #ffe0e0 !important;
+  /* 浅红色背景底色 */
+  box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.35) !important;
+  /* 可选：更明显的红色阴影 */
+  color: #d8000c;
+  /* 可选：将文字颜色也变深红，以确保对比度 */
 }
 
 /* 如果希望聚焦时的错误状态也保持错误样式，可以添加 */
 .config-table input.config-input.input-error:focus {
-  border-color: red !important; 
-  background-color: #ffe0e0 !important; 
-  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important; /* 聚焦时阴影更明显一些 */
+  border-color: red !important;
+  background-color: #ffe0e0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.45) !important;
+  /* 聚焦时阴影更明显一些 */
   color: #d8000c !important;
 }
 
@@ -941,22 +1221,30 @@ div.sidebar-divider > #collapseBtn svg {
   display: flex;
   gap: 8px;
 }
-#reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover {
+
+#reset-table-1:hover,
+#reset-table-2:hover,
+#reset-table-3:hover {
   background: #FEEAEA;
   border-color: #D00000;
   color: #D00000;
 }
+
 .calc-table-content {
   margin-bottom: 0;
 }
+
 .calc-table {
-  width: 100%; /* 默认让表格宽度占满其容器 */
+  width: 100%;
+  /* 默认让表格宽度占满其容器 */
   border-collapse: collapse;
   font-size: 14px;
   color: #495057;
   /* table-layout: fixed; -- 移除全局 fixed，由具体表格按需设置 (如 .calc-table-fixed) */
 }
-.calc-table input, .calc-table select {
+
+.calc-table input,
+.calc-table select {
   width: 95%;
   min-width: 40px;
   height: 30px;
@@ -968,6 +1256,7 @@ div.sidebar-divider > #collapseBtn svg {
   box-sizing: border-box;
   color: #495057;
 }
+
 .calc-table select {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23495057' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -977,21 +1266,30 @@ div.sidebar-divider > #collapseBtn svg {
   appearance: none;
   padding-right: 1.5rem;
 }
-.calc-table th, 
+
+.calc-table th,
 .calc-table td {
-  padding: 8px 10px; /* 统一内边距 */
-  border: 1px solid #E0E0E0; /* 统一边框颜色 */
-  vertical-align: middle; /* 统一垂直居中 */
+  padding: 8px 10px;
+  /* 统一内边距 */
+  border: 1px solid #E0E0E0;
+  /* 统一边框颜色 */
+  vertical-align: middle;
+  /* 统一垂直居中 */
 }
+
 .calc-table th {
   background: #F8F9FA;
   font-weight: 600;
   color: #495057;
-  text-align: center; /* 表头文字默认居中 */
-  white-space: nowrap; /* 表头默认不换行 */
+  text-align: center;
+  /* 表头文字默认居中 */
+  white-space: nowrap;
+  /* 表头默认不换行 */
 }
+
 .calc-table td {
-  text-align: center; /* 表格数据默认居中 (原为 left) */
+  text-align: center;
+  /* 表格数据默认居中 (原为 left) */
   /* white-space: normal; -- 默认允许换行，特定列可设为 nowrap */
 }
 
@@ -999,74 +1297,277 @@ div.sidebar-divider > #collapseBtn svg {
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
 .calc-table-fixed {
   table-layout: fixed;
   width: 100%;
   height: auto;
 }
+
 /* 列表区 (标准导线) 列宽调整 */
-#main-data-table-standard th:nth-child(1), #main-data-table-standard-body td:nth-child(1) { min-width: 48px; width: 8%; } /* 序号 */
-#main-data-table-standard th:nth-child(2), #main-data-table-standard-body td:nth-child(2) { min-width: 80px; width: 20%; } /* 线规 */
-#main-data-table-standard th:nth-child(3), #main-data-table-standard-body td:nth-child(3) { min-width: 80px; width: 20%; } /* 类型 */
-#main-data-table-standard th:nth-child(4), #main-data-table-standard-body td:nth-child(4) { min-width: 70px; width: 12%; } /* 直径(mm) - 减小 */
-#main-data-table-standard th:nth-child(5), #main-data-table-standard-body td:nth-child(5) { min-width: 70px; width: 20%; } /* 数量 */
-#main-data-table-standard th:nth-child(6), #main-data-table-standard-body td:nth-child(6) { min-width: 50px; width: 10%; } /* 删除 - 减小 */
+#main-data-table-standard th:nth-child(1),
+#main-data-table-standard-body td:nth-child(1) {
+  min-width: 48px;
+  width: 8%;
+}
+
+/* 序号 */
+#main-data-table-standard th:nth-child(2),
+#main-data-table-standard-body td:nth-child(2) {
+  min-width: 80px;
+  width: 20%;
+}
+
+/* 线规 */
+#main-data-table-standard th:nth-child(3),
+#main-data-table-standard-body td:nth-child(3) {
+  min-width: 80px;
+  width: 20%;
+}
+
+/* 类型 */
+#main-data-table-standard th:nth-child(4),
+#main-data-table-standard-body td:nth-child(4) {
+  min-width: 70px;
+  width: 12%;
+}
+
+/* 直径(mm) - 减小 */
+#main-data-table-standard th:nth-child(5),
+#main-data-table-standard-body td:nth-child(5) {
+  min-width: 70px;
+  width: 20%;
+}
+
+/* 数量 */
+#main-data-table-standard th:nth-child(6),
+#main-data-table-standard-body td:nth-child(6) {
+  min-width: 50px;
+  width: 10%;
+}
+
+/* 删除 - 减小 */
 
 /* 列表区 (特殊导线) 列宽调整 */
-#main-data-table-special th:nth-child(1), #main-data-table-special-body td:nth-child(1) { min-width: 48px; width: 15%; } /* 序号 */
-#main-data-table-special th:nth-child(2), #main-data-table-special-body td:nth-child(2) { min-width: 80px; width: 40%; } /* 直径(mm) */
-#main-data-table-special th:nth-child(3), #main-data-table-special-body td:nth-child(3) { min-width: 70px; width: 30%; } /* 数量 */
-#main-data-table-special th:nth-child(4), #main-data-table-special-body td:nth-child(4) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
+#main-data-table-special th:nth-child(1),
+#main-data-table-special-body td:nth-child(1) {
+  min-width: 48px;
+  width: 15%;
+}
+
+/* 序号 */
+#main-data-table-special th:nth-child(2),
+#main-data-table-special-body td:nth-child(2) {
+  min-width: 80px;
+  width: 40%;
+}
+
+/* 直径(mm) */
+#main-data-table-special th:nth-child(3),
+#main-data-table-special-body td:nth-child(3) {
+  min-width: 70px;
+  width: 30%;
+}
+
+/* 数量 */
+#main-data-table-special th:nth-child(4),
+#main-data-table-special-body td:nth-child(4) {
+  min-width: 50px;
+  width: 15%;
+}
+
+/* 删除 - 减小 */
 
 /* 列表区 (包覆层) 列宽调整 */
-#main-data-table-wrap th:nth-child(1), #main-data-table-wrap-body td:nth-child(1) { min-width: 48px; width: 30%; } /* 序号 */
-#main-data-table-wrap th:nth-child(2), #main-data-table-wrap-body td:nth-child(2) { min-width: 80px; width: 55%; } /* 厚度(mm) */
-#main-data-table-wrap th:nth-child(3), #main-data-table-wrap-body td:nth-child(3) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
+#main-data-table-wrap th:nth-child(1),
+#main-data-table-wrap-body td:nth-child(1) {
+  min-width: 48px;
+  width: 30%;
+}
+
+/* 序号 */
+#main-data-table-wrap th:nth-child(2),
+#main-data-table-wrap-body td:nth-child(2) {
+  min-width: 80px;
+  width: 55%;
+}
+
+/* 厚度(mm) */
+#main-data-table-wrap th:nth-child(3),
+#main-data-table-wrap-body td:nth-child(3) {
+  min-width: 50px;
+  width: 15%;
+}
+
+/* 删除 - 减小 */
 
 /* 小屏优化：收敛列宽与模拟区占比 */
 @media (max-width: 576px) {
+
   /* 标准导线 */
-  #main-data-table-standard th:nth-child(1), #main-data-table-standard-body td:nth-child(1) { min-width: 40px; width: 10%; }
-  #main-data-table-standard th:nth-child(2), #main-data-table-standard-body td:nth-child(2) { min-width: 64px; width: 22%; }
-  #main-data-table-standard th:nth-child(3), #main-data-table-standard-body td:nth-child(3) { min-width: 64px; width: 22%; }
-  #main-data-table-standard th:nth-child(4), #main-data-table-standard-body td:nth-child(4) { min-width: 60px; width: 20%; }
-  #main-data-table-standard th:nth-child(5), #main-data-table-standard-body td:nth-child(5) { min-width: 56px; width: 16%; }
-  #main-data-table-standard th:nth-child(6), #main-data-table-standard-body td:nth-child(6) { min-width: 40px; width: 10%; }
+  #main-data-table-standard th:nth-child(1),
+  #main-data-table-standard-body td:nth-child(1) {
+    min-width: 40px;
+    width: 10%;
+  }
+
+  #main-data-table-standard th:nth-child(2),
+  #main-data-table-standard-body td:nth-child(2) {
+    min-width: 64px;
+    width: 22%;
+  }
+
+  #main-data-table-standard th:nth-child(3),
+  #main-data-table-standard-body td:nth-child(3) {
+    min-width: 64px;
+    width: 22%;
+  }
+
+  #main-data-table-standard th:nth-child(4),
+  #main-data-table-standard-body td:nth-child(4) {
+    min-width: 60px;
+    width: 20%;
+  }
+
+  #main-data-table-standard th:nth-child(5),
+  #main-data-table-standard-body td:nth-child(5) {
+    min-width: 56px;
+    width: 16%;
+  }
+
+  #main-data-table-standard th:nth-child(6),
+  #main-data-table-standard-body td:nth-child(6) {
+    min-width: 40px;
+    width: 10%;
+  }
 
   /* 特殊导线 */
-  #main-data-table-special th:nth-child(1), #main-data-table-special-body td:nth-child(1) { min-width: 40px; width: 15%; }
-  #main-data-table-special th:nth-child(2), #main-data-table-special-body td:nth-child(2) { min-width: 64px; width: 45%; }
-  #main-data-table-special th:nth-child(3), #main-data-table-special-body td:nth-child(3) { min-width: 56px; width: 25%; }
-  #main-data-table-special th:nth-child(4), #main-data-table-special-body td:nth-child(4) { min-width: 40px; width: 15%; }
+  #main-data-table-special th:nth-child(1),
+  #main-data-table-special-body td:nth-child(1) {
+    min-width: 40px;
+    width: 15%;
+  }
+
+  #main-data-table-special th:nth-child(2),
+  #main-data-table-special-body td:nth-child(2) {
+    min-width: 64px;
+    width: 45%;
+  }
+
+  #main-data-table-special th:nth-child(3),
+  #main-data-table-special-body td:nth-child(3) {
+    min-width: 56px;
+    width: 25%;
+  }
+
+  #main-data-table-special th:nth-child(4),
+  #main-data-table-special-body td:nth-child(4) {
+    min-width: 40px;
+    width: 15%;
+  }
 
   /* 包覆层 */
-  #main-data-table-wrap th:nth-child(1), #main-data-table-wrap-body td:nth-child(1) { min-width: 40px; width: 25%; }
-  #main-data-table-wrap th:nth-child(2), #main-data-table-wrap-body td:nth-child(2) { min-width: 64px; width: 55%; }
-  #main-data-table-wrap th:nth-child(3), #main-data-table-wrap-body td:nth-child(3) { min-width: 40px; width: 20%; }
+  #main-data-table-wrap th:nth-child(1),
+  #main-data-table-wrap-body td:nth-child(1) {
+    min-width: 40px;
+    width: 25%;
+  }
 
-  .calc-table input, .calc-table select { height: 44px; font-size: clamp(14px, 3.5vw, 16px); }
-  .drag-area-input, .drag-area-range { height: 44px; font-size: clamp(14px, 3.5vw, 16px); }
+  #main-data-table-wrap th:nth-child(2),
+  #main-data-table-wrap-body td:nth-child(2) {
+    min-width: 64px;
+    width: 55%;
+  }
+
+  #main-data-table-wrap th:nth-child(3),
+  #main-data-table-wrap-body td:nth-child(3) {
+    min-width: 40px;
+    width: 20%;
+  }
+
+  .calc-table input,
+  .calc-table select {
+    height: 44px;
+    font-size: clamp(14px, 3.5vw, 16px);
+  }
+
+  .drag-area-input,
+  .drag-area-range {
+    height: 44px;
+    font-size: clamp(14px, 3.5vw, 16px);
+  }
 }
 
 @media (max-width: 992px) {
-  .simulation-area { width: 100%; min-height: 240px; aspect-ratio: auto; }
-  .content { padding-bottom: 88px; }
+  .simulation-area {
+    width: 100%;
+    min-height: 240px;
+    aspect-ratio: auto;
+  }
+
+  .content {
+    padding-bottom: 88px;
+  }
 }
 
 @media (min-width: 1200px) {
-  .simulation-area { width: min(100%, 640px); margin-left: auto; margin-right: auto; }
-  .simulation-details { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: max-content; gap: 12px; }
-  .highlighted-result-area { grid-column: 1; }
-  .input-summary-container { grid-column: 1; }
-  .simulation-results-table { grid-column: 2; align-self: start; }
-  .simulation-details .group-result { grid-column: 2; align-self: start; }
+  .simulation-area {
+    width: min(100%, 640px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .simulation-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: max-content;
+    gap: 12px;
+  }
+
+  .highlighted-result-area {
+    grid-column: 1;
+  }
+
+  .input-summary-container {
+    grid-column: 1;
+  }
+
+  .simulation-results-table {
+    grid-column: 2;
+    align-self: start;
+  }
+
+  .simulation-details .group-result {
+    grid-column: 2;
+    align-self: start;
+  }
 }
+
 @media (min-width: 992px) and (max-width: 1199px) {
-  .simulation-details { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: max-content; gap: 12px; }
-  .highlighted-result-area { grid-column: 1; }
-  .input-summary-container { grid-column: 1; }
-  .simulation-results-table { grid-column: 2; align-self: start; }
-  .simulation-details .group-result { grid-column: 2; align-self: start; }
+  .simulation-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: max-content;
+    gap: 12px;
+  }
+
+  .highlighted-result-area {
+    grid-column: 1;
+  }
+
+  .input-summary-container {
+    grid-column: 1;
+  }
+
+  .simulation-results-table {
+    grid-column: 2;
+    align-self: start;
+  }
+
+  .simulation-details .group-result {
+    grid-column: 2;
+    align-self: start;
+  }
 }
 
 /* Simulation Content Wrapper Styles (Moved before media queries) */
@@ -1075,14 +1576,17 @@ div.sidebar-divider > #collapseBtn svg {
   gap: 16px;
   align-items: flex-start;
   text-align: left;
-  flex-wrap: wrap;             /* 允许在窄容器内换行 */
+  flex-wrap: wrap;
+  /* 允许在窄容器内换行 */
   min-width: 0;
 }
+
 .simulation-area {
   background: #F8F9FA;
   border-radius: 6px;
   width: 50%;
-  min-width: 240px;            /* 保证 canvas 不被挤没 */
+  min-width: 240px;
+  /* 保证 canvas 不被挤没 */
   aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
@@ -1095,6 +1599,7 @@ div.sidebar-divider > #collapseBtn svg {
   flex-shrink: 1;
   position: relative;
 }
+
 #simulation-canvas {
   /* Phase 2：CSS 尺寸决定显示，物理像素由 JS 按 devicePixelRatio 设置 */
   width: 100%;
@@ -1104,39 +1609,45 @@ div.sidebar-divider > #collapseBtn svg {
   display: block;
   flex-shrink: 0;
 }
+
 .simulation-details {
   flex: 1 1 240px;
-  min-width: 0;                /* 防止内容溢出撑爆父容器 */
+  min-width: 0;
+  /* 防止内容溢出撑爆父容器 */
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-width: 0;
 }
+
 .highlighted-result-area {
   background-color: #EBF4FF;
   border: 1px solid #B3D1F2;
   border-radius: 6px;
-  padding: 10px 16px; 
+  padding: 10px 16px;
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 4px; 
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   margin-top: 4px;
 }
+
 .highlight-value {
   font-size: clamp(24px, 3vw, 32px);
   font-weight: 700;
   color: #3A86FF;
-  line-height: 1.1; 
+  line-height: 1.1;
 }
+
 .precise-value {
-  font-size: 16px; 
+  font-size: 16px;
   color: #6C757D;
   font-weight: 400;
-  margin-left: 6px; 
+  margin-left: 6px;
   vertical-align: baseline;
 }
+
 #input-summary {
   display: flex;
   flex-direction: column;
@@ -1144,114 +1655,188 @@ div.sidebar-divider > #collapseBtn svg {
   padding: 10px 16px;
   box-sizing: border-box;
 }
-#input-summary > div {
+
+#input-summary>div {
   padding: 6px 0;
   border-bottom: 1px dashed #EAECEF;
   font-size: 13px;
-  color: #495057; 
-  display: flex; 
-  justify-content: space-between; 
+  color: #495057;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
-#input-summary > div:last-child {
+
+#input-summary>div:last-child {
   border-bottom: none;
 }
-#input-summary > div > span:first-child {
+
+#input-summary>div>span:first-child {
   color: #3A86FF;
   font-weight: 600;
 }
+
 #input-summary .input-summary-value {
   margin-left: auto;
   text-align: right;
 }
+
 .simulation-results-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
+
 .simulation-results-table th,
 .simulation-results-table td {
-  padding: 10px 8px; 
-  text-align: left; 
+  padding: 10px 8px;
+  text-align: left;
   border-bottom: 1px dashed #EAECEF;
-  vertical-align: middle; 
+  vertical-align: middle;
 }
+
 .simulation-results-table th {
   color: #495057;
   font-weight: 600;
   background-color: #F8F9FA;
   border-bottom: 2px solid #E0E0E0;
 }
+
 .simulation-results-table th:nth-child(2),
 .simulation-results-table td:nth-child(2),
 .simulation-results-table th:nth-child(3),
 .simulation-results-table td:nth-child(3) {
   text-align: right;
-  width: 30%; 
+  width: 30%;
 }
+
 .simulation-results-table td:nth-child(2) span,
 .simulation-results-table td:nth-child(3) span {
   color: #3A86FF;
   font-weight: 600;
 }
+
 .simulation-results-table tr:last-child td {
   border-bottom: none;
 }
+
 /* End of Simulation Content Wrapper Styles */
 
 
 /* 侧栏收窄规则移除（1750px 以下采用顶部横排） */
 
 @media (min-width: 576px) and (max-width: 992px) {
+
   .group-wire-standard,
   .group-wire-special,
   .group-wrap,
   .group-tolerance,
   .group-score,
-  .chart-container-wrapper { padding: 14px; }
+  .chart-container-wrapper {
+    padding: 14px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
-  .simulation-content-wrapper { display: grid; grid-template-columns: 3fr 5fr; gap: 12px; align-items: stretch; }
-  .simulation-area { width: auto; padding: 12px; box-sizing: border-box; aspect-ratio: auto; }
-  .simulation-details { margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; }
+  .simulation-content-wrapper {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .simulation-area {
+    width: auto;
+    padding: 12px;
+    box-sizing: border-box;
+    aspect-ratio: auto;
+  }
+
+  .simulation-details {
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* 576–768px：横排双列、等宽并齐，基线对齐 */
 @media (min-width: 576px) and (max-width: 768px) {
-  .simulation-content-wrapper { flex-direction: column; align-items: stretch; }
-  .simulation-area { width: 100%; margin: 0; padding: 12px; box-sizing: border-box; }
-  .simulation-details { width: 100%; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; }
+  .simulation-content-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .simulation-area {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .simulation-details {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* <576px：竖排单列，满宽并齐 */
 @media (max-width: 576px) {
-  .simulation-content-wrapper { flex-direction: column; align-items: stretch; }
-  .simulation-area { width: 100%; margin: 0; padding: 12px; box-sizing: border-box; }
-  .simulation-details { width: 100%; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; }
+  .simulation-content-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .simulation-area {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .simulation-details {
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
   .group-wire-standard,
   .group-wire-special,
   .group-wrap,
   .group-tolerance,
   .group-score,
-  .chart-container-wrapper { padding: 12px; }
+  .chart-container-wrapper {
+    padding: 12px;
+  }
 }
 
 #table1-header-wrapper,
 #table2-header-wrapper,
 #table3-header-wrapper {
-  padding-right: 15px; /* 常见滚动条宽度，根据需要调整 */
-  box-sizing: border-box; /* 确保内边距包含在元素总宽度内 */
+  padding-right: 15px;
+  /* 常见滚动条宽度，根据需要调整 */
+  box-sizing: border-box;
+  /* 确保内边距包含在元素总宽度内 */
 }
+
 .calc-table td {
   vertical-align: middle;
   height: auto;
 }
+
 .drag-area-content {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .drag-area-range {
   flex: 1;
   margin: 0;
@@ -1261,6 +1846,7 @@ div.sidebar-divider > #collapseBtn svg {
   background: transparent;
   cursor: pointer;
 }
+
 .drag-area-input {
   width: 65px;
   height: 32px;
@@ -1274,24 +1860,33 @@ div.sidebar-divider > #collapseBtn svg {
   flex-shrink: 0;
   background: #FFFFFF;
 }
+
 .input-with-unit-wrapper {
   position: relative;
-  display: inline-flex; /* Or inline-block, adjust as needed */
+  display: inline-flex;
+  /* Or inline-block, adjust as needed */
   align-items: center;
 }
+
 #tolerance-drag-area .drag-area-input {
-  padding-right: 22px; /* Space for the unit */
+  padding-right: 22px;
+  /* Space for the unit */
 }
+
 .drag-area-unit {
   position: absolute;
-  right: 8px; /* Position inside the input box */
+  right: 8px;
+  /* Position inside the input box */
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
   color: #495057;
-  pointer-events: none; /* Allow clicks to pass through to the input */
+  pointer-events: none;
+  /* Allow clicks to pass through to the input */
 }
-.calc-drag-area { /* This one is used for tolerance and score area */
+
+.calc-drag-area {
+  /* This one is used for tolerance and score area */
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -1302,11 +1897,12 @@ div.sidebar-divider > #collapseBtn svg {
   box-shadow: none;
   border: 1px solid #EAECEF;
 }
+
 .calc-bottom-bar {
   position: fixed;
   bottom: 0;
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
   align-items: center;
   gap: 20px;
   padding: 12px 20px;
@@ -1317,59 +1913,65 @@ div.sidebar-divider > #collapseBtn svg {
   height: 72px;
   transition: left 0.3s ease, width 0.3s ease;
 }
+
 .history-save-option {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-right: auto; 
-  padding-left: 10px; 
+  margin-right: auto;
+  padding-left: 10px;
 }
+
 .history-save-option label {
   font-size: 14px;
   color: #495057;
   cursor: pointer;
-  user-select: none; 
+  user-select: none;
 }
+
 .history-save-option input[type="checkbox"] {
   cursor: pointer;
-  width: 16px; 
+  width: 16px;
   height: 16px;
-  accent-color: #3A86FF; 
+  accent-color: #3A86FF;
 }
+
 .main-container .calc-bottom-bar {
   left: var(--sidebar-width);
   width: calc(100% - var(--sidebar-width));
 }
+
 .main-container.sidebar-collapsed .calc-bottom-bar {
   left: var(--sidebar-collapsed-width);
   width: calc(100% - var(--sidebar-collapsed-width));
 }
+
 .action-bar-btn {
   padding: 10px 28px;
   font-size: clamp(14px, 1.4vw, 16px);
   font-weight: 500;
   border-radius: 8px;
-  border: 1px solid transparent; 
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.2s ease; 
+  transition: all 0.2s ease;
   min-width: 130px;
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05); 
-  user-select: none; 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  user-select: none;
 }
 
 .action-bar-btn:hover {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
 }
 
 .action-bar-btn:active {
   transform: translateY(1px);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); 
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .action-bar-btn:disabled {
@@ -1407,14 +2009,14 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 .btn-calculate-action {
-  background-color: #FFFFFF; 
-  color: #3A86FF;    
-  border-color: #3A86FF; 
+  background-color: #FFFFFF;
+  color: #3A86FF;
+  border-color: #3A86FF;
 }
 
 .btn-calculate-action:hover {
-  background-color: #EEF4FF; 
-  border-color: #3A86FF; 
+  background-color: #EEF4FF;
+  border-color: #3A86FF;
   color: #3A86FF;
   box-shadow: 0 2px 4px rgba(58, 134, 255, 0.15);
 }
@@ -1440,13 +2042,18 @@ div.sidebar-divider > #collapseBtn svg {
     min-width: 0;
     padding-bottom: 90px;
   }
-  .layout-left, .layout-right {
+
+  .layout-left,
+  .layout-right {
     min-width: 0;
     max-width: 100%;
     width: 100%;
-    padding: 16px; /* 缩小卡片内边距以提升密度 */
-    flex: 1 1 auto;         /* 单列布局时不再按 4:6 分配 */
+    padding: 16px;
+    /* 缩小卡片内边距以提升密度 */
+    flex: 1 1 auto;
+    /* 单列布局时不再按 4:6 分配 */
   }
+
   /* sidebar 变顶部横排后，底栏跨全宽 */
   .main-container .calc-bottom-bar,
   .main-container.sidebar-collapsed .calc-bottom-bar {
@@ -1454,6 +2061,7 @@ div.sidebar-divider > #collapseBtn svg {
     width: 100%;
   }
 }
+
 .section-title {
   display: flex;
   justify-content: space-between;
@@ -1463,6 +2071,7 @@ div.sidebar-divider > #collapseBtn svg {
   font-weight: 600;
   color: #343A40;
 }
+
 .title-container {
   display: flex;
   align-items: center;
@@ -1471,128 +2080,150 @@ div.sidebar-divider > #collapseBtn svg {
   font-weight: 600;
   color: #343A40;
 }
+
 .title-container .emoji {
-  margin-right: 8px; /* 在 emoji 和标题文本之间添加一些间距 */
+  margin-right: 8px;
+  /* 在 emoji 和标题文本之间添加一些间距 */
   font-size: 20px;
 }
+
 .group-actions {
   display: flex;
-  gap: 8px; /* 在按钮之间添加一些间距 */
+  gap: 8px;
+  /* 在按钮之间添加一些间距 */
 }
+
 .group-actions.calc-table {
   justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
 }
+
 .group-actions .actions-left {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .group-actions .actions-right {
   display: flex;
   align-items: center;
   gap: 8px;
   justify-content: flex-end;
 }
+
 .group-actions .calc-table-btn {
   margin-left: 8px;
 }
+
 .group-actions [data-i18n="calc_group_standard_wire_select_label"] {
   display: none;
 }
+
 @media (max-width: 768px) {
   .group-actions.calc-table {
     gap: 8px;
   }
+
   .group-actions .actions-right {
     width: 100%;
     flex-wrap: wrap;
     justify-content: flex-end;
   }
 }
+
 .group-title .title-container {
   min-width: 160px;
   white-space: nowrap;
 }
+
 @media (max-width: 768px) {
   .group-title .title-container {
     min-width: 130px;
   }
 }
+
 .chart-container-wrapper {
-  background: #FFFFFF; 
+  background: #FFFFFF;
   border-radius: 8px;
   padding: 16px 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  gap: 10px; 
+  gap: 10px;
 }
-.chart-area-title { /* This is used in JS */
+
+.chart-area-title {
+  /* This is used in JS */
   margin-bottom: 0;
 }
 
 .results-chart-area {
-  background: #F8F9FA; 
+  background: #F8F9FA;
   border-radius: 6px;
   min-height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #CED4DA; 
+  color: #CED4DA;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
   padding: 10px;
-  border: 1px dashed #CED4DA; 
+  border: 1px dashed #CED4DA;
 }
+
 .calc-table td button {
-  background: none; 
-  border: none; 
-  padding: 0; 
-  margin: 0; 
-  box-shadow: none; 
-  color: #D00000; 
-  font-size: 16px; 
-  line-height: 1; 
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  color: #D00000;
+  font-size: 16px;
+  line-height: 1;
   cursor: pointer;
 }
+
 .calc-table td button:hover {
-  background: none; 
-  color: #A30000; 
+  background: none;
+  color: #A30000;
 }
+
 .simulation-legend-wrapper {
-  background: transparent; 
-  border-radius: 0; 
-  padding: 0; 
-  box-shadow: none; 
-  width: 100%; 
-  margin-top: auto; 
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  width: 100%;
+  margin-top: auto;
   box-sizing: border-box;
 }
+
 #legend-items-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 10px; 
-  justify-content: center; 
-  margin-top: 4px; 
+  gap: 4px 10px;
+  justify-content: center;
+  margin-top: 4px;
 }
+
 #legend-items-list li {
   display: flex;
   align-items: center;
-  font-size: 11px; 
+  font-size: 11px;
   color: #495057;
 }
+
 .legend-color-box {
   display: inline-block;
-  width: 10px; 
+  width: 10px;
   height: 10px;
-  border-radius: 2px; 
-  margin-right: 4px; 
+  border-radius: 2px;
+  margin-right: 4px;
   border: 1px solid #DEE2E6;
 }
 
@@ -1606,18 +2237,25 @@ div.sidebar-divider > #collapseBtn svg {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0; /* 修改：与 calc-layout 一致，依赖父级 .content 的 padding */
+  padding: 0;
+  /* 修改：与 calc-layout 一致，依赖父级 .content 的 padding */
   /* background: #F0F2F5; -- 取消淡色背景 */
-  min-height: calc(100vh - 60px); /* 假设导航栏高度为60px */
+  min-height: calc(100vh - 60px);
+  /* 假设导航栏高度为60px */
 }
 
 /* 顶部控制栏(.history-controls) */
 .history-controls {
-  display: flex;                  /* 启用Flexbox布局 */
-  justify-content: space-between; /* 左侧标题推到最左，右侧控件组推到最右 */
-  align-items: center;          /* 修改：与 config-header 一致 */
-  flex-wrap: wrap;                /* 新增：与 config-header 一致 */
-  gap: 10px;                      /* 新增：与 config-header 一致 */
+  display: flex;
+  /* 启用Flexbox布局 */
+  justify-content: space-between;
+  /* 左侧标题推到最左，右侧控件组推到最右 */
+  align-items: center;
+  /* 修改：与 config-header 一致 */
+  flex-wrap: wrap;
+  /* 新增：与 config-header 一致 */
+  gap: 10px;
+  /* 新增：与 config-header 一致 */
   /* 移除以下卡片化样式 */
   /* padding: 15px 20px; */
   /* background: #FFFFFF; */
@@ -1628,20 +2266,28 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 左侧标题 */
 .history-title {
-  font-size: 1.5em; /* 修改：与 config-title 一致 */
+  font-size: 1.5em;
+  /* 修改：与 config-title 一致 */
   font-weight: 600;
-  color: #333;       /* 修改：与 config-title 一致 */
-  margin: 0; /* 移除默认外边距 */
-  padding: 0; /* 移除默认内边距 */
-  line-height: 1.4; /* 微调行高以帮助垂直对齐，可根据实际效果调整 */
+  color: #333;
+  /* 修改：与 config-title 一致 */
+  margin: 0;
+  /* 移除默认外边距 */
+  padding: 0;
+  /* 移除默认内边距 */
+  line-height: 1.4;
+  /* 微调行高以帮助垂直对齐，可根据实际效果调整 */
 }
 
 /* 右侧控件容器 (包含缓存信息和按钮组) */
 .history-rhs-controls {
   display: flex;
-  flex-direction: column;   /* 内部元素垂直堆叠：缓存信息在上，按钮组在中 */
-  align-items: flex-end;    /* 内部元素（缓存信息文本、按钮组）均靠右对齐 */
-  /* gap: 8px; */ /* 缓存信息和按钮组之间的垂直间距 - 现在只有一个子元素，gap不起作用 */
+  flex-direction: column;
+  /* 内部元素垂直堆叠：缓存信息在上，按钮组在中 */
+  align-items: flex-end;
+  /* 内部元素（缓存信息文本、按钮组）均靠右对齐 */
+  /* gap: 8px; */
+  /* 缓存信息和按钮组之间的垂直间距 - 现在只有一个子元素，gap不起作用 */
 }
 
 /* 缓存信息文本 - 相关样式被移除 */
@@ -1651,13 +2297,18 @@ div.sidebar-divider > #collapseBtn svg {
 /* 按钮动作组 */
 .history-actions {
   display: flex;
-  justify-content: flex-end; /* 修改：使按钮组靠右 */
-  align-items: center; /* 新增：与 section-title 对齐 */
-  margin-bottom: 12px; /* 新增：与 section-title 对齐 */
-  gap: 12px; /* 重新显式声明 gap */
+  justify-content: flex-end;
+  /* 修改：使按钮组靠右 */
+  align-items: center;
+  /* 新增：与 section-title 对齐 */
+  margin-bottom: 12px;
+  /* 新增：与 section-title 对齐 */
+  gap: 12px;
+  /* 重新显式声明 gap */
 }
 
-.calc-table-btn.btn-danger:hover { /* "清除历史"按钮的特殊悬停效果 */
+.calc-table-btn.btn-danger:hover {
+  /* "清除历史"按钮的特殊悬停效果 */
   background: #FEEAEA;
   border-color: #D00000;
   color: #D00000;
@@ -1732,40 +2383,68 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 如果需要，可以添加针对历史记录页面中特定元素的更精细样式 */
 
-#history-table-header-table th:nth-child(9), #history-table-body-table td:nth-child(9) { width: 10%; text-align: right;}
-#history-table-header-table th:nth-child(10), #history-table-body-table td:nth-child(10) { width: 10%; text-align: right; font-weight: bold; color: #3A86FF;}
+#history-table-header-table th:nth-child(9),
+#history-table-body-table td:nth-child(9) {
+  width: 10%;
+  text-align: right;
+}
+
+#history-table-header-table th:nth-child(10),
+#history-table-body-table td:nth-child(10) {
+  width: 10%;
+  text-align: right;
+  font-weight: bold;
+  color: #3A86FF;
+}
 
 /* section-title 复用 CalcPage 的样式，或在此处定义/覆盖 */
 /* .section-title 及其子元素 .history-table-header .table-group-subtitle 的样式被移除，因为元素已删除 */
 
 /* 如果需要，可以添加针对历史记录页面中特定元素的更精细样式 */
 
-.calc-table-btn, .calc-table__btn {
-  padding: 6px 16px; /* 调整内边距使其更一致 */
+.calc-table-btn,
+.calc-table__btn {
+  padding: 6px 16px;
+  /* 调整内边距使其更一致 */
   font-size: 14px;
-  border-radius: 8px; /* 统一增加圆角 */
-  border: 1px solid #CED4DA; /* 默认边框颜色 */
-  background: #FFFFFF; /* 默认白色背景 */
-  color: #495057; /* 默认文字颜色 */
+  border-radius: 8px;
+  /* 统一增加圆角 */
+  border: 1px solid #CED4DA;
+  /* 默认边框颜色 */
+  background: #FFFFFF;
+  /* 默认白色背景 */
+  color: #495057;
+  /* 默认文字颜色 */
   cursor: pointer;
-  transition: all 0.2s ease; /* 添加所有属性的过渡效果 */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* 微微阴影 */
+  transition: all 0.2s ease;
+  /* 添加所有属性的过渡效果 */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  /* 微微阴影 */
 }
 
-.calc-table-btn:hover, .calc-table__btn:hover {
-  border-color: #ADB5BD; /* 边框变深 */
-  background-color: #F8F9FA; /* 背景变浅灰 */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* 悬停时阴影加深 */
-  transform: translateY(-1px); /* 悬停时轻微上移 */
+.calc-table-btn:hover,
+.calc-table__btn:hover {
+  border-color: #ADB5BD;
+  /* 边框变深 */
+  background-color: #F8F9FA;
+  /* 背景变浅灰 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  /* 悬停时阴影加深 */
+  transform: translateY(-1px);
+  /* 悬停时轻微上移 */
 }
 
-.calc-table-btn:active, .calc-table__btn:active {
-  background-color: #E9ECEF; /* 点击时背景更淡 */
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  transform: translateY(0); /* 点击时回到原位 */
+.calc-table-btn:active,
+.calc-table__btn:active {
+  background-color: #E9ECEF;
+  /* 点击时背景更淡 */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+  /* 点击时回到原位 */
 }
 
-.calc-table-btn:disabled, .calc-table__btn:disabled {
+.calc-table-btn:disabled,
+.calc-table__btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
@@ -1773,24 +2452,36 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 /* 取消红色悬停动画，改为柔和效果 */
-#reset-table-1:hover, #reset-table-2:hover, #reset-table-3:hover,
-.calc-table-btn.btn-danger:hover, .calc-table__btn--danger:hover {
-  background: #FFF5F5; /* 微微背景变化 */
-  border-color: #DC3545; /* 边框保持危险色 */
-  color: #DC3545;       /* 文字保持危险色 */
+#reset-table-1:hover,
+#reset-table-2:hover,
+#reset-table-3:hover,
+.calc-table-btn.btn-danger:hover,
+.calc-table__btn--danger:hover {
+  background: #FFF5F5;
+  /* 微微背景变化 */
+  border-color: #DC3545;
+  /* 边框保持危险色 */
+  color: #DC3545;
+  /* 文字保持危险色 */
   box-shadow: 0 2px 4px rgba(220, 53, 69, 0.15);
 }
 
-#reset-table-1:active, #reset-table-2:active, #reset-table-3:active,
-.calc-table-btn.btn-danger:active, .calc-table__btn--danger:active {
+#reset-table-1:active,
+#reset-table-2:active,
+#reset-table-3:active,
+.calc-table-btn.btn-danger:active,
+.calc-table__btn--danger:active {
   background: #f8d7da;
   border-color: #DC3545;
   color: #DC3545;
   box-shadow: inset 0 1px 2px rgba(220, 53, 69, 0.2);
 }
 
-#reset-table-1:disabled, #reset-table-2:disabled, #reset-table-3:disabled,
-.calc-table-btn.btn-danger:disabled, .calc-table__btn--danger:disabled {
+#reset-table-1:disabled,
+#reset-table-2:disabled,
+#reset-table-3:disabled,
+.calc-table-btn.btn-danger:disabled,
+.calc-table__btn--danger:disabled {
   background: #FFFFFF;
   border-color: #DC3545;
   color: #DC3545;
@@ -1803,7 +2494,9 @@ div.sidebar-divider > #collapseBtn svg {
 .page-config {}
 
 /* 区块容器（大区分块） */
-.layout-calc, .layout-history, .layout-config {
+.layout-calc,
+.layout-history,
+.layout-config {
   display: flex;
   gap: 24px;
   padding: 0;
@@ -1812,7 +2505,9 @@ div.sidebar-divider > #collapseBtn svg {
   border-radius: 0;
   box-shadow: none;
 }
-.layout-left, .layout-right {
+
+.layout-left,
+.layout-right {
   background: #FFFFFF;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -1831,11 +2526,12 @@ div.sidebar-divider > #collapseBtn svg {
   background-color: #FFFFFF;
   padding: 16px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
   margin-bottom: 20px;
 }
 
-.group-title, .section-title {
+.group-title,
+.section-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1855,36 +2551,47 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 .title-container .emoji {
-  margin-right: 8px; /* 在 emoji 和标题文本之间添加一些间距 */
+  margin-right: 8px;
+  /* 在 emoji 和标题文本之间添加一些间距 */
   font-size: 20px;
 }
 
 .group-actions {
   display: flex;
-  gap: 8px; /* 在按钮之间添加一些间距 */
+  gap: 8px;
+  /* 在按钮之间添加一些间距 */
 }
 
 /* 主表格统一ID样式 */
-.main-data-table, [id^=main-data-table] {
+.main-data-table,
+[id^=main-data-table] {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
   color: #495057;
   background: #fff;
 }
-.main-data-table th, .main-data-table td, [id^=main-data-table] th, [id^=main-data-table] td {
+
+.main-data-table th,
+.main-data-table td,
+[id^=main-data-table] th,
+[id^=main-data-table] td {
   padding: 8px 10px;
   border: 1px solid #E0E0E0;
   vertical-align: middle;
 }
-.main-data-table th, [id^=main-data-table] th {
+
+.main-data-table th,
+[id^=main-data-table] th {
   background: #F8F9FA;
   font-weight: 600;
   color: #495057;
   text-align: center;
   white-space: nowrap;
 }
-.main-data-table td, [id^=main-data-table] td {
+
+.main-data-table td,
+[id^=main-data-table] td {
   text-align: center;
 }
 
@@ -1921,32 +2628,50 @@ div.sidebar-divider > #collapseBtn svg {
 */
 
 /* 2. 统一所有主表格为 simulation-results-table 样式 */
-.main-data-table, [id^=main-data-table],
-.calc-table, .config-table {
+.main-data-table,
+[id^=main-data-table],
+.calc-table,
+.config-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
   background: #fff;
 }
-.main-data-table th, .main-data-table td, [id^=main-data-table] th, [id^=main-data-table] td,
-.calc-table th, .calc-table td, .config-table th, .config-table td {
+
+.main-data-table th,
+.main-data-table td,
+[id^=main-data-table] th,
+[id^=main-data-table] td,
+.calc-table th,
+.calc-table td,
+.config-table th,
+.config-table td {
   padding: 10px 8px;
-  text-align: center; /* 强制居中 */
+  text-align: center;
+  /* 强制居中 */
   border-bottom: 1px dashed #EAECEF;
   border-right: none !important;
   border-left: none !important;
   border-top: none !important;
   vertical-align: middle;
 }
-.main-data-table th, [id^=main-data-table] th, .calc-table th, .config-table th {
+
+.main-data-table th,
+[id^=main-data-table] th,
+.calc-table th,
+.config-table th {
   color: #495057;
   font-weight: 600;
   background-color: #F8F9FA;
   border-bottom: 2px solid #E0E0E0;
-  text-align: center; /* 表头也居中 */
+  text-align: center;
+  /* 表头也居中 */
 }
-.main-data-table tr:last-child td, [id^=main-data-table] tr:last-child td,
-.calc-table tr:last-child td, .config-table tr:last-child td {
+
+.main-data-table tr:last-child td,
+[id^=main-data-table] tr:last-child td,
+.calc-table tr:last-child td,
+.config-table tr:last-child td {
   border-bottom: none;
 }
 
@@ -1955,6 +2680,7 @@ div.sidebar-divider > #collapseBtn svg {
 .group-simulation {
   background: #F8F9FA;
 }
+
 .group-result {
   background: #F8F9FA;
   margin-top: 24px;
@@ -1996,14 +2722,16 @@ div.sidebar-divider > #collapseBtn svg {
 
 /* 标准导线配置表格滚动区域样式 */
 #actual-table-display-area {
-  max-height: 800px; /* 15行的高度，假设每行约40px */
+  max-height: 800px;
+  /* 15行的高度，假设每行约40px */
   overflow-y: auto;
   min-width: 500px;
   background: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 0;
-  position: relative; /* 为固定表头提供定位上下文 */
+  position: relative;
+  /* 为固定表头提供定位上下文 */
 }
 
 /* 固定表头样式 */
@@ -2078,9 +2806,12 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
-  appearance: textfield;           /* 标准写法，优先写在最前面 */
-  -webkit-appearance: textfield;   /* Chrome/Safari */
+  appearance: textfield;
+  /* 标准写法，优先写在最前面 */
+  -webkit-appearance: textfield;
+  /* Chrome/Safari */
 }
 
 /* 计算页历史样式片段（已合并或删除） */
@@ -2098,14 +2829,72 @@ input[type="number"] {
 .group-result.chart-container-wrapper {
   margin-bottom: 24px;
   padding: 24px;
-  background: #FFFFFF; /* Ensure white background */
+  background: #FFFFFF;
+  /* Ensure white background */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .group-result.chart-container-wrapper {
   margin-bottom: 0;
-}/* Legend styles */ .simulation-legend-wrapper { max-height: 150px; overflow-y: auto; margin-top: 15px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px; background-color: #f8f9fa; } .simulation-legend-wrapper ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; } .simulation-legend-wrapper li { margin-right: 15px; margin-bottom: 8px; white-space: nowrap; display: flex; align-items: center; } .legend-color-box { display: inline-block; width: 12px; height: 12px; border: 1px solid #6c757d; border-radius: 2px; margin-right: 5px; flex-shrink: 0; } /* Scrollbar styling for legend */ .simulation-legend-wrapper::-webkit-scrollbar { width: 6px; height: 6px; } .simulation-legend-wrapper::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; } .simulation-legend-wrapper::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; } .simulation-legend-wrapper::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+}
+
+/* Legend styles */
+.simulation-legend-wrapper {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+}
+
+.simulation-legend-wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.simulation-legend-wrapper li {
+  margin-right: 15px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.legend-color-box {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #6c757d;
+  border-radius: 2px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+
+/* Scrollbar styling for legend */
+.simulation-legend-wrapper::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.simulation-legend-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.simulation-legend-wrapper::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.simulation-legend-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
 
 /* ------ Phase 2：计算页布局兜底与响应式收敛 ------ */
 
@@ -2113,16 +2902,19 @@ input[type="number"] {
 .layout-calc {
   flex-wrap: wrap;
 }
+
 .layout-left,
 .layout-right {
   min-width: 0;
 }
+
 /* 992px 以下（中等偏窄）改单列。1100px 断点仍然更严格触发 sidebar 顶部化。 */
 @media (max-width: 992px) {
   .layout-calc {
     flex-direction: column;
     padding-bottom: 90px;
   }
+
   .layout-left,
   .layout-right {
     flex: 1 1 auto;
@@ -2164,4 +2956,1132 @@ input[type="number"] {
 
 #history-table-body-wrapper {
   max-height: min(60vh, 800px);
+}
+
+/* ------ Phase 2.5：视觉一致性与交互收敛覆盖 ------ */
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(58, 134, 255, 0.18);
+}
+
+:focus-visible {
+  outline: 2px solid rgba(58, 134, 255, 0.38);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.content {
+  background: var(--color-bg);
+}
+
+.sidebar {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  border-right: 1px solid var(--color-border-soft);
+}
+
+.sidebar-divider {
+  background: var(--color-border-soft);
+}
+
+div.sidebar-divider>#collapseBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+div.sidebar-divider>#collapseBtn:hover,
+div.sidebar-divider>#collapseBtn:focus-visible {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.sidebar button {
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), width var(--transition-normal), padding var(--transition-normal);
+}
+
+.sidebar button.active {
+  background: linear-gradient(180deg, rgba(235, 244, 255, 0.95), rgba(235, 244, 255, 0.8));
+  color: var(--color-primary);
+  box-shadow: inset 0 0 0 1px var(--color-primary-border);
+}
+
+.sidebar button:not(.active):hover,
+.sidebar button:not(.active):focus-visible {
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--color-primary);
+}
+
+.sidebar.collapsed button {
+  margin-bottom: 12px;
+}
+
+.sidebar.collapsed button .emoji {
+  margin-right: 0;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  width: 100%;
+  padding: var(--space-lg) var(--space-md) var(--space-xl);
+  border-top: 1px solid var(--color-border-soft);
+  gap: var(--space-md);
+}
+
+.footer-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+#btn-help,
+#btn-language,
+.btn-help,
+.btn-language {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+#btn-help:hover,
+#btn-language:hover,
+#btn-help:focus-visible,
+#btn-language:focus-visible {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.version-info {
+  width: 100%;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+}
+
+.layout-calc,
+.layout-history,
+.page-config {
+  display: flex;
+  gap: var(--space-xl);
+  padding: 0 0 96px;
+  min-width: 0;
+}
+
+.layout-left,
+.layout-right,
+.layout-history {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: 20px;
+  gap: var(--space-lg);
+}
+
+.page-config>.layout-left {
+  flex: 1.35 1 520px;
+}
+
+.page-config>.layout-right {
+  flex: 1 1 360px;
+}
+
+.page-history .layout-history,
+.page-query .layout-history {
+  width: 100%;
+}
+
+.layout-left,
+.layout-right {
+  align-self: stretch;
+}
+
+.group-wire-standard,
+.group-wire-special,
+.group-wrap,
+.group-tolerance,
+.group-simulation,
+.group-result.chart-container-wrapper,
+.group-config-table,
+.group-simulation-params,
+.group-history-list,
+#query-filter-content,
+#query-table-content {
+  background: linear-gradient(180deg, rgba(248, 249, 250, 0.92), rgba(255, 255, 255, 0.98));
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+  padding: 16px;
+  margin: 0;
+}
+
+.group-simulation,
+.group-result.chart-container-wrapper {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.group-title,
+.section-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border-soft);
+  color: var(--color-text);
+}
+
+.title-container {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  min-width: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.title-container .emoji {
+  margin-right: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.group-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.group-actions.calc-table {
+  flex: 1 1 auto;
+  gap: var(--space-md);
+}
+
+.group-actions .actions-left,
+.group-actions .actions-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.group-actions .calc-table-btn {
+  margin-left: 0;
+}
+
+.calc-table-btn,
+.action-bar-btn,
+.app-btn,
+.multi-select-toggle {
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  box-shadow: none;
+}
+
+.calc-table-btn:hover,
+.action-bar-btn:hover,
+.app-btn:hover,
+.multi-select-toggle:hover {
+  background: var(--color-surface-muted);
+  border-color: #cfd6dd;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.calc-table-btn:active,
+.action-bar-btn:active,
+.app-btn:active,
+.multi-select-toggle:active {
+  transform: translateY(0);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.calc-table-btn:disabled,
+.action-bar-btn:disabled,
+.app-btn:disabled,
+.multi-select-toggle:disabled,
+.param-reset-btn:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.calc-table-btn:focus-visible,
+.action-bar-btn:focus-visible,
+.app-btn:focus-visible,
+.multi-select-toggle:focus-visible,
+.param-reset-btn:focus-visible,
+.sidebar button:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-border);
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.18);
+}
+
+.calc-table-btn.btn-danger,
+.app-btn.btn-danger,
+.app-btn-danger,
+.btn-reset-action {
+  color: var(--color-danger);
+  border-color: rgba(231, 76, 60, 0.35);
+  background: var(--color-surface);
+}
+
+.calc-table-btn.btn-danger:hover,
+.app-btn.btn-danger:hover,
+.app-btn-danger:hover,
+.btn-reset-action:hover {
+  background: var(--color-danger-soft);
+  border-color: rgba(231, 76, 60, 0.5);
+  color: #c0392b;
+}
+
+.btn-calculate-action,
+.action-bar-btn.btn-calculate-action,
+.app-btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(58, 134, 255, 0.18);
+}
+
+.btn-calculate-action:hover,
+.action-bar-btn.btn-calculate-action:hover,
+.app-btn-primary:hover {
+  background: #2f77e6;
+  border-color: #2f77e6;
+  color: #fff;
+}
+
+.calc-table td .btn-icon,
+.calc-table td button,
+.param-reset-btn {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  box-shadow: none;
+}
+
+.calc-table td .btn-icon:hover,
+.calc-table td button:hover,
+.param-reset-btn:hover {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary-border);
+  color: var(--color-primary);
+  transform: none;
+}
+
+.calc-table td button.btn-danger,
+.calc-table td button.danger {
+  color: var(--color-danger);
+  border-color: rgba(231, 76, 60, 0.28);
+}
+
+.calc-table-content,
+#actual-table-display-area,
+#history-table-body-wrapper,
+#query-table-body-wrapper,
+#table1-body-wrapper,
+#table2-body-wrapper,
+#table3-body-wrapper {
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+#table1-header-wrapper,
+#table2-header-wrapper,
+#table3-header-wrapper,
+#query-table-header-wrapper,
+#history-table-header-wrapper,
+#config-table-header-wrapper {
+  border: 1px solid var(--color-border-soft);
+  border-bottom: none;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: var(--color-surface-muted);
+}
+
+#table1-body-wrapper,
+#table2-body-wrapper,
+#table3-body-wrapper,
+#query-table-body-wrapper,
+#history-table-body-wrapper,
+#actual-table-display-area {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.calc-table,
+.config-table,
+.main-data-table {
+  width: 100%;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  background: transparent;
+}
+
+.calc-table th,
+.calc-table td,
+.config-table th,
+.config-table td,
+.main-data-table th,
+.main-data-table td {
+  padding: 10px 10px;
+  min-height: 48px;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.calc-table th,
+.config-table th,
+.main-data-table th {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.main-data-table tbody tr:nth-child(even) {
+  background: rgba(248, 249, 250, 0.72);
+}
+
+.main-data-table tbody tr:hover {
+  background: rgba(235, 244, 255, 0.62);
+}
+
+.calc-table input,
+.calc-table select,
+.config-input,
+.drag-area-input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid #cfd6dd;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-align: center;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.calc-table input:hover,
+.calc-table select:hover,
+.config-input:hover,
+.drag-area-input:hover,
+.standard-selector select:hover {
+  border-color: #b8c2cc;
+}
+
+.calc-table input:focus,
+.calc-table select:focus,
+.config-input:focus,
+.drag-area-input:focus,
+.standard-selector select:focus,
+.multi-select.open .multi-select-toggle {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.14);
+  background: #fff;
+}
+
+.input-od[readonly],
+.calc-table td.is-readonly,
+.calc-table td.readonly-cell {
+  background: rgba(248, 249, 250, 0.86);
+  color: var(--color-text-muted);
+}
+
+.input-error,
+.config-table input.config-input.input-error,
+.drag-area-input.input-error {
+  border-color: rgba(231, 76, 60, 0.62);
+  background: var(--color-danger-soft);
+  color: #b42318;
+}
+
+.input-error:focus,
+.config-table input.config-input.input-error:focus,
+.drag-area-input.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.14);
+}
+
+.drag-area-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.drag-area-range {
+  flex: 1 1 auto;
+  height: 40px;
+  accent-color: var(--color-primary);
+}
+
+.drag-area-input {
+  max-width: 86px;
+  text-align: center;
+}
+
+.simulation-content-wrapper {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.05fr) minmax(240px, 1fr);
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+.simulation-area {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  margin-inline: auto;
+  justify-self: center;
+  align-self: center;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(248, 249, 250, 0.92), rgba(255, 255, 255, 0.98));
+}
+
+#simulation-canvas {
+  width: 100%;
+  min-height: 240px;
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+.simulation-legend-wrapper {
+  width: 100%;
+  margin-top: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+}
+
+.simulation-legend-wrapper.is-empty {
+  display: none;
+}
+
+#legend-items-list {
+  justify-content: flex-start;
+  gap: 8px 12px;
+  margin-top: 0;
+}
+
+#legend-items-list li {
+  font-size: var(--font-size-xs);
+  color: var(--color-text);
+}
+
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(52, 58, 64, 0.18);
+}
+
+.simulation-details {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.result-highlight-card {
+  padding: 16px 18px;
+  border: 1px solid rgba(58, 134, 255, 0.2);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(235, 244, 255, 0.9), rgba(255, 255, 255, 1));
+  box-shadow: var(--shadow-sm);
+}
+
+.result-metric-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.highlight-value,
+.result-metric-value {
+  display: block;
+  color: var(--color-primary);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.precise-value {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.48em;
+  font-weight: 600;
+}
+
+.input-summary-container,
+.result-details-card,
+.result-status-panel {
+  padding: 14px 16px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+}
+
+#input-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+#input-summary>div {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.input-summary-value {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.simulation-results-table {
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.simulation-results-table th,
+.simulation-results-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.simulation-results-table th {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+}
+
+.simulation-results-table tr:last-child td {
+  border-bottom: none;
+}
+
+.simulation-results-table td:first-child {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.simulation-results-table td span {
+  display: inline-block;
+  min-width: 72px;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-status-panel {
+  display: none;
+}
+
+.result-status-panel.has-content {
+  display: block;
+}
+
+.result-status-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.result-status-text {
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.result-status-text strong {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.empty-state,
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: 18px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(248, 249, 250, 0.9), rgba(255, 255, 255, 1));
+  color: var(--color-text-muted);
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.results-chart-area {
+  position: relative;
+  min-height: 220px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(248, 249, 250, 0.92), rgba(255, 255, 255, 1));
+  color: var(--color-text-muted);
+}
+
+.results-chart-area.is-empty::before,
+.results-chart-area.is-loading::before {
+  content: attr(data-empty-text);
+  position: absolute;
+  inset: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.72);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.results-chart-area.is-loading::before {
+  content: attr(data-loading-text);
+}
+
+.history-save-option {
+  gap: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.history-save-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+}
+
+.calc-bottom-bar,
+.config-bottom-bar {
+  height: 76px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--color-border-soft);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.page-query .group-title {
+  align-items: center;
+}
+
+.standard-selector {
+  margin-left: 0;
+}
+
+.standard-selector label,
+.query-filters-row label {
+  gap: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.multi-select-panel {
+  top: calc(100% + 6px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.multi-option {
+  border-radius: var(--radius-sm);
+}
+
+.multi-option:hover {
+  background: var(--color-primary-soft);
+}
+
+.query-status,
+.page-query #query-loading,
+.page-query #query-empty {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+}
+
+.page-query #query-loading {
+  border: 1px solid var(--color-primary-border);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.page-query #query-empty {
+  border: 1px dashed var(--color-border);
+  background: linear-gradient(180deg, rgba(248, 249, 250, 0.9), rgba(255, 255, 255, 1));
+  color: var(--color-text-muted);
+}
+
+.page-history td[data-empty-state="true"],
+.page-config td[data-empty-state="true"] {
+  padding: 24px 16px;
+  color: var(--color-text-muted);
+  background: linear-gradient(180deg, rgba(248, 249, 250, 0.9), rgba(255, 255, 255, 1));
+}
+
+.group-simulation-params .simulation-params-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: 16px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  max-height: min(60vh, 800px);
+  overflow-y: auto;
+}
+
+.param-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: 14px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+}
+
+.param-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.param-title {
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.param-description {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+}
+
+.app-toast-stack {
+  position: fixed;
+  right: 16px;
+  bottom: 92px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1800;
+  pointer-events: none;
+}
+
+.app-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 260px;
+  max-width: min(360px, calc(100vw - 24px));
+  padding: 12px 14px;
+  border: 1px solid var(--color-border-soft);
+  border-left-width: 4px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  pointer-events: auto;
+  transform: translateY(0);
+  opacity: 1;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.app-toast.info {
+  border-left-color: var(--color-info);
+}
+
+.app-toast.success {
+  border-left-color: var(--color-success);
+}
+
+.app-toast.warning {
+  border-left-color: var(--color-warning);
+}
+
+.app-toast.error {
+  border-left-color: var(--color-danger);
+}
+
+.app-toast.is-leaving {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.app-toast-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  flex: 0 0 20px;
+}
+
+.app-toast-body {
+  min-width: 0;
+}
+
+.app-toast-title {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.app-toast-message {
+  color: var(--color-text-muted);
+}
+
+.app-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(52, 58, 64, 0.18);
+  z-index: 1900;
+}
+
+.app-modal-backdrop.is-open {
+  display: flex;
+}
+
+.app-modal {
+  width: min(420px, calc(100vw - 24px));
+  max-width: 100%;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.app-modal-header,
+.app-modal-footer {
+  padding: 14px 16px;
+  background: var(--color-surface);
+}
+
+.app-modal-header {
+  border-bottom: 1px solid var(--color-border-soft);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.app-modal-body {
+  padding: 16px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.app-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  border-top: 1px solid var(--color-border-soft);
+}
+
+@media (max-width: 1100px) {
+
+  .sidebar,
+  .sidebar.collapsed {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-soft);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .sidebar {
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: var(--space-sm);
+  }
+
+  .sidebar button {
+    min-width: 0;
+    padding: 0 14px;
+    margin-right: 0;
+  }
+
+  .sidebar-footer {
+    width: auto;
+    margin-top: 0;
+    margin-left: auto;
+    padding: 0;
+    border-top: none;
+  }
+
+  .footer-buttons {
+    width: auto;
+    justify-content: center;
+  }
+
+  .page-config,
+  .layout-calc {
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 992px) {
+  .simulation-content-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  #input-summary,
+  .result-status-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .layout-left,
+  .layout-right,
+  .layout-history {
+    padding: 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .group-title,
+  .section-title {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .group-actions,
+  .group-actions.calc-table,
+  .group-actions .actions-left,
+  .group-actions .actions-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .calc-table-btn,
+  .action-bar-btn {
+    width: 100%;
+  }
+
+  .calc-bottom-bar,
+  .config-bottom-bar {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 76px;
+  }
+
+  .app-toast-stack {
+    left: 12px;
+    right: 12px;
+    bottom: 88px;
+  }
+
+  .app-toast {
+    max-width: none;
+  }
+}
+
+@media (max-width: 720px) {
+
+  .sidebar button,
+  .sidebar.collapsed button {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    padding: 0;
+  }
+
+  .sidebar button .emoji {
+    margin-right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

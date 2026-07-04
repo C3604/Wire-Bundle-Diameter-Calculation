@@ -2,22 +2,19 @@
 // Self-contained styles are injected on first use.
 
 let stylesInjected = false;
+const TOAST_META = {
+  info: { icon: "ℹ️", title: "提示" },
+  success: { icon: "✅", title: "成功" },
+  warning: { icon: "⚠️", title: "注意" },
+  error: { icon: "⛔", title: "错误" },
+};
+
 function ensureStyles() {
   if (stylesInjected) return;
   const css = `
-  .app-toast-stack { position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 10000; }
-  .app-toast { min-width: 240px; max-width: 360px; padding: 10px 12px; border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.12); color: #fff; font-size: 14px; line-height: 1.4; }
-  .app-toast.info { background: #2d7ef7; }
-  .app-toast.success { background: #2ecc71; }
-  .app-toast.warning { background: #f39c12; }
-  .app-toast.error { background: #e74c3c; }
-  .app-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: none; align-items: center; justify-content: center; z-index: 9999; }
-  .app-modal { width: 360px; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden; }
-  .app-modal-header { padding: 12px 16px; font-weight: 600; border-bottom: 1px solid #d9d9d9; background: #f8f8f8; }
-  .app-modal-body { padding: 16px; color: #333; }
-  .app-modal-footer { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #d9d9d9; justify-content: flex-end; }
-  .app-btn { padding: 8px 12px; border: 1px solid #d9d9d9; border-radius: 8px; cursor: pointer; background: #fff; }
-  .app-btn-primary { background: #2d7ef7; color: #fff; border-color: #1f6fe0; }
+  :root {
+    --app-feedback-width: min(360px, calc(100vw - 24px));
+  }
   `;
   const style = document.createElement('style');
   style.id = 'app-feedback-style';
@@ -43,12 +40,18 @@ export function showToast(message, type = 'info', options = {}) {
   const stack = getToastStack();
   const el = document.createElement('div');
   el.className = 'app-toast ' + (type || 'info');
-  el.textContent = message;
+  const meta = TOAST_META[type] || TOAST_META.info;
+  el.innerHTML = `
+    <span class="app-toast-icon" aria-hidden="true">${meta.icon}</span>
+    <div class="app-toast-body">
+      <span class="app-toast-title">${meta.title}</span>
+      <div class="app-toast-message"></div>
+    </div>
+  `;
+  el.querySelector('.app-toast-message').textContent = message;
   stack.appendChild(el);
   const timer = setTimeout(() => {
-    el.style.transition = 'opacity .25s ease, transform .25s ease';
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(6px)';
+    el.classList.add('is-leaving');
     setTimeout(() => { el.remove(); }, 250);
   }, duration);
   return { close: () => { clearTimeout(timer); el.remove(); } };
@@ -65,8 +68,8 @@ function ensureModal() {
         <div class="app-modal-header" id="app-confirm-title">确认操作</div>
         <div class="app-modal-body" id="app-confirm-message">确定要继续吗？</div>
         <div class="app-modal-footer">
-          <button class="app-btn" id="app-btn-cancel">取消</button>
-          <button class="app-btn app-btn-primary" id="app-btn-ok">确定</button>
+          <button class="app-btn" id="app-btn-cancel" type="button">取消</button>
+          <button class="app-btn app-btn-primary" id="app-btn-ok" type="button">确定</button>
         </div>
       </div>
     `;
@@ -81,13 +84,31 @@ export function showConfirm(message, opts = {}) {
   const backdrop = ensureModal();
   backdrop.querySelector('#app-confirm-title').textContent = title;
   backdrop.querySelector('#app-confirm-message').textContent = message;
-  backdrop.style.display = 'flex';
+  backdrop.classList.add('is-open');
   return new Promise((resolve) => {
     const ok = backdrop.querySelector('#app-btn-ok');
     const cancel = backdrop.querySelector('#app-btn-cancel');
     ok.textContent = okText; cancel.textContent = cancelText;
-    const close = () => { backdrop.style.display = 'none'; ok.onclick = cancel.onclick = null; };
+    const close = () => {
+      backdrop.classList.remove('is-open');
+      ok.onclick = cancel.onclick = backdrop.onclick = null;
+      document.removeEventListener('keydown', handleKeydown);
+    };
+    const handleKeydown = (event) => {
+      if (event.key === 'Escape') {
+        close();
+        resolve(false);
+      }
+    };
+    backdrop.onclick = (event) => {
+      if (event.target === backdrop) {
+        close();
+        resolve(false);
+      }
+    };
     ok.onclick = () => { close(); resolve(true); };
     cancel.onclick = () => { close(); resolve(false); };
+    document.addEventListener('keydown', handleKeydown);
+    ok.focus();
   });
 }
