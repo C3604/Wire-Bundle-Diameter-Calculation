@@ -1,6 +1,10 @@
 // 主界面页面（侧边栏收缩/展开逻辑及调试输出）
 
-import { renderCalcPage } from "./calc/CalcPage.js";
+import {
+  renderCalcPage,
+  flushCalcPageState,
+  destroyCalcPageSession,
+} from "./calc/CalcPage.js";
 import { renderHistoryPage } from "./history/HistoryPage.js";
 import { renderConfigPage } from "./config/ConfigPage.js";
 import { renderQueryPage } from "./query/QueryPage.js";
@@ -174,6 +178,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // 页面切换逻辑
   function showPage(pageId) {
+    // 切页前：若当前是计算页，同步 flush 未落盘状态并作废会话，防止异步回调污染
+    if (currentPageId === "calc") {
+      try { flushCalcPageState(); } catch (e) { console.warn("flushCalcPageState 失败:", e); }
+      try { destroyCalcPageSession(); } catch (e) { console.warn("destroyCalcPageSession 失败:", e); }
+    }
     // Clean up previous page's styles before rendering the new one
     const oldStyles = document.getElementById("config-page-styles");
     if (oldStyles) {

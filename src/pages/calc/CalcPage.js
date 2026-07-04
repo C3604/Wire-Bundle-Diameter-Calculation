@@ -36,11 +36,59 @@ const WIRE_COLORS = [
 ];
 const DEFAULT_WIRE_COLOR = "#BDC3C7"; // 默认银色
 
+// ---------------------------------------------------------------------------
+// 计算页会话管理（模块级，供 Popup 在切页/切语言前 flush 并作废旧会话）
+// - 每次 renderCalcPage 建一个 session；异步回调仅在 session 仍活动时才操作 DOM。
+// - Popup.showPage() 在销毁 DOM 前调用 flushCalcPageState() 与 destroyCalcPageSession()。
+// ---------------------------------------------------------------------------
+let currentCalcSession = null;
+
+function isSessionActive(session) {
+  return !!(
+    session &&
+    session === currentCalcSession &&
+    !session.destroyed &&
+    session.calcLayoutEl &&
+    session.calcLayoutEl.isConnected
+  );
+}
+
+export function flushCalcPageState() {
+  const s = currentCalcSession;
+  if (s && !s.destroyed && typeof s.flush === "function") {
+    try {
+      s.flush();
+    } catch (e) {
+      console.warn("flushCalcPageState 执行失败:", e);
+    }
+  }
+}
+
+export function destroyCalcPageSession() {
+  const s = currentCalcSession;
+  if (!s) return;
+  s.destroyed = true;
+  if (s.saveTimer) {
+    clearTimeout(s.saveTimer);
+    s.saveTimer = null;
+  }
+  currentCalcSession = null;
+}
+
 /**
  * 渲染“计算”页面并初始化状态、事件与绘图。
  * @param {HTMLElement} container - 页面容器根元素。
  */
 export function renderCalcPage(container) {
+  // 作废可能残留的旧 session（防御性；Popup 已在切页前调用）
+  destroyCalcPageSession();
+  const session = {
+    destroyed: false,
+    calcLayoutEl: null,
+    flush: null,
+    saveTimer: null,
+  };
+  currentCalcSession = session;
   container.innerHTML = `
     <div class="page-calc">
       <div class="layout-calc">
@@ -246,23 +294,73 @@ export function renderCalcPage(container) {
 
   // 使用 setTimeout 确保在操作 DOM 前，HTML 已被完全解析
   setTimeout(() => {
+    if (session.destroyed) return;
     // --- 状态变量 ---
     let lastSimulationCircles = null;
     let simulationHistoryChartInstance = null;
     let currentDiameterColorMap = []; // 存储当前的颜色映射
 
+    // 计算页容器内的 checkbox 引用（在 renderRows 前 DOM 已就绪；无需全局查询）
+    // 使用 getter 是因为 innerHTML 生成后立即可查，但为容错在每次 save 时重新读一次。
+
     // --- 状态管理函数 ---
     // 将状态管理函数移入 `setTimeout` 内部，以确保它们可以访问 `renderCalcPage` 的局部作用域变量
-    function saveState() {
+    function saveStateNow() {
+      if (!isSessionActive(session)) return;
+      const cb = container.querySelector("#save-history-checkbox");
       const state = {
         standardRows: standardRows,
         specialRows: specialRows,
         wrapRows: wrapRows,
         tolerance: toleranceInput.value,
-        saveHistory: document.getElementById("save-history-checkbox").checked,
+        saveHistory: cb ? !!cb.checked : false,
       };
-      setJSON("calcPageState", state);
+      const ok = setJSON("calcPageState", state);
+      if (!ok) {
+        console.warn(
+          "calcPageState 保存失败（可能是 localStorage 配额或序列化异常）",
+        );
+        try {
+          showToast(
+            i18n.getMessage("state_save_failed") || "计算页状态保存失败",
+            "warning",
+          );
+        } catch (_) {}
+      }
     }
+
+    // 输入类事件使用 debounce；切页/切语言前使用 session.flush() 同步落盘
+    function scheduleSaveState() {
+      if (!isSessionActive(session)) return;
+      if (session.saveTimer) clearTimeout(session.saveTimer);
+      session.saveTimer = setTimeout(() => {
+        session.saveTimer = null;
+        if (isSessionActive(session)) saveStateNow();
+      }, 150);
+    }
+
+    // 兼容旧调用点
+    const saveState = saveStateNow;
+
+    // 暴露 flush 给 Popup（切页前同步落盘）
+    session.flush = () => {
+      if (session.saveTimer) {
+        clearTimeout(session.saveTimer);
+        session.saveTimer = null;
+      }
+      // flush 时 session 可能刚被 Popup 标记 destroyed；直接写一次不依赖 isSessionActive
+      if (!calcLayoutEl || !calcLayoutEl.isConnected) return;
+      const cb = container.querySelector("#save-history-checkbox");
+      const state = {
+        standardRows,
+        specialRows,
+        wrapRows,
+        tolerance: toleranceInput ? toleranceInput.value : "110",
+        saveHistory: cb ? !!cb.checked : false,
+      };
+      const ok = setJSON("calcPageState", state);
+      if (!ok) console.warn("flush: calcPageState 保存失败");
+    };
 
     function loadAndApplyState() {
       const state = getJSON("calcPageState");
@@ -272,9 +370,8 @@ export function renderCalcPage(container) {
         wrapRows = state.wrapRows || wrapRows;
         toleranceInput.value = state.tolerance || "110";
         toleranceRange.value = state.tolerance || "110";
-        document.getElementById("save-history-checkbox").checked =
-          state.saveHistory || false;
-
+        const cb = container.querySelector("#save-history-checkbox");
+        if (cb) cb.checked = !!state.saveHistory;
         // 仅更新数据，不再从此函数中调用渲染
       }
     }
@@ -299,6 +396,7 @@ export function renderCalcPage(container) {
       );
       return;
     }
+    session.calcLayoutEl = calcLayoutEl;
 
     // 导出按钮：默认不可见且不可用，待生成模拟后再启用
     const exportBtn = container.querySelector("#btn-export-image");
@@ -431,6 +529,7 @@ export function renderCalcPage(container) {
 
     async function exportRightAreaAsImage() {
       try {
+        if (!isSessionActive(session)) return;
         const rightEl = calcLayoutEl.querySelector(".layout-right");
         if (!rightEl) {
           showToast(i18n.getMessage("export_not_found_right"), "error");
@@ -448,13 +547,17 @@ export function renderCalcPage(container) {
           scrollX: window.scrollX || 0,
           scrollY: window.scrollY || 0,
         });
+        if (!isSessionActive(session)) return;
         canvas.toBlob((blob) => {
+          if (!isSessionActive(session)) return;
           const url = blob ? URL.createObjectURL(blob) : canvas.toDataURL("image/png");
           openImagePreviewModal(url, blob || null);
         }, "image/png");
       } catch (e) {
         console.error("导出图片失败:", e);
-        showToast(i18n.getMessage("export_failed"), "error");
+        if (isSessionActive(session)) {
+          showToast(i18n.getMessage("export_failed"), "error");
+        }
       }
     }
 
@@ -556,10 +659,15 @@ export function renderCalcPage(container) {
       });
     }
 
+    // 标准库异步加载竞态保护：每次 apply 生成新 reqId，
+    // await 之后若不再是最新请求或 select 值已变，直接放弃写入。
+    let standardLoadReqId = 0;
+
     async function initStandardDropdown() {
       try {
         if (standardLoadingEl) standardLoadingEl.style.display = "inline";
         const list = await listDatabaseStandards();
+        if (!isSessionActive(session)) return;
         if (standardSelectEl) {
           standardSelectEl.innerHTML = "";
           list.forEach((name, idx) => {
@@ -574,50 +682,78 @@ export function renderCalcPage(container) {
           if (selected) standardSelectEl.value = selected;
         }
         await applySelectedStandard();
+        if (!isSessionActive(session)) return;
       } catch (e) {
         console.error("初始化标准选择失败:", e);
+        if (!isSessionActive(session)) return;
         showToast(i18n.getMessage("wire_standard_load_failed") || "标准加载失败，已回退默认", "error");
         baseStandardData = [];
         updateWireDataSources();
       } finally {
-        if (standardLoadingEl) standardLoadingEl.style.display = "none";
+        if (isSessionActive(session) && standardLoadingEl) {
+          standardLoadingEl.style.display = "none";
+        }
       }
       // 绑定切换事件
       if (standardSelectEl) {
         standardSelectEl.addEventListener("change", async () => {
           try {
             if (standardLoadingEl) standardLoadingEl.style.display = "inline";
-            await applySelectedStandard();
+            const isLatest = await applySelectedStandard();
+            if (!isSessionActive(session)) return;
+            // 只有最新请求才落盘（否则用户已切到别的标准，本次的 select value 未必是当前）
+            if (isLatest) scheduleSaveState();
           } catch (e) {
             console.error("切换标准失败:", e);
+            if (!isSessionActive(session)) return;
             showToast(i18n.getMessage("wire_standard_switch_failed") || "标准切换失败，已回退默认", "error");
             baseStandardData = [];
             updateWireDataSources();
-            renderStandardTable(); // 重新渲染
+            renderStandardRows(); // 重新渲染
           } finally {
-            if (standardLoadingEl) standardLoadingEl.style.display = "none";
+            if (isSessionActive(session) && standardLoadingEl) {
+              standardLoadingEl.style.display = "none";
+            }
           }
         });
       }
     }
 
+    /**
+     * 加载并应用当前 select 中选中的标准库。
+     * 竞态保护：每次调用生成递增 reqId，await 后校验：
+     *   1) session 仍有效
+     *   2) 本次 reqId 仍是最新请求
+     *   3) select 当前值仍等于本次请求对应的标准名
+     * 不满足则放弃后续渲染/写入。
+     * @returns {Promise<boolean>} 是否为最新且成功完成的请求（用于调用方决定是否落盘）
+     */
     async function applySelectedStandard() {
+      const reqId = ++standardLoadReqId;
       const selectedName = standardSelectEl ? standardSelectEl.value : "";
       if (selectedName) {
         mspecService.setSource(selectedName);
         await mspecService.load();
+        // 三重校验：session / reqId / select 值都必须仍对应本次请求
+        if (!isSessionActive(session)) return false;
+        if (reqId !== standardLoadReqId) return false;
+        if (!standardSelectEl || standardSelectEl.value !== selectedName) return false;
         baseStandardData = [];
         sessionStorage.setItem(SESSION_KEY_SELECTED_STANDARD, selectedName);
       } else {
         baseStandardData = [];
+        // 无 selectedName 也要防抢占
+        if (reqId !== standardLoadReqId) return false;
       }
       const optsAll = mspecService.buildOptions();
       const wireSizes = Array.isArray(optsAll.wireSizes) ? optsAll.wireSizes : [];
       const mergedWireSizes = buildGaugeOptionsWithCustomFirst(wireSizes);
       const firstWire = mergedWireSizes[0] || "";
+      // 保留用户 qty；仅在 gauge/type 在新库中不存在时才回退，且不影响其它字段。
       standardRows = standardRows.map((row) => {
         const curGauge = String(row.gauge || "");
-        const nextGauge = mergedWireSizes.includes(curGauge) ? curGauge : firstWire;
+        const gaugeStillValid = curGauge && mergedWireSizes.includes(curGauge);
+        const nextGauge = gaugeStillValid ? curGauge : firstWire;
         const optsForGauge = nextGauge
           ? mspecService.buildOptions({ wireSize: [nextGauge] })
           : { wallThicknesses: [] };
@@ -625,12 +761,23 @@ export function renderCalcPage(container) {
           ? optsForGauge.wallThicknesses.map((v) => String(v))
           : [];
         const curType = String(row.type || "");
-        const nextType = types.includes(curType) ? curType : (types[0] || "");
-        const nextRow = { ...row, gauge: nextGauge, type: nextType };
+        const typeStillValid = curType && types.includes(curType);
+        const nextType = typeStillValid ? curType : (types[0] || "");
+        const nextRow = {
+          ...row,
+          gauge: nextGauge,
+          type: nextType,
+          // qty 保留原值（若无则用户还未输入，保持原样即可）
+          qty: row.qty != null ? row.qty : "",
+        };
+        // 更新 od；解析不到则置空（不删除该行）
         updateOD(nextRow);
         return nextRow;
       });
+      // 再次校验最新性；若并发切换导致本次已非最新，放弃渲染
+      if (reqId !== standardLoadReqId) return false;
       renderStandardRows();
+      return true;
     }
 
     updateWireDataSources();
@@ -748,6 +895,11 @@ export function renderCalcPage(container) {
       row.od = "";
     }
 
+    // 新增行时的「聚焦下一行」标记（闭包变量，替代旧的 render*Rows._focusNext 静态字段）
+    let focusNextStandardRow = false;
+    let focusNextSpecialRow = false;
+    let focusNextWrapRow = false;
+
     // 渲染标准导线表格
     function renderStandardRows() {
 
@@ -790,6 +942,7 @@ export function renderCalcPage(container) {
           row.gauge = e.target.value;
           updateOD(row);
           renderStandardRows();
+          scheduleSaveState();
         };
         tdGauge.appendChild(selectGauge);
         tr.appendChild(tdGauge);
@@ -833,6 +986,7 @@ export function renderCalcPage(container) {
           row.type = e.target.value;
           updateOD(row);
           renderStandardRows();
+          scheduleSaveState();
         };
         tdType.appendChild(selectType);
         tr.appendChild(tdType);
@@ -855,6 +1009,7 @@ export function renderCalcPage(container) {
         inputQty.oninput = (e) => {
           row.qty = e.target.value;
           updateInputSummary();
+          scheduleSaveState();
         };
         inputQty.addEventListener("keydown", handleInputEnter);
         tdQty.appendChild(inputQty);
@@ -867,10 +1022,11 @@ export function renderCalcPage(container) {
         btnDel.onclick = () => {
           standardRows.splice(idx, 1);
           renderStandardRows();
+          scheduleSaveState();
         };
         tdDel.appendChild(btnDel);
         tr.appendChild(tdDel);
-        if (idx === standardRows.length - 1 && renderStandardRows._focusNext) {
+        if (idx === standardRows.length - 1 && focusNextStandardRow) {
           setTimeout(() => {
             inputQty.focus();
             inputQty.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -878,7 +1034,7 @@ export function renderCalcPage(container) {
         }
         table1Body.appendChild(tr);
       });
-      renderStandardRows._focusNext = false;
+      focusNextStandardRow = false;
       updateInputSummary();
     }
 
@@ -886,8 +1042,9 @@ export function renderCalcPage(container) {
     addRowBtn1.onclick = () => {
       standardRows.push({ gauge: "", type: "", od: "", qty: "1" }); // Add an empty row, or a different default if preferred
       // updateOD might not be necessary if gauge/type are empty
-      renderStandardRows._focusNext = true;
+      focusNextStandardRow = true;
       renderStandardRows();
+      scheduleSaveState();
     };
     // 重置
     resetBtn1.onclick = () => {
@@ -897,6 +1054,7 @@ export function renderCalcPage(container) {
       ];
       standardRows.forEach((row) => updateOD(row)); // Ensure OD is updated on reset
       renderStandardRows();
+      scheduleSaveState();
     };
 
     // --- 特殊导线表格逻辑 ---
@@ -929,6 +1087,7 @@ export function renderCalcPage(container) {
         inputOD.oninput = (e) => {
           row.od = e.target.value;
           updateInputSummary();
+          scheduleSaveState();
         };
         inputOD.addEventListener("keydown", handleInputEnter);
         tdOD.appendChild(inputOD);
@@ -944,6 +1103,7 @@ export function renderCalcPage(container) {
         inputQty.oninput = (e) => {
           row.qty = e.target.value;
           updateInputSummary();
+          scheduleSaveState();
         };
         inputQty.addEventListener("keydown", handleInputEnter);
         tdQty.appendChild(inputQty);
@@ -956,11 +1116,12 @@ export function renderCalcPage(container) {
         btnDel.onclick = () => {
           specialRows.splice(idx, 1);
           renderSpecialRows();
+          scheduleSaveState();
         };
         tdDel.appendChild(btnDel);
         tr.appendChild(tdDel);
         // 新增行时聚焦到数量输入框
-        if (idx === specialRows.length - 1 && renderSpecialRows._focusNext) {
+        if (idx === specialRows.length - 1 && focusNextSpecialRow) {
           setTimeout(() => {
             inputQty.focus();
             inputQty.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -968,18 +1129,20 @@ export function renderCalcPage(container) {
         }
         table2Body.appendChild(tr);
       });
-      renderSpecialRows._focusNext = false;
+      focusNextSpecialRow = false;
       updateInputSummary();
     }
 
     addRowBtn2.onclick = () => {
       specialRows.push({ od: "", qty: "1" }); // Add an empty row
-      renderSpecialRows._focusNext = true;
+      focusNextSpecialRow = true;
       renderSpecialRows();
+      scheduleSaveState();
     };
     resetBtn2.onclick = () => {
       specialRows = [{ od: "2.5", qty: "0" }];
       renderSpecialRows();
+      scheduleSaveState();
     };
     renderSpecialRows();
 
@@ -1015,6 +1178,7 @@ export function renderCalcPage(container) {
         inputThick.oninput = (e) => {
           row.thick = e.target.value;
           updateInputSummary();
+          scheduleSaveState();
         };
         inputThick.addEventListener("keydown", handleInputEnter);
         tdThick.appendChild(inputThick);
@@ -1027,11 +1191,12 @@ export function renderCalcPage(container) {
         btnDel.onclick = () => {
           wrapRows.splice(idx, 1);
           renderWrapRows();
+          scheduleSaveState();
         };
         tdDel.appendChild(btnDel);
         tr.appendChild(tdDel);
         // 新增行时聚焦到厚度输入框
-        if (idx === wrapRows.length - 1 && renderWrapRows._focusNext) {
+        if (idx === wrapRows.length - 1 && focusNextWrapRow) {
           setTimeout(() => {
             inputThick.focus();
             inputThick.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -1039,27 +1204,30 @@ export function renderCalcPage(container) {
         }
         table3Body.appendChild(tr);
       });
-      renderWrapRows._focusNext = false;
+      focusNextWrapRow = false;
       updateInputSummary();
     }
 
     addRowBtn3.onclick = () => {
       wrapRows.push({ thick: "" }); // Add an empty row
-      renderWrapRows._focusNext = true;
+      focusNextWrapRow = true;
       renderWrapRows();
+      scheduleSaveState();
     };
     resetBtn3.onclick = () => {
       wrapRows = [{ thick: "0.5" }];
       renderWrapRows();
+      scheduleSaveState();
     };
     renderWrapRows();
 
     // 拖动条区域联动逻辑
     const toleranceRange = calcLayoutEl.querySelector("#tolerance-range");
     const toleranceInput = calcLayoutEl.querySelector("#tolerance-input");
-    // 拖动滑块时实时刷新输入框
+    // 拖动滑块时实时刷新输入框并保存
     toleranceRange.oninput = function () {
       toleranceInput.value = this.value;
+      scheduleSaveState();
     };
     // 只在输入框失去焦点时刷新滑块
     toleranceInput.onblur = function () {
@@ -1069,25 +1237,10 @@ export function renderCalcPage(container) {
       if (val > 200) val = 200;
       this.value = val;
       toleranceRange.value = val;
+      scheduleSaveState();
     };
-    // 计算次数拖动条联动逻辑
-    const scoreRange = calcLayoutEl.querySelector("#score-range");
-    const scoreInput = calcLayoutEl.querySelector("#score-input");
-    if (scoreRange) {
-      scoreRange.oninput = function () {
-        if (scoreInput) scoreInput.value = this.value;
-      };
-    }
-    if (scoreInput) {
-      scoreInput.onblur = function () {
-        let val = parseInt(this.value, 10);
-        if (isNaN(val)) val = 10;
-        if (val < 1) val = 1;
-        if (val > 100) val = 100;
-        this.value = val;
-        if (scoreRange) scoreRange.value = val;
-      };
-    }
+    // 计算次数（score）UI 已从模板中移除；SIMULATION_COUNT 由
+    // getSimulationParameters().SIMULATION_COUNT 提供，无需绑定 #score-* 事件。
 
     // 在每次渲染表格后调用
     const oldRenderStandardRows = renderStandardRows;
@@ -1107,18 +1260,12 @@ export function renderCalcPage(container) {
     };
 
     const resetToleranceBtn = calcLayoutEl.querySelector("#reset-tolerance");
-    const resetScoreBtn = calcLayoutEl.querySelector("#reset-score");
 
     if (resetToleranceBtn && toleranceRange && toleranceInput) {
       resetToleranceBtn.onclick = () => {
         toleranceRange.value = "110";
         toleranceInput.value = "110";
-      };
-    }
-    if (resetScoreBtn && scoreRange && scoreInput) {
-      resetScoreBtn.onclick = () => {
-        scoreRange.value = "10";
-        scoreInput.value = "10";
+        scheduleSaveState();
       };
     }
 
@@ -1167,16 +1314,19 @@ export function renderCalcPage(container) {
     if (btnPageResetAll) {
       btnPageResetAll.onclick = async () => {
         const ok = await showConfirm(i18n.getMessage("calc_confirm_reset_all"));
-        if (ok) {
-          if (resetBtn1) resetBtn1.click();
-          if (resetBtn2) resetBtn2.click();
-          if (resetBtn3) resetBtn3.click();
-          if (resetToleranceBtn) resetToleranceBtn.click();
-          if (resetScoreBtn) resetScoreBtn.click();
-          document.getElementById("max-wire").textContent = "";
-          document.getElementById("min-wire").textContent = "";
-          document.getElementById("avg-wire").textContent = "";
-        }
+        if (!ok || !isSessionActive(session)) return;
+        if (resetBtn1) resetBtn1.click();
+        if (resetBtn2) resetBtn2.click();
+        if (resetBtn3) resetBtn3.click();
+        if (resetToleranceBtn) resetToleranceBtn.click();
+        // #score-* 已从模板移除，无需清理
+        const maxEl = calcLayoutEl.querySelector("#max-wire");
+        const minEl = calcLayoutEl.querySelector("#min-wire");
+        const avgEl = calcLayoutEl.querySelector("#avg-wire");
+        if (maxEl) maxEl.textContent = "";
+        if (minEl) minEl.textContent = "";
+        if (avgEl) avgEl.textContent = "";
+        scheduleSaveState();
       };
     }
 
@@ -1198,7 +1348,13 @@ export function renderCalcPage(container) {
           scoreValue: params.SIMULATION_COUNT,
         });
         if (!state.ok) {
-           showToast(i18n.getMessage("calc_message_no_valid_wires"), "warning");
+           // 优先展示 collector 内的具体 warnings（如 qty 超限、tolerance 无效）；
+           // 只有当 warnings 为空时才回退到通用「无有效导线」提示。
+           if (state.warnings && state.warnings.length) {
+             state.warnings.forEach((msg) => showToast(msg, "warning"));
+           } else {
+             showToast(i18n.getMessage("calc_message_no_valid_wires"), "warning");
+           }
            btnPageCalculate.disabled = false;
            btnPageCalculate.textContent = i18n.getMessage(
              "calc_bottom_bar_calculate",
@@ -1223,6 +1379,8 @@ export function renderCalcPage(container) {
 
         // 使用 setTimeout 异步执行，防止UI阻塞
         setTimeout(() => {
+          // 会话守卫：切页/切语言后旧回调直接退出，不写 DOM/不 toast/不改按钮
+          if (!isSessionActive(session)) return;
           const simulationDiameters = []; // 存储每次模拟的堆叠直径（不含包裹和公差）
           let tempLastCirclesData = null; // 临时存储最后一次模拟的圆形数据
           currentDiameterColorMap = []; // 重置颜色映射
@@ -1355,7 +1513,8 @@ export function renderCalcPage(container) {
                 (avgSimOD + addedDiameterFromWrapping) * toleranceFactor;
 
               const panelId = "convergence-panel";
-              const oldPanel = document.getElementById(panelId);
+              // 仅在当前计算页作用域内清理旧面板，避免污染其它页面/残留 DOM
+              const oldPanel = calcLayoutEl.querySelector(`#${panelId}`);
               if (oldPanel) oldPanel.remove();
               const panel = document.createElement("div");
               panel.id = panelId;
@@ -1402,7 +1561,8 @@ export function renderCalcPage(container) {
                 </div>
               `;
               panel.innerHTML = html;
-              const target = document.querySelector(".calc-right") || document.body;
+              // 挂载到当前计算页右侧结果区（.layout-right）；绝不 fallback 到 document.body
+              const target = calcLayoutEl.querySelector(".layout-right") || calcLayoutEl;
               target.appendChild(panel);
               const accelSet = [1.2, 1.4];
               const thrSet = [0.0012, 0.001];
@@ -1518,9 +1678,10 @@ export function renderCalcPage(container) {
                 exportBtn.style.display = ""; // 恢复默认显示
                 exportBtn.disabled = false;
               }
-              // 保存历史记录（成功结果时）
-              const saveHistoryCheckbox = document.getElementById(
-                "save-history-checkbox",
+              // 保存历史记录（成功结果时）—— 使用 container 作用域
+              // （checkbox 在 .calc-bottom-bar 里，不在 .layout-calc 后代）
+              const saveHistoryCheckbox = container.querySelector(
+                "#save-history-checkbox",
               );
               if (saveHistoryCheckbox && saveHistoryCheckbox.checked) {
                 try {
@@ -1570,7 +1731,28 @@ export function renderCalcPage(container) {
                   if (history.length > MAX_HISTORY) {
                     history = history.slice(history.length - MAX_HISTORY);
                   }
-                  setJSON("calculationHistory", history);
+                  let ok = setJSON("calculationHistory", history);
+                  if (!ok) {
+                    // 尝试裁剪至 100 条再存一次（配额兜底）
+                    console.warn(
+                      "calculationHistory 保存失败，尝试裁剪至 100 条重试",
+                    );
+                    if (history.length > 100) {
+                      history = history.slice(history.length - 100);
+                    }
+                    ok = setJSON("calculationHistory", history);
+                  }
+                  if (!ok) {
+                    console.warn(
+                      "calculationHistory 二次保存仍失败（可能 localStorage 配额已满）",
+                    );
+                    showToast(
+                      i18n.getMessage("calc_message_history_save_failed") ||
+                        i18n.getMessage("calc_message_save_history_error") ||
+                        "历史记录保存失败（存储空间不足）",
+                      "warning",
+                    );
+                  }
                 } catch (e) {
                   console.error("保存历史记录失败:", e);
                   showToast(
@@ -1587,13 +1769,18 @@ export function renderCalcPage(container) {
             }
             } catch (e) {
               console.error("计算过程中发生错误:", e);
-              showToast(i18n.getMessage("calc_message_calculation_error"), "error");
-              clearSimulationResults(); // 出错时也清理结果, including new details panel
+              if (isSessionActive(session)) {
+                showToast(i18n.getMessage("calc_message_calculation_error"), "error");
+                clearSimulationResults(); // 出错时也清理结果, including new details panel
+              }
             } finally {
-              btnPageCalculate.disabled = false;
-              btnPageCalculate.textContent = i18n.getMessage(
-                "calc_bottom_bar_calculate",
-              );
+              // 只有会话仍活动且按钮仍在 DOM 中才恢复；否则说明用户已切页
+              if (isSessionActive(session) && btnPageCalculate.isConnected) {
+                btnPageCalculate.disabled = false;
+                btnPageCalculate.textContent = i18n.getMessage(
+                  "calc_bottom_bar_calculate",
+                );
+              }
             }
           }, 50); // 50ms延迟，给UI渲染留出时间
         };
@@ -1611,7 +1798,10 @@ export function renderCalcPage(container) {
       renderSpecialRows();
       renderWrapRows();
 
-      // 4. 绑定事件监听
+      // 4. 绑定事件监听（限定在计算页容器内查询，避免污染其它页面 DOM；
+      //    保留原 debounced 兜底，与 scheduleSaveState 叠加为双保险）
+      // 注意：#save-history-checkbox 位于 .calc-bottom-bar，是 .layout-calc 的兄弟；
+      //       必须用 container.querySelector 才能定位到，不能用 calcLayoutEl。
       [
         "#add-row-1",
         "#reset-table-1",
@@ -1620,21 +1810,17 @@ export function renderCalcPage(container) {
         "#add-row-3",
         "#reset-table-3",
         "#reset-tolerance",
-        "#reset-score",
         "#tolerance-input",
-        "#score-input",
         "#save-history-checkbox",
       ].forEach((selector) => {
-        const el = document.querySelector(selector);
+        const el = container.querySelector(selector);
         if (el) {
           const eventType =
             el.type === "checkbox" || el.type === "range" || el.type === "text"
               ? "change"
               : "click";
-          let timer;
           el.addEventListener(eventType, () => {
-            clearTimeout(timer);
-            timer = setTimeout(saveState, 150);
+            scheduleSaveState();
           });
         }
       });

@@ -1,5 +1,9 @@
 import i18n from "../../i18n/index.js";
 
+// —— 数量上限（防止 UI 粘贴/DevTools/localStorage 恢复绕过 maxLength=4 造成冻结） ——
+export const MAX_QTY_PER_ROW = 10000;
+export const MAX_TOTAL_WIRES = 50000;
+
 /**
  * 统一的输入收集与校验流程，返回标准化状态与警告信息。
  * 与 UI 解耦：通过参数传入页面的行数据与输入值。
@@ -21,24 +25,64 @@ export function collectAndValidateInputs({
 }) {
   const warnings = [];
 
-  // 收集导线半径
+  // 收集导线半径 —— 收集前做单行 qty 上限 + 累计总数上限校验，
+  // 校验失败立即返回，不将超限行按 qty 展开推入数组，避免内存暴涨/UI 冻结。
   const wireRadii = [];
-  (standardRows || []).forEach((row) => {
-    const qty = parseInt(String(row.qty).trim(), 10);
-    const od = parseFloat(String(row.od).replace(",", "."));
-    if (!isNaN(qty) && qty > 0 && !isNaN(od) && od > 0) {
+  let limitError = null;
+
+  function processRows(rows, kindMsgKey, kindFallback) {
+    if (limitError) return;
+    const list = rows || [];
+    for (let idx = 0; idx < list.length; idx++) {
+      const row = list[idx];
+      const qty = parseInt(String(row.qty).trim(), 10);
+      const od = parseFloat(String(row.od).replace(",", "."));
+      if (isNaN(qty) || qty <= 0 || isNaN(od) || od <= 0) continue;
+
+      // 单行上限
+      if (qty > MAX_QTY_PER_ROW) {
+        const kind = i18n.getMessage(kindMsgKey) || kindFallback;
+        limitError =
+          i18n.getMessage("calc_message_qty_row_exceeded", {
+            kind,
+            row: String(idx + 1),
+            qty: String(qty),
+            max: String(MAX_QTY_PER_ROW),
+          }) ||
+          `${kind}第 ${idx + 1} 行数量 ${qty} 超过单行上限 ${MAX_QTY_PER_ROW}`;
+        return;
+      }
+
+      // 累计上限（在展开前判定；若超限则不推入本行）
+      if (wireRadii.length + qty > MAX_TOTAL_WIRES) {
+        const projected = wireRadii.length + qty;
+        limitError =
+          i18n.getMessage("calc_message_total_wires_exceeded", {
+            max: String(MAX_TOTAL_WIRES),
+            total: String(projected),
+          }) ||
+          `总导线数量 ${projected} 超过累计上限 ${MAX_TOTAL_WIRES}`;
+        return;
+      }
+
       const radius = od / 2;
       for (let i = 0; i < qty; i++) wireRadii.push(radius);
     }
-  });
-  (specialRows || []).forEach((row) => {
-    const qty = parseInt(String(row.qty).trim(), 10);
-    const od = parseFloat(String(row.od).replace(",", "."));
-    if (!isNaN(qty) && qty > 0 && !isNaN(od) && od > 0) {
-      const radius = od / 2;
-      for (let i = 0; i < qty; i++) wireRadii.push(radius);
-    }
-  });
+  }
+  processRows(standardRows, "calc_qty_kind_standard", "标准导线");
+  processRows(specialRows, "calc_qty_kind_special", "特殊导线");
+
+  if (limitError) {
+    warnings.push(limitError);
+    return {
+      ok: false,
+      wireRadii: [],
+      totalWrappingThickness: 0,
+      numSimulations: 0,
+      toleranceFactor: 0,
+      warnings,
+    };
+  }
 
   if (wireRadii.length === 0) {
     warnings.push(i18n.getMessage("calc_message_no_valid_wires"));

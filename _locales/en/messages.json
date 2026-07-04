@@ -295,6 +295,30 @@
     "message": "Error saving history record. Local storage may be full or disabled.",
     "description": "Save history error message"
   },
+  "calc_message_history_save_failed": {
+    "message": "Failed to save history (local storage quota exceeded).",
+    "description": "History localStorage quota failure warning"
+  },
+  "state_save_failed": {
+    "message": "Failed to save calculator page state (storage full or unavailable).",
+    "description": "calcPageState save failure warning"
+  },
+  "calc_qty_kind_standard": {
+    "message": "Standard wire",
+    "description": "Kind label for standard wire in qty validation messages"
+  },
+  "calc_qty_kind_special": {
+    "message": "Special wire",
+    "description": "Kind label for special wire in qty validation messages"
+  },
+  "calc_message_qty_row_exceeded": {
+    "message": "$kind$ row $row$ quantity $qty$ exceeds per-row limit $max$.",
+    "description": "Per-row qty exceeded, placeholders kind/row/qty/max"
+  },
+  "calc_message_total_wires_exceeded": {
+    "message": "Total wire count $total$ exceeds cumulative limit $max$. Please reduce quantities.",
+    "description": "Total wires exceeded, placeholders total/max"
+  },
   "calc_message_simulation_not_converged": {
     "message": "Some simulations did not fully converge. Consider increasing count or adjusting parameters.",
     "description": "Simulation not converged warning"

@@ -327,6 +327,30 @@
     "message": "保存历史记录时出错。",
     "description": "保存历史记录失败时的错误提示"
   },
+  "calc_message_history_save_failed": {
+    "message": "历史记录保存失败（本地存储空间不足）。",
+    "description": "历史记录 localStorage 配额失败时的警告"
+  },
+  "state_save_failed": {
+    "message": "计算页状态保存失败（存储空间不足或异常）。",
+    "description": "计算页 calcPageState 保存失败提示"
+  },
+  "calc_qty_kind_standard": {
+    "message": "标准导线",
+    "description": "数量校验消息中的导线类型词——标准导线"
+  },
+  "calc_qty_kind_special": {
+    "message": "特殊导线",
+    "description": "数量校验消息中的导线类型词——特殊导线"
+  },
+  "calc_message_qty_row_exceeded": {
+    "message": "$kind$第 $row$ 行数量 $qty$ 超过单行上限 $max$。",
+    "description": "单行 qty 超上限提示，占位符 kind/row/qty/max"
+  },
+  "calc_message_total_wires_exceeded": {
+    "message": "总导线数量 $total$ 超过累计上限 $max$，请减少数量后再计算。",
+    "description": "累计导线数量超上限提示，占位符 total/max"
+  },
   "calc_message_simulation_not_converged": {
     "message": "部分模拟未完全收敛，建议提高次数或调整参数。",
     "description": "模拟未收敛提示"
