@@ -344,12 +344,12 @@
     "description": "数量校验消息中的导线类型词——特殊导线"
   },
   "calc_message_qty_row_exceeded": {
-    "message": "$kind$第 $row$ 行数量 $qty$ 超过单行上限 $max$。",
-    "description": "单行 qty 超上限提示，占位符 kind/row/qty/max"
+    "message": "{kind}第 {row} 行数量 {qty} 超过单行上限 {max}。",
+    "description": "单行 qty 超上限提示；占位符使用花括号语法（避开 Chrome placeholders 校验）"
   },
   "calc_message_total_wires_exceeded": {
-    "message": "总导线数量 $total$ 超过累计上限 $max$，请减少数量后再计算。",
-    "description": "累计导线数量超上限提示，占位符 total/max"
+    "message": "总导线数量 {total} 超过累计上限 {max}，请减少数量后再计算。",
+    "description": "累计导线数量超上限提示；占位符使用 {key} 语法"
   },
   "calc_message_simulation_not_converged": {
     "message": "部分模拟未完全收敛，建议提高次数或调整参数。",

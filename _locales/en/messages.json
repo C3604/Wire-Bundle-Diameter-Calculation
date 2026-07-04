@@ -312,12 +312,12 @@
     "description": "Kind label for special wire in qty validation messages"
   },
   "calc_message_qty_row_exceeded": {
-    "message": "$kind$ row $row$ quantity $qty$ exceeds per-row limit $max$.",
-    "description": "Per-row qty exceeded, placeholders kind/row/qty/max"
+    "message": "{kind} row {row} quantity {qty} exceeds per-row limit {max}.",
+    "description": "Per-row qty exceeded; uses brace-syntax placeholders (bypasses Chrome placeholders validation)"
   },
   "calc_message_total_wires_exceeded": {
-    "message": "Total wire count $total$ exceeds cumulative limit $max$. Please reduce quantities.",
-    "description": "Total wires exceeded, placeholders total/max"
+    "message": "Total wire count {total} exceeds cumulative limit {max}. Please reduce quantities.",
+    "description": "Total wires exceeded; uses {key} syntax"
   },
   "calc_message_simulation_not_converged": {
     "message": "Some simulations did not fully converge. Consider increasing count or adjusting parameters.",

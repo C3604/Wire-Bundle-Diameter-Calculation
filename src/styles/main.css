@@ -672,15 +672,17 @@ div.sidebar-divider > #collapseBtn svg {
 /* 计算页样式片段（历史导入标记已清理） */
 /* ------------------------------------ */
 /* CalcPage 页面样式，抽取自原内嵌<style>标签 */
-.calc-layout {
+/* 计算页主布局：DOM 使用 .layout-calc（曾误写为 .calc-layout，已统一） */
+.layout-calc {
   display: flex;
   gap: 24px;
   padding: 0;
   min-width: 0;
+  flex-wrap: wrap;           /* 中等宽度允许换行 */
   background: transparent;
   border-radius: 0;
   box-shadow: none;
-  padding-bottom: 90px; /* Space for the fixed bottom bar */
+  padding-bottom: 90px;      /* 给 fixed .calc-bottom-bar (72px) 让位 */
 }
 .layout-left, .layout-right {
   background: #FFFFFF;
@@ -690,15 +692,15 @@ div.sidebar-divider > #collapseBtn svg {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;              /* 防止内部 min-content 撑爆父容器 */
 }
+/* 桌面双栏 4:6；不再用 !important，去除 min-width 硬约束（改由断点控制） */
 .layout-left {
-  flex: 4 1 0% !important;
-  min-width: 360px;
+  flex: 4 1 clamp(280px, 40%, 480px);
   max-width: 100%;
 }
 .layout-right {
-  flex: 6 1 0% !important;
-  min-width: 400px;
+  flex: 6 1 clamp(320px, 60%, 720px);
   max-width: 100%;
 }
 .calc-table-group {
@@ -935,53 +937,6 @@ div.sidebar-divider > #collapseBtn svg {
   color: #d8000c !important;
 }
 
-/* 小号删除按钮样式，如果全局 calc-table-btn btn-danger btn-small 不够具体 */
-.config-table .btn-small {
-    padding: 3px 6px; /* 进一步减小按钮内边距 */
-    font-size: 0.9em; /* 减小字体大小 */
-    line-height: 1.2; /* 调整行高以适应新的padding和font-size */
-}
-
-
-/* 计算页样式片段（历史导入标记已清理） */
-/* ------------------------------------ */
-/* CalcPage 页面样式，抽取自原内嵌<style>标签 */
-.calc-layout {
-  display: flex;
-  gap: 24px;
-  padding: 0;
-  min-width: 0;
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  padding-bottom: 90px; /* Space for the fixed bottom bar */
-}
-.layout-left, .layout-right {
-  background: #FFFFFF;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.layout-left {
-  flex: 4 1 0% !important;
-  min-width: 360px;
-  max-width: 100%;
-}
-.layout-right {
-  flex: 6 1 0% !important;
-  min-width: 400px;
-  max-width: 100%;
-}
-.calc-table-group {
-  margin-bottom: 0;
-  padding: 16px 18px;
-  border-bottom: none;
-  background: #F8F9FA;
-  border-radius: 8px; /* 统一圆角 */
-}
 .calc-table-btns {
   display: flex;
   gap: 8px;
@@ -1050,44 +1005,44 @@ div.sidebar-divider > #collapseBtn svg {
   height: auto;
 }
 /* 列表区 (标准导线) 列宽调整 */
-#table1-header-table th:nth-child(1), #table1-body-table td:nth-child(1) { min-width: 48px; width: 8%; } /* 序号 */
-#table1-header-table th:nth-child(2), #table1-body-table td:nth-child(2) { min-width: 80px; width: 20%; } /* 线规 */
-#table1-header-table th:nth-child(3), #table1-body-table td:nth-child(3) { min-width: 80px; width: 20%; } /* 类型 */
-#table1-header-table th:nth-child(4), #table1-body-table td:nth-child(4) { min-width: 70px; width: 12%; } /* 直径(mm) - 减小 */
-#table1-header-table th:nth-child(5), #table1-body-table td:nth-child(5) { min-width: 70px; width: 20%; } /* 数量 */
-#table1-header-table th:nth-child(6), #table1-body-table td:nth-child(6) { min-width: 50px; width: 10%; } /* 删除 - 减小 */
+#main-data-table-standard th:nth-child(1), #main-data-table-standard-body td:nth-child(1) { min-width: 48px; width: 8%; } /* 序号 */
+#main-data-table-standard th:nth-child(2), #main-data-table-standard-body td:nth-child(2) { min-width: 80px; width: 20%; } /* 线规 */
+#main-data-table-standard th:nth-child(3), #main-data-table-standard-body td:nth-child(3) { min-width: 80px; width: 20%; } /* 类型 */
+#main-data-table-standard th:nth-child(4), #main-data-table-standard-body td:nth-child(4) { min-width: 70px; width: 12%; } /* 直径(mm) - 减小 */
+#main-data-table-standard th:nth-child(5), #main-data-table-standard-body td:nth-child(5) { min-width: 70px; width: 20%; } /* 数量 */
+#main-data-table-standard th:nth-child(6), #main-data-table-standard-body td:nth-child(6) { min-width: 50px; width: 10%; } /* 删除 - 减小 */
 
 /* 列表区 (特殊导线) 列宽调整 */
-#table2-header-table th:nth-child(1), #table2-body-table td:nth-child(1) { min-width: 48px; width: 15%; } /* 序号 */
-#table2-header-table th:nth-child(2), #table2-body-table td:nth-child(2) { min-width: 80px; width: 40%; } /* 直径(mm) */
-#table2-header-table th:nth-child(3), #table2-body-table td:nth-child(3) { min-width: 70px; width: 30%; } /* 数量 */
-#table2-header-table th:nth-child(4), #table2-body-table td:nth-child(4) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
+#main-data-table-special th:nth-child(1), #main-data-table-special-body td:nth-child(1) { min-width: 48px; width: 15%; } /* 序号 */
+#main-data-table-special th:nth-child(2), #main-data-table-special-body td:nth-child(2) { min-width: 80px; width: 40%; } /* 直径(mm) */
+#main-data-table-special th:nth-child(3), #main-data-table-special-body td:nth-child(3) { min-width: 70px; width: 30%; } /* 数量 */
+#main-data-table-special th:nth-child(4), #main-data-table-special-body td:nth-child(4) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
 
 /* 列表区 (包覆层) 列宽调整 */
-#table3-header-table th:nth-child(1), #table3-body-table td:nth-child(1) { min-width: 48px; width: 30%; } /* 序号 */
-#table3-header-table th:nth-child(2), #table3-body-table td:nth-child(2) { min-width: 80px; width: 55%; } /* 厚度(mm) */
-#table3-header-table th:nth-child(3), #table3-body-table td:nth-child(3) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
+#main-data-table-wrap th:nth-child(1), #main-data-table-wrap-body td:nth-child(1) { min-width: 48px; width: 30%; } /* 序号 */
+#main-data-table-wrap th:nth-child(2), #main-data-table-wrap-body td:nth-child(2) { min-width: 80px; width: 55%; } /* 厚度(mm) */
+#main-data-table-wrap th:nth-child(3), #main-data-table-wrap-body td:nth-child(3) { min-width: 50px; width: 15%; } /* 删除 - 减小 */
 
 /* 小屏优化：收敛列宽与模拟区占比 */
 @media (max-width: 576px) {
   /* 标准导线 */
-  #table1-header-table th:nth-child(1), #table1-body-table td:nth-child(1) { min-width: 40px; width: 10%; }
-  #table1-header-table th:nth-child(2), #table1-body-table td:nth-child(2) { min-width: 64px; width: 22%; }
-  #table1-header-table th:nth-child(3), #table1-body-table td:nth-child(3) { min-width: 64px; width: 22%; }
-  #table1-header-table th:nth-child(4), #table1-body-table td:nth-child(4) { min-width: 60px; width: 20%; }
-  #table1-header-table th:nth-child(5), #table1-body-table td:nth-child(5) { min-width: 56px; width: 16%; }
-  #table1-header-table th:nth-child(6), #table1-body-table td:nth-child(6) { min-width: 40px; width: 10%; }
+  #main-data-table-standard th:nth-child(1), #main-data-table-standard-body td:nth-child(1) { min-width: 40px; width: 10%; }
+  #main-data-table-standard th:nth-child(2), #main-data-table-standard-body td:nth-child(2) { min-width: 64px; width: 22%; }
+  #main-data-table-standard th:nth-child(3), #main-data-table-standard-body td:nth-child(3) { min-width: 64px; width: 22%; }
+  #main-data-table-standard th:nth-child(4), #main-data-table-standard-body td:nth-child(4) { min-width: 60px; width: 20%; }
+  #main-data-table-standard th:nth-child(5), #main-data-table-standard-body td:nth-child(5) { min-width: 56px; width: 16%; }
+  #main-data-table-standard th:nth-child(6), #main-data-table-standard-body td:nth-child(6) { min-width: 40px; width: 10%; }
 
   /* 特殊导线 */
-  #table2-header-table th:nth-child(1), #table2-body-table td:nth-child(1) { min-width: 40px; width: 15%; }
-  #table2-header-table th:nth-child(2), #table2-body-table td:nth-child(2) { min-width: 64px; width: 45%; }
-  #table2-header-table th:nth-child(3), #table2-body-table td:nth-child(3) { min-width: 56px; width: 25%; }
-  #table2-header-table th:nth-child(4), #table2-body-table td:nth-child(4) { min-width: 40px; width: 15%; }
+  #main-data-table-special th:nth-child(1), #main-data-table-special-body td:nth-child(1) { min-width: 40px; width: 15%; }
+  #main-data-table-special th:nth-child(2), #main-data-table-special-body td:nth-child(2) { min-width: 64px; width: 45%; }
+  #main-data-table-special th:nth-child(3), #main-data-table-special-body td:nth-child(3) { min-width: 56px; width: 25%; }
+  #main-data-table-special th:nth-child(4), #main-data-table-special-body td:nth-child(4) { min-width: 40px; width: 15%; }
 
   /* 包覆层 */
-  #table3-header-table th:nth-child(1), #table3-body-table td:nth-child(1) { min-width: 40px; width: 25%; }
-  #table3-header-table th:nth-child(2), #table3-body-table td:nth-child(2) { min-width: 64px; width: 55%; }
-  #table3-header-table th:nth-child(3), #table3-body-table td:nth-child(3) { min-width: 40px; width: 20%; }
+  #main-data-table-wrap th:nth-child(1), #main-data-table-wrap-body td:nth-child(1) { min-width: 40px; width: 25%; }
+  #main-data-table-wrap th:nth-child(2), #main-data-table-wrap-body td:nth-child(2) { min-width: 64px; width: 55%; }
+  #main-data-table-wrap th:nth-child(3), #main-data-table-wrap-body td:nth-child(3) { min-width: 40px; width: 20%; }
 
   .calc-table input, .calc-table select { height: 44px; font-size: clamp(14px, 3.5vw, 16px); }
   .drag-area-input, .drag-area-range { height: 44px; font-size: clamp(14px, 3.5vw, 16px); }
@@ -1120,31 +1075,38 @@ div.sidebar-divider > #collapseBtn svg {
   gap: 16px;
   align-items: flex-start;
   text-align: left;
+  flex-wrap: wrap;             /* 允许在窄容器内换行 */
+  min-width: 0;
 }
 .simulation-area {
   background: #F8F9FA;
   border-radius: 6px;
-  width: 50%; 
+  width: 50%;
+  min-width: 240px;            /* 保证 canvas 不被挤没 */
   aspect-ratio: 1 / 1;
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: flex-end; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   padding: 8px;
   border: 1px solid #EAECEF;
   box-sizing: border-box;
-  overflow: auto; 
-  flex-shrink: 0;
-  position: relative; 
+  overflow: auto;
+  flex-shrink: 1;
+  position: relative;
 }
 #simulation-canvas {
+  /* Phase 2：CSS 尺寸决定显示，物理像素由 JS 按 devicePixelRatio 设置 */
+  width: 100%;
+  height: auto;
   max-width: 100%;
-  max-height: 80%; 
+  max-height: 80%;
   display: block;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 .simulation-details {
-  flex: 1;
+  flex: 1 1 240px;
+  min-width: 0;                /* 防止内容溢出撑爆父容器 */
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -1472,20 +1434,20 @@ div.sidebar-divider > #collapseBtn svg {
 }
 
 @media (max-width: 1100px) {
-  .calc-layout {
+  .layout-calc {
     flex-direction: column;
     gap: 12px;
     min-width: 0;
-    padding-bottom: 90px; 
+    padding-bottom: 90px;
   }
   .layout-left, .layout-right {
     min-width: 0;
     max-width: 100%;
     width: 100%;
     padding: 16px; /* 缩小卡片内边距以提升密度 */
+    flex: 1 1 auto;         /* 单列布局时不再按 4:6 分配 */
   }
-}
-@media (max-width: 1100px) { 
+  /* sidebar 变顶部横排后，底栏跨全宽 */
   .main-container .calc-bottom-bar,
   .main-container.sidebar-collapsed .calc-bottom-bar {
     left: 0;
@@ -2145,26 +2107,46 @@ input[type="number"] {
   margin-bottom: 0;
 }/* Legend styles */ .simulation-legend-wrapper { max-height: 150px; overflow-y: auto; margin-top: 15px; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px; background-color: #f8f9fa; } .simulation-legend-wrapper ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; } .simulation-legend-wrapper li { margin-right: 15px; margin-bottom: 8px; white-space: nowrap; display: flex; align-items: center; } .legend-color-box { display: inline-block; width: 12px; height: 12px; border: 1px solid #6c757d; border-radius: 2px; margin-right: 5px; flex-shrink: 0; } /* Scrollbar styling for legend */ .simulation-legend-wrapper::-webkit-scrollbar { width: 6px; height: 6px; } .simulation-legend-wrapper::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; } .simulation-legend-wrapper::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; } .simulation-legend-wrapper::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
 
-.calc-layout {
+/* ------ Phase 2：计算页布局兜底与响应式收敛 ------ */
+
+/* 主布局兜底：与前置定义合并；类名统一为 .layout-calc */
+.layout-calc {
   flex-wrap: wrap;
 }
-
 .layout-left,
 .layout-right {
   min-width: 0;
 }
-
-.calc-layout .layout-left {
-  flex: 1 1 360px;
-}
-
-.calc-layout .layout-right {
-  flex: 1 1 420px;
+/* 992px 以下（中等偏窄）改单列。1100px 断点仍然更严格触发 sidebar 顶部化。 */
+@media (max-width: 992px) {
+  .layout-calc {
+    flex-direction: column;
+    padding-bottom: 90px;
+  }
+  .layout-left,
+  .layout-right {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 .layout-right .group-result.chart-container-wrapper {
   width: 100%;
   align-self: stretch;
+}
+
+/* 计算页三张表：窄屏允许横向滚动，避免撑爆父容器 */
+.calc-table-content {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 表格内 input/select 不允许溢出单元格 */
+.calc-table input,
+.calc-table select {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 #table1-body-wrapper {

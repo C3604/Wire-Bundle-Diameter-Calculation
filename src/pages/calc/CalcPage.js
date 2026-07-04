@@ -72,6 +72,19 @@ export function destroyCalcPageSession() {
     clearTimeout(s.saveTimer);
     s.saveTimer = null;
   }
+  // Phase 2：清理 canvas resize 观察器与 debounce 定时器，防止泄漏
+  if (s.resizeObserver && typeof s.resizeObserver.disconnect === "function") {
+    try { s.resizeObserver.disconnect(); } catch (_) {}
+    s.resizeObserver = null;
+  }
+  if (s.resizeDebounceTimer) {
+    clearTimeout(s.resizeDebounceTimer);
+    s.resizeDebounceTimer = null;
+  }
+  if (typeof s.windowResizeHandler === "function") {
+    try { window.removeEventListener("resize", s.windowResizeHandler); } catch (_) {}
+    s.windowResizeHandler = null;
+  }
   currentCalcSession = null;
 }
 
@@ -87,6 +100,10 @@ export function renderCalcPage(container) {
     calcLayoutEl: null,
     flush: null,
     saveTimer: null,
+    // Phase 2：canvas 尺寸自适应 + resize 重绘
+    resizeObserver: null,
+    resizeDebounceTimer: null,
+    windowResizeHandler: null,
   };
   currentCalcSession = session;
   container.innerHTML = `
@@ -1270,6 +1287,23 @@ export function renderCalcPage(container) {
     }
 
 
+    // Phase 2：只重绘上次模拟结果（不重新运行模拟）。
+    // 由 ResizeObserver / window resize debounce 触发；session 无效或无数据时直接返回。
+    function redrawLastSimulation() {
+      if (!isSessionActive(session)) return;
+      const canvasEl = calcLayoutEl.querySelector("#simulation-canvas");
+      if (!canvasEl || !lastSimulationCircles) return;
+      const ctx = canvasEl.getContext("2d");
+      if (!ctx) return;
+      try {
+        drawCirclesOnCanvas(ctx, canvasEl, lastSimulationCircles, {
+          diameterColorMap: currentDiameterColorMap,
+        });
+      } catch (e) {
+        console.warn("redrawLastSimulation 失败:", e);
+      }
+    }
+
     // 清除模拟结果和图表的函数
     function clearSimulationResults() {
       // 清除画布
@@ -1832,6 +1866,30 @@ export function renderCalcPage(container) {
 
       // 5. 更新i18n文本
       i18n.updatePageTexts();
+
+      // 6. Phase 2：canvas 尺寸自适应
+      //    - ResizeObserver 监视 canvas 元素本身，容器变化即 debounced 重绘
+      //    - window resize 兜底（老浏览器 / 特殊场景）
+      //    - destroy 时由 destroyCalcPageSession 统一 disconnect / removeEventListener
+      const canvasEl = calcLayoutEl.querySelector("#simulation-canvas");
+      const scheduleRedraw = () => {
+        if (!isSessionActive(session)) return;
+        if (session.resizeDebounceTimer) clearTimeout(session.resizeDebounceTimer);
+        session.resizeDebounceTimer = setTimeout(() => {
+          session.resizeDebounceTimer = null;
+          redrawLastSimulation();
+        }, 120);
+      };
+      if (canvasEl && typeof ResizeObserver !== "undefined") {
+        try {
+          session.resizeObserver = new ResizeObserver(scheduleRedraw);
+          session.resizeObserver.observe(canvasEl);
+        } catch (e) {
+          console.warn("ResizeObserver 挂载失败:", e);
+        }
+      }
+      session.windowResizeHandler = scheduleRedraw;
+      window.addEventListener("resize", session.windowResizeHandler);
     }, 0);
 }
 

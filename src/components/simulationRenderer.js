@@ -5,6 +5,32 @@ const DEFAULT_CANVAS_PADDING = 15; // 默认画布内边距
 const DEFAULT_COLOR = "#BDC3C7"; // 银色
 
 /**
+ * 按 CSS 显示尺寸 × devicePixelRatio 设置 canvas 的物理分辨率，
+ * 并把 2D context 变换到 CSS 像素坐标系，让绘制代码只关心 CSS 尺寸。
+ * 幂等；每次绘制前调用不会累积变换。
+ *
+ * @param {HTMLCanvasElement} canvas
+ * @returns {{ cssWidth: number, cssHeight: number, dpr: number, ctx: CanvasRenderingContext2D } | null}
+ */
+export function resizeCanvasToDisplaySize(canvas) {
+  if (!canvas) return null;
+  const rect = canvas.getBoundingClientRect();
+  // 若 CSS 尺寸为 0（未布局/隐藏），退回到 attribute 或默认 300
+  const cssWidth = Math.max(1, Math.round(rect.width) || canvas.width || 300);
+  const cssHeight = Math.max(1, Math.round(rect.height) || canvas.height || 300);
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  const targetW = Math.round(cssWidth * dpr);
+  const targetH = Math.round(cssHeight * dpr);
+  if (canvas.width !== targetW) canvas.width = targetW;
+  if (canvas.height !== targetH) canvas.height = targetH;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+  // 用 setTransform 重置累计变换：绘制代码使用 CSS 像素坐标
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { cssWidth, cssHeight, dpr, ctx };
+}
+
+/**
  * 将模拟产生的圆形绘制到指定的画布上。
  * @param {CanvasRenderingContext2D} ctx - 画布的2D渲染上下文。
  * @param {HTMLCanvasElement} canvas - HTML画布元素。
@@ -24,20 +50,21 @@ export function drawCirclesOnCanvas(ctx, canvas, circlesData, options = {}) {
     console.error("Canvas context 或 canvas 元素未提供给 drawCirclesOnCanvas");
     return;
   }
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // 清空画布
+  // Phase 2：按 CSS 尺寸 + DPR 重新设置物理分辨率，
+  // 并将变换重置到 CSS 像素坐标。后续 clearRect/arc/fillText 都用 CSS 逻辑像素。
+  const sized = resizeCanvasToDisplaySize(canvas);
+  if (!sized) return;
+  const cssW = sized.cssWidth;
+  const cssH = sized.cssHeight;
+  ctx.clearRect(0, 0, cssW, cssH); // 使用逻辑尺寸清空
 
   if (!circlesData || circlesData.length < 1 || !circlesData[0]) {
     // 至少需要外层容器数据
     ctx.fillStyle = "#6c757d";
     ctx.textAlign = "center";
     ctx.font = "14px sans-serif";
-    if (canvas.width > 0 && canvas.height > 0) {
-      // 仅在画布有效时绘制文本
-      ctx.fillText(
-        "无有效的模拟数据用于绘制",
-        canvas.width / 2,
-        canvas.height / 2,
-      );
+    if (cssW > 0 && cssH > 0) {
+      ctx.fillText("无有效的模拟数据用于绘制", cssW / 2, cssH / 2);
     }
     return;
   }
@@ -49,15 +76,12 @@ export function drawCirclesOnCanvas(ctx, canvas, circlesData, options = {}) {
     return;
   }
 
-  // 计算缩放比例，使图形适应画布大小并留有边距
+  // 计算缩放比例，使图形适应逻辑画布大小并留有边距
   const scale =
-    Math.min(
-      canvas.width - 2 * CANVAS_PADDING,
-      canvas.height - 2 * CANVAS_PADDING,
-    ) /
+    Math.min(cssW - 2 * CANVAS_PADDING, cssH - 2 * CANVAS_PADDING) /
     (2 * outerContainerRadius);
-  const offsetX = canvas.width / 2; // 画布中心点X
-  const offsetY = canvas.height / 2; // 画布中心点Y
+  const offsetX = cssW / 2; // 画布中心点X（CSS 像素）
+  const offsetY = cssH / 2; // 画布中心点Y（CSS 像素）
 
   // 绘制内层容器边界 (如果存在且有效)
   const innerContainer = circlesData[1];
